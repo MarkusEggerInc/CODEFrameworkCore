@@ -69,6 +69,7 @@ namespace Sample.Contracts
 ##### Create a Service Implementation .NET Standard Class Library
 
 * Create a new .NET Standard Class library project
+* Add a reference to `CODE.Framework.Services.Server.AspNetCore`
 * Add reference to the Contract project created above
 * Implement Services that implement the contracts
 
@@ -264,6 +265,3 @@ Using explicit code you can do the following:
 
 > ### Warning: IPrinciple not available in CTOR
 > The IPrinciple user is not available in constructor code as an instance of the service is required to set the principal without a dependency on ASP.NET Core libs or dependency injection.
-
-
-
