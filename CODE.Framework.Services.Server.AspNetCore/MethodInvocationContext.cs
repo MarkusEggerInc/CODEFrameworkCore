@@ -21,7 +21,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public RestAttribute RestAttribute { get; set; }
 
-        public List<string> AuthorizationRoles = new List<string>();
+        public List<string> AuthorizationRoles { get; set; } = new List<string>();
 
         public MethodInfo MethodInfo { get; set; }
 

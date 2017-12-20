@@ -18,7 +18,7 @@ namespace CODE.Framework.Services.Contracts
                 if (Principals.ContainsKey(instance))
                     return Principals[instance];
             }
-            return new ClaimsPrincipal();
+            return new ClaimsPrincipal(new ClaimsIdentity());
 #else
             return Thread.CurrentPrincipal;
 #endif

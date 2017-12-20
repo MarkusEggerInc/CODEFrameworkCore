@@ -43,6 +43,14 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     }
 
+
+    [DataContract]
+    public class BaseServiceRequest
+    {
+
+    }
+
+
     [DataContract]
     public class ErrorResponse : BaseServiceResponse
     {

@@ -8,7 +8,7 @@ namespace Sample.Contracts
 {
     public interface ICustomerService
     {
-        [Rest(Method = RestMethods.Post, Name ="Customer", Route = "{id:guid}")]
+        [Rest(Method = RestMethods.Post, Name ="Customer", Route = "{id:guid}", AuthorizationRoles = "Administrators")]
         Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request);
 
         [Rest(Method = RestMethods.Get, Name = "", Route = "")]

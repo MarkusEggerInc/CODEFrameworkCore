@@ -2,11 +2,18 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>1.0.0-alpha-1</Version>
+    <Version>1.0.0-alpha-3</Version>
     <Authors>Markus Egger, Rick Strahl</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Copyright>Markus Egger Inc., 2017-2018</Copyright>
+    <Description>Base contracts for the CODE Framework Server side services</Description>
+    <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
   </PropertyGroup>
 
   

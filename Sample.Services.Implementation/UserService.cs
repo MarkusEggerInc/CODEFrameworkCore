@@ -1,34 +1,18 @@
-﻿using Sample.Contracts;
+﻿using CODE.Framework.Services.Contracts;
+using Sample.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 
 namespace Sample.Services.Implementation
 {
     public class UserService : IUserService
-    {
-
-        /// <summary>
-        /// Simulate User Principal 
-        /// </summary>
-        public ClaimsPrincipal User
-        {
-            get
-            {
-                if (_user == null)
-                    _user = Thread.CurrentPrincipal as ClaimsPrincipal;
-
-                return _user;
-            }
-        }
-        private ClaimsPrincipal _user = null;
-
-     
-
+    { 
+        
         public UserService()
-        {
-            
+        {            
         }
 
 
@@ -70,13 +54,24 @@ namespace Sample.Services.Implementation
 
         public IsAuthenticatedResponse IsAuthenticated(IsAuthenticatedRequest request)
         {
+            var user = this.GetCurrentPrincipal();
+            
+            var success = user.Identity.IsAuthenticated;
+            string username = null;
+            if (success)
+            {
+                var id = user.Identity as ClaimsIdentity;
+                var claim = id.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                username = claim.Value;
+            }
+
             // passthrough success and check in controller override
             return new IsAuthenticatedResponse
             {
-                Success = true,
-                Username = "Bogus",
-                UserId = "12345"
+                Success = success,
+                Username = username
             };
+            
         }
 
 

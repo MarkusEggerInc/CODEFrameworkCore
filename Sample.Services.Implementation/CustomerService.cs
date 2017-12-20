@@ -1,24 +1,12 @@
 ﻿using CODE.Framework.Services.Contracts;
-using Microsoft.Extensions.Configuration;
 using Sample.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sample.Services.Implementation
 {
     public class CustomerService : ICustomerService
     {        
-        /// <summary>
-        /// You can optionally inject any DI dependencies
-        /// </summary>
-        /// <param name="config"></param>
-        public CustomerService()
-        {                     
-        }
 
         public GetCustomersResponse GetCustomers()
         {
@@ -40,7 +28,9 @@ namespace Sample.Services.Implementation
         public async Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request)
         {
             var user = this.GetCurrentPrincipal();
-            
+            var isValid = user.IsInRole("Administrators");
+
+
             var result = new GetCustomerResponse()
             {
                 Customer = new Customer() {

@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
@@ -112,9 +114,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         throw new UnauthorizedAccessException("Not authorized to access this request");
                 }
 
+
                 if (ServiceInstanceConfiguration.OnBeforeMethodInvoke != null)
                     await ServiceInstanceConfiguration.OnBeforeMethodInvoke(context);
-
+                               
                 await ExecuteMethod(context);
 
                 ServiceInstanceConfiguration.OnAfterMethodInvoke?.Invoke(context);
@@ -130,6 +133,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 SendJsonResponse(context, error);
             }
         }
+
+
 
 
         /// <summary>
@@ -158,12 +163,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (inst == null)
                 throw new InvalidOperationException(string.Format(Resources.UnableToCreateTypeInstance, serviceType));
 
-
+            var principal = HttpContext.User;
+            UserPrincipalHelper.AddPrincipal(inst, principal);
+            
+            
+            if (MethodContext.AuthorizationRoles != null && MethodContext.AuthorizationRoles.Count > 0)
+            {
+                ValidateRoles(MethodContext.AuthorizationRoles, principal);
+            }
 
             try
             {
-                UserPrincipalHelper.AddPrincipal(inst, HttpContext.User);
-
                 var parameterList = GetMethodParameters(handlerContext);
 
                 if (!handlerContext.MethodContext.IsAsync)
@@ -252,6 +262,30 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return parameterList;
         }
 
+        private void ValidateRoles(List<string> authorizationRoles, IPrincipal user)
+        {
+
+            if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var identity = user.Identity as ClaimsIdentity;
+                var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                if (rolesClaim == null)
+                    return; // no role requirement
+
+                if (string.IsNullOrEmpty(rolesClaim.Value))
+                    return; // no role requirement or empty and we're authenticated
+
+                var roles = rolesClaim.Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var role in roles)
+                {
+                    if (authorizationRoles.Any(r => r == role))
+                        return; // matched a role
+                }
+            }
+
+            throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
+
+        }
 
         static DefaultContractResolver CamelCaseNamingStrategy =
             new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};

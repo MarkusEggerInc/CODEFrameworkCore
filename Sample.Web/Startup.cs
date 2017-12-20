@@ -35,7 +35,20 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
                         ServiceTypeName = "Sample.Services.Implementation.UserService",
                         AssemblyName = "Sample.Services.Implementation",
                         RouteBasePath = "/api/users",
-                        JsonFormatMode = JsonFormatModes.CamelCase
+                        JsonFormatMode = JsonFormatModes.CamelCase,
+                        OnAuthorize = context =>
+                        {
+                            // fake a user context 
+                            context.HttpContext.User = new ClaimsPrincipal(
+                                new ClaimsIdentity(
+                                    new Claim[] {
+                                        new Claim("Permission", "CanViewPage"),
+                                        new Claim(ClaimTypes.Role, "Administrator"),
+                                        new Claim(ClaimTypes.NameIdentifier, "Rick S. User")},
+                                    "Basic"));
+
+                            return Task.FromResult(true);
+                        }
                     },
                     new ServiceHandlerConfigurationInstance
                     {
@@ -45,16 +58,18 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
                         JsonFormatMode = JsonFormatModes.ProperCase,
                         OnAuthorize = context =>
                         {
+                            // fake a user context 
                             context.HttpContext.User = new ClaimsPrincipal(
                                 new ClaimsIdentity(
                                     new Claim[] {
                                         new Claim("Permission", "CanViewPage"),
-                                        new Claim(ClaimTypes.Role, "Administrator"),
-                                        new Claim(ClaimTypes.NameIdentifier, "Rick")},
+                                        new Claim(ClaimTypes.Role, "Administrators"),
+                                        new Claim(ClaimTypes.NameIdentifier, "Rick S. Cust")},
                                     "Basic"));
 
                             return Task.FromResult(true);
                         }
+
                     }
                 });
 

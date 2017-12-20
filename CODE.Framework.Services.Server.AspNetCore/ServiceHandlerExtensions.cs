@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using CODE.Framework.Services.Contracts;
@@ -33,7 +34,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             var provider = services.BuildServiceProvider();
             var serviceConfiguration = provider.GetService<IConfiguration>();
-
 
             var config = new ServiceHandlerConfiguration();
             serviceConfiguration.Bind("ServiceHandler", config);
@@ -159,11 +159,15 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                 if (restAttribute == null)
                                     continue;
                                 
-                               var relativeRoute = restAttribute.Route;
+                                var relativeRoute = restAttribute.Route;
                                 if (relativeRoute == null)
                                     // if no route assume we use the method name
                                     // Note: string.Empty is a valid route!
                                     relativeRoute = method.Name;
+
+
+                               
+
 
                                 // figure out the full route we pass the ASP.NET Core Route Manager
                                 string fullRoute =
@@ -174,6 +178,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                                 // Cache reflection and context data
                                 var methodContext = new MethodInvocationContext(method, serviceConfig, serviceInstanceConfig);
+
+                                var roles = restAttribute.AuthorizationRoles;
+                                if (roles != null)
+                                {
+                                    methodContext.AuthorizationRoles = roles.Split( new char[] { ','},StringSplitOptions.RemoveEmptyEntries).ToList();
+                                }
+
 
                                 // This code is what triggers the SERVICE METHOD EXECUTION
                                 // via a delegate that is called when the route is matched

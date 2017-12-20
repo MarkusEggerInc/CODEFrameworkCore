@@ -91,12 +91,6 @@ namespace Sample.Contracts
         public List<User> Users = new List<User>();
     }
 
-    [DataContract]
-    public class BaseServiceRequest
-    {
-
-    }
-
     public class SignoutRequest : BaseServiceRequest
     {
 
