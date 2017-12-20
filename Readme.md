@@ -6,6 +6,20 @@ The following provides basic steps for a service handler based project setup.
 > #### Pre-release NuGet Packages
 > Framework is current in alpha stage. All NuGet packages have to be loaded using the **pre-release** flag in the Package Manager.
 
+The following is a quick walk through for creating a new project. Here's what the project should look like with appropriate references applied:
+
+![](assets/images/FirstProjectSolutionReferences.png)
+
+#### Create a new Web Solution for the Service Host
+The Web application acts merely as a host to the services that are created in separate projects and that perform all the relevant service and business logic.
+
+Start by creating a new Solution level project:
+
+* Create a new Project
+* Create a .NET Core Web Project
+* Choose the Empty Web template
+
+For now, leave that project - we'll come back to it in a minute.
 
 ##### Create Contracts .NET Standard Class Library
 
