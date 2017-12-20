@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0-alpha-2</Version>
+    <Authors>Markus Egger, Rick Strahl</Authors>
+    <Company>Markus Egger Inc.</Company>
+    <Product>CODE Framework</Product>
+    <Copyright>Markus Egger Inc, 2017-2018</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
+    <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
+    <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Westwind.Utilities" Version="3.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

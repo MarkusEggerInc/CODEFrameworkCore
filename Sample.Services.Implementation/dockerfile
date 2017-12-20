@@ -1,0 +1,8 @@
+FROM markuseggerinc/code.framework.core.servicehandler.web:latest
+WORKDIR /app
+EXPOSE 80
+COPY ./bin/Debug/netstandard2.0/Sample.Contracts.dll .
+COPY ./bin/Debug/netstandard2.0/Sample.Services.Implementation.dll .
+COPY ./bin/Debug/netstandard2.0/appsettings.json .
+#ENTRYPOINT ["dotnet", "CODE.Framework.Core.ServiceHandler.Web.dll"]
+CMD ["/bin/sh", "-c", "dotnet 'CODE.Framework.Core.ServiceHandler.Web.dll'"]
