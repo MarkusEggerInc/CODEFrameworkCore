@@ -11,8 +11,7 @@ The following provides basic steps for a service handler based project setup.
 
 * Create a new .NET Standard Class library project
 * Add Nuget Packages
-    *  `CODE.Framework.Service.Server.AspNetCore`
-    *  `CODE.Framework.Service.Contracts`
+    *  `CODE.Framework.Services.Contracts`
 *  Create a Service Contract
 *  Create [DataContract] objects for inputs and outputs
     * `BaseServiceRequest` 
@@ -119,7 +118,7 @@ namespace Sample.Services.Implementation
 ### Implement Web Project to host the Service
 
 * Create an empty .NET Core Web site
-* Add Nuget package for `CODE.Framework.Service.Server.AspNetCore`
+* Add Nuget package for `CODE.Framework.Services.Server.AspNetCore`
 * Add a reference to the Implementation project from above
 * Configure the Startup configuration for the Service hosting
 * Add `applicationhost.json` for configuration
@@ -221,9 +220,50 @@ The code above explicitly uses code to configure services and the service config
 }
 ```
 
+## Authentication
+Authentication can be managed using the standard `IPrinciple` based user store. In .NET Core there is no thread specific user context, so access to the user context is a little more tricky. In our service structure you have to use a special helper to retrieve an instance of the user principal:
 
+```cs
+var principal = this.GetCurrentPrincipal();  // on Service instance
 
+// or
+var principal = UserPrincipalHelper.GetCurrentPrincipal(service);   // service instance
 
+if (principal.Identity.IsAuthenticated)
+{
+    // comma delimited string
+    var roles = pricipal.Identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role); 
+}
+```
+
+Once you have the principal you can check for authentication using standard claims/user validation.
+
+You can manage authentication in two ways:
+
+* Via service contract on service methods via `[Rest(AuthorizationRoles="Administrators"]`
+* Explicitly in code using `UserPrincipleHelper` to retrieve a `ClaimsIdentity`
+
+### Using REST Attribute AuthorizationRoles
+You can configure a service method in the contract to explicitly require a set of access roles:
+
+```cs
+[Rest(Method = RestMethods.Post, Name ="Customer", 
+      Route = "{id:guid}", AuthorizationRoles = "Administratortt")]
+GetCustomerResponse GetCustomer(GetCustomerRequest request);
+```
+
+Using explicit code you can do the following:
+
+```cs
+ public GetCustomerResponse GetCustomer(GetCustomerRequest request)
+{
+    var user = this.GetCurrentPrincipal();
+    var isValid = user.IsInRole("Administrators");
+}
+```
+
+> ### Warning: IPrinciple not available in CTOR
+> The IPrinciple user is not available in constructor code as an instance of the service is required to set the principal without a dependency on ASP.NET Core libs or dependency injection.
 
 
 
