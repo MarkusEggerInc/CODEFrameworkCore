@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace Sample.Services.Implementation
 {
     public class CustomerService : ICustomerService
-    {        
-
+    {
         public GetCustomersResponse GetCustomers()
         {
             return new GetCustomersResponse()
@@ -28,6 +27,8 @@ namespace Sample.Services.Implementation
         public async Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request)
         {
             var user = this.GetCurrentPrincipal();
+            
+            
             var isValid = user.IsInRole("Administrators");
 
 

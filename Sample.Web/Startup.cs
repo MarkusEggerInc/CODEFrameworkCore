@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sample.Services.Implementation;
 
 
 namespace CODE.Framework.Services.Server.AspNetCore.Web
@@ -26,14 +28,15 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
             services.AddServiceHandler(config =>
             {
                 config.Services.Clear();                
-
+                
+                
                 config.Services.AddRange(new List<ServiceHandlerConfigurationInstance>
                 {
                     new ServiceHandlerConfigurationInstance
                     {
-                        //ServiceType = typeof(UserService), // Using an explicit Type (assembly reference comes in)
-                        ServiceTypeName = "Sample.Services.Implementation.UserService",
-                        AssemblyName = "Sample.Services.Implementation",
+                        ServiceType = typeof(UserService), // Using an explicit Type (assembly reference comes in)
+                        //ServiceTypeName = "Sample.Services.Implementation.UserService",
+                        //AssemblyName = "Sample.Services.Implementation",
                         RouteBasePath = "/api/users",
                         JsonFormatMode = JsonFormatModes.CamelCase,
                         OnAuthorize = context =>
@@ -72,7 +75,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
 
                     }
                 });
-
+                
                 config.Cors.UseCorsPolicy = true;
                 config.Cors.AllowedOrigins = "*";
             });                        

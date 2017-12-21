@@ -157,20 +157,16 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 return;
             }
 
-
-            // Compose type using DI
+            // Let DI create the Service instance
             var inst = HttpContext.RequestServices.GetService(serviceType);            
             if (inst == null)
                 throw new InvalidOperationException(string.Format(Resources.UnableToCreateTypeInstance, serviceType));
 
             var principal = HttpContext.User;
             UserPrincipalHelper.AddPrincipal(inst, principal);
-            
-            
+
             if (MethodContext.AuthorizationRoles != null && MethodContext.AuthorizationRoles.Count > 0)
-            {
                 ValidateRoles(MethodContext.AuthorizationRoles, principal);
-            }
 
             try
             {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading;
 
 namespace Sample.Services.Implementation
@@ -11,11 +12,6 @@ namespace Sample.Services.Implementation
     public class UserService : IUserService
     { 
         
-        public UserService()
-        {            
-        }
-
-
         public AuthenticateUserResponse AuthenticateUser(AuthenticateUserRequest request)
         {
             try
@@ -28,15 +24,12 @@ namespace Sample.Services.Implementation
                     return response;
                 }
 
-              
-
                 response.Id = Guid.NewGuid();
                 response.Email = "test@user.com";
                 response.Firstname = "Test";
                 response.Lastname = "User";
                 
-                
-                // passthrough success and set Auth cooki in controller override
+                // passthrough success and set Auth cookie in controller override
                 response.Success = true;
                 return response;
             }
