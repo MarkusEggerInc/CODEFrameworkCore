@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
@@ -58,10 +60,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                 string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
                     }
                     svc.ServiceType = type;
-
-                    // Add to DI so we can compose the constructor
-                    services.AddTransient(type);
                 }
+
+                // Add to DI so we can compose the constructor
+                services.AddTransient(svc.ServiceType);
             }
 
             // Add configured instance to DI
@@ -103,6 +105,24 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     });
             });
 
+
+            // Allow injection of the IPrincipal
+            services.AddScoped<IPrincipal>(serviceProvider =>
+            {
+                try
+                {
+                    // get User from Http Context
+                    var context = serviceProvider.GetRequiredService(typeof(IHttpContextAccessor)) as IHttpContextAccessor;
+                    return context.HttpContext.User;
+                }
+                catch
+                {
+                    // return an empty identity
+                    return new ClaimsPrincipal(new ClaimsIdentity());
+                }
+            });
+
+
             return services;
         }
 
@@ -116,8 +136,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             this IApplicationBuilder appBuilder)
         {
             var serviceConfig = ServiceHandlerConfiguration.Current;
-
-
+            
             foreach (var serviceInstanceConfig in serviceConfig.Services)
             {
                 // conditionally route to service handler based on RouteBasePath
@@ -190,7 +209,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                 // via a delegate that is called when the route is matched
                                 Func<HttpRequest, HttpResponse, RouteData, Task> exec =
                                     async (req, resp, routeData) =>
-                                    {                                                                                
+                                    {                                                         
+                                        
                                         // ReSharper disable once AccessToModifiedClosure
                                         var handler = new ServiceHandler(req.HttpContext, routeData, methodContext);
                                         await handler.ProcessRequest();
