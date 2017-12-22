@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 
 namespace CODE.Framework.Fundamentals.Utilities
 {
+
 #if NETFULL
     /// <summary>
     /// Class TransparentProxyGenerator.
