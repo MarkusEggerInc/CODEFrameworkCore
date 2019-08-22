@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="d1afedb1-aaae-43e1-807f-005ee3844758" Title="CODE.Framework.Fundamentals.Utilities Namespace" Url="html/N-CODE.Framework.Fundamentals.Utilities.htm">
+    <HelpTOCNode Id="b3c936d9-3a62-4b3f-b4dd-4e7641731a43" Title="ConsoleLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm">
+      <HelpTOCNode Title="ConsoleLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+      <HelpTOCNode Id="199c2dc5-c973-48e6-b21b-b0201a9d73af" Title="ConsoleLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm">
+        <HelpTOCNode Id="523745a5-0efa-4e72-b7f4-88d7ee3ee7b1" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="ConsoleLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="fb415cce-d5e8-4a04-bc57-fae5577a2670" Title="CRC32 Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.CRC32.htm">
+      <HelpTOCNode Title="CRC32 Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+      <HelpTOCNode Title="CRC32 Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.-ctor.htm" />
+      <HelpTOCNode Id="3706a31f-84de-4aa6-86a1-809f3d625042" Title="CRC32 Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm">
+        <HelpTOCNode Title="GetCrc32 Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32.htm" />
+        <HelpTOCNode Title="GetCrc32AndCopy Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32AndCopy.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="0a619b8e-3752-4e68-ae5e-4a704c6c872e" Title="CRC32 Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm">
+        <HelpTOCNode Title="TotalBytesRead Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.CRC32.TotalBytesRead.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="de717bb5-f805-47fb-82b4-c97b6054d553" Title="EnumHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm">
+      <HelpTOCNode Title="EnumHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+      <HelpTOCNode Id="fc6e69e7-b345-48b0-b7b8-604f600bc15e" Title="EnumHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm">
+        <HelpTOCNode Title="GetEnumInformation(T) Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2c2c1b86-3738-4482-afcf-b0626a20e2d2" Title="EnumInformation Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm">
+      <HelpTOCNode Title="EnumInformation Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+      <HelpTOCNode Title="EnumInformation Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumInformation.-ctor.htm" />
+      <HelpTOCNode Title="EnumInformation Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+      <HelpTOCNode Id="fbebbad9-1c4a-473e-94b4-f95633e1f0c3" Title="EnumInformation Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm">
+        <HelpTOCNode Title="DisplayText Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.DisplayText.htm" />
+        <HelpTOCNode Title="EnumValue Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.EnumValue.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Name.htm" />
+        <HelpTOCNode Title="Value Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Value.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d34c6ce5-fa9e-4458-8d66-7a9ca5cfc1f8" Title="ExceptionHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm">
+      <HelpTOCNode Title="ExceptionHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+      <HelpTOCNode Id="6ae108fa-83d9-412e-96b2-9c75c246cd0f" Title="ExceptionHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm">
+        <HelpTOCNode Title="GetExceptionHtml Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionHtml.htm" />
+        <HelpTOCNode Title="GetExceptionText Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionText.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="77f8c7b2-eddc-4964-a760-6eed804a9bca" Title="HttpHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm">
+      <HelpTOCNode Title="HttpHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+      <HelpTOCNode Id="e2bde0fc-2864-42d5-855b-537499692481" Title="HttpHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm">
+        <HelpTOCNode Title="UrlDecode Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlDecode.htm" />
+        <HelpTOCNode Title="UrlEncode Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlEncode.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3ffa2deb-b197-4c7f-a408-0c2e998e1dcf" Title="IExceptionLogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm">
+      <HelpTOCNode Title="IExceptionLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+      <HelpTOCNode Id="ebbc6bc3-9b26-491a-b0c4-212092f035ab" Title="IExceptionLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm">
+        <HelpTOCNode Id="a1cc90d4-1883-4fd6-b338-63be5934dc02" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm">
+          <HelpTOCNode Title="Log Method (Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm" />
+          <HelpTOCNode Title="Log Method (String, Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log_1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="425856bd-de95-4e78-9c28-9f260132eb86" Title="If Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.If.htm">
+      <HelpTOCNode Title="If Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+      <HelpTOCNode Id="686b5e4f-8e89-4fd1-abc6-c7d5ca9870c3" Title="If Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.If.htm">
+        <HelpTOCNode Id="89674c72-fb26-47ba-8acb-7d8abf9ab403" Title="NotNull Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm">
+          <HelpTOCNode Title="NotNull Method (Object, Action)" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm" />
+          <HelpTOCNode Title="NotNull Method (Object, Object, Action)" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_1.htm" />
+          <HelpTOCNode Title="NotNull Method (Object, Object, Object, Action)" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_2.htm" />
+          <HelpTOCNode Title="NotNull Method (Object, Object, Object, Object, Action)" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_3.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="195b454b-7e58-435e-84b9-9681be819db5" Title="Overload:CODE.Framework.Fundamentals.Utilities.If.Real">
+          <HelpTOCNode Title="Real(T) Method (Object, Action(T))" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.Real--1.htm" />
+          <HelpTOCNode Title="Real(T1, T2) Method (Object, Object, Action(T1, T2))" Url="html/M-CODE.Framework.Fundamentals.Utilities.If.Real--2.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6db7dd36-513e-49c9-b902-276e22c1f6cf" Title="ILogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.ILogger.htm">
+      <HelpTOCNode Title="ILogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+      <HelpTOCNode Id="ad9865e3-9218-498f-bed5-cc9f717f8683" Title="ILogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm">
+        <HelpTOCNode Id="34640f19-0f47-4f7c-9336-db39bd8d8701" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm">
+          <HelpTOCNode Title="Log Method (String, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm" />
+          <HelpTOCNode Title="Log Method (Object, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ILogger.Log_1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="5b644129-b375-48d4-bc66-249c2b01c95b" Title="ILogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm">
+        <HelpTOCNode Title="TypeFilter Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ILogger.TypeFilter.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="LogEventType Enumeration" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+    <HelpTOCNode Id="698571b4-7216-4a18-be40-aba9dac29a60" Title="Logger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.Logger.htm">
+      <HelpTOCNode Title="Logger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+      <HelpTOCNode Id="0b0a2b0e-c2a3-42bc-8f76-ca0c3363d690" Title="Logger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.Logger.htm">
+        <HelpTOCNode Id="62320007-e50a-4c05-acf6-20da3e754791" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm">
+          <HelpTOCNode Title="Log Method (String, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm" />
+          <HelpTOCNode Title="Log Method (Object, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_1.htm" />
+          <HelpTOCNode Title="Log Method (Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_2.htm" />
+          <HelpTOCNode Title="Log Method (String, Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_3.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="98d9491e-2a13-488c-8ef4-a3b6c68ce6c0" Title="Logger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.Logger.htm">
+        <HelpTOCNode Title="TypeFilter Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.Logger.TypeFilter.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dce3a69a-8faa-410b-a0ee-c125f7d6d50b" Title="LoggingMediator Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm">
+      <HelpTOCNode Title="LoggingMediator Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+      <HelpTOCNode Id="37013f36-ac4e-4da3-8981-b170e87b2f61" Title="LoggingMediator Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm">
+        <HelpTOCNode Title="AddLogger Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.AddLogger.htm" />
+        <HelpTOCNode Title="ClearLoggers Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.ClearLoggers.htm" />
+        <HelpTOCNode Id="1b2dd06f-dac5-4db1-a38d-c965812fcaa3" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm">
+          <HelpTOCNode Title="Log Method (String, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm" />
+          <HelpTOCNode Title="Log Method (Object, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_1.htm" />
+          <HelpTOCNode Title="Log Method (Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_2.htm" />
+          <HelpTOCNode Title="Log Method (String, Exception, LogEventType)" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_3.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="e0d27bba-6b28-4847-85eb-5356ee3f4bc1" Title="MultiFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm">
+      <HelpTOCNode Title="MultiFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+      <HelpTOCNode Id="73dc7ccb-1ae9-439a-8e4b-33ddd0bbea1c" Title="MultiFileLogger Constructor " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm">
+        <HelpTOCNode Title="MultiFileLogger Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm" />
+        <HelpTOCNode Title="MultiFileLogger Constructor (SpecialFolder)" Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor_1.htm" />
+        <HelpTOCNode Title="MultiFileLogger Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor_2.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="161a462b-4cfa-4864-bf28-664a30dd41d0" Title="MultiFileLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm">
+        <HelpTOCNode Id="55f2e356-9e1e-4116-a743-a5e481c06c40" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b2e4ea32-4dfd-4613-8c90-f94ce888ae7d" Title="MultiFileLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm">
+        <HelpTOCNode Title="Extension Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Extension.htm" />
+        <HelpTOCNode Title="Folder Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Folder.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="e549239d-0865-4bb0-9f55-1ddefc9e6b88" Title="MultiXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm">
+      <HelpTOCNode Title="MultiXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+      <HelpTOCNode Id="19261694-1ef2-4f65-90ca-186c88826237" Title="MultiXmlFileLogger Constructor " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm">
+        <HelpTOCNode Title="MultiXmlFileLogger Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm" />
+        <HelpTOCNode Title="MultiXmlFileLogger Constructor (SpecialFolder)" Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor_1.htm" />
+        <HelpTOCNode Title="MultiXmlFileLogger Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor_2.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="351c975a-150c-41f1-9bb5-a95d209a38c7" Title="MultiXmlFileLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm">
+        <HelpTOCNode Id="d7ba3c4b-66d2-47fd-ac29-8c6766a3904e" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="6184716d-ebb9-481b-a44d-a5f24a717ee4" Title="MultiXmlFileLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm">
+        <HelpTOCNode Title="XmlEventNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventNode.htm" />
+        <HelpTOCNode Title="XmlEventTimeStampAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+        <HelpTOCNode Title="XmlEventTypeAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTypeAttribute.htm" />
+        <HelpTOCNode Title="XmlRootNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlRootNode.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="20e25e42-ff1b-43b4-962b-dcd1045c15b6" Title="ObjectHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm">
+      <HelpTOCNode Title="ObjectHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+      <HelpTOCNode Id="2beb40ec-0dfb-42f8-8cb3-0ae2674a2e18" Title="ObjectHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm">
+        <HelpTOCNode Title="CreateObject Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.CreateObject.htm" />
+        <HelpTOCNode Title="DeserializeFromBinary Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinary.htm" />
+        <HelpTOCNode Title="DeserializeFromBinaryStream Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinaryStream.htm" />
+        <HelpTOCNode Title="DeserializeFromXml Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXml.htm" />
+        <HelpTOCNode Title="DeserializeFromXmlStream Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXmlStream.htm" />
+        <HelpTOCNode Title="GetAllMethodsForInterface Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetAllMethodsForInterface.htm" />
+        <HelpTOCNode Title="GetPropertyByPath Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyByPath.htm" />
+        <HelpTOCNode Title="GetPropertyValue(TResult) Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" />
+        <HelpTOCNode Title="InvokeMethod(TResult) Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" />
+        <HelpTOCNode Title="SerializeToBinaryArray Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryArray.htm" />
+        <HelpTOCNode Title="SerializeToBinaryStream Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryStream.htm" />
+        <HelpTOCNode Title="SerializeToXmlDocument Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlDocument.htm" />
+        <HelpTOCNode Title="SerializeToXmlStream Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlStream.htm" />
+        <HelpTOCNode Title="SerializeToXmlString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlString.htm" />
+        <HelpTOCNode Title="SetPropertyValue(TValue) Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" />
+        <HelpTOCNode Title="ValuesDiffer Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.ValuesDiffer.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="e799d21b-7588-4f9e-9338-d0917eac63ba" Title="ObjectInstantiationException Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm">
+      <HelpTOCNode Title="ObjectInstantiationException Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+      <HelpTOCNode Id="12efcb0a-ac8a-41c2-8825-00a4d97608fe" Title="ObjectInstantiationException Constructor " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm">
+        <HelpTOCNode Title="ObjectInstantiationException Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm" />
+        <HelpTOCNode Title="ObjectInstantiationException Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor_1.htm" />
+        <HelpTOCNode Title="ObjectInstantiationException Constructor (String, Exception)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor_2.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ObjectInstantiationException Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+      <HelpTOCNode Title="ObjectInstantiationException Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="d0361665-ddab-4196-ad87-bdbf5fcdbf4f" Title="OutputWindowLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm">
+      <HelpTOCNode Title="OutputWindowLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+      <HelpTOCNode Id="5d31acfd-eba4-4183-ae14-3de5830f86c7" Title="OutputWindowLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm">
+        <HelpTOCNode Id="da0a5d92-b303-4816-be1a-d63be608ae19" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="OutputWindowLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="a5af50f7-fc20-4315-a457-da8dda81cde2" Title="SecurityHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm">
+      <HelpTOCNode Title="SecurityHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+      <HelpTOCNode Id="859d8721-db0d-4fe3-874d-01a8a40ba254" Title="SecurityHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm">
+        <HelpTOCNode Id="ed28311b-b15b-487b-ac2f-29fa2cccfa90" Title="DecryptBytes Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm">
+          <HelpTOCNode Title="DecryptBytes Method (Byte[], Byte[])" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm" />
+          <HelpTOCNode Title="DecryptBytes Method (String, Byte[])" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DecryptString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptString.htm" />
+        <HelpTOCNode Id="95c35938-6719-4526-be98-b6ede74ffda3" Title="EncryptBytes Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm">
+          <HelpTOCNode Title="EncryptBytes Method (Byte[], Byte[])" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm" />
+          <HelpTOCNode Title="EncryptBytes Method (String, Byte[])" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="EncryptString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptString.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3403b161-906d-4276-8010-9cec18b07826" Title="SharedZipFunctionality Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm">
+      <HelpTOCNode Title="SharedZipFunctionality Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+      <HelpTOCNode Title="SharedZipFunctionality Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f70cd6cc-0b19-4589-93b8-0161cda40f60" Title="SingleFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm">
+      <HelpTOCNode Title="SingleFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+      <HelpTOCNode Id="f52027b7-8726-4c6a-91ee-abe9b230cf10" Title="SingleFileLogger Constructor " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm">
+        <HelpTOCNode Title="SingleFileLogger Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm" />
+        <HelpTOCNode Title="SingleFileLogger Constructor (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_1.htm" />
+        <HelpTOCNode Title="SingleFileLogger Constructor (SpecialFolder)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_2.htm" />
+        <HelpTOCNode Title="SingleFileLogger Constructor (SpecialFolder, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_3.htm" />
+        <HelpTOCNode Title="SingleFileLogger Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_4.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="80c89dd4-db79-4e75-9526-4f1e47ae80e5" Title="SingleFileLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm">
+        <HelpTOCNode Id="531faab7-1bd0-4123-940f-91dfd2d4a6ea" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="71133106-a2af-45ab-8176-381122bfaa0d" Title="SingleFileLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm">
+        <HelpTOCNode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.FileName.htm" />
+        <HelpTOCNode Title="Folder Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Folder.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="0e10007c-dedf-4765-9eb6-15f2906a6a23" Title="SingleXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm">
+      <HelpTOCNode Title="SingleXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+      <HelpTOCNode Id="9bac93aa-97ca-4727-ae09-4c28a3e50258" Title="SingleXmlFileLogger Constructor " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm">
+        <HelpTOCNode Title="SingleXmlFileLogger Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm" />
+        <HelpTOCNode Title="SingleXmlFileLogger Constructor (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_1.htm" />
+        <HelpTOCNode Title="SingleXmlFileLogger Constructor (SpecialFolder)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_2.htm" />
+        <HelpTOCNode Title="SingleXmlFileLogger Constructor (SpecialFolder, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_3.htm" />
+        <HelpTOCNode Title="SingleXmlFileLogger Constructor " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_4.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6344c40d-3bd8-4074-a92c-8664dac4738a" Title="SingleXmlFileLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm">
+        <HelpTOCNode Id="4cc7a037-ab6a-4ebb-9681-6d274c142a84" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="93632adf-026d-461b-8b85-beebd1d40bf7" Title="SingleXmlFileLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm">
+        <HelpTOCNode Title="MaximumEntries Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.MaximumEntries.htm" />
+        <HelpTOCNode Title="XmlEventNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventNode.htm" />
+        <HelpTOCNode Title="XmlEventTimeStampAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+        <HelpTOCNode Title="XmlEventTypeAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTypeAttribute.htm" />
+        <HelpTOCNode Title="XmlRootNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlRootNode.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9be9f4b9-9df2-4c97-a382-8214a82ff484" Title="StreamHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm">
+      <HelpTOCNode Title="StreamHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+      <HelpTOCNode Id="de9e94c9-3157-4186-b1ea-fbb0af56c740" Title="StreamHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm">
+        <HelpTOCNode Title="FromArray Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromArray.htm" />
+        <HelpTOCNode Title="FromFile Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromFile.htm" />
+        <HelpTOCNode Title="FromString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromString.htm" />
+        <HelpTOCNode Title="ToArray Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToArray.htm" />
+        <HelpTOCNode Id="7aeff963-c004-4c44-898e-13a9e342b07e" Title="ToFile Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm">
+          <HelpTOCNode Title="ToFile Method (Stream, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm" />
+          <HelpTOCNode Title="ToFile Method (Stream, String, Boolean)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile_1.htm" />
+          <HelpTOCNode Title="ToFile Method (Stream, String, Boolean, Encoding)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile_2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="2d826bac-a09f-494e-8ebf-acd4aa0630fa" Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm">
+          <HelpTOCNode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="96bde3d1-7c5b-49e3-929b-1f92ea96d3aa" Title="StringHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm">
+      <HelpTOCNode Title="StringHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+      <HelpTOCNode Id="fc728ec6-b6c3-4fa2-906e-62bf8eda9d80" Title="StringHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm">
+        <HelpTOCNode Title="AddBS Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AddBS.htm" />
+        <HelpTOCNode Id="b1b462cb-05d1-42f6-862c-58400edf65fb" Title="ArrayContainsString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm">
+          <HelpTOCNode Title="ArrayContainsString Method (String[], String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm" />
+          <HelpTOCNode Title="ArrayContainsString Method (String[], String, Boolean)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Asc Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Asc.htm" />
+        <HelpTOCNode Id="e0f49049-2d90-42a8-aa81-60b1bb25aede" Title="At Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm">
+          <HelpTOCNode Title="At Method (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm" />
+          <HelpTOCNode Title="At Method (String, String, Int32)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.At_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="AtLine Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AtLine.htm" />
+        <HelpTOCNode Title="Base64Decode Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Decode.htm" />
+        <HelpTOCNode Title="Base64Encode Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Encode.htm" />
+        <HelpTOCNode Title="Chr Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Chr.htm" />
+        <HelpTOCNode Id="ff649b95-6015-4120-9fee-e4bdd9436895" Title="Compare Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm">
+          <HelpTOCNode Title="Compare Method (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm" />
+          <HelpTOCNode Title="Compare Method (String, String, Boolean)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="FromFile Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.FromFile.htm" />
+        <HelpTOCNode Title="GetWordCount Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordCount.htm" />
+        <HelpTOCNode Title="GetWordNumb Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumb.htm" />
+        <HelpTOCNode Title="GetWordNumber Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumber.htm" />
+        <HelpTOCNode Title="IsAlpha Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsAlpha.htm" />
+        <HelpTOCNode Title="IsDigit Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsDigit.htm" />
+        <HelpTOCNode Title="JustFileName Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustFileName.htm" />
+        <HelpTOCNode Title="JustPath Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustPath.htm" />
+        <HelpTOCNode Title="Lower Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Lower.htm" />
+        <HelpTOCNode Id="b2918c45-296b-4689-93d0-e0c3005bbc32" Title="Occurs Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm">
+          <HelpTOCNode Title="Occurs Method (Char, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm" />
+          <HelpTOCNode Title="Occurs Method (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Proper Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Proper.htm" />
+        <HelpTOCNode Title="Replicate Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Replicate.htm" />
+        <HelpTOCNode Title="SmartProper Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SmartProper.htm" />
+        <HelpTOCNode Title="SpaceCamelCase Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SpaceCamelCase.htm" />
+        <HelpTOCNode Title="SubStr Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubStr.htm" />
+        <HelpTOCNode Title="SubstringSafe Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubstringSafe.htm" />
+        <HelpTOCNode Id="65307c0a-8006-4446-8a9f-24f70d77291c" Title="ToFile Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm">
+          <HelpTOCNode Title="ToFile Method (String, String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm" />
+          <HelpTOCNode Title="ToFile Method (String, String, Encoding)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="86c2e0ae-2bce-4c5c-8fc3-22d0db4cede9" Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm">
+          <HelpTOCNode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ToStringSafe Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToStringSafe.htm" />
+        <HelpTOCNode Title="TryBoolParse Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryBoolParse.htm" />
+        <HelpTOCNode Id="006b138e-3dce-4fb1-8e93-6208439f88f6" Title="TryGuidParse Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm">
+          <HelpTOCNode Title="TryGuidParse Method (String, Guid)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm" />
+          <HelpTOCNode Title="TryGuidParse Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TryIntParse Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryIntParse.htm" />
+        <HelpTOCNode Title="Upper Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Upper.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="45086310-80c2-48d4-bc81-acc2621c4a71" Title="TraceLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm">
+      <HelpTOCNode Title="TraceLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+      <HelpTOCNode Id="929c613c-4b46-4016-a875-40f7d108ae12" Title="TraceLogger Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm">
+        <HelpTOCNode Id="0a098b4a-934c-4e30-8c6c-56f3e2badae4" Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="TraceLogger Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="7556b206-0f50-4242-8a21-2845955685d2" Title="XmlHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm">
+      <HelpTOCNode Title="XmlHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+      <HelpTOCNode Id="3285275a-d81c-462f-b104-77fa247c2136" Title="XmlHelper Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm">
+        <HelpTOCNode Id="a5920175-9005-432a-89e5-39741a881a3d" Title="Format Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm">
+          <HelpTOCNode Title="Format Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm" />
+          <HelpTOCNode Title="Format Method (XmlDocument)" Url="html/M-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format_1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3508ffd2-ca65-4b7c-8aa2-2b5a84edb766" Title="ZipDirEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm">
+      <HelpTOCNode Title="ZipDirEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+      <HelpTOCNode Id="7bf38cf6-2409-479e-8649-7782cabdcf2a" Title="ZipDirEntry Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm">
+        <HelpTOCNode Title="Read Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Read.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="13e78262-9c1c-4034-98dc-5c8316c58b9b" Title="ZipDirEntry Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm">
+        <HelpTOCNode Title="Comment Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Comment.htm" />
+        <HelpTOCNode Title="CompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressedSize.htm" />
+        <HelpTOCNode Title="CompressionMethod Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionMethod.htm" />
+        <HelpTOCNode Title="CompressionRatio Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionRatio.htm" />
+        <HelpTOCNode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.FileName.htm" />
+        <HelpTOCNode Title="LastModified Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.LastModified.htm" />
+        <HelpTOCNode Title="UncompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.UncompressedSize.htm" />
+        <HelpTOCNode Title="VersionMadeBy Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionMadeBy.htm" />
+        <HelpTOCNode Title="VersionNeeded Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionNeeded.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="097abe33-f18e-40f5-8d11-c283f8263f23" Title="ZipEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm">
+      <HelpTOCNode Title="ZipEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+      <HelpTOCNode Id="87559b73-ff26-402d-864c-4c7940de2f28" Title="ZipEntry Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm">
+        <HelpTOCNode Id="5fcc5ed4-f149-4004-86f7-17964ba93357" Title="Extract Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm">
+          <HelpTOCNode Title="Extract Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm" />
+          <HelpTOCNode Title="Extract Method (Stream)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract_1.htm" />
+          <HelpTOCNode Title="Extract Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract_2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Read Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Read.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="a527cff2-53a0-4a04-b427-aa137c59553a" Title="ZipEntry Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm">
+        <HelpTOCNode Title="BitField Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.BitField.htm" />
+        <HelpTOCNode Title="CompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressedSize.htm" />
+        <HelpTOCNode Title="CompressionMethod Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionMethod.htm" />
+        <HelpTOCNode Title="CompressionRatio Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionRatio.htm" />
+        <HelpTOCNode Title="DirectoryNameOverride Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.DirectoryNameOverride.htm" />
+        <HelpTOCNode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.FileName.htm" />
+        <HelpTOCNode Title="LastModified Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.LastModified.htm" />
+        <HelpTOCNode Title="UncompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.UncompressedSize.htm" />
+        <HelpTOCNode Title="VersionNeeded Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.VersionNeeded.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7af45239-3a53-4c23-ae85-5ed098d27648" Title="ZipFile Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm">
+      <HelpTOCNode Title="ZipFile Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+      <HelpTOCNode Title="ZipFile Constructor (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.-ctor.htm" />
+      <HelpTOCNode Id="c0f2bbf2-cd2f-49fb-8d02-0ce31c2967fe" Title="ZipFile Methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm">
+        <HelpTOCNode Id="e457dee3-c9da-4d69-b906-743170d62b21" Title="AddBytes Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm">
+          <HelpTOCNode Title="AddBytes Method (Byte[], String, DateTime)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm" />
+          <HelpTOCNode Title="AddBytes Method (Byte[], String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="AddDirectory Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddDirectory.htm" />
+        <HelpTOCNode Title="AddFile Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddFile.htm" />
+        <HelpTOCNode Title="AddItem Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddItem.htm" />
+        <HelpTOCNode Title="Dispose Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Dispose.htm" />
+        <HelpTOCNode Id="2e1a8d91-a550-4ea6-8d8b-a3a0cbb8baf4" Title="Extract Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm">
+          <HelpTOCNode Title="Extract Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm" />
+          <HelpTOCNode Title="Extract Method (String, Stream)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ExtractAll Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.ExtractAll.htm" />
+        <HelpTOCNode Title="GetEnumerator Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.GetEnumerator.htm" />
+        <HelpTOCNode Id="622460b2-b87e-4cf9-a55a-b50391f8c757" Title="Read Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm">
+          <HelpTOCNode Title="Read Method (String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm" />
+          <HelpTOCNode Title="Read Method (Byte[], String)" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read_1.htm" />
+          <HelpTOCNode Title="Read Method (Byte[])" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read_2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Save Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Save.htm" />
+        <HelpTOCNode Title="SaveToStream Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.SaveToStream.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="638fd618-6e9e-4447-9df1-98c9ab8b6d7b" Title="ZipFile Properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm">
+        <HelpTOCNode Title="Item Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Item-System.String-.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Name.htm" />
+        <HelpTOCNode Title="TrimVolumeFromFullyQualifiedPaths Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.TrimVolumeFromFullyQualifiedPaths.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="71d1e539-8539-4d54-b4bc-d5ca2c6b1810" Title="CODE.Framework.Services.Contracts Namespace" Url="html/N-CODE.Framework.Services.Contracts.htm">
+    <HelpTOCNode Id="bab4e8d9-33a4-4daf-9ade-356fd6802618" Title="RestAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestAttribute.htm">
+      <HelpTOCNode Title="RestAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+      <HelpTOCNode Title="RestAttribute Constructor " Url="html/M-CODE.Framework.Services.Contracts.RestAttribute.-ctor.htm" />
+      <HelpTOCNode Title="RestAttribute Methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+      <HelpTOCNode Id="d63a5e59-5e09-4b8b-92ff-7258fb4e0aa0" Title="RestAttribute Properties" Url="html/Properties.T-CODE.Framework.Services.Contracts.RestAttribute.htm">
+        <HelpTOCNode Title="AuthorizationPolicy Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationPolicy.htm" />
+        <HelpTOCNode Title="AuthorizationRoles Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationRoles.htm" />
+        <HelpTOCNode Title="Method Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Method.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Name.htm" />
+        <HelpTOCNode Title="Route Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Route.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="RestMethods Enumeration" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+    <HelpTOCNode Id="f195d86d-c8b6-4d22-80e5-8a457efe2cec" Title="RestUrlParameterAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm">
+      <HelpTOCNode Title="RestUrlParameterAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+      <HelpTOCNode Title="RestUrlParameterAttribute Constructor " Url="html/M-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.-ctor.htm" />
+      <HelpTOCNode Title="RestUrlParameterAttribute Methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+      <HelpTOCNode Id="09bf25be-c60e-497a-80ed-6ab6dfe3b0e5" Title="RestUrlParameterAttribute Properties" Url="html/Properties.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm">
+        <HelpTOCNode Title="Mode Property " Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Mode.htm" />
+        <HelpTOCNode Title="Sequence Property " Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Sequence.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="UrlParameterMode Enumeration" Url="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" />
+    <HelpTOCNode Id="b982c85c-cb20-42e2-9585-e763b2dc7167" Title="UserPrincipalHelper Class" Url="html/T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm">
+      <HelpTOCNode Title="UserPrincipalHelper Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+      <HelpTOCNode Id="381fb638-3650-47c8-90f2-11ae49ab4ed2" Title="UserPrincipalHelper Methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm">
+        <HelpTOCNode Title="AddPrincipal Method " Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.AddPrincipal.htm" />
+        <HelpTOCNode Title="GetCurrentPrincipal Method " Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.GetCurrentPrincipal.htm" />
+        <HelpTOCNode Title="RemovePrincipal Method " Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.RemovePrincipal.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="b8008532-98f1-4cbf-9c07-8c7ec159fd1b" Title="CODE.Framework.Services.Server.AspNetCore Namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.htm">
+    <HelpTOCNode Id="31459186-4840-4dd1-a1cb-dec489ab3ed7" Title="BaseServiceRequest Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm">
+      <HelpTOCNode Title="BaseServiceRequest Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f5b7315d-8d5e-423e-8b2e-800c99fe3674" Title="BaseServiceResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm">
+      <HelpTOCNode Title="BaseServiceResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+      <HelpTOCNode Title="BaseServiceResponse Constructor " Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.-ctor.htm" />
+      <HelpTOCNode Id="9430eef3-634b-4689-9b81-1c7bb5d8823f" Title="BaseServiceResponse Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm">
+        <HelpTOCNode Title="SetError Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.SetError.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="fa516129-680f-4e03-b496-74c0b6fc3bb6" Title="BaseServiceResponse Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm">
+        <HelpTOCNode Title="FailureInformation Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.FailureInformation.htm" />
+        <HelpTOCNode Title="Success Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.Success.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="383836d1-f837-4705-9665-1e50254c2ba7" Title="ErrorResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm">
+      <HelpTOCNode Title="ErrorResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+      <HelpTOCNode Id="ee127df8-a3c1-40dd-b672-a67647044b3f" Title="ErrorResponse Constructor " Url="html/Overload-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm">
+        <HelpTOCNode Title="ErrorResponse Constructor " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm" />
+        <HelpTOCNode Title="ErrorResponse Constructor (Exception)" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor_1.htm" />
+        <HelpTOCNode Title="ErrorResponse Constructor (String)" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor_2.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ErrorResponse Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+      <HelpTOCNode Id="d05f32e3-367f-40bf-aba8-ff935c3e5f3a" Title="ErrorResponse Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm">
+        <HelpTOCNode Title="ExceptionType Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.ExceptionType.htm" />
+        <HelpTOCNode Title="Source Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.Source.htm" />
+        <HelpTOCNode Title="StackTrace Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.StackTrace.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="4917e751-e243-4bc2-a32e-f38acc362517" Title="MethodInvocationContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm">
+      <HelpTOCNode Title="MethodInvocationContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+      <HelpTOCNode Title="MethodInvocationContext Constructor " Url="html/M-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.-ctor.htm" />
+      <HelpTOCNode Title="MethodInvocationContext Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+      <HelpTOCNode Id="a90ee5cc-23b4-459a-9d72-798a34f4b67d" Title="MethodInvocationContext Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm">
+        <HelpTOCNode Title="ActiveMethodContexts Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ActiveMethodContexts.htm" />
+        <HelpTOCNode Title="AuthorizationRoles Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.AuthorizationRoles.htm" />
+        <HelpTOCNode Title="InstanceConfiguration Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.InstanceConfiguration.htm" />
+        <HelpTOCNode Title="IsAsync Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.IsAsync.htm" />
+        <HelpTOCNode Title="MethodInfo Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.MethodInfo.htm" />
+        <HelpTOCNode Title="RestAttribute Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.RestAttribute.htm" />
+        <HelpTOCNode Title="ServiceConfiguration Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ServiceConfiguration.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6f0cf37a-e73d-43b5-963d-3f5e66ca4b42" Title="ServiceHandler Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm">
+      <HelpTOCNode Title="ServiceHandler Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+      <HelpTOCNode Title="ServiceHandler Constructor " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.-ctor.htm" />
+      <HelpTOCNode Id="045ca862-f229-42e9-84f8-e412b47e0526" Title="ServiceHandler Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm">
+        <HelpTOCNode Title="ProcessRequest Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.ProcessRequest.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6c737a02-a917-451a-bc11-18f8bf44eef1" Title="ServiceHandlerExtensions Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm">
+      <HelpTOCNode Title="ServiceHandlerExtensions Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+      <HelpTOCNode Id="2991cbac-f9e4-4ff0-836e-82f6c2ae7623" Title="ServiceHandlerExtensions Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm">
+        <HelpTOCNode Title="AddServiceHandler Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.AddServiceHandler.htm" />
+        <HelpTOCNode Title="GetRestAttribute Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.GetRestAttribute.htm" />
+        <HelpTOCNode Title="UseServiceHandler Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.UseServiceHandler.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7f4a6a2e-1e07-4d68-b251-2012f053c73b" Title="ServiceHandlerRequestContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm">
+      <HelpTOCNode Title="ServiceHandlerRequestContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+      <HelpTOCNode Title="ServiceHandlerRequestContext Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+      <HelpTOCNode Id="11f09a72-cdad-469e-8370-4364bb794dbd" Title="ServiceHandlerRequestContext Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm">
+        <HelpTOCNode Title="HttpContext Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpContext.htm" />
+        <HelpTOCNode Title="HttpRequest Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpRequest.htm" />
+        <HelpTOCNode Title="HttpResponse Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpResponse.htm" />
+        <HelpTOCNode Title="MethodContext Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.MethodContext.htm" />
+        <HelpTOCNode Title="ResultJson Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultJson.htm" />
+        <HelpTOCNode Title="ResultValue Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultValue.htm" />
+        <HelpTOCNode Title="ServiceInstanceConfiguration Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ServiceInstanceConfiguration.htm" />
+        <HelpTOCNode Title="Url Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.Url.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3f248012-1ed8-4a61-81f0-69d3e606cf15" Title="ServiceHandlerRequestContextUrl Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm">
+      <HelpTOCNode Title="ServiceHandlerRequestContextUrl Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+      <HelpTOCNode Title="ServiceHandlerRequestContextUrl Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+      <HelpTOCNode Id="40129496-94d0-4c38-83e4-4f08c33b59a8" Title="ServiceHandlerRequestContextUrl Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm">
+        <HelpTOCNode Title="HttpMethod Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.HttpMethod.htm" />
+        <HelpTOCNode Title="QueryString Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.QueryString.htm" />
+        <HelpTOCNode Title="Url Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.Url.htm" />
+        <HelpTOCNode Title="UrlPath Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.UrlPath.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="f6a25e6f-42cf-4861-aa52-aac4f212b313" Title="CODE.Framework.Services.Server.AspNetCore.Configuration Namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.Configuration.htm">
+    <HelpTOCNode Title="ControllerHttpsMode Enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+    <HelpTOCNode Title="JsonFormatModes Enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+    <HelpTOCNode Id="1f3f8471-eba4-48a9-b0a6-ef849c772ba2" Title="ServiceHandlerConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm">
+      <HelpTOCNode Title="ServiceHandlerConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+      <HelpTOCNode Title="ServiceHandlerConfiguration Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+      <HelpTOCNode Id="ff0effc6-d1e6-452b-b6bd-b3157d9b6f25" Title="ServiceHandlerConfiguration Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm">
+        <HelpTOCNode Title="Cors Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Cors.htm" />
+        <HelpTOCNode Title="Current Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Current.htm" />
+        <HelpTOCNode Title="Services Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Services.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c2d90ab1-e8cc-4590-b346-44ed63faa850" Title="ServiceHandlerConfigurationInstance Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm">
+      <HelpTOCNode Title="ServiceHandlerConfigurationInstance Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+      <HelpTOCNode Title="ServiceHandlerConfigurationInstance Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+      <HelpTOCNode Id="ac7fca6d-b418-43ee-98c6-f2ac89e15581" Title="ServiceHandlerConfigurationInstance Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm">
+        <HelpTOCNode Title="AssemblyName Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.AssemblyName.htm" />
+        <HelpTOCNode Title="HttpsMode Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.HttpsMode.htm" />
+        <HelpTOCNode Title="JsonFormatMode Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.JsonFormatMode.htm" />
+        <HelpTOCNode Title="OnAfterMethodInvoke Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAfterMethodInvoke.htm" />
+        <HelpTOCNode Title="OnAuthorize Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAuthorize.htm" />
+        <HelpTOCNode Title="OnBeforeMethodInvoke Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnBeforeMethodInvoke.htm" />
+        <HelpTOCNode Title="RouteBasePath Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.RouteBasePath.htm" />
+        <HelpTOCNode Title="ServiceType Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceType.htm" />
+        <HelpTOCNode Title="ServiceTypeName Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceTypeName.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="f892eaa7-21d5-4a8d-b602-d072fcca291e" Title="ServiceHandlerCorsConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm">
+      <HelpTOCNode Title="ServiceHandlerCorsConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+      <HelpTOCNode Title="ServiceHandlerCorsConfiguration Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+      <HelpTOCNode Id="43c74850-2152-4528-b265-61ec3a4ca68d" Title="ServiceHandlerCorsConfiguration Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm">
+        <HelpTOCNode Title="AllowCredentials Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowCredentials.htm" />
+        <HelpTOCNode Title="AllowedHeaders Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedHeaders.htm" />
+        <HelpTOCNode Title="AllowedMethods Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedMethods.htm" />
+        <HelpTOCNode Title="AllowedOrigins Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedOrigins.htm" />
+        <HelpTOCNode Title="CorsPolicyName Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.CorsPolicyName.htm" />
+        <HelpTOCNode Title="UseCorsPolicy Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.UseCorsPolicy.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="f4972d14-9a03-4138-9742-4e8765177246" Title="CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler Namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.htm">
+    <HelpTOCNode Id="c82fe036-4600-48cf-a9a2-29d13c02b1bd" Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm">
+      <HelpTOCNode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+      <HelpTOCNode Id="50c59f1f-f0a6-4543-bbdb-0f00938f0600" Title="Program Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm">
+        <HelpTOCNode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.BuildWebHost.htm" />
+        <HelpTOCNode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.Main.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7fe7eb35-13cb-4eb0-8f4a-433e0a2137a5" Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm">
+      <HelpTOCNode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+      <HelpTOCNode Id="d9cd6031-eef9-4109-b657-ef2eb7e47029" Title="Startup Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm">
+        <HelpTOCNode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.Configure.htm" />
+        <HelpTOCNode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.ConfigureServices.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="172d3cce-717a-4b3a-a5e6-8e1d34678592" Title="CODE.Framework.Services.Server.AspNetCore.Web Namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.Web.htm">
+    <HelpTOCNode Id="00acafad-7fae-4d9e-befd-6c7d91c463fb" Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm">
+      <HelpTOCNode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+      <HelpTOCNode Id="b093e0f1-e91d-4dde-aeeb-cf838b8061bc" Title="Program Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm">
+        <HelpTOCNode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.BuildWebHost.htm" />
+        <HelpTOCNode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.Main.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="5dcbe74d-5a87-4499-941f-67917ae7c7aa" Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm">
+      <HelpTOCNode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+      <HelpTOCNode Title="Startup Constructor " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.-ctor.htm" />
+      <HelpTOCNode Id="92b712d3-5a2a-40bc-b873-9ad16b45ddfb" Title="Startup Methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm">
+        <HelpTOCNode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configure.htm" />
+        <HelpTOCNode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.ConfigureServices.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="de4f66b2-5eed-4cec-9297-6fbdca7d1d13" Title="Startup Properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm">
+        <HelpTOCNode Title="Configuration Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configuration.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="a990acaa-cce4-40cc-a98b-573167a8a2c2" Title="Sample.Contracts Namespace" Url="html/N-Sample.Contracts.htm">
+    <HelpTOCNode Id="c45fb72c-9bfe-4f9e-9993-c4a25edcaa6f" Title="AuthenticateUserRequest Class" Url="html/T-Sample.Contracts.AuthenticateUserRequest.htm">
+      <HelpTOCNode Title="AuthenticateUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+      <HelpTOCNode Title="AuthenticateUserRequest Constructor " Url="html/M-Sample.Contracts.AuthenticateUserRequest.-ctor.htm" />
+      <HelpTOCNode Title="AuthenticateUserRequest Methods" Url="html/Methods.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+      <HelpTOCNode Id="3c48617a-452a-4928-b317-aeddfc7d4b68" Title="AuthenticateUserRequest Properties" Url="html/Properties.T-Sample.Contracts.AuthenticateUserRequest.htm">
+        <HelpTOCNode Title="Password Property " Url="html/P-Sample.Contracts.AuthenticateUserRequest.Password.htm" />
+        <HelpTOCNode Title="RememberMe Property " Url="html/P-Sample.Contracts.AuthenticateUserRequest.RememberMe.htm" />
+        <HelpTOCNode Title="UserName Property " Url="html/P-Sample.Contracts.AuthenticateUserRequest.UserName.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="cd1fb251-0909-4275-9123-90c1f9970ca9" Title="AuthenticateUserResponse Class" Url="html/T-Sample.Contracts.AuthenticateUserResponse.htm">
+      <HelpTOCNode Title="AuthenticateUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+      <HelpTOCNode Title="AuthenticateUserResponse Constructor " Url="html/M-Sample.Contracts.AuthenticateUserResponse.-ctor.htm" />
+      <HelpTOCNode Title="AuthenticateUserResponse Methods" Url="html/Methods.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+      <HelpTOCNode Id="48d38507-d346-4cd8-9e3f-3ca0022e0114" Title="AuthenticateUserResponse Properties" Url="html/Properties.T-Sample.Contracts.AuthenticateUserResponse.htm">
+        <HelpTOCNode Title="Company Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Company.htm" />
+        <HelpTOCNode Title="Email Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Email.htm" />
+        <HelpTOCNode Title="Firstname Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Firstname.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Id.htm" />
+        <HelpTOCNode Title="Lastname Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Lastname.htm" />
+        <HelpTOCNode Title="Roles Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Roles.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9df90cc5-0094-4d5c-81c1-338c251a6a0b" Title="Customer Class" Url="html/T-Sample.Contracts.Customer.htm">
+      <HelpTOCNode Title="Customer Members" Url="html/AllMembers.T-Sample.Contracts.Customer.htm" />
+      <HelpTOCNode Title="Customer Methods" Url="html/Methods.T-Sample.Contracts.Customer.htm" />
+      <HelpTOCNode Id="2288680f-3eb9-49cc-9a4c-369eee5b28da" Title="Customer Properties" Url="html/Properties.T-Sample.Contracts.Customer.htm">
+        <HelpTOCNode Title="Company Property " Url="html/P-Sample.Contracts.Customer.Company.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.Customer.Id.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P-Sample.Contracts.Customer.Name.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="36fe315b-0779-47eb-b821-0b64195f944c" Title="GetCustomerRequest Class" Url="html/T-Sample.Contracts.GetCustomerRequest.htm">
+      <HelpTOCNode Title="GetCustomerRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerRequest.htm" />
+      <HelpTOCNode Title="GetCustomerRequest Methods" Url="html/Methods.T-Sample.Contracts.GetCustomerRequest.htm" />
+      <HelpTOCNode Id="40eff08b-5fa1-4e95-9762-6fce14ab5386" Title="GetCustomerRequest Properties" Url="html/Properties.T-Sample.Contracts.GetCustomerRequest.htm">
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.GetCustomerRequest.Id.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="ff5c58eb-c1a7-476f-a879-c11ec5c66022" Title="GetCustomerResponse Class" Url="html/T-Sample.Contracts.GetCustomerResponse.htm">
+      <HelpTOCNode Title="GetCustomerResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerResponse.htm" />
+      <HelpTOCNode Title="GetCustomerResponse Methods" Url="html/Methods.T-Sample.Contracts.GetCustomerResponse.htm" />
+      <HelpTOCNode Id="1a48e785-a73a-49dd-976f-3bd845583086" Title="GetCustomerResponse Properties" Url="html/Properties.T-Sample.Contracts.GetCustomerResponse.htm">
+        <HelpTOCNode Title="Customer Property " Url="html/P-Sample.Contracts.GetCustomerResponse.Customer.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="e1a9ec8d-18d6-482e-81ec-f95134771709" Title="GetCustomersResponse Class" Url="html/T-Sample.Contracts.GetCustomersResponse.htm">
+      <HelpTOCNode Title="GetCustomersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomersResponse.htm" />
+      <HelpTOCNode Title="GetCustomersResponse Methods" Url="html/Methods.T-Sample.Contracts.GetCustomersResponse.htm" />
+      <HelpTOCNode Id="6dd706f6-c386-40bb-a9aa-a9c423e6cea5" Title="GetCustomersResponse Properties" Url="html/Properties.T-Sample.Contracts.GetCustomersResponse.htm">
+        <HelpTOCNode Title="CustomerList Property " Url="html/P-Sample.Contracts.GetCustomersResponse.CustomerList.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7ed89efe-ebad-42db-8e90-88e6f2d24719" Title="GetUserRequest Class" Url="html/T-Sample.Contracts.GetUserRequest.htm">
+      <HelpTOCNode Title="GetUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetUserRequest.htm" />
+      <HelpTOCNode Title="GetUserRequest Methods" Url="html/Methods.T-Sample.Contracts.GetUserRequest.htm" />
+      <HelpTOCNode Id="6a5dbc56-da28-4a69-b460-28e76c3248e9" Title="GetUserRequest Properties" Url="html/Properties.T-Sample.Contracts.GetUserRequest.htm">
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.GetUserRequest.Id.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="8c33f2b5-dfc5-4011-9b18-56247e95b46b" Title="GetUserResponse Class" Url="html/T-Sample.Contracts.GetUserResponse.htm">
+      <HelpTOCNode Title="GetUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUserResponse.htm" />
+      <HelpTOCNode Title="GetUserResponse Constructor " Url="html/M-Sample.Contracts.GetUserResponse.-ctor.htm" />
+      <HelpTOCNode Title="GetUserResponse Methods" Url="html/Methods.T-Sample.Contracts.GetUserResponse.htm" />
+      <HelpTOCNode Id="ba6e2ede-f03c-4138-ac91-c3f208e55116" Title="GetUserResponse Properties" Url="html/Properties.T-Sample.Contracts.GetUserResponse.htm">
+        <HelpTOCNode Title="Company Property " Url="html/P-Sample.Contracts.GetUserResponse.Company.htm" />
+        <HelpTOCNode Title="Email Property " Url="html/P-Sample.Contracts.GetUserResponse.Email.htm" />
+        <HelpTOCNode Title="Firstname Property " Url="html/P-Sample.Contracts.GetUserResponse.Firstname.htm" />
+        <HelpTOCNode Title="IsActive Property " Url="html/P-Sample.Contracts.GetUserResponse.IsActive.htm" />
+        <HelpTOCNode Title="LastLogin Property " Url="html/P-Sample.Contracts.GetUserResponse.LastLogin.htm" />
+        <HelpTOCNode Title="Lastname Property " Url="html/P-Sample.Contracts.GetUserResponse.Lastname.htm" />
+        <HelpTOCNode Title="Roles Property " Url="html/P-Sample.Contracts.GetUserResponse.Roles.htm" />
+        <HelpTOCNode Title="UserId Property " Url="html/P-Sample.Contracts.GetUserResponse.UserId.htm" />
+        <HelpTOCNode Title="Username Property " Url="html/P-Sample.Contracts.GetUserResponse.Username.htm" />
+        <HelpTOCNode Title="Verifier Property " Url="html/P-Sample.Contracts.GetUserResponse.Verifier.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b43af224-5df5-4cdf-a65f-a60d5e44e214" Title="GetUsersRequest Class" Url="html/T-Sample.Contracts.GetUsersRequest.htm">
+      <HelpTOCNode Title="GetUsersRequest Methods" Url="html/Methods.T-Sample.Contracts.GetUsersRequest.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="c7ca99ae-89a1-4293-a7d4-17faf1d26004" Title="GetUsersResponse Class" Url="html/T-Sample.Contracts.GetUsersResponse.htm">
+      <HelpTOCNode Title="GetUsersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUsersResponse.htm" />
+      <HelpTOCNode Id="89a15d7d-d1e8-46fd-8580-bb5f2cccf0a7" Title="GetUsersResponse Fields" Url="html/Fields.T-Sample.Contracts.GetUsersResponse.htm">
+        <HelpTOCNode Title="Users Field" Url="html/F-Sample.Contracts.GetUsersResponse.Users.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="GetUsersResponse Methods" Url="html/Methods.T-Sample.Contracts.GetUsersResponse.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="ed1bf056-af54-4959-88dc-90f5cb4766a2" Title="ICustomerService Interface" Url="html/T-Sample.Contracts.ICustomerService.htm">
+      <HelpTOCNode Title="ICustomerService Members" Url="html/AllMembers.T-Sample.Contracts.ICustomerService.htm" />
+      <HelpTOCNode Id="2a5495e9-ca91-4e82-a754-a8f6dd253435" Title="ICustomerService Methods" Url="html/Methods.T-Sample.Contracts.ICustomerService.htm">
+        <HelpTOCNode Title="GetCustomer Method " Url="html/M-Sample.Contracts.ICustomerService.GetCustomer.htm" />
+        <HelpTOCNode Title="GetCustomers Method " Url="html/M-Sample.Contracts.ICustomerService.GetCustomers.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9c778abc-92ab-466d-af36-74ff70f9cd59" Title="IsAuthenticatedRequest Class" Url="html/T-Sample.Contracts.IsAuthenticatedRequest.htm">
+      <HelpTOCNode Title="IsAuthenticatedRequest Methods" Url="html/Methods.T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f6faf9e7-c76b-4052-9824-16d18d52e644" Title="IsAuthenticatedResponse Class" Url="html/T-Sample.Contracts.IsAuthenticatedResponse.htm">
+      <HelpTOCNode Title="IsAuthenticatedResponse Members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+      <HelpTOCNode Title="IsAuthenticatedResponse Methods" Url="html/Methods.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+      <HelpTOCNode Id="52b36cbc-8d31-4ab6-a211-599d828f1e8d" Title="IsAuthenticatedResponse Properties" Url="html/Properties.T-Sample.Contracts.IsAuthenticatedResponse.htm">
+        <HelpTOCNode Title="UserId Property " Url="html/P-Sample.Contracts.IsAuthenticatedResponse.UserId.htm" />
+        <HelpTOCNode Title="Username Property " Url="html/P-Sample.Contracts.IsAuthenticatedResponse.Username.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="30297b7d-4bc3-40c5-b07c-afeedced35c5" Title="IUserService Interface" Url="html/T-Sample.Contracts.IUserService.htm">
+      <HelpTOCNode Title="IUserService Members" Url="html/AllMembers.T-Sample.Contracts.IUserService.htm" />
+      <HelpTOCNode Id="12e6e630-b727-4989-8861-e362c9f1369c" Title="IUserService Methods" Url="html/Methods.T-Sample.Contracts.IUserService.htm">
+        <HelpTOCNode Title="AuthenticateUser Method " Url="html/M-Sample.Contracts.IUserService.AuthenticateUser.htm" />
+        <HelpTOCNode Title="GetUser Method " Url="html/M-Sample.Contracts.IUserService.GetUser.htm" />
+        <HelpTOCNode Title="GetUsers Method " Url="html/M-Sample.Contracts.IUserService.GetUsers.htm" />
+        <HelpTOCNode Title="IsAuthenticated Method " Url="html/M-Sample.Contracts.IUserService.IsAuthenticated.htm" />
+        <HelpTOCNode Title="ResetPassword Method " Url="html/M-Sample.Contracts.IUserService.ResetPassword.htm" />
+        <HelpTOCNode Title="SaveUser Method " Url="html/M-Sample.Contracts.IUserService.SaveUser.htm" />
+        <HelpTOCNode Title="Signout Method " Url="html/M-Sample.Contracts.IUserService.Signout.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="83b296ae-5391-4966-9971-4785149f0be5" Title="ResetPasswordRequest Class" Url="html/T-Sample.Contracts.ResetPasswordRequest.htm">
+      <HelpTOCNode Title="ResetPasswordRequest Members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordRequest.htm" />
+      <HelpTOCNode Title="ResetPasswordRequest Methods" Url="html/Methods.T-Sample.Contracts.ResetPasswordRequest.htm" />
+      <HelpTOCNode Id="556d8b41-04ef-4c68-b499-f1ca7192af2e" Title="ResetPasswordRequest Properties" Url="html/Properties.T-Sample.Contracts.ResetPasswordRequest.htm">
+        <HelpTOCNode Title="Username Property " Url="html/P-Sample.Contracts.ResetPasswordRequest.Username.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7b409a71-45ea-4960-a2ab-d48ac79286d2" Title="ResetPasswordResponse Class" Url="html/T-Sample.Contracts.ResetPasswordResponse.htm">
+      <HelpTOCNode Title="ResetPasswordResponse Methods" Url="html/Methods.T-Sample.Contracts.ResetPasswordResponse.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="0ddfe493-89ed-4b6f-a196-4ac906d0c198" Title="SaveUserRequest Class" Url="html/T-Sample.Contracts.SaveUserRequest.htm">
+      <HelpTOCNode Title="SaveUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserRequest.htm" />
+      <HelpTOCNode Title="SaveUserRequest Methods" Url="html/Methods.T-Sample.Contracts.SaveUserRequest.htm" />
+      <HelpTOCNode Id="b34d031a-71c2-4f1c-b9ca-0cd7ee531605" Title="SaveUserRequest Properties" Url="html/Properties.T-Sample.Contracts.SaveUserRequest.htm">
+        <HelpTOCNode Title="Company Property " Url="html/P-Sample.Contracts.SaveUserRequest.Company.htm" />
+        <HelpTOCNode Title="Email Property " Url="html/P-Sample.Contracts.SaveUserRequest.Email.htm" />
+        <HelpTOCNode Title="Firstname Property " Url="html/P-Sample.Contracts.SaveUserRequest.Firstname.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.SaveUserRequest.Id.htm" />
+        <HelpTOCNode Title="IsActive Property " Url="html/P-Sample.Contracts.SaveUserRequest.IsActive.htm" />
+        <HelpTOCNode Title="LastLogin Property " Url="html/P-Sample.Contracts.SaveUserRequest.LastLogin.htm" />
+        <HelpTOCNode Title="Lastname Property " Url="html/P-Sample.Contracts.SaveUserRequest.Lastname.htm" />
+        <HelpTOCNode Title="Password Property " Url="html/P-Sample.Contracts.SaveUserRequest.Password.htm" />
+        <HelpTOCNode Title="PasswordVerify Property " Url="html/P-Sample.Contracts.SaveUserRequest.PasswordVerify.htm" />
+        <HelpTOCNode Title="Roles Property " Url="html/P-Sample.Contracts.SaveUserRequest.Roles.htm" />
+        <HelpTOCNode Title="UserId Property " Url="html/P-Sample.Contracts.SaveUserRequest.UserId.htm" />
+        <HelpTOCNode Title="Username Property " Url="html/P-Sample.Contracts.SaveUserRequest.Username.htm" />
+        <HelpTOCNode Title="Verifier Property " Url="html/P-Sample.Contracts.SaveUserRequest.Verifier.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="fb8dd332-aa91-46fe-a86d-ad71023e8fd8" Title="SaveUserResponse Class" Url="html/T-Sample.Contracts.SaveUserResponse.htm">
+      <HelpTOCNode Title="SaveUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserResponse.htm" />
+      <HelpTOCNode Title="SaveUserResponse Methods" Url="html/Methods.T-Sample.Contracts.SaveUserResponse.htm" />
+      <HelpTOCNode Id="1b7e85be-c52e-42d5-9e39-53ddfd45b8ac" Title="SaveUserResponse Properties" Url="html/Properties.T-Sample.Contracts.SaveUserResponse.htm">
+        <HelpTOCNode Title="FailureInformation Property " Url="html/P-Sample.Contracts.SaveUserResponse.FailureInformation.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.SaveUserResponse.Id.htm" />
+        <HelpTOCNode Title="Success Property " Url="html/P-Sample.Contracts.SaveUserResponse.Success.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="8278e02b-16e7-4891-bc63-52f49d3f1fb0" Title="SignoutRequest Class" Url="html/T-Sample.Contracts.SignoutRequest.htm">
+      <HelpTOCNode Title="SignoutRequest Methods" Url="html/Methods.T-Sample.Contracts.SignoutRequest.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="9342c493-181b-4fff-8ea9-2efc7ba6f99e" Title="SignoutResponse Class" Url="html/T-Sample.Contracts.SignoutResponse.htm">
+      <HelpTOCNode Title="SignoutResponse Methods" Url="html/Methods.T-Sample.Contracts.SignoutResponse.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="ec151019-f13e-4330-b160-0f75d1010cb1" Title="User Class" Url="html/T-Sample.Contracts.User.htm">
+      <HelpTOCNode Title="User Members" Url="html/AllMembers.T-Sample.Contracts.User.htm" />
+      <HelpTOCNode Title="User Methods" Url="html/Methods.T-Sample.Contracts.User.htm" />
+      <HelpTOCNode Id="f3926ce6-6925-4ba8-83cc-7e7803cdfa3b" Title="User Properties" Url="html/Properties.T-Sample.Contracts.User.htm">
+        <HelpTOCNode Title="Id Property " Url="html/P-Sample.Contracts.User.Id.htm" />
+        <HelpTOCNode Title="Password Property " Url="html/P-Sample.Contracts.User.Password.htm" />
+        <HelpTOCNode Title="Username Property " Url="html/P-Sample.Contracts.User.Username.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="433eaa8a-f236-4803-8608-061d2bb5b660" Title="Sample.Services.Implementation Namespace" Url="html/N-Sample.Services.Implementation.htm">
+    <HelpTOCNode Id="2145ed6e-c5a5-4da7-b41f-97adbc3a5e81" Title="CustomerService Class" Url="html/T-Sample.Services.Implementation.CustomerService.htm">
+      <HelpTOCNode Title="CustomerService Members" Url="html/AllMembers.T-Sample.Services.Implementation.CustomerService.htm" />
+      <HelpTOCNode Id="40f95694-7983-4552-a31b-cf0c6f1edb4d" Title="CustomerService Methods" Url="html/Methods.T-Sample.Services.Implementation.CustomerService.htm">
+        <HelpTOCNode Title="GetCustomer Method " Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomer.htm" />
+        <HelpTOCNode Title="GetCustomers Method " Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomers.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b7ddd8fe-f48a-4b32-b41e-2d663ffb1a94" Title="UserService Class" Url="html/T-Sample.Services.Implementation.UserService.htm">
+      <HelpTOCNode Title="UserService Members" Url="html/AllMembers.T-Sample.Services.Implementation.UserService.htm" />
+      <HelpTOCNode Id="3a4ba402-514f-4bd8-b6e9-aea595d14784" Title="UserService Methods" Url="html/Methods.T-Sample.Services.Implementation.UserService.htm">
+        <HelpTOCNode Title="AuthenticateUser Method " Url="html/M-Sample.Services.Implementation.UserService.AuthenticateUser.htm" />
+        <HelpTOCNode Title="GetUser Method " Url="html/M-Sample.Services.Implementation.UserService.GetUser.htm" />
+        <HelpTOCNode Title="GetUsers Method " Url="html/M-Sample.Services.Implementation.UserService.GetUsers.htm" />
+        <HelpTOCNode Title="IsAuthenticated Method " Url="html/M-Sample.Services.Implementation.UserService.IsAuthenticated.htm" />
+        <HelpTOCNode Title="ResetPassword Method " Url="html/M-Sample.Services.Implementation.UserService.ResetPassword.htm" />
+        <HelpTOCNode Title="SaveUser Method " Url="html/M-Sample.Services.Implementation.UserService.SaveUser.htm" />
+        <HelpTOCNode Title="Signout Method " Url="html/M-Sample.Services.Implementation.UserService.Signout.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

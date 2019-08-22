@@ -1,0 +1,21 @@
+﻿@page
+@using CODE.Framework.Services.Client
+@using Sample.Contracts
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    GetCustomersResponse response = null;
+    ServiceClient.Call<ICustomerService>(c => { response = c.GetCustomers(new GetCustomersRequest()); });
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    <ul>
+        @foreach (var customer in response.CustomerList)
+        {
+        <li>@customer.Name</li>
+        }
+    </ul>
+</div>

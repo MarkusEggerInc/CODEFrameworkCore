@@ -1,5 +1,4 @@
-﻿using CODE.Framework.Services.Server.AspNetCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CODE.Framework.Services.Contracts;
@@ -8,44 +7,36 @@ namespace Sample.Contracts
 {    
     public interface IUserService
     {     
-        [Rest(Method = RestMethods.Get, Route = "signout")]
+        [Rest(Method = RestMethods.Get)]
         SignoutResponse Signout(SignoutRequest request);
 
-        [Rest(Method = RestMethods.Post, Route = "isauthenticated")]
+        [Rest(Method = RestMethods.Post)]
         IsAuthenticatedResponse IsAuthenticated(IsAuthenticatedRequest request);
         
-        [Rest(Method = RestMethods.Post, Route = "user")]
+        [Rest(Method = RestMethods.Post, Name = "user")]
         SaveUserResponse SaveUser(SaveUserRequest request);
 
-        [Rest(Method = RestMethods.Post, Route = "resetpassword")]
+        [Rest(Method = RestMethods.Post)]
         ResetPasswordResponse ResetPassword(ResetPasswordRequest request);
 
-        [Rest(Method = RestMethods.Get, Route = "{id:guid}")]
+        [Rest(Method = RestMethods.Get, Name = "")]
         GetUserResponse GetUser(GetUserRequest request);
 
-        [Rest(Method = RestMethods.Post, Route = "authenticate")]
+        [Rest(Method = RestMethods.Post, Name = "authenticate")]
         AuthenticateUserResponse AuthenticateUser(AuthenticateUserRequest request);
 
         [Rest(Method = RestMethods.Get, Route = "")]
         GetUsersResponse GetUsers(GetUsersRequest request);        
     }
 
-
-
-
     public class GetUserRequest : BaseServiceRequest
     {
-        [DataMember(IsRequired = true)]
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Inline)]
         public Guid Id { get; set; } = Guid.NewGuid();
     }
 
     public class GetUserResponse : BaseServiceResponse
     {
-        public GetUserResponse()
-        {
-            Roles = new List<string>();
-        }
-
         [DataMember(IsRequired = true)]
         public Guid UserId { get; set; }
 
@@ -75,14 +66,11 @@ namespace Sample.Contracts
         public DateTime LastLogin { get; set; }
 
         [DataMember]
-        public List<string> Roles { get; set; }
-
+        public List<string> Roles { get; set; } = new List<string>();
     }
 
     [DataContract]
-    public class GetUsersRequest
-    {
-    }
+    public class GetUsersRequest { }
 
     [DataContract]
     public class GetUsersResponse : BaseServiceResponse
@@ -91,10 +79,7 @@ namespace Sample.Contracts
         public List<User> Users = new List<User>();
     }
 
-    public class SignoutRequest : BaseServiceRequest
-    {
-
-    }
+    public class SignoutRequest : BaseServiceRequest { }
 
     [DataContract]
     public class ResetPasswordRequest : BaseServiceRequest
@@ -104,19 +89,11 @@ namespace Sample.Contracts
     }
 
     [DataContract]
-    public class ResetPasswordResponse : BaseServiceResponse
-    {
-    }
+    public class ResetPasswordResponse : BaseServiceResponse { }
 
+    public class SignoutResponse : BaseServiceResponse { }
 
-    public class SignoutResponse : BaseServiceResponse
-    {
-    }
-
-    public class IsAuthenticatedRequest : BaseServiceRequest
-    {
-
-    }
+    public class IsAuthenticatedRequest : BaseServiceRequest { }
 
     public class IsAuthenticatedResponse : BaseServiceResponse
     {
@@ -125,7 +102,6 @@ namespace Sample.Contracts
         [DataMember]
         public string UserId { get; set; }
     }
-
 
     public class AuthenticateUserRequest : BaseServiceRequest
     {
@@ -244,7 +220,5 @@ namespace Sample.Contracts
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Username { get; set; }
         public string Password { get; set; }
-
     }
-
 }

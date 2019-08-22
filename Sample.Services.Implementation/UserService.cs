@@ -1,17 +1,14 @@
-﻿using CODE.Framework.Services.Contracts;
-using Sample.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading;
+using CODE.Framework.Services.Server.AspNetCore;
+using Sample.Contracts;
 
 namespace Sample.Services.Implementation
 {
     public class UserService : IUserService
-    { 
-        
+    {
         public AuthenticateUserResponse AuthenticateUser(AuthenticateUserRequest request)
         {
             try
@@ -28,144 +25,104 @@ namespace Sample.Services.Implementation
                 response.Email = "test@user.com";
                 response.Firstname = "Test";
                 response.Lastname = "User";
-                
-                // passthrough success and set Auth cookie in controller override
+
+                // pass-through success and set Auth cookie in controller override
                 response.Success = true;
                 return response;
             }
             catch (Exception ex)
             {
-                return new AuthenticateUserResponse { Success = false, FailureInformation = "Generic error in UserService::AuthenticateUser" };
+                return new AuthenticateUserResponse {Success = false, FailureInformation = "Generic error in UserService::AuthenticateUser"};
             }
         }
 
-        public SignoutResponse Signout(SignoutRequest response)
-        {
-            // passthrough success and check in controller override
-            return new SignoutResponse();
-        }
+        public SignoutResponse Signout(SignoutRequest response) => new SignoutResponse();
 
         public IsAuthenticatedResponse IsAuthenticated(IsAuthenticatedRequest request)
         {
             var user = this.GetCurrentPrincipal();
-            
+
             var success = user.Identity.IsAuthenticated;
             string username = null;
-            if (success)
-            {
-                var id = user.Identity as ClaimsIdentity;
-                var claim = id.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-                username = claim.Value;
-            }
+            if (success && user.Identity is ClaimsIdentity id)
+                username = id.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            // passthrough success and check in controller override
+            // pass-through success and check in controller override
             return new IsAuthenticatedResponse
             {
                 Success = success,
                 Username = username
             };
-            
         }
 
+        public GetUserResponse GetUser(GetUserRequest request) =>
+            new GetUserResponse
+            {
+                UserId = request.Id,
+                Success = true,
+                Firstname = "Test",
+                Lastname = "User",
+                Email = "test@user.com"
+            };
 
-        public GetUserResponse GetUser(GetUserRequest request)
-        {
-            var response = new GetUserResponse();
-            response.UserId = request.Id;
-            response.Success = true;
-            response.Firstname = "Test";
-            response.Lastname = "User";
-            response.Email = "test@user.com";
-            
-            return response;
-        }
-
-
-
-        /// <summary>
-        /// Saves a user
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public SaveUserResponse SaveUser(SaveUserRequest userInfo)
-        {
-            
-              return new SaveUserResponse { Success = true, Id = Guid.NewGuid() };
-            
-        }
+        public SaveUserResponse SaveUser(SaveUserRequest userInfo) => new SaveUserResponse {Success = true, Id = Guid.NewGuid()};
 
         public ResetPasswordResponse ResetPassword(ResetPasswordRequest request)
         {
-            var response = new ResetPasswordResponse();
-            response.Success = true;
+            var response = new ResetPasswordResponse {Success = true};
             return response;
 
-//            var user = UserRepository.GetUserByUsername(request.Username);
-//            if (user == null)
-//            {
-//                response.Success = false;
-//                response.FailureInformation = "Invalid username.";
-//            }
-//            else
-//            {
-//                string password = DataUtils.GenerateUniqueId(10);
-//                user.Password = password;
-//                UserRepository.SaveUser(user);
+            //            var user = UserRepository.GetUserByUsername(request.Username);
+            //            if (user == null)
+            //            {
+            //                response.Success = false;
+            //                response.FailureInformation = "Invalid username.";
+            //            }
+            //            else
+            //            {
+            //                string password = DataUtils.GenerateUniqueId(10);
+            //                user.Password = password;
+            //                UserRepository.SaveUser(user);
 
+            //                // TODO: Use Code Framework Configuration Settings and Email Sending?
+            //                //       or Westwind.Utilities.Configuration?
+            //                string appName = ConfigurationManager.AppSettings["AppName"] ?? "Wikinome";
+            //                var smtp = new SmtpClientNative();
+            //                smtp.MailServer = ConfigurationManager.AppSettings["MailServer"];
+            //                smtp.Username = ConfigurationManager.AppSettings["MailUsername"];
+            //                smtp.Password = ConfigurationManager.AppSettings["MailPassword"];
+            //                string useSsl = ConfigurationManager.AppSettings["MailUseSsl"];
+            //                smtp.SenderEmail = ConfigurationManager.AppSettings["MailSenderEmail"];
+            //                if (!string.IsNullOrEmpty(useSsl) && useSsl.ToLower() == "true")
+            //                    smtp.UseSsl = true;
 
-//                // TODO: Use Code Framework Configuration Settings and Email Sending?
-//                //       or Westwind.Utilities.Configuration?
-//                string appName = ConfigurationManager.AppSettings["AppName"] ?? "Wikinome";
-//                var smtp = new SmtpClientNative();
-//                smtp.MailServer = ConfigurationManager.AppSettings["MailServer"];
-//                smtp.Username = ConfigurationManager.AppSettings["MailUsername"];
-//                smtp.Password = ConfigurationManager.AppSettings["MailPassword"];
-//                string useSsl = ConfigurationManager.AppSettings["MailUseSsl"];
-//                smtp.SenderEmail = ConfigurationManager.AppSettings["MailSenderEmail"];
-//                if (!string.IsNullOrEmpty(useSsl) && useSsl.ToLower() == "true")
-//                    smtp.UseSsl = true;
+            //                smtp.Subject = appName + " Password Recovery";
+            //                smtp.Recipient = user.Username;
+            //                smtp.Message = $@"This message contains a temporary password so you can reset your password 
+            //Please use this temporary password to sign in, then access your account profile and change 
+            //the password to something you can remember.
 
-//                smtp.Subject = appName + " Password Recovery";
-//                smtp.Recipient = user.Username;
-//                smtp.Message = $@"This message contains a temporary password so you can reset your password 
-//Please use this temporary password to sign in, then access your account profile and change 
-//the password to something you can remember.
+            //Your temporary password is: {password}
 
-//Your temporary password is: {password}
+            //The {appName} Team";
 
-//The {appName} Team";
+            //                if (!smtp.SendMail())
+            //                {
+            //                    response.Success = false;
+            //                    response.FailureInformation = "Failed to send password reset email: " + smtp.ErrorMessage;
+            //                }
+            //            }
 
-//                if (!smtp.SendMail())
-//                {
-//                    response.Success = false;
-//                    response.FailureInformation = "Failed to send password reset email: " + smtp.ErrorMessage;
-//                }
-//            }
-
-//            return response;
+            //            return response;
         }
 
-        public GetUsersResponse GetUsers(GetUsersRequest request)
+        public GetUsersResponse GetUsers(GetUsersRequest request) => new GetUsersResponse
         {
-            var response = new GetUsersResponse();
-
-            var userList = new List<User>()
+            Users = new List<User>
             {
-                new Contracts.User
-                {
-                    Id = Guid.NewGuid(),
-                    Username = "rstrahl"
-                },
-                new Contracts.User
-                {
-                    Id = Guid.NewGuid(),
-                    Username = "megger"
-                }
-            };
-
-            response.Users = userList;
-            return response;
-        }
+                new User {Id = Guid.NewGuid(), Username = "rstrahl"},
+                new User {Id = Guid.NewGuid(), Username = "megger"}
+            }
+        };
     }
-
 }

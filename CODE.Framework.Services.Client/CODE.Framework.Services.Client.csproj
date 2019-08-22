@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Version>1.0.5</Version>
+    <Authors>Markus Egger, Rick Strahl</Authors>
+    <Company>Markus Egger Inc.</Company>
+    <Product>CODE Framework</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Copyright>Markus Egger Inc., 2017-2019</Copyright>
+    <Description>Client-side components used for CODE Framework Service Features</Description>
+    <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
+    <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

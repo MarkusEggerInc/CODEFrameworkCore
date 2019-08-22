@@ -4,12 +4,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
+using System.Xml.Serialization;
+using CODE.Framework.Fundamentals.Properties;
 #if NETFULL
 using System.Runtime.Serialization.Formatters.Soap;
 #endif
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace CODE.Framework.Fundamentals.Utilities
 {
@@ -57,19 +59,20 @@ namespace CODE.Framework.Fundamentals.Utilities
                         string location;
                         try
                         {
-                            location = Assembly.GetEntryAssembly() != null ? Assembly.GetEntryAssembly().Location : Assembly.GetAssembly(typeof (ObjectHelper)).Location;
+                            location = Assembly.GetEntryAssembly() != null ? Assembly.GetEntryAssembly().Location : Assembly.GetAssembly(typeof(ObjectHelper)).Location;
                         }
                         catch
                         {
                             try
                             {
-                                location = Assembly.GetAssembly(typeof (ObjectHelper)).Location;
+                                location = Assembly.GetAssembly(typeof(ObjectHelper)).Location;
                             }
                             catch
                             {
                                 throw new ObjectInstantiationException("Unable to find assemblie's location(" + assemblyName + ")");
                             }
                         }
+
                         var startPath = StringHelper.AddBS(StringHelper.JustPath(location));
                         assemblyName = startPath + assemblyName;
 
@@ -86,38 +89,37 @@ namespace CODE.Framework.Fundamentals.Utilities
                 }
             else
                 // This assembly is identified by its name.
-                if (assemblyName.IndexOf(",", StringComparison.Ordinal) > -1)
-                    // There is a comma in the assembly name. Therefore, we assume that this is a fully qualified name
-                    // Note: An example for a fully qualified name would be the following:
-                    //       System.data, version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-                    try
-                    {
-                        assembly = Assembly.Load(assemblyName);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ObjectInstantiationException("Unable to load assembly " + assemblyName + ". Error: " + ex.Message, ex);
-                    }
-                else
-                    // This just seems to be a partially qualified name
-                    // Note: An example for a partially qualified name would be the following:
-                    //       System.data
-                    try
-                    {
-                        //asm = Assembly.LoadWithPartialName(AssemblyName);
-                        assembly = Assembly.Load(assemblyName);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ObjectInstantiationException("Unable to load assembly " + assemblyName + ". Error: " + ex.Message, ex);
-                    }
-
+            if (assemblyName.IndexOf(",", StringComparison.Ordinal) > -1)
+                // There is a comma in the assembly name. Therefore, we assume that this is a fully qualified name
+                // Note: An example for a fully qualified name would be the following:
+                //       System.data, version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                try
+                {
+                    assembly = Assembly.Load(assemblyName);
+                }
+                catch (Exception ex)
+                {
+                    throw new ObjectInstantiationException("Unable to load assembly " + assemblyName + ". Error: " + ex.Message, ex);
+                }
+            else
+                // This just seems to be a partially qualified name
+                // Note: An example for a partially qualified name would be the following:
+                //       System.data
+                try
+                {
+                    //asm = Assembly.LoadWithPartialName(AssemblyName);
+                    assembly = Assembly.Load(assemblyName);
+                }
+                catch (Exception ex)
+                {
+                    throw new ObjectInstantiationException("Unable to load assembly " + assemblyName + ". Error: " + ex.Message, ex);
+                }
 
             // Now that the assembly is loaded, we can get the interfaceType of the specified class
             Type objectType;
             try
             {
-                if (assembly != null) 
+                if (assembly != null)
                     objectType = assembly.GetType(className, true);
                 else
                     throw new ObjectInstantiationException("Unable to create instance " + className + ". Error: Unable to load assembly.");
@@ -174,10 +176,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <example>
         /// Customer customer = (Customer)EPS.Utilities.ObjectHelper.DeserializeFromBinaryStream(stream);
         /// </example>
-        public static object DeserializeFromBinaryStream(Stream stateStream)
-        {
-            return (new BinaryFormatter()).Deserialize(stateStream);
-        }
+        public static object DeserializeFromBinaryStream(Stream stateStream) => new BinaryFormatter().Deserialize(stateStream);
 
         /// <summary>
         /// Deserializes the stream to an object
@@ -193,10 +192,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// // more code
         /// Customer customer = (Customer)stream.DeserializeFromBinary();
         /// </example>
-        public static object DeserializeFromBinary(this Stream stateStream)
-        {
-            return DeserializeFromBinaryStream(stateStream);
-        }
+        public static object DeserializeFromBinary(this Stream stateStream) => DeserializeFromBinaryStream(stateStream);
 
         /// <summary>
         /// Serializes an object to its binary state
@@ -221,7 +217,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             using (var stream = objectToSerialize.SerializeToBinaryStream())
             {
                 var buffer = new byte[stream.Length];
-                stream.Read(buffer, 0, (int)stream.Length);
+                stream.Read(buffer, 0, (int) stream.Length);
                 return buffer;
             }
         }
@@ -270,10 +266,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// // or
         /// string xml = EPS.Utilities.ObjectHelper.SerializeToXmlString(customer);
         /// </example>
-        public static string SerializeToXmlString(this object objectToSerialize)
-        {
-            return StreamHelper.ToString(SerializeToXmlStream(objectToSerialize));
-        }
+        public static string SerializeToXmlString(this object objectToSerialize) => StreamHelper.ToString(SerializeToXmlStream(objectToSerialize));
 
         /// <summary>
         /// Serializes an object to its XML state
@@ -332,10 +325,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// // more code
         /// Customer customer = (Customer)stream.DeserializeFromXmlStream(typeof(Customer));
         /// </example>
-        public static object DeserializeFromXml(this Stream stateStream, Type expectedType)
-        {
-            return DeserializeFromXmlStream(stateStream, expectedType);
-        }
+        public static object DeserializeFromXml(this Stream stateStream, Type expectedType) => DeserializeFromXmlStream(stateStream, expectedType);
 
 #if NETFULL
         /// <summary>
@@ -433,8 +423,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </remarks>
         public static bool ValuesDiffer(object value1, object value2)
         {
-            if (value1 == null) { throw new NullReferenceException(Properties.Resources.ParameterCanNotBeNull + " (value1)"); }
-            if (value2 == null) { throw new NullReferenceException(Properties.Resources.ParameterCanNotBeNull + " (value2)"); }
+            if (value1 == null) throw new NullReferenceException(Resources.ParameterCanNotBeNull + " (value1)");
+            if (value2 == null) throw new NullReferenceException(Resources.ParameterCanNotBeNull + " (value2)");
 
             var fieldsDiffer = false;
 
@@ -459,14 +449,12 @@ namespace CODE.Framework.Fundamentals.Utilities
                 var v1IsNull = value1 is DBNull;
                 var v2IsNull = value2 is DBNull;
                 if (v1IsNull && !v2IsNull || !v1IsNull && v2IsNull)
-                {
                     // Note: I chose to return from here since setting
                     //       the return variable and waiting all the way
                     //       for the end of the method would have increased
                     //       the complexity of the method to a point where
                     //       I did not consider it helpful anymore.
                     return true;
-                }
             }
             catch (InvalidCastException)
             {
@@ -474,6 +462,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                 // We inform the developer about the problem.
                 fieldsDiffer = true;
             }
+
             return fieldsDiffer;
         }
 
@@ -502,13 +491,13 @@ namespace CODE.Framework.Fundamentals.Utilities
             {
                 object parentObject;
                 var property = GetPropertyByPath(valueObject, path, out parentObject);
-                if (property == null) return default(TResult);
+                if (property == null) return default;
                 var propertyValue = property.GetValue(parentObject, null);
-                return (TResult)propertyValue;
+                return (TResult) propertyValue;
             }
             catch
             {
-                return default(TResult);
+                return default;
             }
         }
 
@@ -518,12 +507,12 @@ namespace CODE.Framework.Fundamentals.Utilities
             {
                 var type = valueObject.GetType();
                 var propertyInfo = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                if (propertyInfo != null) return (TResult)propertyInfo.GetValue(valueObject, null);
-                return default(TResult);
+                if (propertyInfo != null) return (TResult) propertyInfo.GetValue(valueObject, null);
+                return default;
             }
             catch
             {
-                return default(TResult);
+                return default;
             }
         }
 
@@ -541,6 +530,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                 parentObject = null;
                 return null;
             }
+
             if (string.IsNullOrEmpty(path))
             {
                 parentObject = null;
@@ -588,13 +578,14 @@ namespace CODE.Framework.Fundamentals.Utilities
                         foreach (var indexerProperty in indexerProperties)
                         {
                             var indexerParameters = indexerProperty.GetIndexParameters();
-                            if (indexerParameters.Length != 1 || indexerParameters[0].ParameterType != typeof (int)) continue;
+                            if (indexerParameters.Length != 1 || indexerParameters[0].ParameterType != typeof(int)) continue;
                             indexerPropertyInfo = indexerProperty;
                             break;
                         }
+
                     if (indexerPropertyInfo == null) return null;
                     if (propertyCounter == parts.Length - 1) return indexerPropertyInfo; // This is the last one (right-most one) in the path, so that is the one we are after
-                    
+
                     valueObject = indexerPropertyInfo.GetValue(valueObject, new object[] {index});
                     parentObject = valueObject;
                 }
@@ -626,7 +617,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         public static bool SetPropertyValue<TValue>(this object valueObject, string path, TValue value)
         {
             // If this is a simple property name, we can simply get its value
-            if (!path.Contains(".") && !path.Contains("[")) return SetSimplePropertyValue<TValue>(valueObject, path, value);
+            if (!path.Contains(".") && !path.Contains("[")) return SetSimplePropertyValue(valueObject, path, value);
 
             // The path is a complex path syntax that first needs to be parsed before we can retrieve the property value
             try
@@ -684,12 +675,12 @@ namespace CODE.Framework.Fundamentals.Utilities
             {
                 var type = valueObject.GetType();
                 var methodInfo = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                if (methodInfo != null) return (TResult)methodInfo.Invoke(valueObject, parameters);
-                return default(TResult);
+                if (methodInfo != null) return (TResult) methodInfo.Invoke(valueObject, parameters);
+                return default;
             }
             catch
             {
-                return default(TResult);
+                return default;
             }
         }
 
@@ -704,6 +695,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             GetMethodsForInheritedInterfaces(interfaceType, methods);
             return methods;
         }
+
         private static void GetMethodsForInheritedInterfaces(Type interfaceType, List<MethodInfo> existingMethods)
         {
             var interfaces = interfaceType.GetInterfaces();
@@ -744,6 +736,6 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <param name="info">Serialization info</param>
         /// <param name="context">Streaming context</param>
-        protected ObjectInstantiationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        protected ObjectInstantiationException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

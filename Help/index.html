@@ -1,0 +1,2290 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>CODE.Framework - Table of Content</title>
+<link rel="stylesheet" href="TOC.css">
+<link rel="shortcut icon" href="favicon.ico"/>
+<script type="text/javascript" src="TOC.js"></script>
+</head>
+
+<body onload="javascript: Initialize('.aspx');" onresize="javascript: ResizeTree();">
+<form id="IndexForm" runat="server">
+
+<div id="TOCDiv" class="TOCDiv">
+
+<div id="divSearchOpts" class="SearchOpts" style="height: 90px; display: none;">
+	<img class="TOCLink" onclick="javascript: ShowHideSearch(false);"
+		src="Close.png" height="24" width="24" alt="Hide Search" title="Hide Search" style="float: right;"/>
+	<span class="Title">Keyword(s) to search:</span>
+	<input id="txtSearchText" type="text" style="width: 100%;" 
+		onkeypress="javascript: return OnSearchTextKeyPress(event);" /><br />
+	<input id="chkSortByTitle" type="checkbox" /><label for="chkSortByTitle">&nbsp;Sort results by title</label>
+	<input type="button" value="Search" onclick="javascript: return PerformSearch();" style="float: right;" />
+</div>
+
+<div id="divIndexOpts" class="IndexOpts" style="height: 28px; display: none;">
+	<img class="TOCLink" onclick="javascript: ShowHideIndex(false);"
+		src="Close.png" height="24" width="24" alt="Hide Keyword Index" title="Hide Keyword Index" style="float: right;"/>
+	<span class="Title">Keyword Index</span>
+</div>
+
+<div id="divNavOpts" class="NavOpts" style="height: 28px;">
+    <img class="TOCLink" onclick="javascript: SyncTOC();" src="SyncTOC.png"
+        height="24" width="24" alt="Sync to TOC" title="Sync to TOC" />
+    <img class="TOCLink" onclick="javascript: ExpandOrCollapseAll(true);"
+        src="ExpandAll.png" height="24" width="24" alt="Expand all" title="Expand all" />
+    <img class="TOCLink" onclick="javascript: ExpandOrCollapseAll(false);"
+        src="CollapseAll.png" height="24" width="24" alt="Collapse all" title="Collapse all" />
+    <img class="TOCLink" onclick="javascript: ShowDirectLink();"
+        src="Link.png" height="24" width="24" alt="Get direct link to the displayed topic" title="Get direct link to the displayed topic" />
+    <a href="#" onclick="javascript: TopicContent.history.go(-1); return false;">
+		<img class="TOCLink" style="float: right;" 
+        src="Back.png" height="24" width="24" alt="Previous page" title="Previous page" /></a>
+</div>
+
+<div class="Tree" id="divSearchResults" style="display: none;"
+    onselectstart="javascript: return false;">
+</div>
+
+<div class="Tree" id="divIndexResults" style="display: none;"
+    onselectstart="javascript: return false;">
+</div>
+
+<div class="Tree" id="divTree" onselectstart="javascript: return false;">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Fundamentals.Utilities.htm" target="TopicContent">CODE.Framework.Fundamentals.Utilities Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" target="TopicContent">ConsoleLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" target="TopicContent">ConsoleLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" target="TopicContent">ConsoleLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" target="TopicContent">ConsoleLogger Properties</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" target="TopicContent">CRC32 Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" target="TopicContent">CRC32 Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.-ctor.htm" target="TopicContent">CRC32 Constructor </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" target="TopicContent">CRC32 Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32.htm" target="TopicContent">GetCrc32 Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32AndCopy.htm" target="TopicContent">GetCrc32AndCopy Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" target="TopicContent">CRC32 Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.CRC32.TotalBytesRead.htm" target="TopicContent">TotalBytesRead Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" target="TopicContent">EnumHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" target="TopicContent">EnumHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" target="TopicContent">EnumHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" target="TopicContent">GetEnumInformation(T) Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" target="TopicContent">EnumInformation Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" target="TopicContent">EnumInformation Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.EnumInformation.-ctor.htm" target="TopicContent">EnumInformation Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" target="TopicContent">EnumInformation Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" target="TopicContent">EnumInformation Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.DisplayText.htm" target="TopicContent">DisplayText Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.EnumValue.htm" target="TopicContent">EnumValue Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Name.htm" target="TopicContent">Name Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Value.htm" target="TopicContent">Value Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" target="TopicContent">ExceptionHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" target="TopicContent">ExceptionHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" target="TopicContent">ExceptionHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionHtml.htm" target="TopicContent">GetExceptionHtml Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionText.htm" target="TopicContent">GetExceptionText Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" target="TopicContent">HttpHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" target="TopicContent">HttpHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" target="TopicContent">HttpHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlDecode.htm" target="TopicContent">UrlDecode Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlEncode.htm" target="TopicContent">UrlEncode Method (String)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" target="TopicContent">IExceptionLogger Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" target="TopicContent">IExceptionLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" target="TopicContent">IExceptionLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm" target="TopicContent">Log Method (Exception, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log_1.htm" target="TopicContent">Log Method (String, Exception, LogEventType)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.If.htm" target="TopicContent">If Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.If.htm" target="TopicContent">If Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.If.htm" target="TopicContent">If Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm" target="TopicContent">NotNull Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm" target="TopicContent">NotNull Method (Object, Action)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_1.htm" target="TopicContent">NotNull Method (Object, Object, Action)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_2.htm" target="TopicContent">NotNull Method (Object, Object, Object, Action)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.NotNull_3.htm" target="TopicContent">NotNull Method (Object, Object, Object, Object, Action)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="#">Overload:CODE.Framework.Fundamentals.Utilities.If.Real</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.Real--1.htm" target="TopicContent">Real(T) Method (Object, Action(T))</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.If.Real--2.htm" target="TopicContent">Real(T1, T2) Method (Object, Object, Action(T1, T2))</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" target="TopicContent">ILogger Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" target="TopicContent">ILogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" target="TopicContent">ILogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm" target="TopicContent">Log Method (String, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ILogger.Log_1.htm" target="TopicContent">Log Method (Object, LogEventType)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" target="TopicContent">ILogger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ILogger.TypeFilter.htm" target="TopicContent">TypeFilter Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" target="TopicContent">LogEventType Enumeration</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.Logger.htm" target="TopicContent">Logger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" target="TopicContent">Logger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" target="TopicContent">Logger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm" target="TopicContent">Log Method (String, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_1.htm" target="TopicContent">Log Method (Object, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_2.htm" target="TopicContent">Log Method (Exception, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.Logger.Log_3.htm" target="TopicContent">Log Method (String, Exception, LogEventType)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" target="TopicContent">Logger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.Logger.TypeFilter.htm" target="TopicContent">TypeFilter Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" target="TopicContent">LoggingMediator Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" target="TopicContent">LoggingMediator Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" target="TopicContent">LoggingMediator Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.AddLogger.htm" target="TopicContent">AddLogger Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.ClearLoggers.htm" target="TopicContent">ClearLoggers Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm" target="TopicContent">Log Method (String, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_1.htm" target="TopicContent">Log Method (Object, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_2.htm" target="TopicContent">Log Method (Exception, LogEventType)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log_3.htm" target="TopicContent">Log Method (String, Exception, LogEventType)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" target="TopicContent">MultiFileLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" target="TopicContent">MultiFileLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm" target="TopicContent">MultiFileLogger Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm" target="TopicContent">MultiFileLogger Constructor (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor_1.htm" target="TopicContent">MultiFileLogger Constructor (SpecialFolder)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor_2.htm" target="TopicContent">MultiFileLogger Constructor </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" target="TopicContent">MultiFileLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" target="TopicContent">MultiFileLogger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Extension.htm" target="TopicContent">Extension Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Folder.htm" target="TopicContent">Folder Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" target="TopicContent">MultiXmlFileLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" target="TopicContent">MultiXmlFileLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm" target="TopicContent">MultiXmlFileLogger Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm" target="TopicContent">MultiXmlFileLogger Constructor (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor_1.htm" target="TopicContent">MultiXmlFileLogger Constructor (SpecialFolder)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor_2.htm" target="TopicContent">MultiXmlFileLogger Constructor </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" target="TopicContent">MultiXmlFileLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" target="TopicContent">MultiXmlFileLogger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventNode.htm" target="TopicContent">XmlEventNode Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTimeStampAttribute.htm" target="TopicContent">XmlEventTimeStampAttribute Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTypeAttribute.htm" target="TopicContent">XmlEventTypeAttribute Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlRootNode.htm" target="TopicContent">XmlRootNode Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" target="TopicContent">ObjectHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" target="TopicContent">ObjectHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" target="TopicContent">ObjectHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.CreateObject.htm" target="TopicContent">CreateObject Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinary.htm" target="TopicContent">DeserializeFromBinary Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinaryStream.htm" target="TopicContent">DeserializeFromBinaryStream Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXml.htm" target="TopicContent">DeserializeFromXml Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXmlStream.htm" target="TopicContent">DeserializeFromXmlStream Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetAllMethodsForInterface.htm" target="TopicContent">GetAllMethodsForInterface Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyByPath.htm" target="TopicContent">GetPropertyByPath Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" target="TopicContent">GetPropertyValue(TResult) Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" target="TopicContent">InvokeMethod(TResult) Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryArray.htm" target="TopicContent">SerializeToBinaryArray Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryStream.htm" target="TopicContent">SerializeToBinaryStream Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlDocument.htm" target="TopicContent">SerializeToXmlDocument Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlStream.htm" target="TopicContent">SerializeToXmlStream Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlString.htm" target="TopicContent">SerializeToXmlString Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" target="TopicContent">SetPropertyValue(TValue) Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.ValuesDiffer.htm" target="TopicContent">ValuesDiffer Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" target="TopicContent">ObjectInstantiationException Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" target="TopicContent">ObjectInstantiationException Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm" target="TopicContent">ObjectInstantiationException Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm" target="TopicContent">ObjectInstantiationException Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor_1.htm" target="TopicContent">ObjectInstantiationException Constructor (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor_2.htm" target="TopicContent">ObjectInstantiationException Constructor (String, Exception)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" target="TopicContent">ObjectInstantiationException Methods</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" target="TopicContent">ObjectInstantiationException Properties</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" target="TopicContent">OutputWindowLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" target="TopicContent">OutputWindowLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" target="TopicContent">OutputWindowLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" target="TopicContent">OutputWindowLogger Properties</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" target="TopicContent">SecurityHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" target="TopicContent">SecurityHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" target="TopicContent">SecurityHelper Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm" target="TopicContent">DecryptBytes Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm" target="TopicContent">DecryptBytes Method (Byte[], Byte[])</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes_1.htm" target="TopicContent">DecryptBytes Method (String, Byte[])</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptString.htm" target="TopicContent">DecryptString Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm" target="TopicContent">EncryptBytes Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm" target="TopicContent">EncryptBytes Method (Byte[], Byte[])</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes_1.htm" target="TopicContent">EncryptBytes Method (String, Byte[])</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptString.htm" target="TopicContent">EncryptString Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" target="TopicContent">SharedZipFunctionality Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" target="TopicContent">SharedZipFunctionality Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" target="TopicContent">SharedZipFunctionality Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" target="TopicContent">SingleFileLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" target="TopicContent">SingleFileLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm" target="TopicContent">SingleFileLogger Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm" target="TopicContent">SingleFileLogger Constructor (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_1.htm" target="TopicContent">SingleFileLogger Constructor (String, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_2.htm" target="TopicContent">SingleFileLogger Constructor (SpecialFolder)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_3.htm" target="TopicContent">SingleFileLogger Constructor (SpecialFolder, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor_4.htm" target="TopicContent">SingleFileLogger Constructor </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" target="TopicContent">SingleFileLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" target="TopicContent">SingleFileLogger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.FileName.htm" target="TopicContent">FileName Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Folder.htm" target="TopicContent">Folder Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" target="TopicContent">SingleXmlFileLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" target="TopicContent">SingleXmlFileLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm" target="TopicContent">SingleXmlFileLogger Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm" target="TopicContent">SingleXmlFileLogger Constructor (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_1.htm" target="TopicContent">SingleXmlFileLogger Constructor (String, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_2.htm" target="TopicContent">SingleXmlFileLogger Constructor (SpecialFolder)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_3.htm" target="TopicContent">SingleXmlFileLogger Constructor (SpecialFolder, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor_4.htm" target="TopicContent">SingleXmlFileLogger Constructor </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" target="TopicContent">SingleXmlFileLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" target="TopicContent">SingleXmlFileLogger Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.MaximumEntries.htm" target="TopicContent">MaximumEntries Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventNode.htm" target="TopicContent">XmlEventNode Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTimeStampAttribute.htm" target="TopicContent">XmlEventTimeStampAttribute Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTypeAttribute.htm" target="TopicContent">XmlEventTypeAttribute Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlRootNode.htm" target="TopicContent">XmlRootNode Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" target="TopicContent">StreamHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" target="TopicContent">StreamHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" target="TopicContent">StreamHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromArray.htm" target="TopicContent">FromArray Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromFile.htm" target="TopicContent">FromFile Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromString.htm" target="TopicContent">FromString Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToArray.htm" target="TopicContent">ToArray Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm" target="TopicContent">ToFile Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm" target="TopicContent">ToFile Method (Stream, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile_1.htm" target="TopicContent">ToFile Method (Stream, String, Boolean)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile_2.htm" target="TopicContent">ToFile Method (Stream, String, Boolean, Encoding)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" target="TopicContent">ToString Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" target="TopicContent">ToString Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" target="TopicContent">StringHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" target="TopicContent">StringHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" target="TopicContent">StringHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AddBS.htm" target="TopicContent">AddBS Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm" target="TopicContent">ArrayContainsString Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm" target="TopicContent">ArrayContainsString Method (String[], String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString_1.htm" target="TopicContent">ArrayContainsString Method (String[], String, Boolean)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Asc.htm" target="TopicContent">Asc Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm" target="TopicContent">At Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm" target="TopicContent">At Method (String, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.At_1.htm" target="TopicContent">At Method (String, String, Int32)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AtLine.htm" target="TopicContent">AtLine Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Decode.htm" target="TopicContent">Base64Decode Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Encode.htm" target="TopicContent">Base64Encode Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Chr.htm" target="TopicContent">Chr Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm" target="TopicContent">Compare Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm" target="TopicContent">Compare Method (String, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare_1.htm" target="TopicContent">Compare Method (String, String, Boolean)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.FromFile.htm" target="TopicContent">FromFile Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordCount.htm" target="TopicContent">GetWordCount Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumb.htm" target="TopicContent">GetWordNumb Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumber.htm" target="TopicContent">GetWordNumber Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsAlpha.htm" target="TopicContent">IsAlpha Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsDigit.htm" target="TopicContent">IsDigit Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustFileName.htm" target="TopicContent">JustFileName Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustPath.htm" target="TopicContent">JustPath Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Lower.htm" target="TopicContent">Lower Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm" target="TopicContent">Occurs Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm" target="TopicContent">Occurs Method (Char, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs_1.htm" target="TopicContent">Occurs Method (String, String)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Proper.htm" target="TopicContent">Proper Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Replicate.htm" target="TopicContent">Replicate Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SmartProper.htm" target="TopicContent">SmartProper Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SpaceCamelCase.htm" target="TopicContent">SpaceCamelCase Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubStr.htm" target="TopicContent">SubStr Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubstringSafe.htm" target="TopicContent">SubstringSafe Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm" target="TopicContent">ToFile Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm" target="TopicContent">ToFile Method (String, String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile_1.htm" target="TopicContent">ToFile Method (String, String, Encoding)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" target="TopicContent">ToString Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" target="TopicContent">ToString Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToStringSafe.htm" target="TopicContent">ToStringSafe Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryBoolParse.htm" target="TopicContent">TryBoolParse Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm" target="TopicContent">TryGuidParse Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm" target="TopicContent">TryGuidParse Method (String, Guid)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse_1.htm" target="TopicContent">TryGuidParse Method (String)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryIntParse.htm" target="TopicContent">TryIntParse Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Upper.htm" target="TopicContent">Upper Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" target="TopicContent">TraceLogger Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" target="TopicContent">TraceLogger Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" target="TopicContent">TraceLogger Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" target="TopicContent">Log Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" target="TopicContent">Log Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" target="TopicContent">TraceLogger Properties</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" target="TopicContent">XmlHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" target="TopicContent">XmlHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" target="TopicContent">XmlHelper Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm" target="TopicContent">Format Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm" target="TopicContent">Format Method (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format_1.htm" target="TopicContent">Format Method (XmlDocument)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" target="TopicContent">ZipDirEntry Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" target="TopicContent">ZipDirEntry Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" target="TopicContent">ZipDirEntry Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Read.htm" target="TopicContent">Read Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" target="TopicContent">ZipDirEntry Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Comment.htm" target="TopicContent">Comment Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressedSize.htm" target="TopicContent">CompressedSize Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionMethod.htm" target="TopicContent">CompressionMethod Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionRatio.htm" target="TopicContent">CompressionRatio Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.FileName.htm" target="TopicContent">FileName Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.LastModified.htm" target="TopicContent">LastModified Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.UncompressedSize.htm" target="TopicContent">UncompressedSize Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionMadeBy.htm" target="TopicContent">VersionMadeBy Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionNeeded.htm" target="TopicContent">VersionNeeded Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" target="TopicContent">ZipEntry Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" target="TopicContent">ZipEntry Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" target="TopicContent">ZipEntry Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm" target="TopicContent">Extract Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm" target="TopicContent">Extract Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract_1.htm" target="TopicContent">Extract Method (Stream)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract_2.htm" target="TopicContent">Extract Method (String)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Read.htm" target="TopicContent">Read Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" target="TopicContent">ZipEntry Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.BitField.htm" target="TopicContent">BitField Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressedSize.htm" target="TopicContent">CompressedSize Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionMethod.htm" target="TopicContent">CompressionMethod Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionRatio.htm" target="TopicContent">CompressionRatio Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.DirectoryNameOverride.htm" target="TopicContent">DirectoryNameOverride Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.FileName.htm" target="TopicContent">FileName Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.LastModified.htm" target="TopicContent">LastModified Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.UncompressedSize.htm" target="TopicContent">UncompressedSize Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.VersionNeeded.htm" target="TopicContent">VersionNeeded Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" target="TopicContent">ZipFile Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" target="TopicContent">ZipFile Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.-ctor.htm" target="TopicContent">ZipFile Constructor (String)</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" target="TopicContent">ZipFile Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm" target="TopicContent">AddBytes Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm" target="TopicContent">AddBytes Method (Byte[], String, DateTime)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes_1.htm" target="TopicContent">AddBytes Method (Byte[], String)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddDirectory.htm" target="TopicContent">AddDirectory Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddFile.htm" target="TopicContent">AddFile Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddItem.htm" target="TopicContent">AddItem Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Dispose.htm" target="TopicContent">Dispose Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm" target="TopicContent">Extract Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm" target="TopicContent">Extract Method (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract_1.htm" target="TopicContent">Extract Method (String, Stream)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.ExtractAll.htm" target="TopicContent">ExtractAll Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.GetEnumerator.htm" target="TopicContent">GetEnumerator Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm" target="TopicContent">Read Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm" target="TopicContent">Read Method (String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read_1.htm" target="TopicContent">Read Method (Byte[], String)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Read_2.htm" target="TopicContent">Read Method (Byte[])</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Save.htm" target="TopicContent">Save Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.SaveToStream.htm" target="TopicContent">SaveToStream Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" target="TopicContent">ZipFile Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Item-System.String-.htm" target="TopicContent">Item Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Name.htm" target="TopicContent">Name Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.TrimVolumeFromFullyQualifiedPaths.htm" target="TopicContent">TrimVolumeFromFullyQualifiedPaths Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Services.Contracts.htm" target="TopicContent">CODE.Framework.Services.Contracts Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Contracts.RestAttribute.htm" target="TopicContent">RestAttribute Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Contracts.RestAttribute.htm" target="TopicContent">RestAttribute Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Contracts.RestAttribute.-ctor.htm" target="TopicContent">RestAttribute Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Contracts.RestAttribute.htm" target="TopicContent">RestAttribute Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Contracts.RestAttribute.htm" target="TopicContent">RestAttribute Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationPolicy.htm" target="TopicContent">AuthorizationPolicy Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationRoles.htm" target="TopicContent">AuthorizationRoles Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestAttribute.Method.htm" target="TopicContent">Method Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestAttribute.Name.htm" target="TopicContent">Name Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestAttribute.Route.htm" target="TopicContent">Route Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" target="TopicContent">RestMethods Enumeration</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" target="TopicContent">RestUrlParameterAttribute Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" target="TopicContent">RestUrlParameterAttribute Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.-ctor.htm" target="TopicContent">RestUrlParameterAttribute Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" target="TopicContent">RestUrlParameterAttribute Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" target="TopicContent">RestUrlParameterAttribute Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Mode.htm" target="TopicContent">Mode Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Sequence.htm" target="TopicContent">Sequence Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" target="TopicContent">UrlParameterMode Enumeration</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" target="TopicContent">UserPrincipalHelper Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" target="TopicContent">UserPrincipalHelper Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" target="TopicContent">UserPrincipalHelper Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.AddPrincipal.htm" target="TopicContent">AddPrincipal Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.GetCurrentPrincipal.htm" target="TopicContent">GetCurrentPrincipal Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.RemovePrincipal.htm" target="TopicContent">RemovePrincipal Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Services.Server.AspNetCore.htm" target="TopicContent">CODE.Framework.Services.Server.AspNetCore Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" target="TopicContent">BaseServiceRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" target="TopicContent">BaseServiceRequest Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" target="TopicContent">BaseServiceResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" target="TopicContent">BaseServiceResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.-ctor.htm" target="TopicContent">BaseServiceResponse Constructor </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" target="TopicContent">BaseServiceResponse Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.SetError.htm" target="TopicContent">SetError Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" target="TopicContent">BaseServiceResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.FailureInformation.htm" target="TopicContent">FailureInformation Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.Success.htm" target="TopicContent">Success Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" target="TopicContent">ErrorResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" target="TopicContent">ErrorResponse Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm" target="TopicContent">ErrorResponse Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm" target="TopicContent">ErrorResponse Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor_1.htm" target="TopicContent">ErrorResponse Constructor (Exception)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor_2.htm" target="TopicContent">ErrorResponse Constructor (String)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" target="TopicContent">ErrorResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" target="TopicContent">ErrorResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.ExceptionType.htm" target="TopicContent">ExceptionType Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.Source.htm" target="TopicContent">Source Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.StackTrace.htm" target="TopicContent">StackTrace Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" target="TopicContent">MethodInvocationContext Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" target="TopicContent">MethodInvocationContext Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.-ctor.htm" target="TopicContent">MethodInvocationContext Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" target="TopicContent">MethodInvocationContext Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" target="TopicContent">MethodInvocationContext Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ActiveMethodContexts.htm" target="TopicContent">ActiveMethodContexts Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.AuthorizationRoles.htm" target="TopicContent">AuthorizationRoles Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.InstanceConfiguration.htm" target="TopicContent">InstanceConfiguration Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.IsAsync.htm" target="TopicContent">IsAsync Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.MethodInfo.htm" target="TopicContent">MethodInfo Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.RestAttribute.htm" target="TopicContent">RestAttribute Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ServiceConfiguration.htm" target="TopicContent">ServiceConfiguration Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" target="TopicContent">ServiceHandler Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" target="TopicContent">ServiceHandler Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.-ctor.htm" target="TopicContent">ServiceHandler Constructor </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" target="TopicContent">ServiceHandler Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.ProcessRequest.htm" target="TopicContent">ProcessRequest Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" target="TopicContent">ServiceHandlerExtensions Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" target="TopicContent">ServiceHandlerExtensions Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" target="TopicContent">ServiceHandlerExtensions Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.AddServiceHandler.htm" target="TopicContent">AddServiceHandler Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.GetRestAttribute.htm" target="TopicContent">GetRestAttribute Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.UseServiceHandler.htm" target="TopicContent">UseServiceHandler Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" target="TopicContent">ServiceHandlerRequestContext Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" target="TopicContent">ServiceHandlerRequestContext Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" target="TopicContent">ServiceHandlerRequestContext Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" target="TopicContent">ServiceHandlerRequestContext Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpContext.htm" target="TopicContent">HttpContext Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpRequest.htm" target="TopicContent">HttpRequest Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpResponse.htm" target="TopicContent">HttpResponse Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.MethodContext.htm" target="TopicContent">MethodContext Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultJson.htm" target="TopicContent">ResultJson Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultValue.htm" target="TopicContent">ResultValue Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ServiceInstanceConfiguration.htm" target="TopicContent">ServiceInstanceConfiguration Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.Url.htm" target="TopicContent">Url Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" target="TopicContent">ServiceHandlerRequestContextUrl Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" target="TopicContent">ServiceHandlerRequestContextUrl Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" target="TopicContent">ServiceHandlerRequestContextUrl Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" target="TopicContent">ServiceHandlerRequestContextUrl Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.HttpMethod.htm" target="TopicContent">HttpMethod Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.QueryString.htm" target="TopicContent">QueryString Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.Url.htm" target="TopicContent">Url Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.UrlPath.htm" target="TopicContent">UrlPath Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Services.Server.AspNetCore.Configuration.htm" target="TopicContent">CODE.Framework.Services.Server.AspNetCore.Configuration Namespace</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" target="TopicContent">ControllerHttpsMode Enumeration</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" target="TopicContent">JsonFormatModes Enumeration</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" target="TopicContent">ServiceHandlerConfiguration Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" target="TopicContent">ServiceHandlerConfiguration Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" target="TopicContent">ServiceHandlerConfiguration Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" target="TopicContent">ServiceHandlerConfiguration Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Cors.htm" target="TopicContent">Cors Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Current.htm" target="TopicContent">Current Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Services.htm" target="TopicContent">Services Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" target="TopicContent">ServiceHandlerConfigurationInstance Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" target="TopicContent">ServiceHandlerConfigurationInstance Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" target="TopicContent">ServiceHandlerConfigurationInstance Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" target="TopicContent">ServiceHandlerConfigurationInstance Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.AssemblyName.htm" target="TopicContent">AssemblyName Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.HttpsMode.htm" target="TopicContent">HttpsMode Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.JsonFormatMode.htm" target="TopicContent">JsonFormatMode Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAfterMethodInvoke.htm" target="TopicContent">OnAfterMethodInvoke Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAuthorize.htm" target="TopicContent">OnAuthorize Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnBeforeMethodInvoke.htm" target="TopicContent">OnBeforeMethodInvoke Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.RouteBasePath.htm" target="TopicContent">RouteBasePath Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceType.htm" target="TopicContent">ServiceType Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceTypeName.htm" target="TopicContent">ServiceTypeName Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" target="TopicContent">ServiceHandlerCorsConfiguration Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" target="TopicContent">ServiceHandlerCorsConfiguration Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" target="TopicContent">ServiceHandlerCorsConfiguration Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" target="TopicContent">ServiceHandlerCorsConfiguration Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowCredentials.htm" target="TopicContent">AllowCredentials Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedHeaders.htm" target="TopicContent">AllowedHeaders Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedMethods.htm" target="TopicContent">AllowedMethods Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedOrigins.htm" target="TopicContent">AllowedOrigins Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.CorsPolicyName.htm" target="TopicContent">CorsPolicyName Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.UseCorsPolicy.htm" target="TopicContent">UseCorsPolicy Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.htm" target="TopicContent">CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" target="TopicContent">Program Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" target="TopicContent">Program Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" target="TopicContent">Program Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.BuildWebHost.htm" target="TopicContent">BuildWebHost Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.Main.htm" target="TopicContent">Main Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" target="TopicContent">Startup Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" target="TopicContent">Startup Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" target="TopicContent">Startup Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.Configure.htm" target="TopicContent">Configure Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.ConfigureServices.htm" target="TopicContent">ConfigureServices Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-CODE.Framework.Services.Server.AspNetCore.Web.htm" target="TopicContent">CODE.Framework.Services.Server.AspNetCore.Web Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" target="TopicContent">Program Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" target="TopicContent">Program Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" target="TopicContent">Program Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.BuildWebHost.htm" target="TopicContent">BuildWebHost Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.Main.htm" target="TopicContent">Main Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" target="TopicContent">Startup Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" target="TopicContent">Startup Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.-ctor.htm" target="TopicContent">Startup Constructor </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" target="TopicContent">Startup Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configure.htm" target="TopicContent">Configure Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.ConfigureServices.htm" target="TopicContent">ConfigureServices Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" target="TopicContent">Startup Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configuration.htm" target="TopicContent">Configuration Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-Sample.Contracts.htm" target="TopicContent">Sample.Contracts Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.AuthenticateUserRequest.htm" target="TopicContent">AuthenticateUserRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.AuthenticateUserRequest.htm" target="TopicContent">AuthenticateUserRequest Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.AuthenticateUserRequest.-ctor.htm" target="TopicContent">AuthenticateUserRequest Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.AuthenticateUserRequest.htm" target="TopicContent">AuthenticateUserRequest Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.AuthenticateUserRequest.htm" target="TopicContent">AuthenticateUserRequest Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserRequest.Password.htm" target="TopicContent">Password Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserRequest.RememberMe.htm" target="TopicContent">RememberMe Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserRequest.UserName.htm" target="TopicContent">UserName Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.AuthenticateUserResponse.htm" target="TopicContent">AuthenticateUserResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.AuthenticateUserResponse.htm" target="TopicContent">AuthenticateUserResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.AuthenticateUserResponse.-ctor.htm" target="TopicContent">AuthenticateUserResponse Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.AuthenticateUserResponse.htm" target="TopicContent">AuthenticateUserResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.AuthenticateUserResponse.htm" target="TopicContent">AuthenticateUserResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Company.htm" target="TopicContent">Company Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Email.htm" target="TopicContent">Email Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Firstname.htm" target="TopicContent">Firstname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Id.htm" target="TopicContent">Id Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Lastname.htm" target="TopicContent">Lastname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.AuthenticateUserResponse.Roles.htm" target="TopicContent">Roles Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.Customer.htm" target="TopicContent">Customer Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.Customer.htm" target="TopicContent">Customer Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.Customer.htm" target="TopicContent">Customer Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.Customer.htm" target="TopicContent">Customer Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.Customer.Company.htm" target="TopicContent">Company Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.Customer.Id.htm" target="TopicContent">Id Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.Customer.Name.htm" target="TopicContent">Name Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetCustomerRequest.htm" target="TopicContent">GetCustomerRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetCustomerRequest.htm" target="TopicContent">GetCustomerRequest Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetCustomerRequest.htm" target="TopicContent">GetCustomerRequest Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.GetCustomerRequest.htm" target="TopicContent">GetCustomerRequest Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetCustomerRequest.Id.htm" target="TopicContent">Id Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetCustomerResponse.htm" target="TopicContent">GetCustomerResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetCustomerResponse.htm" target="TopicContent">GetCustomerResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetCustomerResponse.htm" target="TopicContent">GetCustomerResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.GetCustomerResponse.htm" target="TopicContent">GetCustomerResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetCustomerResponse.Customer.htm" target="TopicContent">Customer Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetCustomersResponse.htm" target="TopicContent">GetCustomersResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetCustomersResponse.htm" target="TopicContent">GetCustomersResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetCustomersResponse.htm" target="TopicContent">GetCustomersResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.GetCustomersResponse.htm" target="TopicContent">GetCustomersResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetCustomersResponse.CustomerList.htm" target="TopicContent">CustomerList Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetUserRequest.htm" target="TopicContent">GetUserRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetUserRequest.htm" target="TopicContent">GetUserRequest Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetUserRequest.htm" target="TopicContent">GetUserRequest Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.GetUserRequest.htm" target="TopicContent">GetUserRequest Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserRequest.Id.htm" target="TopicContent">Id Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetUserResponse.htm" target="TopicContent">GetUserResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetUserResponse.htm" target="TopicContent">GetUserResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.GetUserResponse.-ctor.htm" target="TopicContent">GetUserResponse Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetUserResponse.htm" target="TopicContent">GetUserResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.GetUserResponse.htm" target="TopicContent">GetUserResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Company.htm" target="TopicContent">Company Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Email.htm" target="TopicContent">Email Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Firstname.htm" target="TopicContent">Firstname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.IsActive.htm" target="TopicContent">IsActive Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.LastLogin.htm" target="TopicContent">LastLogin Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Lastname.htm" target="TopicContent">Lastname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Roles.htm" target="TopicContent">Roles Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.UserId.htm" target="TopicContent">UserId Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Username.htm" target="TopicContent">Username Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.GetUserResponse.Verifier.htm" target="TopicContent">Verifier Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetUsersRequest.htm" target="TopicContent">GetUsersRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetUsersRequest.htm" target="TopicContent">GetUsersRequest Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.GetUsersResponse.htm" target="TopicContent">GetUsersResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.GetUsersResponse.htm" target="TopicContent">GetUsersResponse Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Fields.T-Sample.Contracts.GetUsersResponse.htm" target="TopicContent">GetUsersResponse Fields</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/F-Sample.Contracts.GetUsersResponse.Users.htm" target="TopicContent">Users Field</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.GetUsersResponse.htm" target="TopicContent">GetUsersResponse Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.ICustomerService.htm" target="TopicContent">ICustomerService Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.ICustomerService.htm" target="TopicContent">ICustomerService Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-Sample.Contracts.ICustomerService.htm" target="TopicContent">ICustomerService Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.ICustomerService.GetCustomer.htm" target="TopicContent">GetCustomer Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.ICustomerService.GetCustomers.htm" target="TopicContent">GetCustomers Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.IsAuthenticatedRequest.htm" target="TopicContent">IsAuthenticatedRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.IsAuthenticatedRequest.htm" target="TopicContent">IsAuthenticatedRequest Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.IsAuthenticatedResponse.htm" target="TopicContent">IsAuthenticatedResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.IsAuthenticatedResponse.htm" target="TopicContent">IsAuthenticatedResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.IsAuthenticatedResponse.htm" target="TopicContent">IsAuthenticatedResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.IsAuthenticatedResponse.htm" target="TopicContent">IsAuthenticatedResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.IsAuthenticatedResponse.UserId.htm" target="TopicContent">UserId Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.IsAuthenticatedResponse.Username.htm" target="TopicContent">Username Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.IUserService.htm" target="TopicContent">IUserService Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.IUserService.htm" target="TopicContent">IUserService Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-Sample.Contracts.IUserService.htm" target="TopicContent">IUserService Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.AuthenticateUser.htm" target="TopicContent">AuthenticateUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.GetUser.htm" target="TopicContent">GetUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.GetUsers.htm" target="TopicContent">GetUsers Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.IsAuthenticated.htm" target="TopicContent">IsAuthenticated Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.ResetPassword.htm" target="TopicContent">ResetPassword Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.SaveUser.htm" target="TopicContent">SaveUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Contracts.IUserService.Signout.htm" target="TopicContent">Signout Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.ResetPasswordRequest.htm" target="TopicContent">ResetPasswordRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.ResetPasswordRequest.htm" target="TopicContent">ResetPasswordRequest Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.ResetPasswordRequest.htm" target="TopicContent">ResetPasswordRequest Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.ResetPasswordRequest.htm" target="TopicContent">ResetPasswordRequest Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.ResetPasswordRequest.Username.htm" target="TopicContent">Username Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.ResetPasswordResponse.htm" target="TopicContent">ResetPasswordResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.ResetPasswordResponse.htm" target="TopicContent">ResetPasswordResponse Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.SaveUserRequest.htm" target="TopicContent">SaveUserRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.SaveUserRequest.htm" target="TopicContent">SaveUserRequest Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.SaveUserRequest.htm" target="TopicContent">SaveUserRequest Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.SaveUserRequest.htm" target="TopicContent">SaveUserRequest Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Company.htm" target="TopicContent">Company Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Email.htm" target="TopicContent">Email Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Firstname.htm" target="TopicContent">Firstname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Id.htm" target="TopicContent">Id Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.IsActive.htm" target="TopicContent">IsActive Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.LastLogin.htm" target="TopicContent">LastLogin Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Lastname.htm" target="TopicContent">Lastname Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Password.htm" target="TopicContent">Password Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.PasswordVerify.htm" target="TopicContent">PasswordVerify Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Roles.htm" target="TopicContent">Roles Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.UserId.htm" target="TopicContent">UserId Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Username.htm" target="TopicContent">Username Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserRequest.Verifier.htm" target="TopicContent">Verifier Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.SaveUserResponse.htm" target="TopicContent">SaveUserResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.SaveUserResponse.htm" target="TopicContent">SaveUserResponse Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.SaveUserResponse.htm" target="TopicContent">SaveUserResponse Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.SaveUserResponse.htm" target="TopicContent">SaveUserResponse Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserResponse.FailureInformation.htm" target="TopicContent">FailureInformation Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserResponse.Id.htm" target="TopicContent">Id Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.SaveUserResponse.Success.htm" target="TopicContent">Success Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.SignoutRequest.htm" target="TopicContent">SignoutRequest Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.SignoutRequest.htm" target="TopicContent">SignoutRequest Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.SignoutResponse.htm" target="TopicContent">SignoutResponse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.SignoutResponse.htm" target="TopicContent">SignoutResponse Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Contracts.User.htm" target="TopicContent">User Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Contracts.User.htm" target="TopicContent">User Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-Sample.Contracts.User.htm" target="TopicContent">User Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-Sample.Contracts.User.htm" target="TopicContent">User Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.User.Id.htm" target="TopicContent">Id Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.User.Password.htm" target="TopicContent">Password Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-Sample.Contracts.User.Username.htm" target="TopicContent">Username Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-Sample.Services.Implementation.htm" target="TopicContent">Sample.Services.Implementation Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Services.Implementation.CustomerService.htm" target="TopicContent">CustomerService Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Services.Implementation.CustomerService.htm" target="TopicContent">CustomerService Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-Sample.Services.Implementation.CustomerService.htm" target="TopicContent">CustomerService Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.CustomerService.GetCustomer.htm" target="TopicContent">GetCustomer Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.CustomerService.GetCustomers.htm" target="TopicContent">GetCustomers Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-Sample.Services.Implementation.UserService.htm" target="TopicContent">UserService Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-Sample.Services.Implementation.UserService.htm" target="TopicContent">UserService Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-Sample.Services.Implementation.UserService.htm" target="TopicContent">UserService Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.AuthenticateUser.htm" target="TopicContent">AuthenticateUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.GetUser.htm" target="TopicContent">GetUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.GetUsers.htm" target="TopicContent">GetUsers Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.IsAuthenticated.htm" target="TopicContent">IsAuthenticated Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.ResetPassword.htm" target="TopicContent">ResetPassword Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.SaveUser.htm" target="TopicContent">SaveUser Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-Sample.Services.Implementation.UserService.Signout.htm" target="TopicContent">Signout Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="TOCSizer" class="TOCSizer" onmousedown="OnMouseDown(event)" onselectstart="javascript: return false;"></div>
+
+<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/N-CODE.Framework.Fundamentals.Utilities.htm">
+This page uses an IFRAME but your browser does not support it.
+</iframe>
+
+</form>
+
+</body>
+
+</html>

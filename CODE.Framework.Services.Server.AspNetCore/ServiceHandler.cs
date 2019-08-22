@@ -18,67 +18,60 @@ using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
-
     /// <summary>
     /// Handles executing methods on a service instance using 
     /// ASP.NET Request data
     /// </summary>
     public class ServiceHandler
     {
-
         /// <summary>
         /// Http Request instance to get request inputs
         /// </summary>
-        HttpRequest HttpRequest { get; }
+        private HttpRequest HttpRequest { get; }
 
         /// <summary>
         /// Http Response output object to send response data into
         /// </summary>
-        HttpResponse HttpResponse { get; }
+        private HttpResponse HttpResponse { get; }
 
         /// <summary>
         /// HttpContext instance passed from ASP.NET request context
         /// </summary>
-        HttpContext HttpContext { get;  }
+        private HttpContext HttpContext { get; }
 
         /// <summary>
         /// Request route data for the current request
         /// </summary>
-        RouteData RouteData { get; }
-
+        private RouteData RouteData { get; }
 
         /// <summary>
         /// Internally info about the method that is to be executed. This info
         /// is created when the handler is first initialized.
         /// </summary>
-        MethodInvocationContext MethodContext { get; }
+        private MethodInvocationContext MethodContext { get; }
 
         /// <summary>
         /// The service specific configuration information
         /// </summary>
-        ServiceHandlerConfigurationInstance ServiceInstanceConfiguration { get; }
-        
+        private ServiceHandlerConfigurationInstance ServiceInstanceConfiguration { get; }
+
         /// <summary>
         /// Ctor
         /// </summary>
         /// <param name="httpContext"></param>
         /// <param name="routeData"></param>
         /// <param name="methodContext"></param>
-        
-        public ServiceHandler(HttpContext httpContext,
-            RouteData routeData,
-            MethodInvocationContext methodContext)
+        public ServiceHandler(HttpContext httpContext, RouteData routeData, MethodInvocationContext methodContext)
         {
             HttpContext = httpContext;
             HttpRequest = httpContext.Request;
             HttpResponse = httpContext.Response;
-            
+
             RouteData = routeData;
             MethodContext = methodContext;
-            
+
             ServiceInstanceConfiguration = MethodContext.InstanceConfiguration;
         }
-
 
         /// <summary>
         /// Main entry point method that handles processing the active request
@@ -86,20 +79,20 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// <returns></returns>
         public async Task ProcessRequest()
         {
-            var context = new ServiceHandlerRequestContext()
+            var context = new ServiceHandlerRequestContext
             {
                 HttpRequest = HttpRequest,
                 HttpResponse = HttpResponse,
                 HttpContext = HttpContext,
                 ServiceInstanceConfiguration = ServiceInstanceConfiguration,
                 MethodContext = MethodContext,
-                Url = new ServiceHandlerRequestContextUrl()
+                Url = new ServiceHandlerRequestContextUrl
                 {
-                    Url = HttpRequest.GetDisplayUrl(),                    
+                    Url = HttpRequest.GetDisplayUrl(),
                     UrlPath = HttpRequest.Path.Value,
                     QueryString = HttpRequest.QueryString,
                     HttpMethod = HttpRequest.Method.ToUpper()
-                }                
+                }
             };
 
             try
@@ -109,15 +102,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     throw new UnauthorizedAccessException(Resources.ServiceMustBeAccessedOverHttps);
 
                 if (ServiceInstanceConfiguration.OnAuthorize != null)
-                {
                     if (!await ServiceInstanceConfiguration.OnAuthorize(context))
                         throw new UnauthorizedAccessException("Not authorized to access this request");
-                }
-
 
                 if (ServiceInstanceConfiguration.OnBeforeMethodInvoke != null)
                     await ServiceInstanceConfiguration.OnBeforeMethodInvoke(context);
-                               
+
                 await ExecuteMethod(context);
 
                 ServiceInstanceConfiguration.OnAfterMethodInvoke?.Invoke(context);
@@ -134,31 +124,27 @@ namespace CODE.Framework.Services.Server.AspNetCore
             }
         }
 
-
-
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="handlerContext"></param>
         /// <returns></returns>
-        async Task ExecuteMethod(ServiceHandlerRequestContext handlerContext)
+        private async Task ExecuteMethod(ServiceHandlerRequestContext handlerContext)
         {
             var serviceConfig = ServiceHandlerConfiguration.Current;
             var methodToInvoke = handlerContext.MethodContext.MethodInfo;
             var serviceType = handlerContext.ServiceInstanceConfiguration.ServiceType;
 
-
             var httpVerb = handlerContext.HttpRequest.Method;
             if (httpVerb == "OPTIONS" && serviceConfig.Cors.UseCorsPolicy)
             {
-                // emty response - ASP.NET will provide CORS headers via applied policy
+                // Empty response - ASP.NET will provide CORS headers via applied policy
                 handlerContext.HttpResponse.StatusCode = StatusCodes.Status204NoContent;
                 return;
             }
 
             // Let DI create the Service instance
-            var inst = HttpContext.RequestServices.GetService(serviceType);            
+            var inst = HttpContext.RequestServices.GetService(serviceType);
             if (inst == null)
                 throw new InvalidOperationException(string.Format(Resources.UnableToCreateTypeInstance, serviceType));
 
@@ -179,15 +165,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(string.Format(Resources.UnableToExecuteMethod, methodToInvoke.Name,
-                    ex.Message));
+                throw new InvalidOperationException(string.Format(Resources.UnableToExecuteMethod, methodToInvoke.Name, ex.Message));
             }
             finally
             {
                 UserPrincipalHelper.RemovePrincipal(inst);
             }
         }
-
 
         /// <summary>
         /// Retrieve parameters from body and URL parameters
@@ -198,47 +182,54 @@ namespace CODE.Framework.Services.Server.AspNetCore
         {
             // parameter parsing
             var parameterList = new object[] { };
-            object result = null;
 
             // simplistic - no parameters or single body post parameter
             var paramInfos = handlerContext.MethodContext.MethodInfo.GetParameters();
             if (paramInfos.Length > 1)
-                throw new ArgumentNullException(string.Format(
-                    Resources.OnlySingleParametersAreAllowedOnServiceMethods,
-                    MethodContext.MethodInfo.Name));
+                throw new ArgumentNullException(string.Format(Resources.OnlySingleParametersAreAllowedOnServiceMethods, MethodContext.MethodInfo.Name));
 
             // if there is a parameter create and de-serialize, then add url parameters
             if (paramInfos.Length == 1)
             {
-                var parm = paramInfos[0];
+                var parameter = paramInfos[0];
 
                 // First Deserialize from body if any
-                JsonSerializer serializer = new JsonSerializer();
+                var serializer = new JsonSerializer();
 
                 // there's always 1 parameter
                 object parameterData = null;
                 if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
                     // if no content create an empty one
-                    parameterData = ReflectionUtils.CreateInstanceFromType(parm.ParameterType);
+                    parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
                 else
-                {
                     using (var sw = new StreamReader(HttpRequest.Body))
                     using (JsonReader reader = new JsonTextReader(sw))
-                    {
-                        parameterData = serializer.Deserialize(reader, parm.ParameterType);
-                    }
+                        parameterData = serializer.Deserialize(reader, parameter.ParameterType);
+
+                // We map all parameters passed as named parameters in the URL to their respective properties
+                foreach (var key in handlerContext.HttpRequest.Query.Keys)
+                {
+                    var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                    if (prop != null)
+                        try
+                        {
+                            var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
+                            var val = ReflectionUtils.StringToTypedValue(urlParameterValue, prop.PropertyType);
+                            ReflectionUtils.SetProperty(parameterData, key, val);
+                        }
+                        catch
+                        {
+                            throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
+                        }
                 }
 
-                // Map named URL parameters to properties
+                // Map inline URL parameters defined in the route to properties.
+                // Note: Since this is done after the named parameters above, parameters that are part of the route definition win out over simple named parameters
                 if (RouteData != null)
-                {
                     foreach (var kv in RouteData.Values)
                     {
-                        var prop = parm.ParameterType.GetProperty(kv.Key,
-                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty |
-                            BindingFlags.IgnoreCase);
+                        var prop = parameter.ParameterType.GetProperty(kv.Key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
                         if (prop != null)
-                        {
                             try
                             {
                                 var val = ReflectionUtils.StringToTypedValue(kv.Value as string, prop.PropertyType);
@@ -246,76 +237,62 @@ namespace CODE.Framework.Services.Server.AspNetCore
                             }
                             catch
                             {
-                                throw new InvalidOperationException(
-                                    string.Format("Unable set parameter from URL segment for property: {0}", kv.Key));
+                                throw new InvalidOperationException($"Unable set parameter from URL segment for property: {kv.Key}");
                             }
-                        }
                     }
-                }
 
                 parameterList = new[] {parameterData};
             }
+
             return parameterList;
         }
 
         private void ValidateRoles(List<string> authorizationRoles, IPrincipal user)
         {
-
             if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
             {
-                var identity = user.Identity as ClaimsIdentity;
-                var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-                if (rolesClaim == null)
-                    return; // no role requirement
+                if (user.Identity is ClaimsIdentity identity) {
+                    var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                    if (rolesClaim == null)
+                        return; // no role requirement
 
-                if (string.IsNullOrEmpty(rolesClaim.Value))
-                    return; // no role requirement or empty and we're authenticated
+                    if (string.IsNullOrEmpty(rolesClaim.Value))
+                        return; // no role requirement or empty and we're authenticated
 
-                var roles = rolesClaim.Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var role in roles)
-                {
-                    if (authorizationRoles.Any(r => r == role))
-                        return; // matched a role
+                    var roles = rolesClaim.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var role in roles)
+                        if (authorizationRoles.Any(r => r == role))
+                            return; // matched a role
                 }
             }
 
             throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
-
         }
 
-        static DefaultContractResolver CamelCaseNamingStrategy =
-            new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
+        private static readonly DefaultContractResolver CamelCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
 
-        static DefaultContractResolver SnakeCaseNamingStrategy =
-            new DefaultContractResolver {NamingStrategy = new SnakeCaseNamingStrategy()};
+        private static readonly DefaultContractResolver SnakeCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new SnakeCaseNamingStrategy()};
 
-        static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
+        private static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
         {
             var response = context.HttpResponse;
 
             response.ContentType = "application/json; charset=utf-8";
 
-            JsonSerializer serializer = new JsonSerializer();
+            var serializer = new JsonSerializer();
 
             if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
                 serializer.ContractResolver = CamelCaseNamingStrategy;
             else if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.SnakeCase)
-                serializer.ContractResolver = SnakeCaseNamingStrategy;            
+                serializer.ContractResolver = SnakeCaseNamingStrategy;
 
 #if DEBUG
             serializer.Formatting = Formatting.Indented;
 #endif
 
             using (var sw = new StreamWriter(response.Body))
-            {
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, value);
-                }
-            }
+            using (JsonWriter writer = new JsonTextWriter(sw))
+                serializer.Serialize(writer, value);
         }
-                
     }
-
 }
-

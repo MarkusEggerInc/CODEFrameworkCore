@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace CODE.Framework.Services.Server.AspNetCore
+namespace CODE.Framework.Services.Contracts
 {
-
     /// <summary>
     /// Standard CODE Framework service response object that returns a
     /// standard response that wraps the result along with status information.
@@ -11,10 +10,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     [DataContract]
     public class BaseServiceResponse
     {
-        public BaseServiceResponse()
-        {
-            Success = true;
-        }
+        public BaseServiceResponse() => Success = true;
 
         /// <summary>
         /// Gets or sets the success.
@@ -22,7 +18,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// <value>The success.</value>
         [DataMember(IsRequired = true)]
         public bool Success { get; set; }
-
 
         [DataMember]
         public string FailureInformation { get; set; }
@@ -40,16 +35,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 FailureInformation = null;
             }
         }
-
     }
-
 
     [DataContract]
-    public class BaseServiceRequest
-    {
-
-    }
-
+    public class BaseServiceRequest { }
 
     [DataContract]
     public class ErrorResponse : BaseServiceResponse
@@ -61,30 +50,26 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public string Source { get; set; }
 
         [DataMember]
-        public string ExceptionType { get; set;  }
+        public string ExceptionType { get; set; }
 
-        public ErrorResponse()
-        {
-            Success = false;
-        }
+        public ErrorResponse() => Success = false;
 
         public ErrorResponse(Exception ex)
         {
             ex = ex.GetBaseException();
             Success = false;
-            FailureInformation =ex.Message;
+            FailureInformation = ex.Message;
 #if DEBUG
             StackTrace = ex.StackTrace;
             Source = ex.Source;
             ExceptionType = ex.GetType().ToString();
 #endif
-            
         }
 
         public ErrorResponse(string errorMessage)
         {
             Success = false;
-            FailureInformation = errorMessage;            
+            FailureInformation = errorMessage;
         }
     }
 }

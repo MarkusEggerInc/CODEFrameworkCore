@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading;
 
-namespace CODE.Framework.Services.Contracts
+namespace CODE.Framework.Services.Server.AspNetCore
 {
     public static class UserPrincipalHelper
     {
@@ -11,30 +10,26 @@ namespace CODE.Framework.Services.Contracts
 
         public static IPrincipal GetCurrentPrincipal(this object instance)
         {
-
 #if NETSTANDARD
             lock (Principals)
-            {
                 if (Principals.ContainsKey(instance))
                     return Principals[instance];
-            }
+
             return new ClaimsPrincipal(new ClaimsIdentity());
 #else
-            return Thread.CurrentPrincipal;
+            // TODO: return Thread.CurrentPrincipal;
+            return null;
 #endif
         }
-
 
         public static void AddPrincipal(object instance, IPrincipal principal)
         {
-
 #if NETSTANDARD
-            lock (Principals)
-                Principals[instance] = principal;        
+            lock (Principals) Principals[instance] = principal;
 #endif
         }
 
-        public static void  RemovePrincipal(object instance)
+        public static void RemovePrincipal(object instance)
         {
 #if NETSTANDARD
             lock (Principals)
@@ -42,9 +37,5 @@ namespace CODE.Framework.Services.Contracts
                     Principals.Remove(instance);
 #endif
         }
-
-
     }
-
 }
-

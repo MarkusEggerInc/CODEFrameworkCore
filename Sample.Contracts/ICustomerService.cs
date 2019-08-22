@@ -1,25 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 using CODE.Framework.Services.Contracts;
-using CODE.Framework.Services.Server.AspNetCore;
 
 namespace Sample.Contracts
 {
     public interface ICustomerService
     {
-        [Rest(Method = RestMethods.Post, Name ="Customer", Route = "{id:guid}", AuthorizationRoles = "Administrators")]
-        Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request);
+        [Rest(Method = RestMethods.Get, Name ="Customer", AuthorizationRoles = "Administrators")]
+        GetCustomerResponse GetCustomer(GetCustomerRequest request);
 
-        [Rest(Method = RestMethods.Get, Name = "", Route = "")]
-        GetCustomersResponse GetCustomers();
+        [Rest(Method = RestMethods.Get, Name = "")]
+        GetCustomersResponse GetCustomers(GetCustomersRequest request);
+
+        [Rest(Method = RestMethods.Get, Name = "Search")]
+        SearchTestResponse SearchTest(SearchTestRequest request);
+
     }
 
+    [DataContract]
+    public class SearchTestRequest
+    {
+        [DataMember, RestUrlParameter(Mode = UrlParameterMode.Inline)]
+        public string SearchString { get; set; } = string.Empty;
+
+        [DataMember, RestUrlParameter(Mode = UrlParameterMode.Named)]
+        public bool IncludeInactive { get; set; } = false;
+    }
+
+    [DataContract]
+    public class SearchTestResponse : BaseServiceResponse
+    {
+        [DataMember]
+        public string SearchStringUsed { get; set; } = string.Empty;
+
+        [DataMember]
+        public bool InactivesAreIncluded { get; set; } = false;
+    }
+
+    [DataContract]
+    public class GetCustomersRequest { }
 
     [DataContract]
     public class GetCustomerRequest : BaseServiceRequest
     {
-        [DataMember]
+        [DataMember, RestUrlParameter(Mode = UrlParameterMode.Inline)]
         public string Id { get; set; }
     }
 
@@ -37,12 +61,10 @@ namespace Sample.Contracts
         public Customer Customer { get; set; }
     }
 
-
     public class Customer
     {
         public string Name { get; set; }
         public string Company { get; set; }
         public string Id { get; set; }
     }
-
 }

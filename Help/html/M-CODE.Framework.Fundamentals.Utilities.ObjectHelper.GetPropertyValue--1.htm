@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="save" content="history" />
+    <title>GetPropertyValue(TResult) Method </title>
+    <link rel="stylesheet" type="text/css" href="../styles/lightweight.css" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" />
+    <link rel="stylesheet" type="text/css" href="../styles/lw-code.css" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" />
+    <script type="text/javascript" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" src="../scripts/languageSelector.js"> </script>
+    <meta name="container" content="CODE.Framework.Fundamentals.Utilities" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" />
+    <meta name="file" content="M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" />
+    <meta name="guid" content="M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt" />
+    <xml xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+      <MSHelp:Attr Name="AssetID" Value="M:CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue``1(System.Object,System.String)" />
+      <MSHelp:TOCTitle Title="GetPropertyValue(TResult) Method " />
+      <MSHelp:RLTitle Title="ObjectHelper.GetPropertyValue(TResult) Method  (CODE.Framework.Fundamentals.Utilities)" />
+      <MSHelp:Keyword Index="A" Term="M:CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue``1(System.Object,System.String)" />
+      <MSHelp:Keyword Index="A" Term="frlrfCODEFrameworkFundamentalsUtilitiesObjectHelperClassGetPropertyValueTopic" />
+      <MSHelp:Keyword Index="K" Term="GetPropertyValue%3CTResult%3E method" />
+      <MSHelp:Keyword Index="K" Term="GetPropertyValue(Of TResult) method" />
+      <MSHelp:Keyword Index="K" Term="ObjectHelper.GetPropertyValue%3CTResult%3E method" />
+      <MSHelp:Keyword Index="K" Term="ObjectHelper.GetPropertyValue(Of TResult) method" />
+      <MSHelp:Keyword Index="F" Term="CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue" />
+      <MSHelp:Attr Name="APIType" Value="Managed" />
+      <MSHelp:Attr Name="APILocation" Value="CODE.Framework.Fundamentals.dll" />
+      <MSHelp:Attr Name="APIName" Value="CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue" />
+      <MSHelp:Attr Name="DevLang" Value="CSharp" />
+      <MSHelp:Attr Name="DevLang" Value="VB" />
+      <MSHelp:Attr Name="Locale" Value="en-us" />
+      <MSHelp:Attr Name="TopicType" Value="kbSyntax" />
+      <MSHelp:Attr Name="TopicType" Value="apiref" />
+      <MSHelp:Attr Name="Abstract" Value="Dynamically retrieves a property value from the specified object" />
+      <MSHelp:Attr Name="AssemblyVersion" Value="" />
+    </xml>
+  </head>
+  <body>
+    <div class="contentPlaceHolder" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+      <div class="content">
+        <div class="topicContainer">
+          <div class="topic">
+            <p class="majorTitle" />
+            <h1 class="title">ObjectHelper<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span><span class="fs">.</span></span>GetPropertyValue<span class="languageSpecificText"><span class="cs">&lt;</span><span class="vb">(Of </span><span class="cpp">&lt;</span><span class="nu">(</span><span class="fs">&lt;'</span></span><span class="typeparameter">TResult</span><span class="languageSpecificText"><span class="cs">&gt;</span><span class="vb">)</span><span class="cpp">&gt;</span><span class="nu">)</span><span class="fs">&gt;</span></span> Method </h1>
+            <div id="mainSection">
+              <div id="mainBody">
+                <div class="summary">Dynamically retrieves a property value from the specified object</div>
+                <p />
+    <b>Namespace:</b> 
+   <a href="N-CODE.Framework.Fundamentals.Utilities.htm">CODE.Framework.Fundamentals.Utilities</a><br />
+    <b>Assembly:</b>
+   <span sdata="assembly">CODE.Framework.Fundamentals</span> (in CODE.Framework.Fundamentals.dll)<div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">Syntax</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="syntaxSection"><!----></a><div class="CodeSnippetContainer"><div class="CodeSnippetContainerTabs"><div class="CodeSnippetContainerTabLeft"><!----></div><div class="CodeSnippetContainerTabFirst CSharpTab" id="CSharpTabId" style="background:white;border-bottom-color:white"><a href="javascript:setActiveTab('CodeSnippetContainerCode','CSharpCode','CSharpTabId');" title="C#">C#</a></div><div class="CodeSnippetContainerTab VisualBasicTab" id="VisualBasicTabId"><a href="javascript:setActiveTab('CodeSnippetContainerCode','VisualBasicCode','VisualBasicTabId');" title="Visual Basic">VB</a></div><div class="CodeSnippetContainerTab ManagedCPlusPlusTab" id="ManagedCPlusPlusTabId"><a href="javascript:setActiveTab('CodeSnippetContainerCode','ManagedCPlusPlusCode','ManagedCPlusPlusTabId');" title="Visual C++">C++</a></div><div class="CodeSnippetContainerTabRight"><!----></div></div><div class="CodeSnippetContainerCodeCollection"><div class="CodeSnippetToolBar"><div class="CodeSnippetToolBarText" /></div><div class="CodeSnippetContainerCode CSharpCode"><pre xml:space="preserve" class="libCScode"><span class="keyword">public</span> <span class="keyword">static</span> TResult <span class="identifier">GetPropertyValue</span>&lt;TResult&gt;(
+	<a href="http://msdn.microsoft.com/en-us/library/system.object.aspx" target="_blank">Object</a> <span class="parameter">valueObject</span>,
+	<a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">string</a> <span class="parameter">path</span>
+)
+</pre></div><div class="CodeSnippetContainerCode VisualBasicCode"><pre xml:space="preserve" class="libCScode"><span class="keyword">Public</span> <span class="keyword">Shared</span> <span class="keyword">Function</span> <span class="identifier">GetPropertyValue</span>(<span class="keyword">Of</span> TResult) ( _
+	<span class="parameter">valueObject</span> <span class="keyword">As</span> <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx" target="_blank">Object</a>, _
+	<span class="parameter">path</span> <span class="keyword">As</span> <a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a> _
+) <span class="keyword">As</span> TResult</pre></div><div class="CodeSnippetContainerCode ManagedCPlusPlusCode"><pre xml:space="preserve" class="libCScode"><span class="keyword">public</span>:
+<span class="keyword">generic</span>&lt;<span class="keyword">typename</span> TResult&gt;
+<span class="keyword">static</span> TResult <span class="identifier">GetPropertyValue</span>(
+	<a href="http://msdn.microsoft.com/en-us/library/system.object.aspx" target="_blank">Object</a>^ <span class="parameter">valueObject</span>, 
+	<a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a>^ <span class="parameter">path</span>
+)</pre></div></div></div><h4 class="subHeading">Type Parameters</h4><dl><dt><span class="parameterItalic">TResult</span></dt><dd>The interfaceType of the result.</dd></dl><div id="parameters"><h4 class="subHeading">Parameters</h4><dl paramName="valueObject"><dt><span class="parameterItalic">valueObject</span></dt><dd>Type: <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx" target="_blank">Object</a><br />The value object.</dd></dl><dl paramName="path"><dt><span class="parameterItalic">path</span></dt><dd>Type: <a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a><br />Name of the property.</dd></dl></div><h4 class="subHeading">Return Value</h4>Property value or default value</div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">Remarks</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="remarksSection"><!----></a>
+   The property must be a readable instance property.
+   This method can be called as an extension method.
+   </div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">Examples</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="exampleSection"><!----></a>
+   using EPS.Utilities;
+   // more code
+   var customer = this.GetCustomerObject();
+   string name = customer.GetPropertyValue&lt;string&gt;("LastName");
+   </div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">See Also</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="seeAlsoSection"><!----></a><div class="seeAlsoStyle"><a href="T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm">ObjectHelper Class</a></div><div class="seeAlsoStyle"><a href="N-CODE.Framework.Fundamentals.Utilities.htm">CODE.Framework.Fundamentals.Utilities Namespace</a></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div id="footer" class="footerContainer">
+          <div class="footerLogoContainer">
+            <div style="margin-top:5px">
+              <span class="customCopyrightFooter" />
+            </div>
+            <div style="margin-top:5px" class="copyrightFooter">Help File generated with GhostDoc</div>
+            <div> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

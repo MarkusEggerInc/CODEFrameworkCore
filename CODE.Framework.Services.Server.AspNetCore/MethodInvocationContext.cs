@@ -11,7 +11,7 @@ using CODE.Framework.Services.Server.AspNetCore.Configuration;
 namespace CODE.Framework.Services.Server.AspNetCore
 {
     /// <summary>
-    /// Method that holds cachable method invocation logic
+    /// Method that holds cache-able method invocation logic
     /// </summary>
     [DebuggerDisplay("{MethodInfo.Name} - {RestAttribute.Method}")]
     public class MethodInvocationContext

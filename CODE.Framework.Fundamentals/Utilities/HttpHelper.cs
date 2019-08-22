@@ -129,8 +129,8 @@ namespace CODE.Framework.Fundamentals.Utilities
 
         private static byte[] UrlEncode(byte[] bytes, int offset, int count, bool alwaysCreateNewReturnValue)
         {
-            byte[] encoded = UrlEncode(bytes, offset, count);
-            return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes)) ? (byte[])encoded.Clone() : encoded;
+            var encoded = UrlEncode(bytes, offset, count);
+            return alwaysCreateNewReturnValue && encoded != null && encoded == bytes ? (byte[])encoded.Clone() : encoded;
         }
 
         private static byte[] UrlEncode(byte[] bytes, int offset, int count)
@@ -138,23 +138,26 @@ namespace CODE.Framework.Fundamentals.Utilities
             if (!ValidateUrlEncodingParameters(bytes, offset, count))
                 return null;
 
-            var cSpaces = 0;
-            var cUnsafe = 0;
+            var spaces = 0;
+            var unsafeCharacters = 0;
 
             // count them first
-            for (var i = 0; i < count; i++)
+            for (var counter = 0; counter < count; counter++)
             {
-                var ch = (char)bytes[offset + i];
-
-                if (ch == ' ') cSpaces++;
-                else if (!IsUrlSafeChar(ch)) cUnsafe++;
+                var character = (char)bytes[offset + counter];
+                if (character == ' ')
+                {
+                    spaces++;
+                    unsafeCharacters++;
+                }
+                else if (!IsUrlSafeChar(character)) unsafeCharacters++;
             }
 
             // nothing to expand?
-            if (cSpaces == 0 && cUnsafe == 0) return bytes;
+            if (spaces == 0 && unsafeCharacters == 0) return bytes;
 
             // expand not 'safe' characters into %XX, spaces to +s
-            var expandedBytes = new byte[count + cUnsafe * 2];
+            var expandedBytes = new byte[count + unsafeCharacters * 2];
             var pos = 0;
 
             for (var i = 0; i < count; i++)
@@ -163,7 +166,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                 var ch = (char)b;
 
                 if (IsUrlSafeChar(ch)) expandedBytes[pos++] = b;
-                else if (ch == ' ') expandedBytes[pos++] = (byte) '+';
+                //else if (ch == ' ') expandedBytes[pos++] = (byte) '+';
                 else
                 {
                     expandedBytes[pos++] = (byte) '%';

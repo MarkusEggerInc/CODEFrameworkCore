@@ -2,7 +2,6 @@
 
 namespace CODE.Framework.Services.Contracts
 {
-
     /// <summary>
     /// Attribute used to specify REST behavior
     /// </summary>
@@ -62,7 +61,6 @@ namespace CODE.Framework.Services.Contracts
         /// <remarks>If the method is an empty string, it is considered to be the root (method name does not have to be specified)</remarks>
         public string Name { get; set; }
 
-
         /// <summary>
         /// ASP.NET Core Routing data
         /// </summary>
@@ -72,11 +70,9 @@ namespace CODE.Framework.Services.Contracts
         /// Specify roles required to access this method
         /// null means anonymous, string.Empty means ANY authorized user
         /// </summary>
-        public string AuthorizationRoles { get; set;  }         
+        public string AuthorizationRoles { get; set; }
 
         public string AuthorizationPolicy { get; set; }
-        
-
     }
 
     /// <summary>
@@ -101,10 +97,7 @@ namespace CODE.Framework.Services.Contracts
         /// <summary>
         /// Initializes a new instance of the <see cref="RestUrlParameterAttribute"/> class.
         /// </summary>
-        public RestUrlParameterAttribute()
-        {
-            Mode = UrlParameterMode.Named;
-        }
+        public RestUrlParameterAttribute() => Mode = UrlParameterMode.Named;
 
         /// <summary>
         /// Sets the sequence of the parameter within the URL
@@ -132,6 +125,7 @@ namespace CODE.Framework.Services.Contracts
         /// Named parameter (such as ?value=1)
         /// </summary>
         Named,
+
         /// <summary>
         /// Inline parameter (such as .../1/...)
         /// </summary>
@@ -145,38 +139,55 @@ namespace CODE.Framework.Services.Contracts
     {
         /// <summary>HTTP POST</summary>
         Post,
+
         /// <summary>HTTP GET</summary>
         Get,
+
         /// <summary>HTTP PUT</summary>
         Put,
+
         /// <summary>HTTP DELETE</summary>
         Delete,
+
         /// <summary>HTTP HEAD</summary>
         Head,
+
         /// <summary>HTTP TRACE</summary>
         Trace,
+
         /// <summary>HTTP SEARCH</summary>
         Search,
+
         /// <summary>HTTP CONNECT</summary>
         Connect,
+
         /// <summary>HTTP PROPFIND</summary>
         PropFind,
+
         /// <summary>HTTP PROPPATCH</summary>
         PropPatch,
+
         /// <summary>HTTP PATCH</summary>
         Patch,
+
         /// <summary>HTTP MKCOL</summary>
         Mkcol,
+
         /// <summary>HTTP COPY</summary>
         Copy,
+
         /// <summary>HTTP MOVE</summary>
         Move,
+
         /// <summary>HTTP LOCK</summary>
         Lock,
+
         /// <summary>HTTP UNLOCK</summary>
         Unlock,
+
         /// <summary>HTTP OPTIONS</summary>
         Options,
+
         /// <summary>HTTP POST or PUT (both are valid for this setting)</summary>
         PostOrPut
     }

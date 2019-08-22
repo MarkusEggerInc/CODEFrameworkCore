@@ -124,10 +124,10 @@
     <value>Invalid Service type: {0}</value>
   </data>
   <data name="OnlySingleParametersAreAllowedOnServiceMethods" xml:space="preserve">
-    <value>Only a single object parameter can be passed to a service method "{0}"</value>
+    <value>Only a single object parameter can be passed to a service propertyInfo "{0}"</value>
   </data>
   <data name="ServiceMethodDoesntExist" xml:space="preserve">
-    <value>Service method {0} doesn't exist or can't be called with Http Verb {1}. Method not invoked.</value>
+    <value>Service propertyInfo {0} doesn't exist or can't be called with Http Verb {1}. Method not invoked.</value>
   </data>
   <data name="ServiceMustBeAccessedOverHttps" xml:space="preserve">
     <value>Service must be called over a secure connection (HTTPS)</value>
@@ -136,6 +136,6 @@
     <value>Couldn't create type instance: {0}</value>
   </data>
   <data name="UnableToExecuteMethod" xml:space="preserve">
-    <value>Unable to execute method {0}: {1}</value>
+    <value>Unable to execute propertyInfo {0}: {1}</value>
   </data>
 </root>

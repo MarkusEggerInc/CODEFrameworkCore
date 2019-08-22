@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="ActiveMethodContexts property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ActiveMethodContexts.htm" />
+  <HelpKINode Title="AddBS method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AddBS.htm" />
+  <HelpKINode Title="AddBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm" />
+  <HelpKINode Title="AddDirectory method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddDirectory.htm" />
+  <HelpKINode Title="AddFile method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddFile.htm" />
+  <HelpKINode Title="AddItem method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddItem.htm" />
+  <HelpKINode Title="AddLogger method" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.AddLogger.htm" />
+  <HelpKINode Title="AddPrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.AddPrincipal.htm" />
+  <HelpKINode Title="AddServiceHandler method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.AddServiceHandler.htm" />
+  <HelpKINode Title="AllowCredentials property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowCredentials.htm" />
+  <HelpKINode Title="AllowedHeaders property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedHeaders.htm" />
+  <HelpKINode Title="AllowedMethods property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedMethods.htm" />
+  <HelpKINode Title="AllowedOrigins property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedOrigins.htm" />
+  <HelpKINode Title="ArrayContainsString method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm" />
+  <HelpKINode Title="Asc method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Asc.htm" />
+  <HelpKINode Title="AssemblyName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.AssemblyName.htm" />
+  <HelpKINode Title="At method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm" />
+  <HelpKINode Title="AtLine method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AtLine.htm" />
+  <HelpKINode Title="AuthenticateUser method">
+    <HelpKINode Title="AuthenticateUser Method " Url="html/M-Sample.Contracts.IUserService.AuthenticateUser.htm" />
+    <HelpKINode Title="AuthenticateUser Method " Url="html/M-Sample.Services.Implementation.UserService.AuthenticateUser.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AuthenticateUserRequest class">
+    <HelpKINode Title="AuthenticateUserRequest Class" Url="html/T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="AuthenticateUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="about AuthenticateUserRequest class" Url="html/T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="constructor" Url="html/M-Sample.Contracts.AuthenticateUserRequest.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AuthenticateUserRequest.AuthenticateUserRequest constructor" Url="html/M-Sample.Contracts.AuthenticateUserRequest.-ctor.htm" />
+  <HelpKINode Title="AuthenticateUserRequest.Password property" Url="html/P-Sample.Contracts.AuthenticateUserRequest.Password.htm" />
+  <HelpKINode Title="AuthenticateUserRequest.RememberMe property" Url="html/P-Sample.Contracts.AuthenticateUserRequest.RememberMe.htm" />
+  <HelpKINode Title="AuthenticateUserRequest.UserName property" Url="html/P-Sample.Contracts.AuthenticateUserRequest.UserName.htm" />
+  <HelpKINode Title="AuthenticateUserResponse class">
+    <HelpKINode Title="AuthenticateUserResponse Class" Url="html/T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="AuthenticateUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="about AuthenticateUserResponse class" Url="html/T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/M-Sample.Contracts.AuthenticateUserResponse.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AuthenticateUserResponse.AuthenticateUserResponse constructor" Url="html/M-Sample.Contracts.AuthenticateUserResponse.-ctor.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Company property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Company.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Email property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Email.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Firstname property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Firstname.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Id property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Id.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Lastname property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Lastname.htm" />
+  <HelpKINode Title="AuthenticateUserResponse.Roles property" Url="html/P-Sample.Contracts.AuthenticateUserResponse.Roles.htm" />
+  <HelpKINode Title="AuthorizationPolicy property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationPolicy.htm" />
+  <HelpKINode Title="AuthorizationRoles property">
+    <HelpKINode Title="AuthorizationRoles Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationRoles.htm" />
+    <HelpKINode Title="AuthorizationRoles Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.AuthorizationRoles.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Base64Decode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Decode.htm" />
+  <HelpKINode Title="Base64Encode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Encode.htm" />
+  <HelpKINode Title="BaseServiceRequest class">
+    <HelpKINode Title="BaseServiceRequest Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    <HelpKINode Title="BaseServiceRequest Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    <HelpKINode Title="about BaseServiceRequest class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BaseServiceResponse class">
+    <HelpKINode Title="BaseServiceResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="BaseServiceResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="about BaseServiceResponse class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BaseServiceResponse.BaseServiceResponse constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.-ctor.htm" />
+  <HelpKINode Title="BaseServiceResponse.FailureInformation property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.FailureInformation.htm" />
+  <HelpKINode Title="BaseServiceResponse.SetError method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.SetError.htm" />
+  <HelpKINode Title="BaseServiceResponse.Success property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.Success.htm" />
+  <HelpKINode Title="BitField property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.BitField.htm" />
+  <HelpKINode Title="BuildWebHost method">
+    <HelpKINode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.BuildWebHost.htm" />
+    <HelpKINode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.BuildWebHost.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CamelCase enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+  <HelpKINode Title="CamelCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.CamelCase.htm" />
+  <HelpKINode Title="Chr method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Chr.htm" />
+  <HelpKINode Title="ClearLoggers method" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.ClearLoggers.htm" />
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities namespace" Url="html/N-CODE.Framework.Fundamentals.Utilities.htm" />
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ConsoleLogger class">
+    <HelpKINode Title="ConsoleLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="ConsoleLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.CRC32 class">
+    <HelpKINode Title="CRC32 Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="CRC32 Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.EnumHelper class">
+    <HelpKINode Title="EnumHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+    <HelpKINode Title="EnumHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.EnumInformation class">
+    <HelpKINode Title="EnumInformation Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="EnumInformation Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ExceptionHelper class">
+    <HelpKINode Title="ExceptionHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+    <HelpKINode Title="ExceptionHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.HttpHelper class">
+    <HelpKINode Title="HttpHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+    <HelpKINode Title="HttpHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.IExceptionLogger interface">
+    <HelpKINode Title="IExceptionLogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+    <HelpKINode Title="IExceptionLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.If class">
+    <HelpKINode Title="If Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+    <HelpKINode Title="If Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ILogger interface">
+    <HelpKINode Title="ILogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="ILogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.LogEventType enumeration" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.Logger class">
+    <HelpKINode Title="Logger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="Logger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.LoggingMediator class">
+    <HelpKINode Title="LoggingMediator Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+    <HelpKINode Title="LoggingMediator Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.MultiFileLogger class">
+    <HelpKINode Title="MultiFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="MultiFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger class">
+    <HelpKINode Title="MultiXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="MultiXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ObjectHelper class">
+    <HelpKINode Title="ObjectHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+    <HelpKINode Title="ObjectHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException class">
+    <HelpKINode Title="ObjectInstantiationException Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="ObjectInstantiationException Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.OutputWindowLogger class">
+    <HelpKINode Title="OutputWindowLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="OutputWindowLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.SecurityHelper class">
+    <HelpKINode Title="SecurityHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+    <HelpKINode Title="SecurityHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality class">
+    <HelpKINode Title="SharedZipFunctionality Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    <HelpKINode Title="SharedZipFunctionality Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.SingleFileLogger class">
+    <HelpKINode Title="SingleFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="SingleFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger class">
+    <HelpKINode Title="SingleXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="SingleXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.StreamHelper class">
+    <HelpKINode Title="StreamHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+    <HelpKINode Title="StreamHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.StringHelper class">
+    <HelpKINode Title="StringHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+    <HelpKINode Title="StringHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.TraceLogger class">
+    <HelpKINode Title="TraceLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="TraceLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.XmlHelper class">
+    <HelpKINode Title="XmlHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+    <HelpKINode Title="XmlHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ZipDirEntry class">
+    <HelpKINode Title="ZipDirEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="ZipDirEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ZipEntry class">
+    <HelpKINode Title="ZipEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="ZipEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Fundamentals.Utilities.ZipFile class">
+    <HelpKINode Title="ZipFile Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="ZipFile Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Contracts namespace" Url="html/N-CODE.Framework.Services.Contracts.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Contracts.RestAttribute class">
+    <HelpKINode Title="RestAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="RestAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Contracts.RestMethods enumeration" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Contracts.RestUrlParameterAttribute class">
+    <HelpKINode Title="RestUrlParameterAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="RestUrlParameterAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Contracts.UrlParameterMode enumeration" Url="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Contracts.UserPrincipalHelper class">
+    <HelpKINode Title="UserPrincipalHelper Class" Url="html/T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+    <HelpKINode Title="UserPrincipalHelper Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest class">
+    <HelpKINode Title="BaseServiceRequest Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+    <HelpKINode Title="BaseServiceRequest Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse class">
+    <HelpKINode Title="BaseServiceResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+    <HelpKINode Title="BaseServiceResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.Configuration.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration class">
+    <HelpKINode Title="ServiceHandlerConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="ServiceHandlerConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance class">
+    <HelpKINode Title="ServiceHandlerConfigurationInstance Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="ServiceHandlerConfigurationInstance Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration class">
+    <HelpKINode Title="ServiceHandlerCorsConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="ServiceHandlerCorsConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.ErrorResponse class">
+    <HelpKINode Title="ErrorResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="ErrorResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program class">
+    <HelpKINode Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+    <HelpKINode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup class">
+    <HelpKINode Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext class">
+    <HelpKINode Title="MethodInvocationContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="MethodInvocationContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.ServiceHandler class">
+    <HelpKINode Title="ServiceHandler Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+    <HelpKINode Title="ServiceHandler Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions class">
+    <HelpKINode Title="ServiceHandlerExtensions Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+    <HelpKINode Title="ServiceHandlerExtensions Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext class">
+    <HelpKINode Title="ServiceHandlerRequestContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="ServiceHandlerRequestContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl class">
+    <HelpKINode Title="ServiceHandlerRequestContextUrl Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="ServiceHandlerRequestContextUrl Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Web namespace" Url="html/N-CODE.Framework.Services.Server.AspNetCore.Web.htm" />
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Web.Program class">
+    <HelpKINode Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CODE.Framework.Services.Server.AspNetCore.Web.Startup class">
+    <HelpKINode Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Comment property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Comment.htm" />
+  <HelpKINode Title="Company property">
+    <HelpKINode Title="Company Property " Url="html/P-Sample.Contracts.Customer.Company.htm" />
+    <HelpKINode Title="Company Property " Url="html/P-Sample.Contracts.GetUserResponse.Company.htm" />
+    <HelpKINode Title="Company Property " Url="html/P-Sample.Contracts.SaveUserRequest.Company.htm" />
+    <HelpKINode Title="Company Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Company.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Compare method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm" />
+  <HelpKINode Title="CompressedSize property">
+    <HelpKINode Title="CompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressedSize.htm" />
+    <HelpKINode Title="CompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressedSize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CompressionMethod property">
+    <HelpKINode Title="CompressionMethod Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionMethod.htm" />
+    <HelpKINode Title="CompressionMethod Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionMethod.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CompressionRatio property">
+    <HelpKINode Title="CompressionRatio Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionRatio.htm" />
+    <HelpKINode Title="CompressionRatio Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionRatio.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Configuration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configuration.htm" />
+  <HelpKINode Title="Configure method">
+    <HelpKINode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configure.htm" />
+    <HelpKINode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.Configure.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConfigureServices method">
+    <HelpKINode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.ConfigureServices.htm" />
+    <HelpKINode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.ConfigureServices.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Connect enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Connect field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Connect.htm" />
+  <HelpKINode Title="ConsoleLogger class">
+    <HelpKINode Title="ConsoleLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="ConsoleLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="about ConsoleLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControllerHttpsMode enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+  <HelpKINode Title="ControllerHttpsMode.Http field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.Http.htm" />
+  <HelpKINode Title="ControllerHttpsMode.RequireHttps field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.RequireHttps.htm" />
+  <HelpKINode Title="ControllerHttpsMode.RequireHttpsExceptLocalhost field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.RequireHttpsExceptLocalhost.htm" />
+  <HelpKINode Title="ControllerHttpsMode.Undefined field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.Undefined.htm" />
+  <HelpKINode Title="Copy enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Copy field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Copy.htm" />
+  <HelpKINode Title="Cors property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Cors.htm" />
+  <HelpKINode Title="CorsPolicyName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.CorsPolicyName.htm" />
+  <HelpKINode Title="CRC32 class">
+    <HelpKINode Title="CRC32 Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="CRC32 Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="about CRC32 class" Url="html/T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.CRC32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CRC32.CRC32 constructor" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.-ctor.htm" />
+  <HelpKINode Title="CRC32.GetCrc32 method" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32.htm" />
+  <HelpKINode Title="CRC32.GetCrc32AndCopy method" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32AndCopy.htm" />
+  <HelpKINode Title="CRC32.TotalBytesRead property" Url="html/P-CODE.Framework.Fundamentals.Utilities.CRC32.TotalBytesRead.htm" />
+  <HelpKINode Title="CreateObject method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.CreateObject.htm" />
+  <HelpKINode Title="Critical enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Critical field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Critical.htm" />
+  <HelpKINode Title="Current property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Current.htm" />
+  <HelpKINode Title="Customer class">
+    <HelpKINode Title="Customer Class" Url="html/T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="Customer Members" Url="html/AllMembers.T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="about Customer class" Url="html/T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.Customer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Customer property" Url="html/P-Sample.Contracts.GetCustomerResponse.Customer.htm" />
+  <HelpKINode Title="Customer.Company property" Url="html/P-Sample.Contracts.Customer.Company.htm" />
+  <HelpKINode Title="Customer.Id property" Url="html/P-Sample.Contracts.Customer.Id.htm" />
+  <HelpKINode Title="Customer.Name property" Url="html/P-Sample.Contracts.Customer.Name.htm" />
+  <HelpKINode Title="CustomerList property" Url="html/P-Sample.Contracts.GetCustomersResponse.CustomerList.htm" />
+  <HelpKINode Title="CustomerService class">
+    <HelpKINode Title="CustomerService Class" Url="html/T-Sample.Services.Implementation.CustomerService.htm" />
+    <HelpKINode Title="CustomerService Members" Url="html/AllMembers.T-Sample.Services.Implementation.CustomerService.htm" />
+    <HelpKINode Title="about CustomerService class" Url="html/T-Sample.Services.Implementation.CustomerService.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Services.Implementation.CustomerService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Services.Implementation.CustomerService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CustomerService.GetCustomer method" Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomer.htm" />
+  <HelpKINode Title="CustomerService.GetCustomers method" Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomers.htm" />
+  <HelpKINode Title="DecryptBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm" />
+  <HelpKINode Title="DecryptString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptString.htm" />
+  <HelpKINode Title="Delete enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Delete field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Delete.htm" />
+  <HelpKINode Title="DeserializeFromBinary method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinary.htm" />
+  <HelpKINode Title="DeserializeFromBinaryStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinaryStream.htm" />
+  <HelpKINode Title="DeserializeFromXml method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXml.htm" />
+  <HelpKINode Title="DeserializeFromXmlStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXmlStream.htm" />
+  <HelpKINode Title="DirectoryNameOverride property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.DirectoryNameOverride.htm" />
+  <HelpKINode Title="DisplayText property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.DisplayText.htm" />
+  <HelpKINode Title="Email property">
+    <HelpKINode Title="Email Property " Url="html/P-Sample.Contracts.GetUserResponse.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-Sample.Contracts.SaveUserRequest.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Email.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EncryptBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm" />
+  <HelpKINode Title="EncryptString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptString.htm" />
+  <HelpKINode Title="EnumHelper class">
+    <HelpKINode Title="EnumHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+    <HelpKINode Title="EnumHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+    <HelpKINode Title="about EnumHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnumHelper.GetEnumInformation(Of T) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" />
+  <HelpKINode Title="EnumHelper.GetEnumInformation&lt;T&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" />
+  <HelpKINode Title="EnumInformation class">
+    <HelpKINode Title="EnumInformation Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="EnumInformation Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="about EnumInformation class" Url="html/T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumInformation.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.EnumInformation.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnumInformation.DisplayText property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.DisplayText.htm" />
+  <HelpKINode Title="EnumInformation.EnumInformation constructor" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumInformation.-ctor.htm" />
+  <HelpKINode Title="EnumInformation.EnumValue property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.EnumValue.htm" />
+  <HelpKINode Title="EnumInformation.Name property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Name.htm" />
+  <HelpKINode Title="EnumInformation.Value property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Value.htm" />
+  <HelpKINode Title="EnumValue property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.EnumValue.htm" />
+  <HelpKINode Title="Error enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Error field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Error.htm" />
+  <HelpKINode Title="ErrorResponse class">
+    <HelpKINode Title="ErrorResponse Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="ErrorResponse Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="about ErrorResponse class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ErrorResponse.ErrorResponse constructor" Url="html/Overload-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.-ctor.htm" />
+  <HelpKINode Title="ErrorResponse.ExceptionType property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.ExceptionType.htm" />
+  <HelpKINode Title="ErrorResponse.Source property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.Source.htm" />
+  <HelpKINode Title="ErrorResponse.StackTrace property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.StackTrace.htm" />
+  <HelpKINode Title="Exception enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Exception field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Exception.htm" />
+  <HelpKINode Title="ExceptionHelper class">
+    <HelpKINode Title="ExceptionHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+    <HelpKINode Title="ExceptionHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+    <HelpKINode Title="about ExceptionHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ExceptionHelper.GetExceptionHtml method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionHtml.htm" />
+  <HelpKINode Title="ExceptionHelper.GetExceptionText method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionText.htm" />
+  <HelpKINode Title="ExceptionType property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.ExceptionType.htm" />
+  <HelpKINode Title="Extension property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Extension.htm" />
+  <HelpKINode Title="Extract method">
+    <HelpKINode Title="Extract Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm" />
+    <HelpKINode Title="Extract Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ExtractAll method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.ExtractAll.htm" />
+  <HelpKINode Title="FailureInformation property">
+    <HelpKINode Title="FailureInformation Property " Url="html/P-Sample.Contracts.SaveUserResponse.FailureInformation.htm" />
+    <HelpKINode Title="FailureInformation Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.FailureInformation.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FileName property">
+    <HelpKINode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.FileName.htm" />
+    <HelpKINode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.FileName.htm" />
+    <HelpKINode Title="FileName Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.FileName.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Firstname property">
+    <HelpKINode Title="Firstname Property " Url="html/P-Sample.Contracts.SaveUserRequest.Firstname.htm" />
+    <HelpKINode Title="Firstname Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Firstname.htm" />
+    <HelpKINode Title="Firstname Property " Url="html/P-Sample.Contracts.GetUserResponse.Firstname.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Folder property">
+    <HelpKINode Title="Folder Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Folder.htm" />
+    <HelpKINode Title="Folder Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Folder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Format method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm" />
+  <HelpKINode Title="FromArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromArray.htm" />
+  <HelpKINode Title="FromFile method">
+    <HelpKINode Title="FromFile Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromFile.htm" />
+    <HelpKINode Title="FromFile Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.FromFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FromString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromString.htm" />
+  <HelpKINode Title="Get enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Get field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Get.htm" />
+  <HelpKINode Title="GetAllMethodsForInterface method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetAllMethodsForInterface.htm" />
+  <HelpKINode Title="GetCrc32 method" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32.htm" />
+  <HelpKINode Title="GetCrc32AndCopy method" Url="html/M-CODE.Framework.Fundamentals.Utilities.CRC32.GetCrc32AndCopy.htm" />
+  <HelpKINode Title="GetCurrentPrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.GetCurrentPrincipal.htm" />
+  <HelpKINode Title="GetCustomer method">
+    <HelpKINode Title="GetCustomer Method " Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomer.htm" />
+    <HelpKINode Title="GetCustomer Method " Url="html/M-Sample.Contracts.ICustomerService.GetCustomer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCustomerRequest class">
+    <HelpKINode Title="GetCustomerRequest Class" Url="html/T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="GetCustomerRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="about GetCustomerRequest class" Url="html/T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.GetCustomerRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCustomerRequest.Id property" Url="html/P-Sample.Contracts.GetCustomerRequest.Id.htm" />
+  <HelpKINode Title="GetCustomerResponse class">
+    <HelpKINode Title="GetCustomerResponse Class" Url="html/T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="GetCustomerResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="about GetCustomerResponse class" Url="html/T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.GetCustomerResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCustomerResponse.Customer property" Url="html/P-Sample.Contracts.GetCustomerResponse.Customer.htm" />
+  <HelpKINode Title="GetCustomers method">
+    <HelpKINode Title="GetCustomers Method " Url="html/M-Sample.Services.Implementation.CustomerService.GetCustomers.htm" />
+    <HelpKINode Title="GetCustomers Method " Url="html/M-Sample.Contracts.ICustomerService.GetCustomers.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCustomersResponse class">
+    <HelpKINode Title="GetCustomersResponse Class" Url="html/T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="GetCustomersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="about GetCustomersResponse class" Url="html/T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.GetCustomersResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCustomersResponse.CustomerList property" Url="html/P-Sample.Contracts.GetCustomersResponse.CustomerList.htm" />
+  <HelpKINode Title="GetEnumerator method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.GetEnumerator.htm" />
+  <HelpKINode Title="GetEnumInformation(Of T) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" />
+  <HelpKINode Title="GetEnumInformation&lt;T&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.EnumHelper.GetEnumInformation--1.htm" />
+  <HelpKINode Title="GetExceptionHtml method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionHtml.htm" />
+  <HelpKINode Title="GetExceptionText method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ExceptionHelper.GetExceptionText.htm" />
+  <HelpKINode Title="GetPropertyByPath method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyByPath.htm" />
+  <HelpKINode Title="GetPropertyValue(Of TResult) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" />
+  <HelpKINode Title="GetPropertyValue&lt;TResult&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" />
+  <HelpKINode Title="GetRestAttribute method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.GetRestAttribute.htm" />
+  <HelpKINode Title="GetUser method">
+    <HelpKINode Title="GetUser Method " Url="html/M-Sample.Contracts.IUserService.GetUser.htm" />
+    <HelpKINode Title="GetUser Method " Url="html/M-Sample.Services.Implementation.UserService.GetUser.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUserRequest class">
+    <HelpKINode Title="GetUserRequest Class" Url="html/T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="GetUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="about GetUserRequest class" Url="html/T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.GetUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUserRequest.Id property" Url="html/P-Sample.Contracts.GetUserRequest.Id.htm" />
+  <HelpKINode Title="GetUserResponse class">
+    <HelpKINode Title="GetUserResponse Class" Url="html/T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="GetUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="about GetUserResponse class" Url="html/T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/M-Sample.Contracts.GetUserResponse.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.GetUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUserResponse.Company property" Url="html/P-Sample.Contracts.GetUserResponse.Company.htm" />
+  <HelpKINode Title="GetUserResponse.Email property" Url="html/P-Sample.Contracts.GetUserResponse.Email.htm" />
+  <HelpKINode Title="GetUserResponse.Firstname property" Url="html/P-Sample.Contracts.GetUserResponse.Firstname.htm" />
+  <HelpKINode Title="GetUserResponse.GetUserResponse constructor" Url="html/M-Sample.Contracts.GetUserResponse.-ctor.htm" />
+  <HelpKINode Title="GetUserResponse.IsActive property" Url="html/P-Sample.Contracts.GetUserResponse.IsActive.htm" />
+  <HelpKINode Title="GetUserResponse.LastLogin property" Url="html/P-Sample.Contracts.GetUserResponse.LastLogin.htm" />
+  <HelpKINode Title="GetUserResponse.Lastname property" Url="html/P-Sample.Contracts.GetUserResponse.Lastname.htm" />
+  <HelpKINode Title="GetUserResponse.Roles property" Url="html/P-Sample.Contracts.GetUserResponse.Roles.htm" />
+  <HelpKINode Title="GetUserResponse.UserId property" Url="html/P-Sample.Contracts.GetUserResponse.UserId.htm" />
+  <HelpKINode Title="GetUserResponse.Username property" Url="html/P-Sample.Contracts.GetUserResponse.Username.htm" />
+  <HelpKINode Title="GetUserResponse.Verifier property" Url="html/P-Sample.Contracts.GetUserResponse.Verifier.htm" />
+  <HelpKINode Title="GetUsers method">
+    <HelpKINode Title="GetUsers Method " Url="html/M-Sample.Services.Implementation.UserService.GetUsers.htm" />
+    <HelpKINode Title="GetUsers Method " Url="html/M-Sample.Contracts.IUserService.GetUsers.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUsersRequest class">
+    <HelpKINode Title="GetUsersRequest Class" Url="html/T-Sample.Contracts.GetUsersRequest.htm" />
+    <HelpKINode Title="GetUsersRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetUsersRequest.htm" />
+    <HelpKINode Title="about GetUsersRequest class" Url="html/T-Sample.Contracts.GetUsersRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetUsersRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetUsersRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUsersResponse class">
+    <HelpKINode Title="GetUsersResponse Class" Url="html/T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="GetUsersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="about GetUsersResponse class" Url="html/T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="fields" Url="html/Fields.T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.GetUsersResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetUsersResponse.Users field" Url="html/F-Sample.Contracts.GetUsersResponse.Users.htm" />
+  <HelpKINode Title="GetWordCount method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordCount.htm" />
+  <HelpKINode Title="GetWordNumb method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumb.htm" />
+  <HelpKINode Title="GetWordNumber method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumber.htm" />
+  <HelpKINode Title="Head enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Head field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Head.htm" />
+  <HelpKINode Title="Http enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+  <HelpKINode Title="Http field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.Http.htm" />
+  <HelpKINode Title="HttpContext property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpContext.htm" />
+  <HelpKINode Title="HttpHelper class">
+    <HelpKINode Title="HttpHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+    <HelpKINode Title="HttpHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+    <HelpKINode Title="about HttpHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.HttpHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HttpHelper.UrlDecode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlDecode.htm" />
+  <HelpKINode Title="HttpMethod property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.HttpMethod.htm" />
+  <HelpKINode Title="HttpRequest property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpRequest.htm" />
+  <HelpKINode Title="HttpResponse property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpResponse.htm" />
+  <HelpKINode Title="HttpsMode property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.HttpsMode.htm" />
+  <HelpKINode Title="ICustomerService interface">
+    <HelpKINode Title="ICustomerService Interface" Url="html/T-Sample.Contracts.ICustomerService.htm" />
+    <HelpKINode Title="ICustomerService Members" Url="html/AllMembers.T-Sample.Contracts.ICustomerService.htm" />
+    <HelpKINode Title="about ICustomerService interface" Url="html/T-Sample.Contracts.ICustomerService.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.ICustomerService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.ICustomerService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ICustomerService.GetCustomer method" Url="html/M-Sample.Contracts.ICustomerService.GetCustomer.htm" />
+  <HelpKINode Title="ICustomerService.GetCustomers method" Url="html/M-Sample.Contracts.ICustomerService.GetCustomers.htm" />
+  <HelpKINode Title="Id property">
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.SaveUserResponse.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.SaveUserRequest.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.User.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.GetUserRequest.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.Customer.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-Sample.Contracts.GetCustomerRequest.Id.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IExceptionLogger interface">
+    <HelpKINode Title="IExceptionLogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+    <HelpKINode Title="IExceptionLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+    <HelpKINode Title="about IExceptionLogger interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IExceptionLogger.Log method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm" />
+  <HelpKINode Title="If class">
+    <HelpKINode Title="If Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+    <HelpKINode Title="If Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+    <HelpKINode Title="about If class" Url="html/T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.If.htm" />
+  </HelpKINode>
+  <HelpKINode Title="If.NotNull method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm" />
+  <HelpKINode Title="ILogger interface">
+    <HelpKINode Title="ILogger Interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="ILogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="about ILogger interface" Url="html/T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ILogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ILogger.Log method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm" />
+  <HelpKINode Title="ILogger.TypeFilter property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ILogger.TypeFilter.htm" />
+  <HelpKINode Title="Information enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Information field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Information.htm" />
+  <HelpKINode Title="Inline enumeration member" Url="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" />
+  <HelpKINode Title="Inline field" Url="html/F-CODE.Framework.Services.Contracts.UrlParameterMode.Inline.htm" />
+  <HelpKINode Title="InstanceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.InstanceConfiguration.htm" />
+  <HelpKINode Title="InvokeMethod(Of TResult) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" />
+  <HelpKINode Title="InvokeMethod&lt;TResult&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" />
+  <HelpKINode Title="IsActive property">
+    <HelpKINode Title="IsActive Property " Url="html/P-Sample.Contracts.GetUserResponse.IsActive.htm" />
+    <HelpKINode Title="IsActive Property " Url="html/P-Sample.Contracts.SaveUserRequest.IsActive.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsAlpha method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsAlpha.htm" />
+  <HelpKINode Title="IsAsync property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.IsAsync.htm" />
+  <HelpKINode Title="IsAuthenticated method">
+    <HelpKINode Title="IsAuthenticated Method " Url="html/M-Sample.Contracts.IUserService.IsAuthenticated.htm" />
+    <HelpKINode Title="IsAuthenticated Method " Url="html/M-Sample.Services.Implementation.UserService.IsAuthenticated.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsAuthenticatedRequest class">
+    <HelpKINode Title="IsAuthenticatedRequest Class" Url="html/T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    <HelpKINode Title="IsAuthenticatedRequest Members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    <HelpKINode Title="about IsAuthenticatedRequest class" Url="html/T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsAuthenticatedResponse class">
+    <HelpKINode Title="IsAuthenticatedResponse Class" Url="html/T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="IsAuthenticatedResponse Members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="about IsAuthenticatedResponse class" Url="html/T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsAuthenticatedResponse.UserId property" Url="html/P-Sample.Contracts.IsAuthenticatedResponse.UserId.htm" />
+  <HelpKINode Title="IsAuthenticatedResponse.Username property" Url="html/P-Sample.Contracts.IsAuthenticatedResponse.Username.htm" />
+  <HelpKINode Title="IsDigit method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsDigit.htm" />
+  <HelpKINode Title="Item property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Item-System.String-.htm" />
+  <HelpKINode Title="IUserService interface">
+    <HelpKINode Title="IUserService Interface" Url="html/T-Sample.Contracts.IUserService.htm" />
+    <HelpKINode Title="IUserService Members" Url="html/AllMembers.T-Sample.Contracts.IUserService.htm" />
+    <HelpKINode Title="about IUserService interface" Url="html/T-Sample.Contracts.IUserService.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.IUserService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.IUserService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IUserService.AuthenticateUser method" Url="html/M-Sample.Contracts.IUserService.AuthenticateUser.htm" />
+  <HelpKINode Title="IUserService.GetUser method" Url="html/M-Sample.Contracts.IUserService.GetUser.htm" />
+  <HelpKINode Title="IUserService.GetUsers method" Url="html/M-Sample.Contracts.IUserService.GetUsers.htm" />
+  <HelpKINode Title="IUserService.IsAuthenticated method" Url="html/M-Sample.Contracts.IUserService.IsAuthenticated.htm" />
+  <HelpKINode Title="IUserService.ResetPassword method" Url="html/M-Sample.Contracts.IUserService.ResetPassword.htm" />
+  <HelpKINode Title="IUserService.SaveUser method" Url="html/M-Sample.Contracts.IUserService.SaveUser.htm" />
+  <HelpKINode Title="IUserService.Signout method" Url="html/M-Sample.Contracts.IUserService.Signout.htm" />
+  <HelpKINode Title="JsonFormatMode property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.JsonFormatMode.htm" />
+  <HelpKINode Title="JsonFormatModes enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+  <HelpKINode Title="JsonFormatModes.CamelCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.CamelCase.htm" />
+  <HelpKINode Title="JsonFormatModes.ProperCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.ProperCase.htm" />
+  <HelpKINode Title="JsonFormatModes.SnakeCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.SnakeCase.htm" />
+  <HelpKINode Title="JustFileName method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustFileName.htm" />
+  <HelpKINode Title="JustPath method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustPath.htm" />
+  <HelpKINode Title="LastLogin property">
+    <HelpKINode Title="LastLogin Property " Url="html/P-Sample.Contracts.GetUserResponse.LastLogin.htm" />
+    <HelpKINode Title="LastLogin Property " Url="html/P-Sample.Contracts.SaveUserRequest.LastLogin.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LastModified property">
+    <HelpKINode Title="LastModified Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.LastModified.htm" />
+    <HelpKINode Title="LastModified Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.LastModified.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Lastname property">
+    <HelpKINode Title="Lastname Property " Url="html/P-Sample.Contracts.GetUserResponse.Lastname.htm" />
+    <HelpKINode Title="Lastname Property " Url="html/P-Sample.Contracts.SaveUserRequest.Lastname.htm" />
+    <HelpKINode Title="Lastname Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Lastname.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Lock enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Lock field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Lock.htm" />
+  <HelpKINode Title="Log method">
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ILogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.IExceptionLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ConsoleLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LogEventType enumeration" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="LogEventType.Critical field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Critical.htm" />
+  <HelpKINode Title="LogEventType.Error field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Error.htm" />
+  <HelpKINode Title="LogEventType.Exception field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Exception.htm" />
+  <HelpKINode Title="LogEventType.Information field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Information.htm" />
+  <HelpKINode Title="LogEventType.Success field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Success.htm" />
+  <HelpKINode Title="LogEventType.Undefined field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Undefined.htm" />
+  <HelpKINode Title="LogEventType.Warning field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Warning.htm" />
+  <HelpKINode Title="Logger class">
+    <HelpKINode Title="Logger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="Logger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="about Logger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.Logger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Logger.Log method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.Logger.Log.htm" />
+  <HelpKINode Title="Logger.TypeFilter property" Url="html/P-CODE.Framework.Fundamentals.Utilities.Logger.TypeFilter.htm" />
+  <HelpKINode Title="LoggingMediator class">
+    <HelpKINode Title="LoggingMediator Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+    <HelpKINode Title="LoggingMediator Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+    <HelpKINode Title="about LoggingMediator class" Url="html/T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.LoggingMediator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LoggingMediator.AddLogger method" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.AddLogger.htm" />
+  <HelpKINode Title="LoggingMediator.ClearLoggers method" Url="html/M-CODE.Framework.Fundamentals.Utilities.LoggingMediator.ClearLoggers.htm" />
+  <HelpKINode Title="LoggingMediator.Log method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.LoggingMediator.Log.htm" />
+  <HelpKINode Title="Lower method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Lower.htm" />
+  <HelpKINode Title="Main method">
+    <HelpKINode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.Main.htm" />
+    <HelpKINode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.Main.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MaximumEntries property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.MaximumEntries.htm" />
+  <HelpKINode Title="Method property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Method.htm" />
+  <HelpKINode Title="MethodContext property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.MethodContext.htm" />
+  <HelpKINode Title="MethodInfo property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.MethodInfo.htm" />
+  <HelpKINode Title="MethodInvocationContext class">
+    <HelpKINode Title="MethodInvocationContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="MethodInvocationContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="about MethodInvocationContext class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MethodInvocationContext.ActiveMethodContexts property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ActiveMethodContexts.htm" />
+  <HelpKINode Title="MethodInvocationContext.AuthorizationRoles property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.AuthorizationRoles.htm" />
+  <HelpKINode Title="MethodInvocationContext.InstanceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.InstanceConfiguration.htm" />
+  <HelpKINode Title="MethodInvocationContext.IsAsync property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.IsAsync.htm" />
+  <HelpKINode Title="MethodInvocationContext.MethodInfo property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.MethodInfo.htm" />
+  <HelpKINode Title="MethodInvocationContext.MethodInvocationContext constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.-ctor.htm" />
+  <HelpKINode Title="MethodInvocationContext.RestAttribute property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.RestAttribute.htm" />
+  <HelpKINode Title="MethodInvocationContext.ServiceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ServiceConfiguration.htm" />
+  <HelpKINode Title="Mkcol enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Mkcol field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Mkcol.htm" />
+  <HelpKINode Title="Mode property" Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Mode.htm" />
+  <HelpKINode Title="Move enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Move field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Move.htm" />
+  <HelpKINode Title="MultiFileLogger class">
+    <HelpKINode Title="MultiFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="MultiFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="about MultiFileLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MultiFileLogger.Extension property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Extension.htm" />
+  <HelpKINode Title="MultiFileLogger.Folder property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Folder.htm" />
+  <HelpKINode Title="MultiFileLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MultiFileLogger.MultiFileLogger constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiFileLogger.-ctor.htm" />
+  <HelpKINode Title="MultiXmlFileLogger class">
+    <HelpKINode Title="MultiXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="MultiXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="about MultiXmlFileLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MultiXmlFileLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MultiXmlFileLogger.MultiXmlFileLogger constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.-ctor.htm" />
+  <HelpKINode Title="MultiXmlFileLogger.XmlEventNode property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventNode.htm" />
+  <HelpKINode Title="MultiXmlFileLogger.XmlEventTimeStampAttribute property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+  <HelpKINode Title="MultiXmlFileLogger.XmlEventTypeAttribute property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTypeAttribute.htm" />
+  <HelpKINode Title="MultiXmlFileLogger.XmlRootNode property" Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlRootNode.htm" />
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="Name Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Name.htm" />
+    <HelpKINode Title="Name Property " Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Name.htm" />
+    <HelpKINode Title="Name Property " Url="html/P-Sample.Contracts.Customer.Name.htm" />
+    <HelpKINode Title="Name Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Named enumeration member" Url="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" />
+  <HelpKINode Title="Named field" Url="html/F-CODE.Framework.Services.Contracts.UrlParameterMode.Named.htm" />
+  <HelpKINode Title="NotNull method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.If.NotNull.htm" />
+  <HelpKINode Title="ObjectHelper class">
+    <HelpKINode Title="ObjectHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+    <HelpKINode Title="ObjectHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+    <HelpKINode Title="about ObjectHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ObjectHelper.CreateObject method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.CreateObject.htm" />
+  <HelpKINode Title="ObjectHelper.DeserializeFromBinary method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinary.htm" />
+  <HelpKINode Title="ObjectHelper.DeserializeFromBinaryStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromBinaryStream.htm" />
+  <HelpKINode Title="ObjectHelper.DeserializeFromXml method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXml.htm" />
+  <HelpKINode Title="ObjectHelper.DeserializeFromXmlStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.DeserializeFromXmlStream.htm" />
+  <HelpKINode Title="ObjectHelper.GetAllMethodsForInterface method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetAllMethodsForInterface.htm" />
+  <HelpKINode Title="ObjectHelper.GetPropertyByPath method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyByPath.htm" />
+  <HelpKINode Title="ObjectHelper.GetPropertyValue(Of TResult) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" />
+  <HelpKINode Title="ObjectHelper.GetPropertyValue&lt;TResult&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.GetPropertyValue--1.htm" />
+  <HelpKINode Title="ObjectHelper.InvokeMethod(Of TResult) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" />
+  <HelpKINode Title="ObjectHelper.InvokeMethod&lt;TResult&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.InvokeMethod--1.htm" />
+  <HelpKINode Title="ObjectHelper.SerializeToBinaryArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryArray.htm" />
+  <HelpKINode Title="ObjectHelper.SerializeToBinaryStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryStream.htm" />
+  <HelpKINode Title="ObjectHelper.SerializeToXmlDocument method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlDocument.htm" />
+  <HelpKINode Title="ObjectHelper.SerializeToXmlStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlStream.htm" />
+  <HelpKINode Title="ObjectHelper.SerializeToXmlString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlString.htm" />
+  <HelpKINode Title="ObjectHelper.SetPropertyValue(Of TValue) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" />
+  <HelpKINode Title="ObjectHelper.SetPropertyValue&lt;TValue&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" />
+  <HelpKINode Title="ObjectHelper.ValuesDiffer method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.ValuesDiffer.htm" />
+  <HelpKINode Title="ObjectInstantiationException class">
+    <HelpKINode Title="ObjectInstantiationException Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="ObjectInstantiationException Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="about ObjectInstantiationException class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ObjectInstantiationException.ObjectInstantiationException constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ObjectInstantiationException.-ctor.htm" />
+  <HelpKINode Title="Occurs method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm" />
+  <HelpKINode Title="OnAfterMethodInvoke property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAfterMethodInvoke.htm" />
+  <HelpKINode Title="OnAuthorize property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAuthorize.htm" />
+  <HelpKINode Title="OnBeforeMethodInvoke property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnBeforeMethodInvoke.htm" />
+  <HelpKINode Title="Options enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Options field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Options.htm" />
+  <HelpKINode Title="OutputWindowLogger class">
+    <HelpKINode Title="OutputWindowLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="OutputWindowLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="about OutputWindowLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutputWindowLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.OutputWindowLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Password property">
+    <HelpKINode Title="Password Property " Url="html/P-Sample.Contracts.SaveUserRequest.Password.htm" />
+    <HelpKINode Title="Password Property " Url="html/P-Sample.Contracts.User.Password.htm" />
+    <HelpKINode Title="Password Property " Url="html/P-Sample.Contracts.AuthenticateUserRequest.Password.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PasswordVerify property" Url="html/P-Sample.Contracts.SaveUserRequest.PasswordVerify.htm" />
+  <HelpKINode Title="Patch enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Patch field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Patch.htm" />
+  <HelpKINode Title="Post enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Post field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Post.htm" />
+  <HelpKINode Title="PostOrPut enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="PostOrPut field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PostOrPut.htm" />
+  <HelpKINode Title="ProcessRequest method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.ProcessRequest.htm" />
+  <HelpKINode Title="Program class">
+    <HelpKINode Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+    <HelpKINode Title="Program Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+    <HelpKINode Title="Program Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="about Program class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+    <HelpKINode Title="about Program class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Program.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Program.BuildWebHost method">
+    <HelpKINode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.BuildWebHost.htm" />
+    <HelpKINode Title="BuildWebHost Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.BuildWebHost.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Program.Main method">
+    <HelpKINode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Program.Main.htm" />
+    <HelpKINode Title="Main Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Program.Main.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Proper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Proper.htm" />
+  <HelpKINode Title="ProperCase enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+  <HelpKINode Title="ProperCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.ProperCase.htm" />
+  <HelpKINode Title="PropFind enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="PropFind field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PropFind.htm" />
+  <HelpKINode Title="PropPatch enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="PropPatch field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PropPatch.htm" />
+  <HelpKINode Title="Put enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Put field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Put.htm" />
+  <HelpKINode Title="QueryString property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.QueryString.htm" />
+  <HelpKINode Title="Read method">
+    <HelpKINode Title="Read Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Read.htm" />
+    <HelpKINode Title="Read Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Read.htm" />
+    <HelpKINode Title="Read Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RememberMe property" Url="html/P-Sample.Contracts.AuthenticateUserRequest.RememberMe.htm" />
+  <HelpKINode Title="RemovePrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.RemovePrincipal.htm" />
+  <HelpKINode Title="Replicate method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Replicate.htm" />
+  <HelpKINode Title="RequireHttps enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+  <HelpKINode Title="RequireHttps field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.RequireHttps.htm" />
+  <HelpKINode Title="RequireHttpsExceptLocalhost enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+  <HelpKINode Title="RequireHttpsExceptLocalhost field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.RequireHttpsExceptLocalhost.htm" />
+  <HelpKINode Title="ResetPassword method">
+    <HelpKINode Title="ResetPassword Method " Url="html/M-Sample.Contracts.IUserService.ResetPassword.htm" />
+    <HelpKINode Title="ResetPassword Method " Url="html/M-Sample.Services.Implementation.UserService.ResetPassword.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ResetPasswordRequest class">
+    <HelpKINode Title="ResetPasswordRequest Class" Url="html/T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="ResetPasswordRequest Members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="about ResetPasswordRequest class" Url="html/T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.ResetPasswordRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ResetPasswordRequest.Username property" Url="html/P-Sample.Contracts.ResetPasswordRequest.Username.htm" />
+  <HelpKINode Title="ResetPasswordResponse class">
+    <HelpKINode Title="ResetPasswordResponse Class" Url="html/T-Sample.Contracts.ResetPasswordResponse.htm" />
+    <HelpKINode Title="ResetPasswordResponse Members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordResponse.htm" />
+    <HelpKINode Title="about ResetPasswordResponse class" Url="html/T-Sample.Contracts.ResetPasswordResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.ResetPasswordResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RestAttribute class">
+    <HelpKINode Title="RestAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="RestAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="about RestAttribute class" Url="html/T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Contracts.RestAttribute.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Contracts.RestAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RestAttribute property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.RestAttribute.htm" />
+  <HelpKINode Title="RestAttribute.AuthorizationPolicy property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationPolicy.htm" />
+  <HelpKINode Title="RestAttribute.AuthorizationRoles property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.AuthorizationRoles.htm" />
+  <HelpKINode Title="RestAttribute.Method property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Method.htm" />
+  <HelpKINode Title="RestAttribute.Name property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Name.htm" />
+  <HelpKINode Title="RestAttribute.RestAttribute constructor" Url="html/M-CODE.Framework.Services.Contracts.RestAttribute.-ctor.htm" />
+  <HelpKINode Title="RestAttribute.Route property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Route.htm" />
+  <HelpKINode Title="RestMethods enumeration" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="RestMethods.Connect field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Connect.htm" />
+  <HelpKINode Title="RestMethods.Copy field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Copy.htm" />
+  <HelpKINode Title="RestMethods.Delete field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Delete.htm" />
+  <HelpKINode Title="RestMethods.Get field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Get.htm" />
+  <HelpKINode Title="RestMethods.Head field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Head.htm" />
+  <HelpKINode Title="RestMethods.Lock field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Lock.htm" />
+  <HelpKINode Title="RestMethods.Mkcol field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Mkcol.htm" />
+  <HelpKINode Title="RestMethods.Move field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Move.htm" />
+  <HelpKINode Title="RestMethods.Options field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Options.htm" />
+  <HelpKINode Title="RestMethods.Patch field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Patch.htm" />
+  <HelpKINode Title="RestMethods.Post field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Post.htm" />
+  <HelpKINode Title="RestMethods.PostOrPut field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PostOrPut.htm" />
+  <HelpKINode Title="RestMethods.PropFind field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PropFind.htm" />
+  <HelpKINode Title="RestMethods.PropPatch field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.PropPatch.htm" />
+  <HelpKINode Title="RestMethods.Put field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Put.htm" />
+  <HelpKINode Title="RestMethods.Search field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Search.htm" />
+  <HelpKINode Title="RestMethods.Trace field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Trace.htm" />
+  <HelpKINode Title="RestMethods.Unlock field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Unlock.htm" />
+  <HelpKINode Title="RestUrlParameterAttribute class">
+    <HelpKINode Title="RestUrlParameterAttribute Class" Url="html/T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="RestUrlParameterAttribute Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="about RestUrlParameterAttribute class" Url="html/T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RestUrlParameterAttribute.Mode property" Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Mode.htm" />
+  <HelpKINode Title="RestUrlParameterAttribute.RestUrlParameterAttribute constructor" Url="html/M-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.-ctor.htm" />
+  <HelpKINode Title="RestUrlParameterAttribute.Sequence property" Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Sequence.htm" />
+  <HelpKINode Title="ResultJson property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultJson.htm" />
+  <HelpKINode Title="ResultValue property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultValue.htm" />
+  <HelpKINode Title="Roles property">
+    <HelpKINode Title="Roles Property " Url="html/P-Sample.Contracts.SaveUserRequest.Roles.htm" />
+    <HelpKINode Title="Roles Property " Url="html/P-Sample.Contracts.GetUserResponse.Roles.htm" />
+    <HelpKINode Title="Roles Property " Url="html/P-Sample.Contracts.AuthenticateUserResponse.Roles.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Route property" Url="html/P-CODE.Framework.Services.Contracts.RestAttribute.Route.htm" />
+  <HelpKINode Title="RouteBasePath property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.RouteBasePath.htm" />
+  <HelpKINode Title="Sample.Contracts namespace" Url="html/N-Sample.Contracts.htm" />
+  <HelpKINode Title="Sample.Contracts.AuthenticateUserRequest class">
+    <HelpKINode Title="AuthenticateUserRequest Class" Url="html/T-Sample.Contracts.AuthenticateUserRequest.htm" />
+    <HelpKINode Title="AuthenticateUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.AuthenticateUserResponse class">
+    <HelpKINode Title="AuthenticateUserResponse Class" Url="html/T-Sample.Contracts.AuthenticateUserResponse.htm" />
+    <HelpKINode Title="AuthenticateUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.AuthenticateUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.Customer class">
+    <HelpKINode Title="Customer Class" Url="html/T-Sample.Contracts.Customer.htm" />
+    <HelpKINode Title="Customer Members" Url="html/AllMembers.T-Sample.Contracts.Customer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetCustomerRequest class">
+    <HelpKINode Title="GetCustomerRequest Class" Url="html/T-Sample.Contracts.GetCustomerRequest.htm" />
+    <HelpKINode Title="GetCustomerRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetCustomerResponse class">
+    <HelpKINode Title="GetCustomerResponse Class" Url="html/T-Sample.Contracts.GetCustomerResponse.htm" />
+    <HelpKINode Title="GetCustomerResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomerResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetCustomersResponse class">
+    <HelpKINode Title="GetCustomersResponse Class" Url="html/T-Sample.Contracts.GetCustomersResponse.htm" />
+    <HelpKINode Title="GetCustomersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetCustomersResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetUserRequest class">
+    <HelpKINode Title="GetUserRequest Class" Url="html/T-Sample.Contracts.GetUserRequest.htm" />
+    <HelpKINode Title="GetUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetUserResponse class">
+    <HelpKINode Title="GetUserResponse Class" Url="html/T-Sample.Contracts.GetUserResponse.htm" />
+    <HelpKINode Title="GetUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetUsersRequest class">
+    <HelpKINode Title="GetUsersRequest Class" Url="html/T-Sample.Contracts.GetUsersRequest.htm" />
+    <HelpKINode Title="GetUsersRequest Members" Url="html/AllMembers.T-Sample.Contracts.GetUsersRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.GetUsersResponse class">
+    <HelpKINode Title="GetUsersResponse Class" Url="html/T-Sample.Contracts.GetUsersResponse.htm" />
+    <HelpKINode Title="GetUsersResponse Members" Url="html/AllMembers.T-Sample.Contracts.GetUsersResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.ICustomerService interface">
+    <HelpKINode Title="ICustomerService Interface" Url="html/T-Sample.Contracts.ICustomerService.htm" />
+    <HelpKINode Title="ICustomerService Members" Url="html/AllMembers.T-Sample.Contracts.ICustomerService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.IsAuthenticatedRequest class">
+    <HelpKINode Title="IsAuthenticatedRequest Class" Url="html/T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+    <HelpKINode Title="IsAuthenticatedRequest Members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.IsAuthenticatedResponse class">
+    <HelpKINode Title="IsAuthenticatedResponse Class" Url="html/T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+    <HelpKINode Title="IsAuthenticatedResponse Members" Url="html/AllMembers.T-Sample.Contracts.IsAuthenticatedResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.IUserService interface">
+    <HelpKINode Title="IUserService Interface" Url="html/T-Sample.Contracts.IUserService.htm" />
+    <HelpKINode Title="IUserService Members" Url="html/AllMembers.T-Sample.Contracts.IUserService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.ResetPasswordRequest class">
+    <HelpKINode Title="ResetPasswordRequest Class" Url="html/T-Sample.Contracts.ResetPasswordRequest.htm" />
+    <HelpKINode Title="ResetPasswordRequest Members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.ResetPasswordResponse class">
+    <HelpKINode Title="ResetPasswordResponse Class" Url="html/T-Sample.Contracts.ResetPasswordResponse.htm" />
+    <HelpKINode Title="ResetPasswordResponse Members" Url="html/AllMembers.T-Sample.Contracts.ResetPasswordResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.SaveUserRequest class">
+    <HelpKINode Title="SaveUserRequest Class" Url="html/T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="SaveUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.SaveUserResponse class">
+    <HelpKINode Title="SaveUserResponse Class" Url="html/T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="SaveUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.SignoutRequest class">
+    <HelpKINode Title="SignoutRequest Class" Url="html/T-Sample.Contracts.SignoutRequest.htm" />
+    <HelpKINode Title="SignoutRequest Members" Url="html/AllMembers.T-Sample.Contracts.SignoutRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.SignoutResponse class">
+    <HelpKINode Title="SignoutResponse Class" Url="html/T-Sample.Contracts.SignoutResponse.htm" />
+    <HelpKINode Title="SignoutResponse Members" Url="html/AllMembers.T-Sample.Contracts.SignoutResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Contracts.User class">
+    <HelpKINode Title="User Class" Url="html/T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="User Members" Url="html/AllMembers.T-Sample.Contracts.User.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Services.Implementation namespace" Url="html/N-Sample.Services.Implementation.htm" />
+  <HelpKINode Title="Sample.Services.Implementation.CustomerService class">
+    <HelpKINode Title="CustomerService Class" Url="html/T-Sample.Services.Implementation.CustomerService.htm" />
+    <HelpKINode Title="CustomerService Members" Url="html/AllMembers.T-Sample.Services.Implementation.CustomerService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sample.Services.Implementation.UserService class">
+    <HelpKINode Title="UserService Class" Url="html/T-Sample.Services.Implementation.UserService.htm" />
+    <HelpKINode Title="UserService Members" Url="html/AllMembers.T-Sample.Services.Implementation.UserService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Save method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Save.htm" />
+  <HelpKINode Title="SaveToStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.SaveToStream.htm" />
+  <HelpKINode Title="SaveUser method">
+    <HelpKINode Title="SaveUser Method " Url="html/M-Sample.Contracts.IUserService.SaveUser.htm" />
+    <HelpKINode Title="SaveUser Method " Url="html/M-Sample.Services.Implementation.UserService.SaveUser.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SaveUserRequest class">
+    <HelpKINode Title="SaveUserRequest Class" Url="html/T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="SaveUserRequest Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="about SaveUserRequest class" Url="html/T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.SaveUserRequest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.SaveUserRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SaveUserRequest.Company property" Url="html/P-Sample.Contracts.SaveUserRequest.Company.htm" />
+  <HelpKINode Title="SaveUserRequest.Email property" Url="html/P-Sample.Contracts.SaveUserRequest.Email.htm" />
+  <HelpKINode Title="SaveUserRequest.Firstname property" Url="html/P-Sample.Contracts.SaveUserRequest.Firstname.htm" />
+  <HelpKINode Title="SaveUserRequest.Id property" Url="html/P-Sample.Contracts.SaveUserRequest.Id.htm" />
+  <HelpKINode Title="SaveUserRequest.IsActive property" Url="html/P-Sample.Contracts.SaveUserRequest.IsActive.htm" />
+  <HelpKINode Title="SaveUserRequest.LastLogin property" Url="html/P-Sample.Contracts.SaveUserRequest.LastLogin.htm" />
+  <HelpKINode Title="SaveUserRequest.Lastname property" Url="html/P-Sample.Contracts.SaveUserRequest.Lastname.htm" />
+  <HelpKINode Title="SaveUserRequest.Password property" Url="html/P-Sample.Contracts.SaveUserRequest.Password.htm" />
+  <HelpKINode Title="SaveUserRequest.PasswordVerify property" Url="html/P-Sample.Contracts.SaveUserRequest.PasswordVerify.htm" />
+  <HelpKINode Title="SaveUserRequest.Roles property" Url="html/P-Sample.Contracts.SaveUserRequest.Roles.htm" />
+  <HelpKINode Title="SaveUserRequest.UserId property" Url="html/P-Sample.Contracts.SaveUserRequest.UserId.htm" />
+  <HelpKINode Title="SaveUserRequest.Username property" Url="html/P-Sample.Contracts.SaveUserRequest.Username.htm" />
+  <HelpKINode Title="SaveUserRequest.Verifier property" Url="html/P-Sample.Contracts.SaveUserRequest.Verifier.htm" />
+  <HelpKINode Title="SaveUserResponse class">
+    <HelpKINode Title="SaveUserResponse Class" Url="html/T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="SaveUserResponse Members" Url="html/AllMembers.T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="about SaveUserResponse class" Url="html/T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.SaveUserResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.SaveUserResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SaveUserResponse.FailureInformation property" Url="html/P-Sample.Contracts.SaveUserResponse.FailureInformation.htm" />
+  <HelpKINode Title="SaveUserResponse.Id property" Url="html/P-Sample.Contracts.SaveUserResponse.Id.htm" />
+  <HelpKINode Title="SaveUserResponse.Success property" Url="html/P-Sample.Contracts.SaveUserResponse.Success.htm" />
+  <HelpKINode Title="Search enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Search field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Search.htm" />
+  <HelpKINode Title="SecurityHelper class">
+    <HelpKINode Title="SecurityHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+    <HelpKINode Title="SecurityHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+    <HelpKINode Title="about SecurityHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SecurityHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SecurityHelper.DecryptBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptBytes.htm" />
+  <HelpKINode Title="SecurityHelper.DecryptString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.DecryptString.htm" />
+  <HelpKINode Title="SecurityHelper.EncryptBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptBytes.htm" />
+  <HelpKINode Title="SecurityHelper.EncryptString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.SecurityHelper.EncryptString.htm" />
+  <HelpKINode Title="Sequence property" Url="html/P-CODE.Framework.Services.Contracts.RestUrlParameterAttribute.Sequence.htm" />
+  <HelpKINode Title="SerializeToBinaryArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryArray.htm" />
+  <HelpKINode Title="SerializeToBinaryStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToBinaryStream.htm" />
+  <HelpKINode Title="SerializeToXmlDocument method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlDocument.htm" />
+  <HelpKINode Title="SerializeToXmlStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlStream.htm" />
+  <HelpKINode Title="SerializeToXmlString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SerializeToXmlString.htm" />
+  <HelpKINode Title="ServiceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.MethodInvocationContext.ServiceConfiguration.htm" />
+  <HelpKINode Title="ServiceHandler class">
+    <HelpKINode Title="ServiceHandler Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+    <HelpKINode Title="ServiceHandler Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+    <HelpKINode Title="about ServiceHandler class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandler.ProcessRequest method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.ProcessRequest.htm" />
+  <HelpKINode Title="ServiceHandler.ServiceHandler constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandler.-ctor.htm" />
+  <HelpKINode Title="ServiceHandlerConfiguration class">
+    <HelpKINode Title="ServiceHandlerConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="ServiceHandlerConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="about ServiceHandlerConfiguration class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerConfiguration.Cors property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Cors.htm" />
+  <HelpKINode Title="ServiceHandlerConfiguration.Current property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Current.htm" />
+  <HelpKINode Title="ServiceHandlerConfiguration.Services property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Services.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance class">
+    <HelpKINode Title="ServiceHandlerConfigurationInstance Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="ServiceHandlerConfigurationInstance Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="about ServiceHandlerConfigurationInstance class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.AssemblyName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.AssemblyName.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.HttpsMode property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.HttpsMode.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.JsonFormatMode property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.JsonFormatMode.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.OnAfterMethodInvoke property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAfterMethodInvoke.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.OnAuthorize property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnAuthorize.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.OnBeforeMethodInvoke property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.OnBeforeMethodInvoke.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.RouteBasePath property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.RouteBasePath.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.ServiceType property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceType.htm" />
+  <HelpKINode Title="ServiceHandlerConfigurationInstance.ServiceTypeName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceTypeName.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration class">
+    <HelpKINode Title="ServiceHandlerCorsConfiguration Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="ServiceHandlerCorsConfiguration Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="about ServiceHandlerCorsConfiguration class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.AllowCredentials property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowCredentials.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.AllowedHeaders property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedHeaders.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.AllowedMethods property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedMethods.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.AllowedOrigins property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.AllowedOrigins.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.CorsPolicyName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.CorsPolicyName.htm" />
+  <HelpKINode Title="ServiceHandlerCorsConfiguration.UseCorsPolicy property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.UseCorsPolicy.htm" />
+  <HelpKINode Title="ServiceHandlerExtensions class">
+    <HelpKINode Title="ServiceHandlerExtensions Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+    <HelpKINode Title="ServiceHandlerExtensions Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+    <HelpKINode Title="about ServiceHandlerExtensions class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerExtensions.AddServiceHandler method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.AddServiceHandler.htm" />
+  <HelpKINode Title="ServiceHandlerExtensions.GetRestAttribute method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.GetRestAttribute.htm" />
+  <HelpKINode Title="ServiceHandlerExtensions.UseServiceHandler method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.UseServiceHandler.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext class">
+    <HelpKINode Title="ServiceHandlerRequestContext Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="ServiceHandlerRequestContext Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="about ServiceHandlerRequestContext class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerRequestContext.HttpContext property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpContext.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.HttpRequest property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpRequest.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.HttpResponse property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.HttpResponse.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.MethodContext property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.MethodContext.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.ResultJson property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultJson.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.ResultValue property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ResultValue.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.ServiceInstanceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ServiceInstanceConfiguration.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContext.Url property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.Url.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContextUrl class">
+    <HelpKINode Title="ServiceHandlerRequestContextUrl Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="ServiceHandlerRequestContextUrl Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="about ServiceHandlerRequestContextUrl class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceHandlerRequestContextUrl.HttpMethod property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.HttpMethod.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContextUrl.QueryString property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.QueryString.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContextUrl.Url property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.Url.htm" />
+  <HelpKINode Title="ServiceHandlerRequestContextUrl.UrlPath property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.UrlPath.htm" />
+  <HelpKINode Title="ServiceInstanceConfiguration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.ServiceInstanceConfiguration.htm" />
+  <HelpKINode Title="Services property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfiguration.Services.htm" />
+  <HelpKINode Title="ServiceType property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceType.htm" />
+  <HelpKINode Title="ServiceTypeName property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerConfigurationInstance.ServiceTypeName.htm" />
+  <HelpKINode Title="SetError method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.SetError.htm" />
+  <HelpKINode Title="SetPropertyValue(Of TValue) method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" />
+  <HelpKINode Title="SetPropertyValue&lt;TValue&gt; method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.SetPropertyValue--1.htm" />
+  <HelpKINode Title="SharedZipFunctionality class">
+    <HelpKINode Title="SharedZipFunctionality Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    <HelpKINode Title="SharedZipFunctionality Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    <HelpKINode Title="about SharedZipFunctionality class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SharedZipFunctionality.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Signout method">
+    <HelpKINode Title="Signout Method " Url="html/M-Sample.Services.Implementation.UserService.Signout.htm" />
+    <HelpKINode Title="Signout Method " Url="html/M-Sample.Contracts.IUserService.Signout.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SignoutRequest class">
+    <HelpKINode Title="SignoutRequest Class" Url="html/T-Sample.Contracts.SignoutRequest.htm" />
+    <HelpKINode Title="SignoutRequest Members" Url="html/AllMembers.T-Sample.Contracts.SignoutRequest.htm" />
+    <HelpKINode Title="about SignoutRequest class" Url="html/T-Sample.Contracts.SignoutRequest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.SignoutRequest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.SignoutRequest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SignoutResponse class">
+    <HelpKINode Title="SignoutResponse Class" Url="html/T-Sample.Contracts.SignoutResponse.htm" />
+    <HelpKINode Title="SignoutResponse Members" Url="html/AllMembers.T-Sample.Contracts.SignoutResponse.htm" />
+    <HelpKINode Title="about SignoutResponse class" Url="html/T-Sample.Contracts.SignoutResponse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.SignoutResponse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.SignoutResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleFileLogger class">
+    <HelpKINode Title="SingleFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="SingleFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="about SingleFileLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleFileLogger.FileName property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.FileName.htm" />
+  <HelpKINode Title="SingleFileLogger.Folder property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Folder.htm" />
+  <HelpKINode Title="SingleFileLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleFileLogger.SingleFileLogger constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleFileLogger.-ctor.htm" />
+  <HelpKINode Title="SingleXmlFileLogger class">
+    <HelpKINode Title="SingleXmlFileLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="SingleXmlFileLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="about SingleXmlFileLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleXmlFileLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleXmlFileLogger.MaximumEntries property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.MaximumEntries.htm" />
+  <HelpKINode Title="SingleXmlFileLogger.SingleXmlFileLogger constructor" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.-ctor.htm" />
+  <HelpKINode Title="SingleXmlFileLogger.XmlEventNode property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventNode.htm" />
+  <HelpKINode Title="SingleXmlFileLogger.XmlEventTimeStampAttribute property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+  <HelpKINode Title="SingleXmlFileLogger.XmlEventTypeAttribute property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTypeAttribute.htm" />
+  <HelpKINode Title="SingleXmlFileLogger.XmlRootNode property" Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlRootNode.htm" />
+  <HelpKINode Title="SmartProper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SmartProper.htm" />
+  <HelpKINode Title="SnakeCase enumeration member" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.htm" />
+  <HelpKINode Title="SnakeCase field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.JsonFormatModes.SnakeCase.htm" />
+  <HelpKINode Title="Source property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.Source.htm" />
+  <HelpKINode Title="SpaceCamelCase method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SpaceCamelCase.htm" />
+  <HelpKINode Title="StackTrace property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ErrorResponse.StackTrace.htm" />
+  <HelpKINode Title="Startup class">
+    <HelpKINode Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="Startup Class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="Startup Members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="about Startup class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="about Startup class" Url="html/T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Services.Server.AspNetCore.Web.Startup.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Startup.Configuration property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configuration.htm" />
+  <HelpKINode Title="Startup.Configure method">
+    <HelpKINode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.Configure.htm" />
+    <HelpKINode Title="Configure Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.Configure.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Startup.ConfigureServices method">
+    <HelpKINode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.ConfigureServices.htm" />
+    <HelpKINode Title="ConfigureServices Method " Url="html/M-CODE.Framework.Services.Server.AspNetCore.GenericServiceHandler.Startup.ConfigureServices.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Startup.Startup constructor" Url="html/M-CODE.Framework.Services.Server.AspNetCore.Web.Startup.-ctor.htm" />
+  <HelpKINode Title="StreamHelper class">
+    <HelpKINode Title="StreamHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+    <HelpKINode Title="StreamHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+    <HelpKINode Title="about StreamHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StreamHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StreamHelper.FromArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromArray.htm" />
+  <HelpKINode Title="StreamHelper.FromFile method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromFile.htm" />
+  <HelpKINode Title="StreamHelper.FromString method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.FromString.htm" />
+  <HelpKINode Title="StreamHelper.ToArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToArray.htm" />
+  <HelpKINode Title="StreamHelper.ToFile method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm" />
+  <HelpKINode Title="StreamHelper.ToString method">
+    <HelpKINode Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" />
+    <HelpKINode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StringHelper class">
+    <HelpKINode Title="StringHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+    <HelpKINode Title="StringHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+    <HelpKINode Title="about StringHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.StringHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StringHelper.AddBS method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AddBS.htm" />
+  <HelpKINode Title="StringHelper.ArrayContainsString method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ArrayContainsString.htm" />
+  <HelpKINode Title="StringHelper.Asc method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Asc.htm" />
+  <HelpKINode Title="StringHelper.At method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.At.htm" />
+  <HelpKINode Title="StringHelper.AtLine method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.AtLine.htm" />
+  <HelpKINode Title="StringHelper.Base64Decode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Decode.htm" />
+  <HelpKINode Title="StringHelper.Base64Encode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Base64Encode.htm" />
+  <HelpKINode Title="StringHelper.Chr method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Chr.htm" />
+  <HelpKINode Title="StringHelper.Compare method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Compare.htm" />
+  <HelpKINode Title="StringHelper.FromFile method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.FromFile.htm" />
+  <HelpKINode Title="StringHelper.GetWordCount method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordCount.htm" />
+  <HelpKINode Title="StringHelper.GetWordNumb method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumb.htm" />
+  <HelpKINode Title="StringHelper.GetWordNumber method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.GetWordNumber.htm" />
+  <HelpKINode Title="StringHelper.IsAlpha method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsAlpha.htm" />
+  <HelpKINode Title="StringHelper.IsDigit method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.IsDigit.htm" />
+  <HelpKINode Title="StringHelper.JustFileName method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustFileName.htm" />
+  <HelpKINode Title="StringHelper.JustPath method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.JustPath.htm" />
+  <HelpKINode Title="StringHelper.Lower method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Lower.htm" />
+  <HelpKINode Title="StringHelper.Occurs method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.Occurs.htm" />
+  <HelpKINode Title="StringHelper.Proper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Proper.htm" />
+  <HelpKINode Title="StringHelper.Replicate method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Replicate.htm" />
+  <HelpKINode Title="StringHelper.SmartProper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SmartProper.htm" />
+  <HelpKINode Title="StringHelper.SpaceCamelCase method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SpaceCamelCase.htm" />
+  <HelpKINode Title="StringHelper.SubStr method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubStr.htm" />
+  <HelpKINode Title="StringHelper.SubstringSafe method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubstringSafe.htm" />
+  <HelpKINode Title="StringHelper.ToFile method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm" />
+  <HelpKINode Title="StringHelper.ToString method">
+    <HelpKINode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" />
+    <HelpKINode Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StringHelper.ToStringSafe method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToStringSafe.htm" />
+  <HelpKINode Title="StringHelper.TryBoolParse method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryBoolParse.htm" />
+  <HelpKINode Title="StringHelper.TryGuidParse method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm" />
+  <HelpKINode Title="StringHelper.TryIntParse method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryIntParse.htm" />
+  <HelpKINode Title="StringHelper.Upper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Upper.htm" />
+  <HelpKINode Title="SubStr method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubStr.htm" />
+  <HelpKINode Title="SubstringSafe method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.SubstringSafe.htm" />
+  <HelpKINode Title="Success enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Success field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Success.htm" />
+  <HelpKINode Title="Success property">
+    <HelpKINode Title="Success Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.BaseServiceResponse.Success.htm" />
+    <HelpKINode Title="Success Property " Url="html/P-Sample.Contracts.SaveUserResponse.Success.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToArray method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToArray.htm" />
+  <HelpKINode Title="ToFile method">
+    <HelpKINode Title="ToFile Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToFile.htm" />
+    <HelpKINode Title="ToFile Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToString method">
+    <HelpKINode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" />
+    <HelpKINode Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" />
+    <HelpKINode Title="ToString Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.StreamHelper.ToString.htm" />
+    <HelpKINode Title="ToString Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToStringSafe method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.ToStringSafe.htm" />
+  <HelpKINode Title="TotalBytesRead property" Url="html/P-CODE.Framework.Fundamentals.Utilities.CRC32.TotalBytesRead.htm" />
+  <HelpKINode Title="Trace enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Trace field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Trace.htm" />
+  <HelpKINode Title="TraceLogger class">
+    <HelpKINode Title="TraceLogger Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="TraceLogger Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="about TraceLogger class" Url="html/T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.TraceLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TraceLogger.Log method">
+    <HelpKINode Title="Log Method " Url="html/M-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" />
+    <HelpKINode Title="Log Method " Url="html/Overload-CODE.Framework.Fundamentals.Utilities.TraceLogger.Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TrimVolumeFromFullyQualifiedPaths property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.TrimVolumeFromFullyQualifiedPaths.htm" />
+  <HelpKINode Title="TryBoolParse method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryBoolParse.htm" />
+  <HelpKINode Title="TryGuidParse method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.StringHelper.TryGuidParse.htm" />
+  <HelpKINode Title="TryIntParse method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.TryIntParse.htm" />
+  <HelpKINode Title="TypeFilter property">
+    <HelpKINode Title="TypeFilter Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.Logger.TypeFilter.htm" />
+    <HelpKINode Title="TypeFilter Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ILogger.TypeFilter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UncompressedSize property">
+    <HelpKINode Title="UncompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.UncompressedSize.htm" />
+    <HelpKINode Title="UncompressedSize Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.UncompressedSize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Undefined enumeration member">
+    <HelpKINode Title="ControllerHttpsMode Enumeration" Url="html/T-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.htm" />
+    <HelpKINode Title="LogEventType Enumeration" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Undefined field">
+    <HelpKINode Title="Undefined Field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Undefined.htm" />
+    <HelpKINode Title="Undefined Field" Url="html/F-CODE.Framework.Services.Server.AspNetCore.Configuration.ControllerHttpsMode.Undefined.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Unlock enumeration member" Url="html/T-CODE.Framework.Services.Contracts.RestMethods.htm" />
+  <HelpKINode Title="Unlock field" Url="html/F-CODE.Framework.Services.Contracts.RestMethods.Unlock.htm" />
+  <HelpKINode Title="Upper method" Url="html/M-CODE.Framework.Fundamentals.Utilities.StringHelper.Upper.htm" />
+  <HelpKINode Title="Url property">
+    <HelpKINode Title="Url Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.Url.htm" />
+    <HelpKINode Title="Url Property " Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContext.Url.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UrlDecode method" Url="html/M-CODE.Framework.Fundamentals.Utilities.HttpHelper.UrlDecode.htm" />
+  <HelpKINode Title="UrlParameterMode enumeration" Url="html/T-CODE.Framework.Services.Contracts.UrlParameterMode.htm" />
+  <HelpKINode Title="UrlParameterMode.Inline field" Url="html/F-CODE.Framework.Services.Contracts.UrlParameterMode.Inline.htm" />
+  <HelpKINode Title="UrlParameterMode.Named field" Url="html/F-CODE.Framework.Services.Contracts.UrlParameterMode.Named.htm" />
+  <HelpKINode Title="UrlPath property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerRequestContextUrl.UrlPath.htm" />
+  <HelpKINode Title="UseCorsPolicy property" Url="html/P-CODE.Framework.Services.Server.AspNetCore.Configuration.ServiceHandlerCorsConfiguration.UseCorsPolicy.htm" />
+  <HelpKINode Title="User class">
+    <HelpKINode Title="User Class" Url="html/T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="User Members" Url="html/AllMembers.T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="about User class" Url="html/T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Contracts.User.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-Sample.Contracts.User.htm" />
+  </HelpKINode>
+  <HelpKINode Title="User.Id property" Url="html/P-Sample.Contracts.User.Id.htm" />
+  <HelpKINode Title="User.Password property" Url="html/P-Sample.Contracts.User.Password.htm" />
+  <HelpKINode Title="User.Username property" Url="html/P-Sample.Contracts.User.Username.htm" />
+  <HelpKINode Title="UserId property">
+    <HelpKINode Title="UserId Property " Url="html/P-Sample.Contracts.SaveUserRequest.UserId.htm" />
+    <HelpKINode Title="UserId Property " Url="html/P-Sample.Contracts.IsAuthenticatedResponse.UserId.htm" />
+    <HelpKINode Title="UserId Property " Url="html/P-Sample.Contracts.GetUserResponse.UserId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Username property">
+    <HelpKINode Title="Username Property " Url="html/P-Sample.Contracts.GetUserResponse.Username.htm" />
+    <HelpKINode Title="Username Property " Url="html/P-Sample.Contracts.ResetPasswordRequest.Username.htm" />
+    <HelpKINode Title="Username Property " Url="html/P-Sample.Contracts.IsAuthenticatedResponse.Username.htm" />
+    <HelpKINode Title="Username Property " Url="html/P-Sample.Contracts.User.Username.htm" />
+    <HelpKINode Title="Username Property " Url="html/P-Sample.Contracts.SaveUserRequest.Username.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UserName property" Url="html/P-Sample.Contracts.AuthenticateUserRequest.UserName.htm" />
+  <HelpKINode Title="UserPrincipalHelper class">
+    <HelpKINode Title="UserPrincipalHelper Class" Url="html/T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+    <HelpKINode Title="UserPrincipalHelper Members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+    <HelpKINode Title="about UserPrincipalHelper class" Url="html/T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Services.Contracts.UserPrincipalHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UserPrincipalHelper.AddPrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.AddPrincipal.htm" />
+  <HelpKINode Title="UserPrincipalHelper.GetCurrentPrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.GetCurrentPrincipal.htm" />
+  <HelpKINode Title="UserPrincipalHelper.RemovePrincipal method" Url="html/M-CODE.Framework.Services.Contracts.UserPrincipalHelper.RemovePrincipal.htm" />
+  <HelpKINode Title="Users field" Url="html/F-Sample.Contracts.GetUsersResponse.Users.htm" />
+  <HelpKINode Title="UserService class">
+    <HelpKINode Title="UserService Class" Url="html/T-Sample.Services.Implementation.UserService.htm" />
+    <HelpKINode Title="UserService Members" Url="html/AllMembers.T-Sample.Services.Implementation.UserService.htm" />
+    <HelpKINode Title="about UserService class" Url="html/T-Sample.Services.Implementation.UserService.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-Sample.Services.Implementation.UserService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-Sample.Services.Implementation.UserService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UserService.AuthenticateUser method" Url="html/M-Sample.Services.Implementation.UserService.AuthenticateUser.htm" />
+  <HelpKINode Title="UserService.GetUser method" Url="html/M-Sample.Services.Implementation.UserService.GetUser.htm" />
+  <HelpKINode Title="UserService.GetUsers method" Url="html/M-Sample.Services.Implementation.UserService.GetUsers.htm" />
+  <HelpKINode Title="UserService.IsAuthenticated method" Url="html/M-Sample.Services.Implementation.UserService.IsAuthenticated.htm" />
+  <HelpKINode Title="UserService.ResetPassword method" Url="html/M-Sample.Services.Implementation.UserService.ResetPassword.htm" />
+  <HelpKINode Title="UserService.SaveUser method" Url="html/M-Sample.Services.Implementation.UserService.SaveUser.htm" />
+  <HelpKINode Title="UserService.Signout method" Url="html/M-Sample.Services.Implementation.UserService.Signout.htm" />
+  <HelpKINode Title="UseServiceHandler method" Url="html/M-CODE.Framework.Services.Server.AspNetCore.ServiceHandlerExtensions.UseServiceHandler.htm" />
+  <HelpKINode Title="Value property" Url="html/P-CODE.Framework.Fundamentals.Utilities.EnumInformation.Value.htm" />
+  <HelpKINode Title="ValuesDiffer method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ObjectHelper.ValuesDiffer.htm" />
+  <HelpKINode Title="Verifier property">
+    <HelpKINode Title="Verifier Property " Url="html/P-Sample.Contracts.SaveUserRequest.Verifier.htm" />
+    <HelpKINode Title="Verifier Property " Url="html/P-Sample.Contracts.GetUserResponse.Verifier.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VersionMadeBy property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionMadeBy.htm" />
+  <HelpKINode Title="VersionNeeded property">
+    <HelpKINode Title="VersionNeeded Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.VersionNeeded.htm" />
+    <HelpKINode Title="VersionNeeded Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionNeeded.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Warning enumeration member" Url="html/T-CODE.Framework.Fundamentals.Utilities.LogEventType.htm" />
+  <HelpKINode Title="Warning field" Url="html/F-CODE.Framework.Fundamentals.Utilities.LogEventType.Warning.htm" />
+  <HelpKINode Title="XmlEventNode property">
+    <HelpKINode Title="XmlEventNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventNode.htm" />
+    <HelpKINode Title="XmlEventNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventNode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XmlEventTimeStampAttribute property">
+    <HelpKINode Title="XmlEventTimeStampAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+    <HelpKINode Title="XmlEventTimeStampAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTimeStampAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XmlEventTypeAttribute property">
+    <HelpKINode Title="XmlEventTypeAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlEventTypeAttribute.htm" />
+    <HelpKINode Title="XmlEventTypeAttribute Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlEventTypeAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XmlHelper class">
+    <HelpKINode Title="XmlHelper Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+    <HelpKINode Title="XmlHelper Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+    <HelpKINode Title="about XmlHelper class" Url="html/T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.XmlHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XmlHelper.Format method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.XmlHelper.Format.htm" />
+  <HelpKINode Title="XmlRootNode property">
+    <HelpKINode Title="XmlRootNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.SingleXmlFileLogger.XmlRootNode.htm" />
+    <HelpKINode Title="XmlRootNode Property " Url="html/P-CODE.Framework.Fundamentals.Utilities.MultiXmlFileLogger.XmlRootNode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ZipDirEntry class">
+    <HelpKINode Title="ZipDirEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="ZipDirEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="about ZipDirEntry class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ZipDirEntry.Comment property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Comment.htm" />
+  <HelpKINode Title="ZipDirEntry.CompressedSize property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressedSize.htm" />
+  <HelpKINode Title="ZipDirEntry.CompressionMethod property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionMethod.htm" />
+  <HelpKINode Title="ZipDirEntry.CompressionRatio property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.CompressionRatio.htm" />
+  <HelpKINode Title="ZipDirEntry.FileName property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.FileName.htm" />
+  <HelpKINode Title="ZipDirEntry.LastModified property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.LastModified.htm" />
+  <HelpKINode Title="ZipDirEntry.Read method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.Read.htm" />
+  <HelpKINode Title="ZipDirEntry.UncompressedSize property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.UncompressedSize.htm" />
+  <HelpKINode Title="ZipDirEntry.VersionMadeBy property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionMadeBy.htm" />
+  <HelpKINode Title="ZipDirEntry.VersionNeeded property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipDirEntry.VersionNeeded.htm" />
+  <HelpKINode Title="ZipEntry class">
+    <HelpKINode Title="ZipEntry Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="ZipEntry Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="about ZipEntry class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipEntry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ZipEntry.BitField property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.BitField.htm" />
+  <HelpKINode Title="ZipEntry.CompressedSize property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressedSize.htm" />
+  <HelpKINode Title="ZipEntry.CompressionMethod property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionMethod.htm" />
+  <HelpKINode Title="ZipEntry.CompressionRatio property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.CompressionRatio.htm" />
+  <HelpKINode Title="ZipEntry.DirectoryNameOverride property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.DirectoryNameOverride.htm" />
+  <HelpKINode Title="ZipEntry.Extract method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipEntry.Extract.htm" />
+  <HelpKINode Title="ZipEntry.FileName property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.FileName.htm" />
+  <HelpKINode Title="ZipEntry.LastModified property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.LastModified.htm" />
+  <HelpKINode Title="ZipEntry.Read method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipEntry.Read.htm" />
+  <HelpKINode Title="ZipEntry.UncompressedSize property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.UncompressedSize.htm" />
+  <HelpKINode Title="ZipEntry.VersionNeeded property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipEntry.VersionNeeded.htm" />
+  <HelpKINode Title="ZipFile class">
+    <HelpKINode Title="ZipFile Class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="ZipFile Members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="about ZipFile class" Url="html/T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-CODE.Framework.Fundamentals.Utilities.ZipFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ZipFile.AddBytes method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.AddBytes.htm" />
+  <HelpKINode Title="ZipFile.AddDirectory method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddDirectory.htm" />
+  <HelpKINode Title="ZipFile.AddFile method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddFile.htm" />
+  <HelpKINode Title="ZipFile.AddItem method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.AddItem.htm" />
+  <HelpKINode Title="ZipFile.Extract method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Extract.htm" />
+  <HelpKINode Title="ZipFile.ExtractAll method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.ExtractAll.htm" />
+  <HelpKINode Title="ZipFile.GetEnumerator method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.GetEnumerator.htm" />
+  <HelpKINode Title="ZipFile.Item property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Item-System.String-.htm" />
+  <HelpKINode Title="ZipFile.Name property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.Name.htm" />
+  <HelpKINode Title="ZipFile.Read method" Url="html/Overload-CODE.Framework.Fundamentals.Utilities.ZipFile.Read.htm" />
+  <HelpKINode Title="ZipFile.Save method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.Save.htm" />
+  <HelpKINode Title="ZipFile.SaveToStream method" Url="html/M-CODE.Framework.Fundamentals.Utilities.ZipFile.SaveToStream.htm" />
+  <HelpKINode Title="ZipFile.TrimVolumeFromFullyQualifiedPaths property" Url="html/P-CODE.Framework.Fundamentals.Utilities.ZipFile.TrimVolumeFromFullyQualifiedPaths.htm" />
+</HelpKI>
