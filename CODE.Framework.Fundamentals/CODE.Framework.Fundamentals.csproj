@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Authors>Markus Egger, Rick Strahl</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
@@ -15,6 +15,8 @@
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
   </PropertyGroup>
 
   
