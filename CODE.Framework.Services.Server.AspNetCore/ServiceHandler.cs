@@ -97,8 +97,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             try
             {
-                if (context.ServiceInstanceConfiguration.HttpsMode == ControllerHttpsMode.RequireHttps &&
-                    HttpRequest.Scheme != "https")
+                if (context.ServiceInstanceConfiguration.HttpsMode == ControllerHttpsMode.RequireHttps && HttpRequest.Scheme != "https")
                     throw new UnauthorizedAccessException(Resources.ServiceMustBeAccessedOverHttps);
 
                 if (ServiceInstanceConfiguration.OnAuthorize != null)

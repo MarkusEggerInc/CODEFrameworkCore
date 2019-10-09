@@ -169,20 +169,18 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                    if (restAttribute.Name == null)
                                                        relativeRoute = method.Name;
                                                    else
-                                                   {
                                                        relativeRoute = restAttribute.Name;
 
-                                                       // We also have to take a look at the parameter(s) - there should be only one - to build the route
-                                                       var parameters = method.GetParameters();
-                                                       if (parameters.Length > 0)
-                                                       {
-                                                           var parameterType = parameters[0].ParameterType;
-                                                           var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-                                                           var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
-                                                           foreach (var inlineParameter in inlineParameters)
-                                                               relativeRoute += "/{" + inlineParameter + "}";
-                                                       }
-                                                   }
+                                                    // We also have to take a look at the parameter(s) - there should be only one - to build the route
+                                                    var parameters = method.GetParameters();
+                                                    if (parameters.Length > 0)
+                                                    {
+                                                        var parameterType = parameters[0].ParameterType;
+                                                        var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                                                        var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
+                                                        foreach (var inlineParameter in inlineParameters)
+                                                            relativeRoute += "/{" + inlineParameter + "}";
+                                                    }
                                                }
 
                                                if (relativeRoute.StartsWith("/")) relativeRoute = relativeRoute.Substring(1);

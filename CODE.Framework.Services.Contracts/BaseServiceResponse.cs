@@ -10,17 +10,15 @@ namespace CODE.Framework.Services.Contracts
     [DataContract]
     public class BaseServiceResponse
     {
-        public BaseServiceResponse() => Success = true;
-
         /// <summary>
         /// Gets or sets the success.
         /// </summary>
         /// <value>The success.</value>
         [DataMember(IsRequired = true)]
-        public bool Success { get; set; }
+        public bool Success { get; set; } = true;
 
         [DataMember]
-        public string FailureInformation { get; set; }
+        public string FailureInformation { get; set; } = string.Empty;
 
         public void SetError(string message, Exception ex = null)
         {

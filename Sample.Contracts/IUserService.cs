@@ -22,7 +22,7 @@ namespace Sample.Contracts
         [Rest(Method = RestMethods.Get, Name = "")]
         GetUserResponse GetUser(GetUserRequest request);
 
-        [Rest(Method = RestMethods.Post, Name = "authenticate")]
+        [Rest(Method = RestMethods.Get, Name = "authenticate")]
         AuthenticateUserResponse AuthenticateUser(AuthenticateUserRequest request);
 
         [Rest(Method = RestMethods.Get, Route = "")]
@@ -38,32 +38,32 @@ namespace Sample.Contracts
     public class GetUserResponse : BaseServiceResponse
     {
         [DataMember(IsRequired = true)]
-        public Guid UserId { get; set; }
+        public Guid UserId { get; set; } = Guid.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
 
         [DataMember(IsRequired = true)]
-        public string Firstname { get; set; }
+        public string Firstname { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Lastname { get; set; }
+        public string Lastname { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Company { get; set; }
+        public string Company { get; set; } = string.Empty;
 
         [DataMember]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [DataMember]
-        public string Verifier { get; set; }
+        public string Verifier { get; set; } = string.Empty;
 
         [DataMember]
-        public DateTime LastLogin { get; set; }
+        public DateTime LastLogin { get; set; } = DateTime.MinValue;
 
         [DataMember]
         public List<string> Roles { get; set; } = new List<string>();
@@ -85,7 +85,7 @@ namespace Sample.Contracts
     public class ResetPasswordRequest : BaseServiceRequest
     {
         [DataMember(IsRequired = true)]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
     }
 
     [DataContract]
@@ -105,120 +105,98 @@ namespace Sample.Contracts
 
     public class AuthenticateUserRequest : BaseServiceRequest
     {
-        public AuthenticateUserRequest()
-        {
-            UserName = string.Empty;
-            //Password = string.Empty;
-            RememberMe = false;
-        }
+        [DataMember(IsRequired = true)]
+        [RestUrlParameter(Mode = UrlParameterMode.Inline, Sequence = 0)]
+        public string UserName { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string UserName { get; set; }
+        [RestUrlParameter(Mode = UrlParameterMode.Inline, Sequence = 1)]
+        public string Password { get; set; } = string.Empty;
+
         [DataMember(IsRequired = true)]
-        public string Password { get; set; }
-        [DataMember(IsRequired = true)]
-        public bool RememberMe { get; set; }
+        public bool RememberMe { get; set; } = false;
     }
 
     [DataContract]
     public class AuthenticateUserResponse : BaseServiceResponse
     {
-        public AuthenticateUserResponse()
-        {
-            Success = true;
-            FailureInformation = string.Empty;
-            Roles = new List<string>();
-        }
+        [DataMember]
+        public Guid Id { get; set; } = Guid.Empty;
 
         [DataMember]
-        public Guid Id { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [DataMember]
-        public string Email { get; set; }
+        public string Firstname { get; set; } = string.Empty;
 
         [DataMember]
-        public string Firstname { get; set; }
+        public string Lastname { get; set; } = string.Empty;
 
         [DataMember]
-        public string Lastname { get; set; }
+        public string Company { get; set; } = string.Empty;
 
         [DataMember]
-        public string Company { get; set; }
-
-        [DataMember]
-        public List<string> Roles { get; set; }
+        public List<string> Roles { get; set; } = new List<string>();
     }
 
     [DataContract]
     public class SaveUserRequest
     {
         [DataMember]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
 
         [DataMember]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [DataMember]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
 
         [DataMember(IsRequired = true)]
-        public string Firstname { get; set; }
+        public string Firstname { get; set; } = string.Empty;
 
         [DataMember(IsRequired = true)]
-        public string Lastname { get; set; }
+        public string Lastname { get; set; } = string.Empty;
 
         [DataMember]
-        public string Company { get; set; }
+        public string Company { get; set; } = string.Empty;
 
         [DataMember]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [DataMember]
-        public string Verifier { get; set; }
+        public string Verifier { get; set; } = string.Empty;
 
         [DataMember]
-        public DateTime LastLogin { get; set; }
+        public DateTime LastLogin { get; set; } = DateTime.MinValue;
 
         [DataMember]
-        public List<string> Roles { get; set; }
+        public List<string> Roles { get; set; } = new List<string>();
 
         [DataMember]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
         [DataMember]
-        public string PasswordVerify { get; set; }
+        public string PasswordVerify { get; set; } = string.Empty;
     }
 
     [DataContract]
-    public class SaveUserResponse
+    public class SaveUserResponse : BaseServiceResponse
     {
-        /// <summary>
-        /// Gets or sets the success status
-        /// </summary>        
-        [DataMember]
-        public bool Success { get; set; }
-
-        /// <summary>
-        /// Error message if an error occurred and Success=false
-        /// </summary>
-        [DataMember]
-        public string FailureInformation { get; set; }
-
         /// <summary>
         /// Id of the updated or new User
         /// </summary>
         [DataMember]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
     }
 
     public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }
