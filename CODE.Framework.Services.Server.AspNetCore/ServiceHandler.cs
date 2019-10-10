@@ -272,7 +272,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         private static readonly DefaultContractResolver SnakeCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new SnakeCaseNamingStrategy()};
 
-        private static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
+        public static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
         {
             var response = context.HttpResponse;
 

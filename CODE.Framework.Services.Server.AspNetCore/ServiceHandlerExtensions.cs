@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using CODE.Framework.Services.Server.AspNetCore.Properties;
@@ -15,6 +16,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
@@ -149,6 +152,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                            if (interfaces.Length < 1)
                                                throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
+                                           // TODO: Optionally enable swagger support.
+                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
+                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
+                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
+
                                            // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                            // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
                                            foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
@@ -171,16 +179,16 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                    else
                                                        relativeRoute = restAttribute.Name;
 
-                                                    // We also have to take a look at the parameter(s) - there should be only one - to build the route
-                                                    var parameters = method.GetParameters();
-                                                    if (parameters.Length > 0)
-                                                    {
-                                                        var parameterType = parameters[0].ParameterType;
-                                                        var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-                                                        var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
-                                                        foreach (var inlineParameter in inlineParameters)
-                                                            relativeRoute += "/{" + inlineParameter + "}";
-                                                    }
+                                                   // We also have to take a look at the parameter(s) - there should be only one - to build the route
+                                                   var parameters = method.GetParameters();
+                                                   if (parameters.Length > 0)
+                                                   {
+                                                       var parameterType = parameters[0].ParameterType;
+                                                       var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                                                       var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
+                                                       foreach (var inlineParameter in inlineParameters)
+                                                           relativeRoute += "/{" + inlineParameter + "}";
+                                                   }
                                                }
 
                                                if (relativeRoute.StartsWith("/")) relativeRoute = relativeRoute.Substring(1);
@@ -193,7 +201,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                var methodContext = new MethodInvocationContext(method, serviceConfig, serviceInstanceConfig);
 
                                                var roles = restAttribute.AuthorizationRoles;
-                                               if (roles != null) methodContext.AuthorizationRoles = roles.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                               if (roles != null) methodContext.AuthorizationRoles = roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
                                                // This code is what triggers the SERVICE METHOD EXECUTION via a delegate that is called when the route is matched
                                                Func<HttpRequest, HttpResponse, RouteData, Task> exec =
@@ -212,6 +220,62 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             return appBuilder;
         }
+
+        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetSwaggerJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces) => async (req, resp, route) =>
+        {
+            resp.ContentType = "application/json; charset=utf-8";
+
+            var si = new SwaggerInformation();
+            si.Info.Description = "This is a test";
+
+            foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
+            {
+                var interfaceMethod = interfaces[0].GetMethod(method.Name);
+                if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+                var restAttribute = GetRestAttribute(interfaceMethod);
+                if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+
+                si.Paths.Add(restAttribute.Name == null ? "/" + method.Name : "/" + restAttribute.Name, new SwaggerPathInfo(restAttribute.Method.ToString()) { OperationId = method.Name });
+            }
+
+            var response = resp;
+            response.ContentType = "application/json; charset=utf-8";
+
+            var serializer = new JsonSerializer();
+            serializer.ContractResolver = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
+
+#if DEBUG
+            serializer.Formatting = Formatting.Indented;
+#endif
+
+            using (var sw = new StreamWriter(response.Body))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+                serializer.Serialize(writer, si);
+
+            //using (var sw = new StreamWriter(resp.Body))
+            //{
+            //    sw.Write("{");
+            //    sw.Write(" swagger: \"2.0\"");
+            //    sw.Write(" info: {");
+            //    sw.Write("   description: \"sdfsdfsdfsdfsdfd\"");
+            //    sw.Write(" }");
+            //    sw.Write(" paths: [");
+
+            //    foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
+            //    {
+            //        var interfaceMethod = interfaces[0].GetMethod(method.Name);
+            //        if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+            //        var restAttribute = GetRestAttribute(interfaceMethod);
+            //        if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+            //        if (restAttribute.Name == null)
+            //            sw.Write("{ '/'" + method.Name + "': {}}");
+            //        else
+            //            sw.Write("{ '/'" + restAttribute.Name + "': {}}");
+            //    }
+            //    sw.Write(" ]");
+            //    sw.Write("}");
+            //}
+        };
 
         /// <summary>
         /// Extracts the RestAttribute from a propertyInfo's attributes
