@@ -36,6 +36,9 @@
     <Reference Include="Microsoft.Extensions.Configuration.Json">
       <HintPath>..\..\..\..\..\Users\megge\.nuget\packages\microsoft.extensions.configuration.json\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.OpenApi">
+      <HintPath>..\..\..\Projects\OpenAPI.NET-master\src\Microsoft.OpenApi\bin\Debug\netstandard2.0\Microsoft.OpenApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
