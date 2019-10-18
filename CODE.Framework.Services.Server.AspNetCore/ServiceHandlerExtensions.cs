@@ -153,6 +153,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
                                            // TODO: Optionally enable swagger support.
+                                           // TODO: CReate the json using object.
                                            var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
                                            if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
                                            routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
