@@ -155,54 +155,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                            if (interfaces.Length < 1)
                                                throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                                           OpenApiDocument openApiDocument = new OpenApiDocument
-                                           {
-                                               Info = new OpenApiInfo
-                                               {
-                                                   Title = "EPS ServiceHandlerExtensions",
-                                                   Description = "EPS ServiceHandlerExtensions class.",
-                                                   Version = "4.2.3",
-                                                   Contact = new OpenApiContact
-                                                   {
-                                                       Email = "megger@eps-software.com",
-                                                       Name = "Markus Egger",
-                                                       Url = new Uri("https://www.codemag.com/people/bio/markus.egger")
-                                                   },
-                                                   License = new OpenApiLicense
-                                                   {
-                                                       Name = "GNU AGPLv3",
-                                                       Url = new Uri("https://choosealicense.com/licenses/agpl-3.0/")
-                                                   },
-                                                   TermsOfService = new Uri("https://docs.codeframework.io/")
-                                               },
-                                               Servers = new List<OpenApiServer>
-                                               {
-                                                   new OpenApiServer
-                                                   {
-                                                       Description = serviceInstanceConfig.AssemblyName,
-                                                       Url = serviceInstanceConfig.RouteBasePath,
-                                                   }
-                                               },
-                                               Paths = new OpenApiPaths()
-                                           };
+                                           // TODO: Optionally enable swagger support.
+                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
+                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
 
-                                           OpenApiPathItem pathItem = new OpenApiPathItem();
-
-                                           string verb = "GET";
-                                           Enum.TryParse(verb.ToLower().Substring(0, 1).ToUpper(), out OperationType operationType);
-
-                                           OpenApiOperation operation = new OpenApiOperation
-                                           {
-                                               Summary = "",
-                                               Description = "",
-                                               OperationId = "",
-                                               Responses = new OpenApiResponses(),
-                                               Tags = new List<OpenApiTag>()
-                                           };
-
-                                           operation.Responses.Add("200", new OpenApiResponse { Description = "Success." });
-                                           operation.Responses.Add("400", new OpenApiResponse { Description = "Bad Request." });
-                                           operation.Responses.Add("404", new OpenApiResponse { Description = "Not Found." });
+                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
 
                                            // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                            // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -231,21 +188,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                    var parameters = method.GetParameters();
                                                    if (parameters.Length > 0)
                                                    {
-                                                       operation.Parameters = new List<OpenApiParameter>();
                                                        var parameterType = parameters[0].ParameterType;
                                                        var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
                                                        var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
                                                        foreach (var inlineParameter in inlineParameters)
                                                        {
                                                            relativeRoute += "/{" + inlineParameter + "}";
-                                                           OpenApiParameter parameter = new OpenApiParameter
-                                                           {
-                                                               Description = inlineParameter + " Description.",
-                                                               Name = inlineParameter,
-                                                               In = ParameterLocation.Path,
-                                                               Required = true
-                                                           };
-                                                           operation.Parameters.Add(parameter);
                                                        }
                                                    }
                                                }
@@ -274,23 +222,126 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
                                                routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) => { resp.StatusCode = StatusCodes.Status204NoContent; });
 
-                                               pathItem.AddOperation(operationType, operation);
-                                               openApiDocument.Paths.Add(restAttribute.Name ?? method.Name, pathItem);
+
                                            }
-
-                                           // TODO: Optionally enable swagger support.
-                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
-                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
-
-                                           routeBuilder.MapVerb(verb, swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces, openApiDocument));
                                        });
                                    });
 
             return appBuilder;
         }
 
-        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetSwaggerJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces, OpenApiDocument openApiDocument) => async (req, resp, route) =>
+        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetSwaggerJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces) => async (req, resp, route) =>
         {
+            OpenApiDocument openApiDocument = new OpenApiDocument
+            {
+                Info = new OpenApiInfo
+                {
+                    Title = "EPS ServiceHandlerExtensions",
+                    Description = "EPS ServiceHandlerExtensions class.",
+                    Version = "4.2.3",
+                    Contact = new OpenApiContact
+                    {
+                        Email = "megger@eps-software.com",
+                        Name = "Markus Egger",
+                        Url = new Uri("https://www.codemag.com/people/bio/markus.egger")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "GNU AGPLv3",
+                        Url = new Uri("https://choosealicense.com/licenses/agpl-3.0/")
+                    },
+                    TermsOfService = new Uri("https://docs.codeframework.io/")
+                },
+                Paths = new OpenApiPaths()
+            };
+
+            openApiDocument.Servers = new List<OpenApiServer>
+                                               {
+                                                   new OpenApiServer
+                                                   {
+                                                       Description = serviceInstanceConfig.AssemblyName,
+                                                       Url = req.Host.Value + serviceInstanceConfig.RouteBasePath,
+                                                   }
+                                               };
+
+            // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
+            // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
+            foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
+            {
+                // find service contract                                
+                var interfaceMethod = interfaces[0].GetMethod(method.Name);
+                if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+
+                OpenApiOperation operation = new OpenApiOperation
+                {
+                    Summary = "",
+                    Description = "",
+                    OperationId = interfaceMethod.Name,
+                    Responses = new OpenApiResponses(),
+                    Tags = new List<OpenApiTag>()
+                };
+
+                operation.Responses.Add("200", new OpenApiResponse { Description = "Success." });
+                operation.Responses.Add("400", new OpenApiResponse { Description = "Bad Request." });
+                operation.Responses.Add("404", new OpenApiResponse { Description = "Not Found." });
+
+                operation.Parameters = new List<OpenApiParameter>();
+
+                var restAttribute = GetRestAttribute(interfaceMethod);
+                if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+
+                var relativeRoute = restAttribute.Route;
+
+                if (relativeRoute == null)
+                {
+                    // If no route is defined, we either build a route out of name and other attributes, or we use the propertyInfo name as the last resort.
+                    // Note: string.Empty is a valid route (and also a valid name). Only null values indicate that the setting has not been set!
+
+                    if (restAttribute.Name == null)
+                        relativeRoute = method.Name;
+                    else
+                        relativeRoute = restAttribute.Name;
+                }
+
+                // We also have to take a look at the parameter(s) - there should be only one - to build the route
+                var parameters = method.GetParameters();
+                if (parameters.Length > 0)
+                {
+                    var parameterType = parameters[0].ParameterType;
+                    var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                    var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
+                    foreach (var inlineParameter in inlineParameters)
+                    {
+                        relativeRoute += "/{" + inlineParameter + "}";
+                        OpenApiParameter parameter = new OpenApiParameter
+                        {
+                            Description = "Description.",
+                            Name = inlineParameter,
+                            
+                            In = ParameterLocation.Path,
+                            Required = true
+                        };
+                        operation.Parameters.Add(parameter);
+                    }
+                }
+
+                if (relativeRoute.StartsWith("/")) relativeRoute = relativeRoute.Substring(1);
+
+                // Figure out the full route we pass the ASP.NET Core Route Manager
+                var fullRoute = (serviceInstanceConfig.RouteBasePath + "/" + relativeRoute).Replace("//", "/");
+                if (fullRoute.StartsWith("/")) fullRoute = fullRoute.Substring(1);
+
+                OpenApiPathItem pathItem = new OpenApiPathItem();
+
+                //Enum.TryParse("Get", out OperationType operationType);
+
+                pathItem.AddOperation(OperationType.Get, operation);
+
+                openApiDocument.Paths.Add(interfaceMethod.Name, pathItem);
+            }
+
+
+
             //            resp.ContentType = "application/json; charset=utf-8";
 
             //            var si = new SwaggerInformation();
@@ -306,14 +357,29 @@ namespace CODE.Framework.Services.Server.AspNetCore
             //                si.Paths.Add(restAttribute.Name == null ? "/" + method.Name : "/" + restAttribute.Name, new SwaggerPathInfo(restAttribute.Method.ToString()) { OperationId = method.Name });
             //            }
 
+
             var response = resp;
             response.ContentType = "application/json; charset=utf-8";
-            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(WriteSwaggerToJson(openApiDocument));
+            var jsonDoc = WriteSwaggerToJson(openApiDocument);
 
-            using (MemoryStream stream = new MemoryStream(byteArray))
-            {
-                response.Body = stream;
-            }            
+            using (var sw = new StreamWriter(response.Body))
+                sw.Write(jsonDoc);
+
+            //var responseStream = StreamHelper.FromString(jsonDoc);
+
+            //response.Body = responseStream;
+
+            //var serializer = new JsonSerializer();
+            //using (var sw = new StreamWriter(response.Body))
+            //using (JsonWriter writer = new JsonTextWriter(sw))
+            //    serializer.Serialize(writer, sw);
+
+            //byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(jsonDoc);
+
+            //using (MemoryStream stream = new MemoryStream(byteArray))
+            //{
+            //    response.Body = stream;
+            //}
 
             //            var serializer = new JsonSerializer();
             //            serializer.ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
@@ -353,12 +419,18 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         internal static string WriteSwaggerToJson(OpenApiDocument document)
         {
-            var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            var writer = new OpenApiJsonWriter(outputStringWriter);
-            document.SerializeAsV2(writer);
-            writer.Flush();            
-
-            return outputStringWriter.GetStringBuilder().ToString();
+            try
+            {
+                var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
+                var writer = new OpenApiJsonWriter(outputStringWriter);
+                document.SerializeAsV2(writer);
+                writer.Flush();
+                return outputStringWriter.GetStringBuilder().ToString();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         /// <summary>
