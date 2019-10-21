@@ -255,14 +255,16 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 Paths = new OpenApiPaths()
             };
 
+            var routeURL = GetRouteURL(req.Host.Value, serviceInstanceConfig.RouteBasePath);
+
             openApiDocument.Servers = new List<OpenApiServer>
-                                               {
-                                                   new OpenApiServer
-                                                   {
-                                                       Description = serviceInstanceConfig.AssemblyName,
-                                                       Url = req.Host.Value + serviceInstanceConfig.RouteBasePath,
-                                                   }
-                                               };
+            {
+                new OpenApiServer
+                {
+                    Description = serviceInstanceConfig.AssemblyName,
+                    Url = routeURL,
+                }
+            };
 
             // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
             // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -317,9 +319,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         {
                             Description = "Description.",
                             Name = inlineParameter,
-                            
+
                             In = ParameterLocation.Path,
-                            Required = true
+                            Required = true,
+                            Schema = new OpenApiSchema
+                            {
+                                Type = "string"
+                            }
                         };
                         operation.Parameters.Add(parameter);
                     }
@@ -337,26 +343,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                 pathItem.AddOperation(OperationType.Get, operation);
 
-                openApiDocument.Paths.Add(interfaceMethod.Name, pathItem);
+                openApiDocument.Paths.Add(((interfaceMethod.Name[0] != '/' ? "/" : "") + interfaceMethod.Name), pathItem);
             }
-
-
-
-            //            resp.ContentType = "application/json; charset=utf-8";
-
-            //            var si = new SwaggerInformation();
-            //            si.Info.Description = "This is a test";
-
-            //            foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
-            //            {
-            //                var interfaceMethod = interfaces[0].GetMethod(method.Name);
-            //                if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
-            //                var restAttribute = GetRestAttribute(interfaceMethod);
-            //                if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
-
-            //                si.Paths.Add(restAttribute.Name == null ? "/" + method.Name : "/" + restAttribute.Name, new SwaggerPathInfo(restAttribute.Method.ToString()) { OperationId = method.Name });
-            //            }
-
 
             var response = resp;
             response.ContentType = "application/json; charset=utf-8";
@@ -364,58 +352,22 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             using (var sw = new StreamWriter(response.Body))
                 sw.Write(jsonDoc);
-
-            //var responseStream = StreamHelper.FromString(jsonDoc);
-
-            //response.Body = responseStream;
-
-            //var serializer = new JsonSerializer();
-            //using (var sw = new StreamWriter(response.Body))
-            //using (JsonWriter writer = new JsonTextWriter(sw))
-            //    serializer.Serialize(writer, sw);
-
-            //byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(jsonDoc);
-
-            //using (MemoryStream stream = new MemoryStream(byteArray))
-            //{
-            //    response.Body = stream;
-            //}
-
-            //            var serializer = new JsonSerializer();
-            //            serializer.ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
-
-            //#if DEBUG
-            //            serializer.Formatting = Formatting.Indented;
-            //#endif
-
-            //            using (var sw = new StreamWriter(response.Body))
-            //            using (JsonWriter writer = new JsonTextWriter(sw))
-            //                serializer.Serialize(writer, si);
-
-            //using (var sw = new StreamWriter(resp.Body))
-            //{
-            //    sw.Write("{");
-            //    sw.Write(" swagger: \"2.0\"");
-            //    sw.Write(" info: {");
-            //    sw.Write("   description: \"sdfsdfsdfsdfsdfd\"");
-            //    sw.Write(" }");
-            //    sw.Write(" paths: [");
-
-            //    foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
-            //    {
-            //        var interfaceMethod = interfaces[0].GetMethod(method.Name);
-            //        if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
-            //        var restAttribute = GetRestAttribute(interfaceMethod);
-            //        if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
-            //        if (restAttribute.Name == null)
-            //            sw.Write("{ '/'" + method.Name + "': {}}");
-            //        else
-            //            sw.Write("{ '/'" + restAttribute.Name + "': {}}");
-            //    }
-            //    sw.Write(" ]");
-            //    sw.Write("}");
-            //}
         };
+
+        internal static string GetRouteURL(string hostValue, string routeBase)
+        {
+            if (!hostValue.ToLower().Contains("https"))
+            {
+                hostValue = "https://" + hostValue;
+            }
+
+            if (routeBase[0] != '/')
+            {
+                routeBase = "/" + routeBase;
+            }
+
+            return hostValue + routeBase;
+        }
 
         internal static string WriteSwaggerToJson(OpenApiDocument document)
         {
@@ -429,7 +381,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             }
             catch (Exception ex)
             {
-                return null;
+                return string.Empty;
             }
         }
 
