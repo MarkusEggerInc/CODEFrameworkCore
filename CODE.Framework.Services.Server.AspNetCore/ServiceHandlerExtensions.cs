@@ -252,7 +252,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     },
                     TermsOfService = new Uri("https://docs.codeframework.io/")
                 },
-                Paths = new OpenApiPaths()
+                Paths = new OpenApiPaths(),
+                Tags = new List<OpenApiTag>()
             };
 
             var routeURL = GetRouteURL(req.Host.Value, serviceInstanceConfig.RouteBasePath);
@@ -340,10 +341,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 OpenApiPathItem pathItem = new OpenApiPathItem();
 
                 //Enum.TryParse("Get", out OperationType operationType);
+                operation.Tags = new List<OpenApiTag> { new OpenApiTag { Name = interfaceMethod.Name } };
 
                 pathItem.AddOperation(OperationType.Get, operation);
 
                 openApiDocument.Paths.Add(((interfaceMethod.Name[0] != '/' ? "/" : "") + interfaceMethod.Name), pathItem);
+                
+                openApiDocument.Tags.Add(new OpenApiTag() { Name = interfaceMethod.Name, Description = interfaceMethod.Name[0] + " Description." });
             }
 
             var response = resp;
