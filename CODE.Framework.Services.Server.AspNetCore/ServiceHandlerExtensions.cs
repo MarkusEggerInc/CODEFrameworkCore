@@ -347,7 +347,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                 openApiDocument.Paths.Add(((interfaceMethod.Name[0] != '/' ? "/" : "") + interfaceMethod.Name), pathItem);
                 
-                openApiDocument.Tags.Add(new OpenApiTag() { Name = interfaceMethod.Name, Description = interfaceMethod.Name[0] + " Description." });
+                openApiDocument.Tags.Add(new OpenApiTag() { Name = interfaceMethod.Name, Description = interfaceMethod.Name + " Description." });
             }
 
             var response = resp;
