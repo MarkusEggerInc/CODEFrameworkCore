@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
@@ -152,10 +153,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                            if (interfaces.Length < 1)
                                                throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                                           // TODO: Optionally enable swagger support.
-                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
-                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
-                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
+                                           //// TODO: Optionally enable swagger support.
+                                           //var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
+                                           //if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
+                                           //routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
 
                                            // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                            // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -213,7 +214,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                    };
 
                                                routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
-                                               routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) => { resp.StatusCode = StatusCodes.Status204NoContent; });
+
+                                               routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) => 
+                                               { 
+                                                   resp.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
+                                                   resp.StatusCode = StatusCodes.Status204NoContent; 
+                                               });
                                            }
                                        });
                                    });
