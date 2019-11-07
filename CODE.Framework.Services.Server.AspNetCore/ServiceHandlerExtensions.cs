@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +6,6 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using CODE.Framework.Services.Server.AspNetCore.Properties;
@@ -87,7 +85,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                   builder =>
                                   {
                                       if (config.Cors.AllowedOrigins == "*")
-                                          builder = builder.AllowAnyOrigin();
+                                          builder = builder.SetIsOriginAllowed(s => true);
                                       else if (!string.IsNullOrEmpty(config.Cors.AllowedOrigins))
                                           builder.WithOrigins(config.Cors.AllowedOrigins.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
 
@@ -129,6 +127,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public static IApplicationBuilder UseServiceHandler(this IApplicationBuilder appBuilder)
         {
             var serviceConfig = ServiceHandlerConfiguration.Current;
+            
+            if (serviceConfig.Cors.UseCorsPolicy)
+                appBuilder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
             foreach (var serviceInstanceConfig in serviceConfig.Services)
                 // conditionally route to service handler based on RouteBasePath
@@ -142,8 +143,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                    },
                                    builder =>
                                    {
-                                       if (serviceConfig.Cors.UseCorsPolicy)
-                                           builder.UseCors(serviceConfig.Cors.CorsPolicyName);
+                                       //if (serviceConfig.Cors.UseCorsPolicy)
+                                       //    builder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
                                        // Build up route mapping
                                        builder.UseRouter(routeBuilder =>
@@ -213,13 +214,23 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                        await handler.ProcessRequest();
                                                    };
 
-                                               routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
+                                               routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) =>
+                                               {
+                                                   //if (req.Headers.ContainsKey("Origin"))
+                                                   //    resp.Headers.Add("Access-Control-Allow-Origin", req.Headers["Origin"]);
+                                                   //else
+                                                   //    resp.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
 
-                                               routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) => 
-                                               { 
-                                                   resp.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
-                                                   resp.StatusCode = StatusCodes.Status204NoContent; 
+                                                   //if (req.Headers.ContainsKey("Access-Control-Request-Method"))
+                                                   //    resp.Headers.Add("Access-Control-Allow-Methods", new StringValues("*")); // TODO: Would be nice to return a more meaningful list based on what is actually exposed.
+
+                                                   //if (req.Headers.ContainsKey("Access-Control-Request-Headers"))
+                                                   //    resp.Headers.Add("Access-Control-Allow-Methods", req.Headers["Access-Control-Request-Headers"]);
+
+                                                   resp.StatusCode = StatusCodes.Status204NoContent;
                                                });
+                                               
+                                               routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
                                            }
                                        });
                                    });
