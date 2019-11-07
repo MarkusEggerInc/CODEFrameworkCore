@@ -19,6 +19,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
 
+//using Westwind.Utilities;
+
 namespace CODE.Framework.Services.Server.AspNetCore
 {
     public static class ServiceHandlerExtensions
@@ -232,18 +234,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                                     routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) =>
                                     {
-                                        //if (req.Headers.ContainsKey("Origin"))
-                                        //    resp.Headers.Add("Access-Control-Allow-Origin", req.Headers["Origin"]);
-                                        //else
-                                        //    resp.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
-
-                                        //if (req.Headers.ContainsKey("Access-Control-Request-Method"))
-                                        //    resp.Headers.Add("Access-Control-Allow-Methods", new StringValues("*")); // TODO: Would be nice to return a more meaningful list based on what is actually exposed.
-
-                                        //if (req.Headers.ContainsKey("Access-Control-Request-Headers"))
-                                        //    resp.Headers.Add("Access-Control-Allow-Methods", req.Headers["Access-Control-Request-Headers"]);
-
                                         resp.StatusCode = StatusCodes.Status204NoContent;
+                                        await Task.CompletedTask;
                                     });
 
                                     routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);

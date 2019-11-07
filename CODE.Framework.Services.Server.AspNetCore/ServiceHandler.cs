@@ -113,7 +113,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 ServiceInstanceConfiguration.OnAfterMethodInvoke?.Invoke(context);
 
                 if (string.IsNullOrEmpty(context.ResultJson))
-                    context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
+                    context.ResultJson = JsonSerializer.Serialize(context.ResultValue);
 
                 await SendJsonResponse(context, context.ResultValue);
             }
@@ -284,7 +284,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
             var response = context.HttpResponse;
 
             response.ContentType = "application/json; charset=utf-8";
-
             response.Headers.Add("X-Powered-By", "CODE Framework");
 
             JsonNamingPolicy policy = null;
