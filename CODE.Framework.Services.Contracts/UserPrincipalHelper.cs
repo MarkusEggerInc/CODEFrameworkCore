@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Security.Principal;
 
-namespace CODE.Framework.Services.Server.AspNetCore
+namespace CODE.Framework.Services.Contracts
 {
     public static class UserPrincipalHelper
     {

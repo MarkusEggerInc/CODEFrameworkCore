@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
@@ -13,9 +14,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
+
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -115,12 +115,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (string.IsNullOrEmpty(context.ResultJson))
                     context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
 
-                SendJsonResponse(context, context.ResultValue);
+                await SendJsonResponse(context, context.ResultValue);
             }
             catch (Exception ex)
             {
                 var error = new ErrorResponse(ex);
-                SendJsonResponse(context, error);
+                await SendJsonResponse(context, error);
             }
         }
 
@@ -158,7 +158,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             try
             {
-                var parameterList = GetMethodParameters(handlerContext);
+                var parameterList = await GetMethodParameters(handlerContext);
 
                 if (!handlerContext.MethodContext.IsAsync)
                     handlerContext.ResultValue = methodToInvoke.Invoke(inst, parameterList);
@@ -180,7 +180,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// </summary>
         /// <param name="handlerContext"></param>
         /// <returns></returns>
-        private object[] GetMethodParameters(ServiceHandlerRequestContext handlerContext)
+        private async Task<object[]> GetMethodParameters(ServiceHandlerRequestContext handlerContext)
         {
             // parameter parsing
             var parameterList = new object[] { };
@@ -195,19 +195,27 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 var parameter = paramInfos[0];
 
-                // First Deserialize from body if any
-                var serializer = new JsonSerializer();
-
+                
                 // there's always 1 parameter
                 object parameterData = null;
                 if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
                     // if no content create an empty one
                     parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
                 else
-                    using (var sw = new StreamReader(HttpRequest.Body))
-                    using (JsonReader reader = new JsonTextReader(sw))
-                        parameterData = serializer.Deserialize(reader, parameter.ParameterType);
+                {
+                    JsonNamingPolicy policy = null;
+                    if (handlerContext.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                        policy = JsonNamingPolicy.CamelCase;
 
+                    var settings = new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = policy,
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    parameterData = await JsonSerializer.DeserializeAsync(HttpRequest.Body, parameter.ParameterType,settings);
+                }
+             
                 // We map all parameters passed as named parameters in the URL to their respective properties
                 foreach (var key in handlerContext.HttpRequest.Query.Keys)
                 {
@@ -271,30 +279,27 @@ namespace CODE.Framework.Services.Server.AspNetCore
             throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
         }
 
-        private static readonly DefaultContractResolver CamelCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
-
-        private static readonly DefaultContractResolver SnakeCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new SnakeCaseNamingStrategy()};
-
-        public static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
+        public async static Task SendJsonResponse(ServiceHandlerRequestContext context, object value)
         {
             var response = context.HttpResponse;
 
             response.ContentType = "application/json; charset=utf-8";
 
-            var serializer = new JsonSerializer();
+            response.Headers.Add("X-Powered-By", "CODE Framework");
 
-            if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
-                serializer.ContractResolver = CamelCaseNamingStrategy;
-            else if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.SnakeCase)
-                serializer.ContractResolver = SnakeCaseNamingStrategy;
+            JsonNamingPolicy policy = null;
+             if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                 policy = JsonNamingPolicy.CamelCase;
 
+            var settings = new System.Text.Json.JsonSerializerOptions()
+            {
+              PropertyNamingPolicy = policy,  
 #if DEBUG
-            serializer.Formatting = Formatting.Indented;
+                WriteIndented = true
 #endif
+            };
 
-            using (var sw = new StreamWriter(response.Body))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-                serializer.Serialize(writer, value);
+            await  System.Text.Json.JsonSerializer.SerializeAsync(response.Body, value, value.GetType(), settings);
         }
     }
 }

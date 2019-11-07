@@ -3,21 +3,8 @@ Accept-Encoding: gzip,deflate
 Content-type: application/json
 Origin: west-wind.com
 
-{}
-HTTP/1.1  
-Transfer-Encoding: chunked
-Access-Control-Allow-Credentials: true
-Access-Control-Allow-Origin: west-wind.com
-Content-Type: application/json; charset=utf-8
-Date: Thu, 07 Nov 2019 06:01:12 GMT
-Server: Kestrel
-X-Powered-By: ASP.NET
-
-{
-  "username": "Rick S. User",
-  "userId": null,
-  "success": true,
-  "failureInformation": ""
+{ 
+   
 }
 
 ------------------------------------------------------------------
@@ -56,31 +43,6 @@ Content-type: application/json
 GET http://localhost:5008/api/users HTTP/1.1
 Accept-Encoding: gzip,deflate
 Origin: west-wind.com
-HTTP/1.1  
-Transfer-Encoding: chunked
-Access-Control-Allow-Credentials: true
-Access-Control-Allow-Origin: west-wind.com
-Content-Type: application/json; charset=utf-8
-Date: Thu, 07 Nov 2019 06:02:25 GMT
-Server: Kestrel
-X-Powered-By: ASP.NET
-
-{
-  "users": [
-    {
-      "id": "6cd4e7d9-93eb-4f85-a924-93446666fd05",
-      "username": "rstrahl",
-      "password": ""
-    },
-    {
-      "id": "59e8a724-ac1c-44bf-8393-e0dc5c69cbfd",
-      "username": "megger",
-      "password": ""
-    }
-  ],
-  "success": true,
-  "failureInformation": ""
-}
 
 ------------------------------------------------------------------
 
@@ -88,19 +50,23 @@ OPTIONS http://localhost:5008/api/users HTTP/1.1
 Accept-Encoding: gzip,deflate
 Content-type: application/json
 Origin: west-wind.com
-HTTP/1.1  
-Access-Control-Allow-Credentials: true
-Access-Control-Allow-Origin: west-wind.com
-Date: Thu, 07 Nov 2019 06:02:34 GMT
-Server: Kestrel
-X-Powered-By: ASP.NET
-
 
 ------------------------------------------------------------------
 
 GET https://api.epsservices.net/person/countries HTTP/1.1
 Accept-Encoding: gzip,deflate
 Origin: west-wind.com
+
+------------------------------------------------------------------
+
+POST http://localhost:5008/api/users/resetpassword HTTP/1.1
+Accept-Encoding: gzip,deflate
+Content-type: application/json
+Origin: west-wind.com
+
+{
+  "Username": "passw0rd"
+}
 
 ------------------------------------------------------------------
 
@@ -114,7 +80,7 @@ Origin: west-wind.com
   "CaptureMinimalResponseData": false,
   "MaxResponseSize": 0,
   "ReplaceQueryStringValuePairs": null,
-  "ReplaceDomain": "localhost:5008",
+  "ReplaceDomain": "localhost:5000",
   "ReplaceCookieValue": null,
   "ReplaceAuthorization": null,
   "Username": null,

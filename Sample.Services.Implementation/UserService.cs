@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using CODE.Framework.Services.Server.AspNetCore;
+using CODE.Framework.Services.Contracts;
 using Sample.Contracts;
 
 namespace Sample.Services.Implementation

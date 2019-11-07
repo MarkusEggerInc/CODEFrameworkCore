@@ -76,7 +76,7 @@ namespace Sample.Contracts
     public class GetUsersResponse : BaseServiceResponse
     {
         [DataMember]
-        public List<User> Users = new List<User>();
+        public List<User> Users { get; set;  } = new List<User>();
     }
 
     public class SignoutRequest : BaseServiceRequest { }

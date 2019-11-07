@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CODE.Framework.Services.Server.AspNetCore\CODE.Framework.Services.Server.AspNetCore.csproj" />
     <ProjectReference Include="..\Sample.Contracts\Sample.Contracts.csproj" />
   </ItemGroup>
 
