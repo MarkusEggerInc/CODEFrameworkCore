@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
@@ -13,9 +12,7 @@ using CODE.Framework.Services.Server.AspNetCore.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Primitives;
 using Westwind.Utilities;
-
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -140,8 +137,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 // Empty response - ASP.NET will provide CORS headers via applied policy
                 handlerContext.HttpResponse.StatusCode = StatusCodes.Status204NoContent;
-                // TODO: Adding this header for now after all, since it doesn't seem to work, but we should remove this later.
-                //handlerContext.HttpResponse.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
                 return;
             }
 
@@ -191,95 +186,78 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 throw new ArgumentNullException(string.Format(Resources.OnlySingleParametersAreAllowedOnServiceMethods, MethodContext.MethodInfo.Name));
 
             // if there is a parameter create and de-serialize, then add url parameters
-            if (paramInfos.Length == 1)
+            if (paramInfos.Length != 1) return parameterList;
+            var parameter = paramInfos[0];
+
+            // there's always 1 parameter
+            object parameterData;
+            if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
+                // if no content create an empty one
+                parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
+            else
             {
-                var parameter = paramInfos[0];
-
-                
-                // there's always 1 parameter
-                object parameterData = null;
-                if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
-                    // if no content create an empty one
-                    parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
-                else
-                {
-                    JsonNamingPolicy policy = null;
-                    if (handlerContext.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
-                        policy = JsonNamingPolicy.CamelCase;
-
-                    var settings = new JsonSerializerOptions()
-                    {
-                        PropertyNamingPolicy = policy,
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    parameterData = await JsonSerializer.DeserializeAsync(HttpRequest.Body, parameter.ParameterType,settings);
-                }
-             
-                // We map all parameters passed as named parameters in the URL to their respective properties
-                foreach (var key in handlerContext.HttpRequest.Query.Keys)
-                {
-                    var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                    if (prop != null)
-                        try
-                        {
-                            var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
-                            var val = ReflectionUtils.StringToTypedValue(urlParameterValue, prop.PropertyType);
-                            ReflectionUtils.SetProperty(parameterData, key, val);
-                        }
-                        catch
-                        {
-                            throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
-                        }
-                }
-
-                // Map inline URL parameters defined in the route to properties.
-                // Note: Since this is done after the named parameters above, parameters that are part of the route definition win out over simple named parameters
-                if (RouteData != null)
-                    foreach (var kv in RouteData.Values)
-                    {
-                        var prop = parameter.ParameterType.GetProperty(kv.Key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                        if (prop != null)
-                            try
-                            {
-                                var val = ReflectionUtils.StringToTypedValue(kv.Value as string, prop.PropertyType);
-                                ReflectionUtils.SetProperty(parameterData, kv.Key, val);
-                            }
-                            catch
-                            {
-                                throw new InvalidOperationException($"Unable set parameter from URL segment for property: {kv.Key}");
-                            }
-                    }
-
-                parameterList = new[] {parameterData};
+                JsonNamingPolicy policy = null;
+                if (handlerContext.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                    policy = JsonNamingPolicy.CamelCase;
+                parameterData = await JsonSerializer.DeserializeAsync(HttpRequest.Body, parameter.ParameterType, new JsonSerializerOptions {PropertyNamingPolicy = policy, PropertyNameCaseInsensitive = true});
             }
+
+            // We map all parameters passed as named parameters in the URL to their respective properties
+            foreach (var key in handlerContext.HttpRequest.Query.Keys)
+            {
+                var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                if (prop == null) continue;
+                try
+                {
+                    var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
+                    var val = ReflectionUtils.StringToTypedValue(urlParameterValue, prop.PropertyType);
+                    ReflectionUtils.SetProperty(parameterData, key, val);
+                }
+                catch
+                {
+                    throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
+                }
+            }
+
+            // Map inline URL parameters defined in the route to properties.
+            // Note: Since this is done after the named parameters above, parameters that are part of the route definition win out over simple named parameters
+            if (RouteData != null)
+                foreach (var (key, value) in RouteData.Values)
+                {
+                    var property = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                    if (property == null) continue;
+                    try
+                    {
+                        var val = ReflectionUtils.StringToTypedValue(value as string, property.PropertyType);
+                        ReflectionUtils.SetProperty(parameterData, key, val);
+                    }
+                    catch
+                    {
+                        throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
+                    }
+                }
+
+            parameterList = new[] {parameterData};
 
             return parameterList;
         }
 
-        private void ValidateRoles(List<string> authorizationRoles, IPrincipal user)
+        private void ValidateRoles(IReadOnlyCollection<string> authorizationRoles, IPrincipal user)
         {
-            if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
-            {
-                if (user.Identity is ClaimsIdentity identity) {
-                    var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-                    if (rolesClaim == null)
-                        return; // no role requirement
+            if (user?.Identity == null || !user.Identity.IsAuthenticated) throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
+            if (!(user.Identity is ClaimsIdentity identity)) throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
 
-                    if (string.IsNullOrEmpty(rolesClaim.Value))
-                        return; // no role requirement or empty and we're authenticated
+            var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+            if (rolesClaim == null) return; // no role requirement
+            if (string.IsNullOrEmpty(rolesClaim.Value)) return; // no role requirement or empty and we're authenticated
 
-                    var roles = rolesClaim.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (var role in roles)
-                        if (authorizationRoles.Any(r => r == role))
-                            return; // matched a role
-                }
-            }
+            var roles = rolesClaim.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            if (roles.Any(role => authorizationRoles.Any(r => r == role))) return; // matched a role
 
             throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
         }
 
-        public async static Task SendJsonResponse(ServiceHandlerRequestContext context, object value)
+        public static async Task SendJsonResponse(ServiceHandlerRequestContext context, object value)
         {
             var response = context.HttpResponse;
 
@@ -287,18 +265,18 @@ namespace CODE.Framework.Services.Server.AspNetCore
             response.Headers.Add("X-Powered-By", "CODE Framework");
 
             JsonNamingPolicy policy = null;
-             if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
-                 policy = JsonNamingPolicy.CamelCase;
+            if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                policy = JsonNamingPolicy.CamelCase;
 
-            var settings = new System.Text.Json.JsonSerializerOptions()
+            var settings = new JsonSerializerOptions
             {
-              PropertyNamingPolicy = policy,  
+                PropertyNamingPolicy = policy,
 #if DEBUG
                 WriteIndented = true
 #endif
             };
 
-            await  System.Text.Json.JsonSerializer.SerializeAsync(response.Body, value, value.GetType(), settings);
+            await JsonSerializer.SerializeAsync(response.Body, value, value.GetType(), settings);
         }
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
     public class SwaggerInformation
     {
         public string Swagger => "2.0";
-        public SwaggerInfo Info { get; set; } = new SwaggerInfo(); 
+        public SwaggerInfo Info { get; set; } = new SwaggerInfo();
         public Dictionary<string, SwaggerPathInfo> Paths { get; set; } = new Dictionary<string, SwaggerPathInfo>();
     }
 
@@ -18,11 +16,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public class SwaggerPathInfo
     {
-        private string _path; 
-        public SwaggerPathInfo(string path)
-        {
-            _path = path;
-        }
+        private readonly string _path;
+        public SwaggerPathInfo(string path) => _path = path;
 
         public string OperationId { get; set; }
 
