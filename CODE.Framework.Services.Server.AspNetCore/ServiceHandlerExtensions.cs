@@ -18,6 +18,8 @@ using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
+using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Writers;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -87,13 +89,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                       if (config.Cors.AllowedOrigins == "*")
                                           builder = builder.SetIsOriginAllowed(s => true);
                                       else if (!string.IsNullOrEmpty(config.Cors.AllowedOrigins))
-                                          builder.WithOrigins(config.Cors.AllowedOrigins.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithOrigins(config.Cors.AllowedOrigins.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (!string.IsNullOrEmpty(config.Cors.AllowedMethods))
-                                          builder.WithMethods(config.Cors.AllowedMethods.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithMethods(config.Cors.AllowedMethods.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (!string.IsNullOrEmpty(config.Cors.AllowedHeaders))
-                                          builder.WithHeaders(config.Cors.AllowedHeaders.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithHeaders(config.Cors.AllowedHeaders.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (config.Cors.AllowCredentials)
                                           builder.AllowCredentials();
@@ -127,7 +129,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public static IApplicationBuilder UseServiceHandler(this IApplicationBuilder appBuilder)
         {
             var serviceConfig = ServiceHandlerConfiguration.Current;
-            
+
             if (serviceConfig.Cors.UseCorsPolicy)
                 appBuilder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
@@ -154,10 +156,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                            if (interfaces.Length < 1)
                                                throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                                           //// TODO: Optionally enable swagger support.
-                                           //var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
-                                           //if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
-                                           //routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
+                                           // TODO: Optionally enable swagger support.
+                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
+                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
+                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
 
                                            // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                            // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -229,7 +231,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                                                    resp.StatusCode = StatusCodes.Status204NoContent;
                                                });
-                                               
+
                                                routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
                                            }
                                        });
@@ -259,7 +261,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             response.ContentType = "application/json; charset=utf-8";
 
             var serializer = new JsonSerializer();
-            serializer.ContractResolver = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
+            serializer.ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
 
 #if DEBUG
             serializer.Formatting = Formatting.Indented;
@@ -268,30 +270,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
             using (var sw = new StreamWriter(response.Body))
             using (JsonWriter writer = new JsonTextWriter(sw))
                 serializer.Serialize(writer, si);
-
-            //using (var sw = new StreamWriter(resp.Body))
-            //{
-            //    sw.Write("{");
-            //    sw.Write(" swagger: \"2.0\"");
-            //    sw.Write(" info: {");
-            //    sw.Write("   description: \"sdfsdfsdfsdfsdfd\"");
-            //    sw.Write(" }");
-            //    sw.Write(" paths: [");
-
-            //    foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
-            //    {
-            //        var interfaceMethod = interfaces[0].GetMethod(method.Name);
-            //        if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
-            //        var restAttribute = GetRestAttribute(interfaceMethod);
-            //        if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
-            //        if (restAttribute.Name == null)
-            //            sw.Write("{ '/'" + method.Name + "': {}}");
-            //        else
-            //            sw.Write("{ '/'" + restAttribute.Name + "': {}}");
-            //    }
-            //    sw.Write(" ]");
-            //    sw.Write("}");
-            //}
         };
 
         /// <summary>
@@ -327,7 +305,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 var attribute = GetRestUrlParameterAttribute(propertyInfo);
                 if (attribute != null)
                     if (attribute.Mode == UrlParameterMode.Inline)
-                        list.Add(new PropertyInfoHelper {Name = propertyInfo.Name, Order = attribute.Sequence});
+                        list.Add(new PropertyInfoHelper { Name = propertyInfo.Name, Order = attribute.Sequence });
             }
 
             return list.OrderBy(a => a.Order).Select(a => a.Name);
