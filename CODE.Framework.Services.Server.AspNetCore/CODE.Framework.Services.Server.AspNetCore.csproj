@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.11.0</AssemblyVersion>
+    <FileVersion>1.0.11.0</FileVersion>
+    <Version>1.0.11</Version>
     <Authors>Markus Egger, Rick Strahl</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
@@ -14,6 +16,10 @@
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,15 +36,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
     <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration.Json">
-      <HintPath>..\..\..\..\..\Users\megge\.nuget\packages\microsoft.extensions.configuration.json\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.OpenApi">
-      <HintPath>..\..\..\Projects\OpenAPI.NET-master\src\Microsoft.OpenApi\bin\Debug\netstandard2.0\Microsoft.OpenApi.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

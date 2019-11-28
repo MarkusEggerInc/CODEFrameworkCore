@@ -11,6 +11,12 @@ namespace CODE.Framework.Services.Client
 {
     public static class ServiceClient
     {
+        static ServiceClient()
+        {
+            if (GetSetting("ServiceClient:" + nameof(LogCommunicationErrors)).ToLowerInvariant() == "true")
+                LogCommunicationErrors = true;
+        }
+
         /// <summary>Internal message size cache</summary>
         private static readonly Dictionary<string, MessageSize> CachedMessageSizes = new Dictionary<string, MessageSize>();
 
@@ -43,21 +49,17 @@ namespace CODE.Framework.Services.Client
             try
             {
                 action(channel);
-                // TODO: Do we need this for REST? -- CloseChannel(channel, false);
             }
             catch (Exception ex)
             {
-                // TODO: Do we need this for REST? -- AbortChannel(channel, ex);
-
                 if (MustRetryCall(ex))
                 {
                     channel = GetChannelDedicated<TServiceType>();
                     try
                     {
                         action(channel);
-                        // TODO: Do we need this for REST? -- CloseChannel(channel, false);
                     }
-                    catch (Exception ex2)
+                    catch
                     {
                         // TODO: Do we need this for REST? -- AbortChannel(channel, ex2);
                     }
@@ -65,14 +67,17 @@ namespace CODE.Framework.Services.Client
             }
         }
 
-        public static bool AutoRetryFailedCalls { get; set; }
+        public static bool AutoRetryFailedCalls { get; set; } = false;
 
         /// <summary>Defines the delay (milliseconds) between auto-retry calls</summary>
         /// <remarks>The delay is defined in milliseconds (-1 = no delay). Note that the delay puts the thread to sleep, so this should not be done on foreground threads.</remarks>
-        public static int AutoRetryDelay { get; set; }
+        public static int AutoRetryDelay { get; set; } = -1;
 
         /// <summary>Defines the list of exception types for which to auto-retry calls</summary>
-        public static List<Type> AutoRetryFailedCallsForExceptions { get; set; }
+        public static List<Type> AutoRetryFailedCallsForExceptions { get; set; } // TODO: = new List<Type> { typeof (EndpointNotFoundException), typeof (ServerTooBusyException) };
+
+        /// <summary>When set to true (non-default), service communication errors are forwarded to the logging mediator.</summary>
+        public static bool LogCommunicationErrors { get; set; } = false;
 
         /// <summary>Determines whether a call needs to be auto-retried</summary>
         /// <param name="exception">The exception that caused the original failure.</param>
@@ -194,11 +199,7 @@ namespace CODE.Framework.Services.Client
         /// </summary>
         /// <typeparam name="TServiceType">The type of the T service type.</typeparam>
         /// <returns>MessageSize.</returns>
-        private static MessageSize GetMessageSize<TServiceType>()
-        {
-            var type = typeof(TServiceType);
-            return GetMessageSize(type.Name);
-        }
+        private static MessageSize GetMessageSize<TServiceType>() => GetMessageSize(typeof(TServiceType).Name);
 
         /// <summary>
         /// Gets the allowable message size for a specific interface

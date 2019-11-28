@@ -12,6 +12,7 @@ using CODE.Framework.Services.Server.AspNetCore.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Westwind.Utilities;
@@ -139,6 +140,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 // Empty response - ASP.NET will provide CORS headers via applied policy
                 handlerContext.HttpResponse.StatusCode = StatusCodes.Status204NoContent;
+                // TODO: Adding this header for now after all, since it doesn't seem to work, but we should remove this later.
+                //handlerContext.HttpResponse.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
                 return;
             }
 
