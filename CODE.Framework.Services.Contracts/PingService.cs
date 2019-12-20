@@ -3,11 +3,6 @@ using System.Runtime.Serialization;
 
 namespace CODE.Framework.Services.Contracts
 {
-    public interface IPingService
-    {
-        PingResponse Ping(PingRequest request);
-    }
-
     [DataContract]
     public class PingResponse : BaseServiceResponse
     {

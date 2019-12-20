@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using CODE.Framework.Services.Contracts;
 
 namespace Sample.Contracts
-{    
+{   
+    [ServiceContract]
     public interface IUserService
     {     
         [Rest(Method = RestMethods.Get)]

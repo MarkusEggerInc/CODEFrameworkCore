@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using CODE.Framework.Services.Contracts;
 
 namespace Sample.Contracts
 {
+    [ServiceContract]
     public interface ICustomerService
     {
+        [OperationContract, Rest(Method = RestMethods.Get)]
+        PingResponse Ping(PingRequest request);
+
         [Rest(Method = RestMethods.Get, Name ="Customer", AuthorizationRoles = "Administrators")]
         GetCustomerResponse GetCustomer(GetCustomerRequest request);
 

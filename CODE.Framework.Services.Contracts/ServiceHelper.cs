@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Reflection;
-using CODE.Framework.Fundamentals.Utilities;
-using CODE.Framework.Services.Contracts;
+using System.Runtime.InteropServices;
 
-namespace CODE.Framework.Services.Server.AspNetCore
+namespace CODE.Framework.Services.Contracts
 {
-    static class ServiceHelper
+    public static class ServiceHelper
     {
         public static PingResponse GetPopulatedPingResponse(this object referenceObject)
         {
@@ -15,13 +14,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 {
                     ServerDateTime = DateTime.Now, 
                     Version = referenceObject?.GetType().Assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
-                    OperatingSystemDescription = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
-                    FrameworkDescription = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
+                    OperatingSystemDescription = RuntimeInformation.OSDescription,
+                    FrameworkDescription = RuntimeInformation.FrameworkDescription
                 };
             }
-            catch (Exception ex)
+            catch
             {
-                LoggingMediator.Log(ex);
                 return new PingResponse
                 {
                     Success = false,

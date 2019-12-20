@@ -1,11 +1,14 @@
 ﻿using CODE.Framework.Services.Contracts;
 using Sample.Contracts;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Sample.Services.Implementation
 {
     public class CustomerService : ICustomerService, IServiceEvents
     {
+        public PingResponse Ping(PingRequest request) => this.GetPopulatedPingResponse();
+
         public GetCustomersResponse GetCustomers(GetCustomersRequest request)
         {
             return new GetCustomersResponse
