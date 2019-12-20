@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using Sample.Contracts;
 
@@ -17,7 +18,8 @@ namespace Sample.Services.Implementation
 
                 if (string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.Password))
                 {
-                    response.SetError("Invalid username or password.");
+                    response.Success = false;
+                    response.FailureInformation = "Invalid username or password.";
                     return response;
                 }
 
@@ -32,6 +34,7 @@ namespace Sample.Services.Implementation
             }
             catch (Exception ex)
             {
+                LoggingMediator.Log("Generic error in UserService::AuthenticateUser - Generic exception.", ex);
                 return new AuthenticateUserResponse {Success = false, FailureInformation = "Generic error in UserService::AuthenticateUser"};
             }
         }
