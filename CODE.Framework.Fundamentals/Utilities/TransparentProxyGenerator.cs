@@ -102,7 +102,7 @@ namespace CODE.Framework.Fundamentals.Utilities
 
                     il.Emit(OpCodes.Ret);
                 }
-                var proxyType = typeBuilder.CreateTypeInfo();
+                var proxyType = typeBuilder.CreateTypeInfo().AsType();
                 var proxy = Activator.CreateInstance(proxyType, new object[] { handler }, null);
                 if (useProxyCache) ProxyCache.Add(t, proxy);
                 return (TProxy)proxy;
