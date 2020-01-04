@@ -1,5 +1,7 @@
 ﻿using System;
 using CODE.Framework.Fundamentals.Configuration;
+using CODE.Framework.Fundamentals.Utilities;
+using CODE.Framework.Fundamentals.Utilities.CODE.Framework.Core.Utilities;
 using CODE.Framework.Services.Client;
 using Sample.Contracts;
 
@@ -10,6 +12,10 @@ namespace Sample.Client.Console
         static void Main(string[] args)
         {
             var originalColor = System.Console.ForegroundColor;
+
+            //var markdown = "# Hello World\r\n\r\nThis _is_ a test :-)\r\n\r\ncodemag.com";
+            //var html = MarkdownHelper.ToHtml(markdown);
+            //var text = MarkupHelper.GetStrippedBodyOnly(html);
 
             ConfigurationSettings.Sources["Memory"].Settings["RestServiceUrl:ICustomerService"] = "http://localhost:5008/api/customers";
             ConfigurationSettings.Sources["Memory"].Settings["RestServiceUrl:IUserService"] = "http://localhost:5008/api/users";
