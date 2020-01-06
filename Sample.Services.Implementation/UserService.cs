@@ -34,8 +34,7 @@ namespace Sample.Services.Implementation
             }
             catch (Exception ex)
             {
-                LoggingMediator.Log("Generic error in UserService::AuthenticateUser - Generic exception.", ex);
-                return new AuthenticateUserResponse {Success = false, FailureInformation = "Generic error in UserService::AuthenticateUser"};
+                return ServiceHelper.GetPopulatedFailureResponse<AuthenticateUserResponse>(ex);
             }
         }
 

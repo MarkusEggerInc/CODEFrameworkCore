@@ -56,14 +56,14 @@ namespace Sample.Contracts
     public class GetCustomersResponse : BaseServiceResponse
     {
         [DataMember]
-        public List<Customer> CustomerList { get; set; }
+        public List<Customer> CustomerList { get; set; } = new List<Customer>();
     }
 
     [DataContract]
     public class GetCustomerResponse : BaseServiceResponse
     {
         [DataMember]
-        public Customer Customer { get; set; }
+        public Customer Customer { get; set; } = new Customer();
     }
 
     public class Customer
