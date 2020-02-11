@@ -72,14 +72,29 @@ namespace CODE.Framework.Services.Contracts
             return response;
         }
 
-        public static bool IsDebug() 
+        private static string _isDebug = string.Empty;
+        public static bool IsDebug()
         {
-            var assembly = Assembly.GetEntryAssembly();
-            var attributes = assembly.GetCustomAttributes(typeof(DebuggableAttribute), true);
-            if (attributes == null || attributes.Length == 0) return false;
+            if (!string.IsNullOrEmpty(_isDebug)) return _isDebug == "YES";
 
-            var debuggableAttribute = (DebuggableAttribute)attributes[0];
-            return debuggableAttribute.IsJITTrackingEnabled;
+            var assembly = Assembly.GetEntryAssembly();
+            if (assembly != null)
+            {
+                var attributes = assembly.GetCustomAttributes(typeof(DebuggableAttribute), true);
+                if (attributes.Length == 0)
+                {
+                    _isDebug = "NO";
+                    return false;
+                }
+
+                var debuggableAttribute = (DebuggableAttribute)attributes[0];
+                var debuggableAttributeIsJitTrackingEnabled = debuggableAttribute.IsJITTrackingEnabled;
+                _isDebug = debuggableAttributeIsJitTrackingEnabled ? "YES" : "NO";
+                return debuggableAttributeIsJitTrackingEnabled;
+            }
+
+            _isDebug = "NO";
+            return false;
         }
 
         private static string GetExceptionText(Exception exception)
