@@ -97,10 +97,8 @@ namespace CODE.Framework.Fundamentals.Utilities
                         if (options.ExcludedFields.Contains(destinationProperty.Name))
                         {
                             if (options.LogMappedMembers)
-                            {
-                                if (!options.IgnoredSourceProperties.Contains(sourcePropertyName)) options.IgnoredSourceProperties.Add(sourcePropertyName);
-                                if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name)) options.IgnoredDestinationProperties.Add(destinationProperty.Name);
-                            }
+                                if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name))
+                                    options.IgnoredDestinationProperties.Add(destinationProperty.Name);
                             continue;
                         }
 
@@ -108,30 +106,40 @@ namespace CODE.Framework.Fundamentals.Utilities
                         if (options.ExcludedFields.Contains(sourcePropertyName))
                         {
                             if (options.LogMappedMembers)
-                            {
-                                if (!options.IgnoredSourceProperties.Contains(sourcePropertyName)) options.IgnoredSourceProperties.Add(sourcePropertyName);
-                                if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name)) options.IgnoredDestinationProperties.Add(destinationProperty.Name);
-                            }
+                                if (!options.IgnoredSourceProperties.Contains(sourcePropertyName))
+                                    options.IgnoredSourceProperties.Add(sourcePropertyName);
                             continue;
                         }
 
-                        if (options.LogMappedMembers)
+                        var sourceProperty = sourceType.GetProperty(sourcePropertyName, BindingFlags.Public | BindingFlags.Instance);
+                        if (sourceProperty == null)
                         {
-                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
-                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                            if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name))
+                                options.IgnoredDestinationProperties.Add(destinationProperty.Name); // Have to ignore it, since we can't find the source to map from
+                            continue;
                         }
 
-                        var sourceProperty = sourceType.GetProperty(sourcePropertyName, BindingFlags.Public | BindingFlags.Instance);
-                        if (sourceProperty == null) continue;
                         if (sourceProperty.CanRead && destinationProperty.CanWrite)
                             if (options.MapFunctionsFiltered.ContainsKey(sourceProperty.Name) && options.MapFunctionsFiltered[destinationProperty.Name](source, destination, options.MapDirection))
-                                continue; // Successfully mapped with a function filtered to this property
+                            {
+                                // Successfully mapped with a function filtered to this property
+                                if (options.LogMappedMembers)
+                                {
+                                    if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                    if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                }
+                            }
                             else if (sourceProperty.PropertyType == destinationProperty.PropertyType)
                                 try
                                 {
                                     var currentValue = destinationProperty.GetValue(destination, null);
                                     var newValue = sourceProperty.GetValue(source, null);
                                     UpdateValueIfNeeded(destination, destinationProperty, currentValue, newValue);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
                             else if (sourceProperty.PropertyType.Name == "Nullable`1" && !destinationProperty.PropertyType.Name.StartsWith("Nullable"))
@@ -141,6 +149,11 @@ namespace CODE.Framework.Fundamentals.Utilities
                                     var newValue = sourceProperty.GetValue(source, null);
                                     if (newValue != null) // Can't set it if it is null.
                                         destinationProperty.SetValue(destination, newValue, null);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
                             else if (destinationProperty.PropertyType.Name == "Nullable`1" && !sourceProperty.PropertyType.Name.StartsWith("Nullable"))
@@ -149,17 +162,51 @@ namespace CODE.Framework.Fundamentals.Utilities
                                     // The destination is nullable although the source isn't. This has a pretty good chance of working
                                     var newValue = sourceProperty.GetValue(source, null);
                                     destinationProperty.SetValue(destination, newValue, null);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
                             else
+                            {
                                 // Property types differ, but maybe we can still map them
-                            if (options.MapEnums)
-                                if (sourceProperty.PropertyType.IsEnum && destinationProperty.PropertyType.IsEnum)
-                                    MapEnumValues(source, destination, destinationProperty, sourceProperty, options);
-                                else if (PropertyTypeIsNumeric(sourceProperty.PropertyType) && destinationProperty.PropertyType.IsEnum)
-                                    MapNumericToEnum(source, destination, destinationProperty, sourceProperty);
-                                else if (sourceProperty.PropertyType.IsEnum && PropertyTypeIsNumeric(destinationProperty.PropertyType))
-                                    MapEnumToNumeric(source, destination, destinationProperty, sourceProperty);
+                                if (options.MapEnums)
+                                    if (sourceProperty.PropertyType.IsEnum && destinationProperty.PropertyType.IsEnum)
+                                    {
+                                        MapEnumValues(source, destination, destinationProperty, sourceProperty, options);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                                    else if (PropertyTypeIsNumeric(sourceProperty.PropertyType) && destinationProperty.PropertyType.IsEnum)
+                                    {
+                                        MapNumericToEnum(source, destination, destinationProperty, sourceProperty);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                                    else if (sourceProperty.PropertyType.IsEnum && PropertyTypeIsNumeric(destinationProperty.PropertyType))
+                                    {
+                                        MapEnumToNumeric(source, destination, destinationProperty, sourceProperty);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                            }
+                    }
+                    else if (options.LogMappedMembers)
+                    {
+                        var sourcePropertyName = GetMappedSourcePropertyName(destinationProperty.Name, options.MapDirection);
+                        if (!options.IgnoredSourceProperties.Contains(sourcePropertyName)) options.IgnoredSourceProperties.Add(sourcePropertyName);
+                        if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name)) options.IgnoredDestinationProperties.Add(destinationProperty.Name);
                     }
             }
             catch
