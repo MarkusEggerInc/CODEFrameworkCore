@@ -1498,8 +1498,10 @@ namespace CODE.Framework.Fundamentals.Utilities
                 LogMappedMembers = true;
         }
 
+        public void AddMap(string sourceField, string destinationField) => Maps.Add(new Map(sourceField, destinationField));
+
         private static string _isDebug = string.Empty;
-        public static bool IsDebug()
+        private static bool IsDebug()
         {
             if (!string.IsNullOrEmpty(_isDebug)) return _isDebug == "YES";
 
