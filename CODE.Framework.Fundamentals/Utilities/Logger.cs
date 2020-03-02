@@ -1,11 +1,12 @@
 ﻿using System;
-#if NETFULL
 using System.Diagnostics;
-#endif
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
+#if NETFULL
+using System.Diagnostics;
+#endif
 
 namespace CODE.Framework.Fundamentals.Utilities
 {
@@ -38,15 +39,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <param name="logEvent">The event (object).</param>
         /// <param name="type">The event type.</param>
-        public virtual void Log(object logEvent, LogEventType type)
-        {
-            Log(logEvent.ToString(), type);
-        }
-
-        /// <summary>
-        /// For internal use only
-        /// </summary>
-        private LogEventType _typeFilter = LogEventType.Undefined;
+        public virtual void Log(object logEvent, LogEventType type) => Log(logEvent.ToString(), type);
 
         /// <summary>
         /// Gets or sets the type filter.
@@ -55,22 +48,14 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <remarks>
         /// Only events that match the type filter will be considered by this logger.
         /// </remarks>
-        public virtual LogEventType TypeFilter
-        {
-            get { return _typeFilter; }
-            set { _typeFilter = value; }
-        }
+        public virtual LogEventType TypeFilter { get; set; } = LogEventType.Undefined;
 
         /// <summary>
         /// Logs the specified event (text).
         /// </summary>
         /// <param name="exception">The exception that is to be logged.</param>
         /// <param name="type">The event type.</param>
-        public virtual void Log(Exception exception, LogEventType type)
-        {
-            var text = GetSerializedExceptionText(exception, type);
-            Log(text, type);
-        }
+        public virtual void Log(Exception exception, LogEventType type) => Log(GetSerializedExceptionText(exception, type), type);
 
         /// <summary>
         /// Logs the specified event (text).
@@ -78,11 +63,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="leadingText">The leading text.</param>
         /// <param name="exception">The exception that is to be logged.</param>
         /// <param name="type">The event type.</param>
-        public virtual void Log(string leadingText, Exception exception, LogEventType type)
-        {
-            var text = leadingText + GetSerializedExceptionText(exception, type);
-            Log(text, type);
-        }
+        public virtual void Log(string leadingText, Exception exception, LogEventType type) => Log(leadingText + GetSerializedExceptionText(exception, type), type);
 
         /// <summary>
         /// Serializes the exception and returns the serialized text
@@ -91,9 +72,29 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="type">The log info type.</param>
         /// <returns>Serialized exception information</returns>
         /// <remarks>This method is designed to be overridden in subclasses</remarks>
-        protected virtual string GetSerializedExceptionText(Exception exception, LogEventType type)
+        protected virtual string GetSerializedExceptionText(Exception exception, LogEventType type) => ExceptionHelper.GetExceptionText(exception);
+    }
+
+    public class AzureLogger : Logger
+    {
+        public override void Log(string logEvent, LogEventType type)
         {
-            return ExceptionHelper.GetExceptionText(exception);
+            switch (type)
+            {
+                case LogEventType.Undefined:
+                case LogEventType.Success:
+                case LogEventType.Information:
+                    Trace.TraceInformation(logEvent);
+                    break;
+                case LogEventType.Warning:
+                    Trace.TraceWarning(logEvent);
+                    break;
+                case LogEventType.Exception:
+                case LogEventType.Error:
+                case LogEventType.Critical:
+                    Trace.TraceError(logEvent);
+                    break;
+            }
         }
     }
 
@@ -116,10 +117,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <param name="logEvent">The event (text).</param>
         /// <param name="type">The event type.</param>
-        public override void Log(string logEvent, LogEventType type)
-        {
-            Console.WriteLine(type + ": " + logEvent);
-        }
+        public override void Log(string logEvent, LogEventType type) => Console.WriteLine(type + ": " + logEvent);
     }
 
     /// <summary>
@@ -141,12 +139,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <param name="logEvent">The event (text).</param>
         /// <param name="type">The event type.</param>
-        public override void Log(string logEvent, LogEventType type)
-        {
-            System.Diagnostics.Debug.WriteLine(type + ": " + logEvent);
-        }
+        public override void Log(string logEvent, LogEventType type) => Debug.WriteLine(type + ": " + logEvent);
     }
-
 
     /// <summary>
     /// Trace logger class
@@ -171,11 +165,9 @@ namespace CODE.Framework.Fundamentals.Utilities
         {
             try
             {
-                System.Diagnostics.Trace.WriteLine(type + ": " + logEvent);
+                Trace.WriteLine(type + ": " + logEvent);
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 
@@ -207,14 +199,13 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         public string Extension
         {
-            get { return _extension; }
+            get => _extension;
             set
             {
                 if (value.StartsWith(".")) value = value.Substring(1);
                 _extension = value;
             }
         }
-
 
         /// <summary>
         /// Gets or sets the folder the files are to be put into.
@@ -226,49 +217,33 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Initializes a new instance of the <see cref="MultiFileLogger"/> class.
         /// </summary>
         /// <param name="folder">The folder the files are to be put into.</param>
-        public MultiFileLogger(string folder)
-        {
-            Folder = folder;
-        }
+        public MultiFileLogger(string folder) => Folder = folder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiFileLogger"/> class.
         /// </summary>
         /// <param name="folder">The folder the files are to be put into.</param>
-        public MultiFileLogger(Environment.SpecialFolder folder)
-        {
-            Folder = Environment.GetFolderPath(folder);
-        }
+        public MultiFileLogger(Environment.SpecialFolder folder) => Folder = Environment.GetFolderPath(folder);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiFileLogger"/> class.
         /// </summary>
         /// <remarks>By default, the application data files folder is used for the log files.</remarks>
-        public MultiFileLogger()
-        {
-            Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        }
+        public MultiFileLogger() => Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         /// <summary>
         /// Logs the specified event (text).
         /// </summary>
         /// <param name="logEvent">The event (text).</param>
         /// <param name="type">The event type.</param>
-        public override void Log(string logEvent, LogEventType type)
-        {
-            var fileName = StringHelper.AddBS(Folder) + GetNextFileName();
-            StringHelper.ToFile(logEvent, fileName);
-        }
+        public override void Log(string logEvent, LogEventType type) => StringHelper.ToFile(logEvent, StringHelper.AddBS(Folder) + GetNextFileName());
 
         /// <summary>
         /// Gets the name of the next file.
         /// </summary>
         /// <returns>Next file name.</returns>
         /// <remarks>Override this method to create a different file name schema.</remarks>
-        protected virtual string GetNextFileName()
-        {
-            return Guid.NewGuid() + "." + Extension;
-        }
+        protected virtual string GetNextFileName() => Guid.NewGuid() + "." + Extension;
     }
 
     /// <summary>
@@ -387,6 +362,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                     var eventTypeNode = eventNode.Attributes.SetNamedItem(document.CreateNode(XmlNodeType.Attribute, XmlEventTypeAttribute, string.Empty));
                     eventTypeNode.Value = type.ToString();
                 }
+
                 if (eventNode.Attributes != null)
                 {
                     var eventTimeStampNode = eventNode.Attributes.SetNamedItem(document.CreateNode(XmlNodeType.Attribute, XmlEventTimeStampAttribute, string.Empty));
@@ -426,7 +402,6 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Log file name
         /// </summary>
         public string FileName { get; set; }
-
 
         /// <summary>
         /// Gets or sets the folder the files are to be put into.
@@ -671,10 +646,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             TruncateLog(xml);
 
             // We are ready to save the file
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
+            if (File.Exists(fileName)) File.Delete(fileName);
             using (var stream = new FileStream(fileName, FileMode.CreateNew, FileAccess.ReadWrite))
             {
                 var writer = new XmlTextWriter(stream, Encoding.UTF8) {Formatting = Formatting.Indented, Indentation = 2};
@@ -693,7 +665,6 @@ namespace CODE.Framework.Fundamentals.Utilities
         {
             var xml = new XmlDocument();
             if (File.Exists(fileName))
-            {
                 try
                 {
                     xml.Load(fileName);
@@ -704,9 +675,9 @@ namespace CODE.Framework.Fundamentals.Utilities
                 {
                     xml = CreateXmlDocument();
                 }
-            }
             else
                 xml = CreateXmlDocument();
+
             return xml;
         }
 

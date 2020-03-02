@@ -9,14 +9,15 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Copyright>Markus Egger Inc., 2017-2019</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2020</Copyright>
     <Description>Shared fundamentals used by other CODE Framework components</Description>
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageIcon>CodeFramework_Small.png</PackageIcon>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
-    <AssemblyVersion>1.0.11.0</AssemblyVersion>
-    <FileVersion>1.0.11.0</FileVersion>
-    <Version>1.0.11</Version>
+    <AssemblyVersion>1.5.4.0</AssemblyVersion>
+    <FileVersion>1.5.4.0</FileVersion>
+    <Version>1.5.4</Version>
   </PropertyGroup>
 
   
@@ -26,18 +27,11 @@
 
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="Markdig" Version="0.18.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
-
-  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>-->
 
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">
@@ -51,6 +45,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

@@ -26,43 +26,30 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public MethodInfo MethodInfo { get; set; }
 
         public bool IsAsync { get; set; }
-        
-        
+
+
 
         public ServiceHandlerConfigurationInstance InstanceConfiguration { get; set; }
 
         public ServiceHandlerConfiguration ServiceConfiguration { get; set; }
 
-        public MethodInvocationContext(MethodInfo method, 
-            ServiceHandlerConfiguration serviceConfiguration,
-            ServiceHandlerConfigurationInstance instanceConfiguration)
+        public MethodInvocationContext(MethodInfo method, ServiceHandlerConfiguration serviceConfiguration, ServiceHandlerConfigurationInstance instanceConfiguration)
         {
             InstanceConfiguration = instanceConfiguration;
             ServiceConfiguration = serviceConfiguration;
             MethodInfo = method;
-            
-            var attrib = (AsyncStateMachineAttribute)method.GetCustomAttribute(typeof(AsyncStateMachineAttribute));
-            if(attrib != null)
+
+            var attribute = (AsyncStateMachineAttribute) method.GetCustomAttribute(typeof(AsyncStateMachineAttribute));
+            if (attribute != null)
                 IsAsync = true;
 
             RestAttribute = method.GetCustomAttribute(typeof(RestAttribute), true) as RestAttribute;
-            if (RestAttribute == null)
-                return;
-            
+
             // set allowable authorization roles
-            if (RestAttribute.AuthorizationRoles != null)
-            {
-                AuthorizationRoles = RestAttribute.AuthorizationRoles
-                            .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                            .ToList();
-                if (AuthorizationRoles.Count == 0)
-                    AuthorizationRoles.Add(string.Empty);  // Any authorized user
-            }
-
-
-
+            if (RestAttribute?.AuthorizationRoles == null) return;
+            AuthorizationRoles = RestAttribute.AuthorizationRoles.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            if (AuthorizationRoles.Count == 0)
+                AuthorizationRoles.Add(string.Empty); // Any authorized user
         }
-
     }
 }
-

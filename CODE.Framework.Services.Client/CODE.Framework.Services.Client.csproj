@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyVersion>1.0.11.0</AssemblyVersion>
-    <FileVersion>1.0.11.0</FileVersion>
-    <Version>1.0.11</Version>
+    <AssemblyVersion>1.5.4.0</AssemblyVersion>
+    <FileVersion>1.5.4.0</FileVersion>
+    <Version>1.5.4</Version>
     <Authors>Markus Egger, Rick Strahl</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
@@ -12,9 +12,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Copyright>Markus Egger Inc., 2017-2019</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2020</Copyright>
     <Description>Client-side components used for CODE Framework Service Features</Description>
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageIcon>CodeFramework_Small.png</PackageIcon>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -26,6 +27,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
     <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
 </Project>

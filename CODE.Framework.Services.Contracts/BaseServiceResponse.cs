@@ -19,20 +19,6 @@ namespace CODE.Framework.Services.Contracts
 
         [DataMember]
         public string FailureInformation { get; set; } = string.Empty;
-
-        public void SetError(string message, Exception ex = null)
-        {
-            if (message != null)
-            {
-                Success = false;
-                FailureInformation = message;
-            }
-            else
-            {
-                Success = true;
-                FailureInformation = null;
-            }
-        }
     }
 
     [DataContract]

@@ -38,32 +38,29 @@ namespace CODE.Framework.Fundamentals.Utilities
                 if (_assemblyBuilder == null)
                 {
                     _assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("CODE.Framework.Proxies"), AssemblyBuilderAccess.Run);
-                    var assemblyName = _assemblyBuilder.GetName().Name;
-                    _moduleBuilder = _assemblyBuilder.DefineDynamicModule(assemblyName);
+                    //var assemblyName = _assemblyBuilder.GetName().Name;
+                    _moduleBuilder = _assemblyBuilder.DefineDynamicModule("MainModule");
                 }
-                var typeBuilder = _moduleBuilder.DefineType(t.Name + "_CODE_Framework_Proxy_" + Guid.NewGuid().ToString().Replace("-", "_"), TypeAttributes.Class | TypeAttributes.Public, typeof(Object), new[] { t });
-                var proxyFieldBuilder = typeBuilder.DefineField("handler", typeof(IProxyHandler), FieldAttributes.Private);
+                var typeBuilder = _moduleBuilder.DefineType(t.Name + "_CODE_Framework_Proxy_" + Guid.NewGuid().ToString().Replace("-", "_"), TypeAttributes.Class | TypeAttributes.Public, typeof(object), new[] { t });
+                var proxyFieldBuilder = typeBuilder.DefineField("handler", typeof(IProxyHandler), FieldAttributes.Public);
                 var callRetMethod = typeof(IProxyHandler).GetMethod("OnMethod", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new[] { typeof(MethodInfo), typeof(object[]) }, null);
 
-                var constructorType = Type.GetType("System.Object");
-                if (constructorType != null)
-                {
-                    var constructor = constructorType.GetConstructor(new Type[] { });
-                    var constructorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, new[] { typeof(IProxyHandler) });
+                var constructorType = typeof(object);
+                var constructor = constructorType.GetConstructor(new Type[] { });
+                var constructorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, new[] { typeof(IProxyHandler) });
 
-                    var cIl = constructorBuilder.GetILGenerator();
-                    cIl.Emit(OpCodes.Ldarg_0); // Load this to stack
-                    if (constructor != null) cIl.Emit(OpCodes.Call, constructor); // Call base (object) constructor
-                    cIl.Emit(OpCodes.Ldarg_0); // Load this to stack
-                    cIl.Emit(OpCodes.Ldarg_1); // Load the IProxyHandler to stack
-                    cIl.Emit(OpCodes.Stfld, proxyFieldBuilder); // Set proxy to the actual proxy
-                    cIl.Emit(OpCodes.Ret);
-                }
+                var cIl = constructorBuilder.GetILGenerator();
+                cIl.Emit(OpCodes.Ldarg_0); // Load this to stack
+                if (constructor != null) cIl.Emit(OpCodes.Call, constructor); // Call base (object) constructor
+                cIl.Emit(OpCodes.Ldarg_0); // Load this to stack
+                cIl.Emit(OpCodes.Ldarg_1); // Load the IProxyHandler to stack
+                cIl.Emit(OpCodes.Stfld, proxyFieldBuilder); // Set proxy to the actual proxy
+                cIl.Emit(OpCodes.Ret);
 
                 // Creating all the methods on the interface
                 foreach (var method in t.GetMethods())
                 {
-                    var mb = typeBuilder.DefineMethod(method.Name, MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual, method.ReturnType, method.GetParameters().Select(pi => pi.ParameterType).ToArray());
+                    var mb = typeBuilder.DefineMethod(method.Name, MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, method.ReturnType, method.GetParameters().Select(pi => pi.ParameterType).ToArray());
                     var privateParameterCount = method.GetParameters().Length;
                     var il = mb.GetILGenerator();
 
@@ -93,7 +90,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                     il.Emit(OpCodes.Ldfld, proxyFieldBuilder);
                     il.Emit(OpCodes.Ldloc, methodInfo);
                     il.Emit(OpCodes.Ldloc, argArray);
-                    il.Emit(OpCodes.Call, callRetMethod);
+                    il.Emit(OpCodes.Callvirt, callRetMethod);
                     if (method.ReturnType.IsValueType && method.ReturnType != typeof(void))
                         il.Emit(OpCodes.Unbox_Any, method.ReturnType);
 
@@ -102,7 +99,9 @@ namespace CODE.Framework.Fundamentals.Utilities
 
                     il.Emit(OpCodes.Ret);
                 }
-                var proxyType = typeBuilder.CreateTypeInfo();
+
+                var proxyTypeInfo = typeBuilder.CreateTypeInfo();
+                var proxyType = proxyTypeInfo.AsType();
                 var proxy = Activator.CreateInstance(proxyType, new object[] { handler }, null);
                 if (useProxyCache) ProxyCache.Add(t, proxy);
                 return (TProxy)proxy;
@@ -199,7 +198,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                     il.Emit(OpCodes.Ldfld, proxyFieldBuilder);
                     il.Emit(OpCodes.Ldloc, methodInfo);
                     il.Emit(OpCodes.Ldloc, argArray);
-                    il.Emit(OpCodes.Call, callRetMethod);
+                    il.Emit(OpCodes.Callvirt, callRetMethod);
                     if (method.ReturnType.IsValueType && method.ReturnType != typeof(void))
                         il.Emit(OpCodes.Unbox_Any, method.ReturnType);
 
