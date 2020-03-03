@@ -13,7 +13,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to CSV data.  
     /// </summary>
-    public class CsvReader : IDataReader, IEnumerable<string[]>
+    public partial class CsvReader : IDataReader, IEnumerable<string[]>
     {
         /// <summary>
         /// Defines the default buffer size.
@@ -51,6 +51,41 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private TextReader _reader;
 
         /// <summary>
+        /// Contains the buffer size.
+        /// </summary>
+        private readonly int _bufferSize;
+
+        /// <summary>
+        /// Contains the comment character indicating that a line is commented out.
+        /// </summary>
+        private readonly char _comment;
+
+        /// <summary>
+        /// Contains the escape character letting insert quotation characters inside a quoted field.
+        /// </summary>
+        private readonly char _escape;
+
+        /// <summary>
+        /// Contains the delimiter character separating each field.
+        /// </summary>
+        private readonly char _delimiter;
+
+        /// <summary>
+        /// Contains the quotation character wrapping every field.
+        /// </summary>
+        private readonly char _quote;
+
+        /// <summary>
+        /// Indicates if spaces at the start and end of a field are trimmed.
+        /// </summary>
+        private readonly bool _trimSpaces;
+
+        /// <summary>
+        /// Indicates if field names are located on the first non commented line.
+        /// </summary>
+        private readonly bool _hasHeaders;
+
+        /// <summary>
         /// Indicates if the class is initialized.
         /// </summary>
         private bool _initialized;
@@ -64,6 +99,13 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// Contains the dictionary of field indexes by header. The key is the field name and the value is its index.
         /// </summary>
         private Dictionary<string, int> _fieldHeaderIndexes;
+
+        /// <summary>
+        /// Contains the current record index in the CSV file.
+        /// A value of MinValue means that the reader has not been initialized yet.
+        /// Otherwise, a negative value means that no record has been read yet.
+        /// </summary>
+        private long _currentRecordIndex;
 
         /// <summary>
         /// Contains the starting position of the next unread field.
@@ -112,6 +154,18 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// because one record must be read to get the field count automatically
         /// </summary>
         private bool _firstRecordInCache;
+
+        /// <summary>
+        /// Indicates if one or more field are missing for the current record.
+        /// Resets after each successful record read.
+        /// </summary>
+        private bool _missingFieldFlag;
+
+        /// <summary>
+        /// Indicates if a parse error occured for the current record.
+        /// Resets after each successful record read.
+        /// </summary>
+        private bool _parseErrorFlag;
 
         /// <summary>
         /// Initializes a new instance of the CsvReader class.
@@ -195,9 +249,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 throw new ArgumentNullException("reader");
 
             if (bufferSize <= 0)
-                throw new ArgumentOutOfRangeException("bufferSize", bufferSize, "Buffer size too small");
+                throw new ArgumentOutOfRangeException("bufferSize", bufferSize, "BufferSizeTooSmall");
 
-            BufferSize = bufferSize;
+            _bufferSize = bufferSize;
 
             if (reader is StreamReader)
             {
@@ -206,21 +260,21 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 if (stream.CanSeek)
                     // Handle bad implementations returning 0 or less
                     if (stream.Length > 0)
-                        BufferSize = (int) Math.Min(bufferSize, stream.Length);
+                        _bufferSize = (int) Math.Min(bufferSize, stream.Length);
             }
 
             _reader = reader;
-            Delimiter = delimiter;
-            Quote = quote;
-            Escape = escape;
-            Comment = comment;
+            _delimiter = delimiter;
+            _quote = quote;
+            _escape = escape;
+            _comment = comment;
 
-            HasHeaders = hasHeaders;
-            TrimSpaces = trimSpaces;
+            _hasHeaders = hasHeaders;
+            _trimSpaces = trimSpaces;
             SupportsMultiline = true;
             SkipEmptyLines = true;
 
-            CurrentRecordIndex = -1;
+            _currentRecordIndex = -1;
             DefaultParseErrorAction = ParseErrorAction.RaiseEvent;
         }
 
@@ -233,48 +287,54 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// Raises the <see cref="M:ParseError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="ParseErrorEventArgs"/> that contains the event data.</param>
-        protected virtual void OnParseError(ParseErrorEventArgs e) => ParseError?.Invoke(this, e);
+        protected virtual void OnParseError(ParseErrorEventArgs e)
+        {
+            var handler = ParseError;
+
+            if (handler != null)
+                handler(this, e);
+        }
 
         /// <summary>
         /// Gets the comment character indicating that a line is commented out.
         /// </summary>
         /// <value>The comment character indicating that a line is commented out.</value>
-        public char Comment { get; }
+        public char Comment => _comment;
 
         /// <summary>
         /// Gets the escape character letting insert quotation characters inside a quoted field.
         /// </summary>
         /// <value>The escape character letting insert quotation characters inside a quoted field.</value>
-        public char Escape { get; }
+        public char Escape => _escape;
 
         /// <summary>
         /// Gets the delimiter character separating each field.
         /// </summary>
         /// <value>The delimiter character separating each field.</value>
-        public char Delimiter { get; }
+        public char Delimiter => _delimiter;
 
         /// <summary>
         /// Gets the quotation character wrapping every field.
         /// </summary>
         /// <value>The quotation character wrapping every field.</value>
-        public char Quote { get; }
+        public char Quote => _quote;
 
         /// <summary>
         /// Indicates if field names are located on the first non commented line.
         /// </summary>
         /// <value><see langword="true"/> if field names are located on the first non commented line, otherwise, <see langword="false"/>.</value>
-        public bool HasHeaders { get; }
+        public bool HasHeaders => _hasHeaders;
 
         /// <summary>
         /// Indicates if spaces at the start and end of a field are trimmed.
         /// </summary>
         /// <value><see langword="true"/> if spaces at the start and end of a field are trimmed, otherwise, <see langword="false"/>.</value>
-        public bool TrimSpaces { get; }
+        public bool TrimSpaces => _trimSpaces;
 
         /// <summary>
         /// Gets the buffer size.
         /// </summary>
-        public int BufferSize { get; }
+        public int BufferSize => _bufferSize;
 
         /// <summary>
         /// Gets or sets the default action to take when a parsing error has occured.
@@ -346,19 +406,19 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// Gets the current record index in the CSV file.
         /// </summary>
         /// <value>The current record index in the CSV file.</value>
-        public virtual long CurrentRecordIndex { get; private set; }
+        public virtual long CurrentRecordIndex => _currentRecordIndex;
 
         /// <summary>
         /// Indicates if one or more field are missing for the current record.
         /// Resets after each successful record read.
         /// </summary>
-        public bool MissingFieldFlag { get; private set; }
+        public bool MissingFieldFlag => _missingFieldFlag;
 
         /// <summary>
         /// Indicates if a parse error occured for the current record.
         /// Resets after each successful record read.
         /// </summary>
-        public bool ParseErrorFlag { get; private set; }
+        public bool ParseErrorFlag => _parseErrorFlag;
 
         /// <summary>
         /// Gets the field with the specified name and record position. <see cref="M:hasHeaders"/> must be <see langword="true"/>.
@@ -427,13 +487,13 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 if (string.IsNullOrEmpty(field))
                     throw new ArgumentNullException("field");
 
-                if (!HasHeaders)
-                    throw new InvalidOperationException("No headers");
+                if (!_hasHeaders)
+                    throw new InvalidOperationException("NoHeaders");
 
                 var index = GetFieldIndex(field);
 
                 if (index < 0)
-                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Field header not found.", field), "field");
+                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "FieldHeaderNotFound", field), "field");
 
                 return this[index];
             }
@@ -481,7 +541,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         {
             EnsureInitialize();
 
-            if (_fieldHeaderIndexes != null && _fieldHeaderIndexes.TryGetValue(header, out var index))
+            int index;
+
+            if (_fieldHeaderIndexes != null && _fieldHeaderIndexes.TryGetValue(header, out index))
                 return index;
             return -1;
         }
@@ -517,14 +579,14 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             if (index < 0 || index >= array.Length)
                 throw new ArgumentOutOfRangeException("index", index, string.Empty);
 
-            if (CurrentRecordIndex < 0 || !_initialized)
-                throw new InvalidOperationException("No current record.");
+            if (_currentRecordIndex < 0 || !_initialized)
+                throw new InvalidOperationException("NoCurrentRecord");
 
             if (array.Length - index < _fieldCount)
-                throw new ArgumentException("Not enough space in array.", "array");
+                throw new ArgumentException("NotEnoughSpaceInArray", "array");
 
             for (var i = 0; i < _fieldCount; i++)
-                if (ParseErrorFlag)
+                if (_parseErrorFlag)
                     array[index + i] = null;
                 else
                     array[index + i] = this[i];
@@ -535,7 +597,12 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// </summary>
         /// <remarks>Used for exception handling purpose.</remarks>
         /// <returns>The current raw CSV data.</returns>
-        public string GetCurrentRawData() => _buffer != null && _bufferLength > 0 ? new string(_buffer, 0, _bufferLength) : string.Empty;
+        public string GetCurrentRawData()
+        {
+            if (_buffer != null && _bufferLength > 0)
+                return new string(_buffer, 0, _bufferLength);
+            return string.Empty;
+        }
 
         /// <summary>
         /// Indicates whether the specified Unicode character is categorized as white space.
@@ -545,7 +612,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private bool IsWhiteSpace(char c)
         {
             // Handle cases where the delimiter is a whitespace (e.g. tab)
-            if (c == Delimiter)
+            if (c == _delimiter)
                 return false;
             // See char.IsLatin1(char c) in Reflector
             if (c <= '\x00ff')
@@ -569,20 +636,20 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         public virtual void MoveTo(long record)
         {
             if (record < 0)
-                throw new ArgumentOutOfRangeException("record", record, "Record index less than zero.");
+                throw new ArgumentOutOfRangeException("record", record, "RecordIndexLessThanZero");
 
-            if (record < CurrentRecordIndex)
-                throw new InvalidOperationException("Cannot move previous record in forward only.");
+            if (record < _currentRecordIndex)
+                throw new InvalidOperationException("CannotMovePreviousRecordInForwardOnly");
 
             // Get number of record to read
 
-            var offset = record - CurrentRecordIndex;
+            var offset = record - _currentRecordIndex;
 
             if (offset > 0)
                 do
                 {
                     if (!ReadNextRecord())
-                        throw new EndOfStreamException(string.Format(CultureInfo.InvariantCulture, "Cannot read record at index."));
+                        throw new EndOfStreamException(string.Format(CultureInfo.InvariantCulture, "CannotReadRecordAtIndex", _currentRecordIndex - offset));
                 } while (--offset > 0);
         }
 
@@ -611,7 +678,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
             // Treat \r as new line only if it's not the delimiter
 
-            if (c == '\r' && Delimiter != '\r')
+            if (c == '\r' && _delimiter != '\r')
             {
                 pos++;
 
@@ -622,7 +689,13 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                     if (_buffer[pos] == '\n')
                         pos++;
                 }
-                else if (ReadBuffer()) pos = _buffer[0] == '\n' ? 1 : 0;
+                else if (ReadBuffer())
+                {
+                    if (_buffer[0] == '\n')
+                        pos = 1;
+                    else
+                        pos = 0;
+                }
 
                 if (pos >= _bufferLength)
                 {
@@ -659,8 +732,14 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private bool IsNewLine(int pos)
         {
             Debug.Assert(pos < _bufferLength);
+
             var c = _buffer[pos];
-            return c == '\n' || c == '\r' && Delimiter != '\r';
+
+            if (c == '\n')
+                return true;
+            if (c == '\r' && _delimiter != '\r')
+                return true;
+            return false;
         }
 
         /// <summary>
@@ -677,7 +756,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
             CheckDisposed();
 
-            _bufferLength = _reader.Read(_buffer, 0, BufferSize);
+            _bufferLength = _reader.Read(_buffer, 0, _bufferSize);
 
             if (_bufferLength > 0)
                 return true;
@@ -718,15 +797,15 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             if (!initializing)
             {
                 if (field < 0 || field >= _fieldCount)
-                    throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                    throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", field));
 
-                if (CurrentRecordIndex < 0)
-                    throw new InvalidOperationException("No current record.");
+                if (_currentRecordIndex < 0)
+                    throw new InvalidOperationException("NoCurrentRecord");
 
                 // Directly return field if cached
                 if (_fields[field] != null)
                     return _fields[field];
-                if (MissingFieldFlag)
+                if (_missingFieldFlag)
                     return HandleMissingField(null, field, ref _nextFieldStart);
             }
 
@@ -748,8 +827,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
                 string value = null;
 
-                if (MissingFieldFlag)
+                if (_missingFieldFlag)
+                {
                     value = HandleMissingField(value, index, ref _nextFieldStart);
+                }
                 else if (_nextFieldStart == _bufferLength)
                 {
                     // Handle_EOF1: Handle EOF here
@@ -766,17 +847,21 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                         }
                     }
                     else
+                    {
                         value = HandleMissingField(value, index, ref _nextFieldStart);
+                    }
                 }
                 else
                 {
                     // Trim spaces at start
-                    if (TrimSpaces)
+                    if (_trimSpaces)
                         SkipWhiteSpaces(ref _nextFieldStart);
 
                     if (_eof)
+                    {
                         value = string.Empty;
-                    else if (_buffer[_nextFieldStart] != Quote)
+                    }
+                    else if (_buffer[_nextFieldStart] != _quote)
                     {
                         // Non-quoted field
 
@@ -789,9 +874,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                             {
                                 var c = _buffer[pos];
 
-                                if (c == Delimiter)
+                                if (c == _delimiter)
                                 {
                                     _nextFieldStart = pos + 1;
+
                                     break;
                                 }
 
@@ -799,6 +885,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                                 {
                                     _nextFieldStart = pos;
                                     _eol = true;
+
                                     break;
                                 }
 
@@ -820,7 +907,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
                         if (!discardValue)
                         {
-                            if (!TrimSpaces)
+                            if (!_trimSpaces)
                             {
                                 if (!_eof && pos > start)
                                     value += new string(_buffer, start, pos - start);
@@ -839,13 +926,15 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                                         value += new string(_buffer, start, pos - start);
                                 }
                                 else
+                                {
                                     pos = -1;
+                                }
 
                                 // If pos <= 0, that means the trimming went past buffer start,
                                 // and the concatenated value needs to be trimmed too.
                                 if (pos <= 0)
                                 {
-                                    pos = value?.Length - 1 ?? -1;
+                                    pos = value == null ? -1 : value.Length - 1;
 
                                     // Do the trimming
                                     while (pos > -1 && IsWhiteSpace(value[pos]))
@@ -902,14 +991,14 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                                     start = pos;
                                 }
                                 // IF current char is escape AND (escape and quote are different OR next char is a quote)
-                                else if (c == Escape && (Escape != Quote || pos + 1 < _bufferLength && _buffer[pos + 1] == Quote || pos + 1 == _bufferLength && _reader.Peek() == Quote))
+                                else if (c == _escape && (_escape != _quote || pos + 1 < _bufferLength && _buffer[pos + 1] == _quote || pos + 1 == _bufferLength && _reader.Peek() == _quote))
                                 {
                                     if (!discardValue)
                                         value += new string(_buffer, start, pos - start);
 
                                     escaped = true;
                                 }
-                                else if (c == Quote)
+                                else if (c == _quote)
                                 {
                                     quoted = false;
                                     break;
@@ -929,7 +1018,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
                             if (!ReadBuffer())
                             {
-                                HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, CurrentRecordIndex), index), ref _nextFieldStart);
+                                HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, _currentRecordIndex), index), ref _nextFieldStart);
                                 return null;
                             }
                         }
@@ -948,13 +1037,15 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
                             // Skip delimiter
                             bool delimiterSkipped;
-                            if (_nextFieldStart < _bufferLength && _buffer[_nextFieldStart] == Delimiter)
+                            if (_nextFieldStart < _bufferLength && _buffer[_nextFieldStart] == _delimiter)
                             {
                                 _nextFieldStart++;
                                 delimiterSkipped = true;
                             }
                             else
+                            {
                                 delimiterSkipped = false;
+                            }
 
                             // Skip new line delimiter if initializing or last field
                             // (if the next field is missing, it will be caught when parsed)
@@ -963,7 +1054,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
                             // If no delimiter is present after the quoted field and it is not the last field, then it is a parsing error
                             if (!delimiterSkipped && !_eof && !(_eol || IsNewLine(_nextFieldStart)))
-                                HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, CurrentRecordIndex), index), ref _nextFieldStart);
+                                HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, _currentRecordIndex), index), ref _nextFieldStart);
                         }
 
                         if (!discardValue)
@@ -996,7 +1087,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             }
 
             // Getting here is bad ...
-            HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, CurrentRecordIndex), index), ref _nextFieldStart);
+            HandleParseError(new MalformedCsvException(GetCurrentRawData(), _nextFieldStart, Math.Max(0, _currentRecordIndex), index), ref _nextFieldStart);
             return null;
         }
 
@@ -1031,7 +1122,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 if (_firstRecordInCache)
                 {
                     _firstRecordInCache = false;
-                    CurrentRecordIndex++;
+                    _currentRecordIndex++;
 
                     return true;
                 }
@@ -1043,7 +1134,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
             if (!_initialized)
             {
-                _buffer = new char[BufferSize];
+                _buffer = new char[_bufferSize];
 
                 // will be replaced if and when headers are read
                 _fieldHeaders = new string[0];
@@ -1061,11 +1152,11 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 _fields = new string[16];
 
                 while (ReadField(_fieldCount, true, false) != null)
-                    if (ParseErrorFlag)
+                    if (_parseErrorFlag)
                     {
                         _fieldCount = 0;
                         Array.Clear(_fields, 0, _fields.Length);
-                        ParseErrorFlag = false;
+                        _parseErrorFlag = false;
                         _nextFieldIndex = 0;
                     }
                     else
@@ -1086,10 +1177,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 _initialized = true;
 
                 // If headers are present, call ReadNextRecord again
-                if (HasHeaders)
+                if (_hasHeaders)
                 {
                     // Don't count first record as it was the headers
-                    CurrentRecordIndex = -1;
+                    _currentRecordIndex = -1;
 
                     _firstRecordInCache = false;
 
@@ -1117,7 +1208,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                         _nextFieldIndex = 0;
                         _eol = false;
 
-                        CurrentRecordIndex++;
+                        _currentRecordIndex++;
                         return true;
                     }
                 }
@@ -1126,12 +1217,12 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                     if (onlyReadHeaders)
                     {
                         _firstRecordInCache = true;
-                        CurrentRecordIndex = -1;
+                        _currentRecordIndex = -1;
                     }
                     else
                     {
                         _firstRecordInCache = false;
-                        CurrentRecordIndex = 0;
+                        _currentRecordIndex = 0;
                     }
                 }
             }
@@ -1139,7 +1230,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             {
                 if (skipToNextLine)
                     SkipToNextLine(ref _nextFieldStart);
-                else if (CurrentRecordIndex > -1 && !MissingFieldFlag)
+                else if (_currentRecordIndex > -1 && !_missingFieldFlag)
                     // If not already at end of record, move there
                     if (!_eol && !_eof)
                     {
@@ -1153,23 +1244,25 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 if (!_firstRecordInCache && !SkipEmptyAndCommentedLines(ref _nextFieldStart))
                     return false;
 
-                if (HasHeaders || !_firstRecordInCache)
+                if (_hasHeaders || !_firstRecordInCache)
                     _eol = false;
 
                 // Check to see if the first record is in cache.
                 // This can happen when initializing a reader with no headers
                 // because one record must be read to get the field count automatically
                 if (_firstRecordInCache)
+                {
                     _firstRecordInCache = false;
+                }
                 else
                 {
                     Array.Clear(_fields, 0, _fields.Length);
                     _nextFieldIndex = 0;
                 }
 
-                MissingFieldFlag = false;
-                ParseErrorFlag = false;
-                CurrentRecordIndex++;
+                _missingFieldFlag = false;
+                _parseErrorFlag = false;
+                _currentRecordIndex++;
             }
 
             return true;
@@ -1199,7 +1292,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                     DoSkipEmptyAndCommentedLines(ref pos);
                 }
                 else
+                {
                     return false;
+                }
 
             return !_eof;
         }
@@ -1218,14 +1313,16 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private void DoSkipEmptyAndCommentedLines(ref int pos)
         {
             while (pos < _bufferLength)
-                if (_buffer[pos] == Comment)
+                if (_buffer[pos] == _comment)
                 {
                     pos++;
                     SkipToNextLine(ref pos);
                 }
                 else if (SkipEmptyLines && ParseNewLine(ref pos)) { }
                 else
+                {
                     break;
+                }
         }
 
         /// <summary>
@@ -1288,7 +1385,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             if (error == null)
                 throw new ArgumentNullException("error");
 
-            ParseErrorFlag = true;
+            _parseErrorFlag = true;
 
             switch (DefaultParseErrorAction)
             {
@@ -1305,28 +1402,28 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                             throw e.Error;
 
                         case ParseErrorAction.RaiseEvent:
-                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "Parse error action invalid inside parse error event."), e.Error);
+                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "ParseErrorActionInvalidInsideParseErrorEvent", e.Action), e.Error);
 
                         case ParseErrorAction.AdvanceToNextLine:
                             // already at EOL when fields are missing, so don't skip to next line in that case
-                            if (!MissingFieldFlag && pos >= 0)
+                            if (!_missingFieldFlag && pos >= 0)
                                 SkipToNextLine(ref pos);
                             break;
 
                         default:
-                            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Parse error action not supported."), e.Error);
+                            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "ParseErrorActionNotSupported", e.Action), e.Error);
                     }
 
                     break;
 
                 case ParseErrorAction.AdvanceToNextLine:
                     // already at EOL when fields are missing, so don't skip to next line in that case
-                    if (!MissingFieldFlag && pos >= 0)
+                    if (!_missingFieldFlag && pos >= 0)
                         SkipToNextLine(ref pos);
                     break;
 
                 default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Parse error action not supported."), error);
+                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "ParseErrorActionNotSupported", DefaultParseErrorAction), error);
             }
         }
 
@@ -1344,9 +1441,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private string HandleMissingField(string value, int fieldIndex, ref int currentPosition)
         {
             if (fieldIndex < 0 || fieldIndex >= _fieldCount)
-                throw new ArgumentOutOfRangeException("fieldIndex", fieldIndex, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                throw new ArgumentOutOfRangeException("fieldIndex", fieldIndex, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", fieldIndex));
 
-            MissingFieldFlag = true;
+            _missingFieldFlag = true;
 
             for (var i = fieldIndex + 1; i < _fieldCount; i++)
                 _fields[i] = null;
@@ -1356,7 +1453,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             switch (MissingFieldAction)
             {
                 case MissingFieldAction.ParseError:
-                    HandleParseError(new MissingFieldCsvException(GetCurrentRawData(), currentPosition, Math.Max(0, CurrentRecordIndex), fieldIndex), ref currentPosition);
+                    HandleParseError(new MissingFieldCsvException(GetCurrentRawData(), currentPosition, Math.Max(0, _currentRecordIndex), fieldIndex), ref currentPosition);
                     return value;
 
                 case MissingFieldAction.ReplaceByEmpty:
@@ -1366,7 +1463,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                     return null;
 
                 default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Missing field action not supported."));
+                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "MissingFieldActionNotSupported", MissingFieldAction));
             }
         }
 
@@ -1383,9 +1480,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         private void ValidateDataReader(DataReaderValidations validations)
         {
             if ((validations & DataReaderValidations.IsInitialized) != 0 && !_initialized)
-                throw new InvalidOperationException("No current record.");
+                throw new InvalidOperationException("NoCurrentRecord");
+
             if ((validations & DataReaderValidations.IsNotClosed) != 0 && _isDisposed)
-                throw new InvalidOperationException("Reader closed.");
+                throw new InvalidOperationException("ReaderClosed");
         }
 
         /// <summary>
@@ -1402,7 +1500,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             EnsureInitialize();
 
             if (field < 0 || field >= _fieldCount)
-                throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", field));
 
             if (fieldOffset < 0 || fieldOffset >= int.MaxValue)
                 throw new ArgumentOutOfRangeException("fieldOffset");
@@ -1422,11 +1520,14 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             Debug.Assert(destinationArray.GetType() == typeof(char[]) || destinationArray.GetType() == typeof(byte[]));
 
             if (destinationArray.GetType() == typeof(char[]))
+            {
                 Array.Copy(value.ToCharArray((int) fieldOffset, length), 0, destinationArray, destinationOffset, length);
+            }
             else
             {
                 var chars = value.ToCharArray((int) fieldOffset, length);
                 var source = new byte[chars.Length];
+                ;
 
                 for (var i = 0; i < chars.Length; i++)
                     source[i] = Convert.ToByte(chars[i]);
@@ -1437,6 +1538,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             return length;
         }
 
+        // For SELECT statements, -1 must be returned.
         int IDataReader.RecordsAffected => -1;
 
         bool IDataReader.IsClosed => _eof;
@@ -1452,6 +1554,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         bool IDataReader.Read()
         {
             ValidateDataReader(DataReaderValidations.IsNotClosed);
+
             return ReadNextRecord();
         }
 
@@ -1497,8 +1600,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
             string[] columnNames;
 
-            if (HasHeaders)
+            if (_hasHeaders)
+            {
                 columnNames = _fieldHeaders;
+            }
             else
             {
                 columnNames = new string[_fieldCount];
@@ -1605,7 +1710,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             ValidateDataReader(DataReaderValidations.IsInitialized | DataReaderValidations.IsNotClosed);
 
             if (i < 0 || i >= _fieldCount)
-                throw new ArgumentOutOfRangeException("i", i, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                throw new ArgumentOutOfRangeException("i", i, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", i));
 
             return typeof(string);
         }
@@ -1633,9 +1738,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             ValidateDataReader(DataReaderValidations.IsNotClosed);
 
             if (i < 0 || i >= _fieldCount)
-                throw new ArgumentOutOfRangeException("i", i, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                throw new ArgumentOutOfRangeException("i", i, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", i));
 
-            if (HasHeaders)
+            if (_hasHeaders)
                 return _fieldHeaders[i];
             return "Column" + i.ToString(CultureInfo.InvariantCulture);
         }
@@ -1658,7 +1763,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
             var value = this[i];
 
-            if (int.TryParse(value, out var result))
+            int result;
+
+            if (int.TryParse(value, out result))
                 return result != 0;
             return bool.Parse(value);
         }
@@ -1680,8 +1787,10 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             EnsureInitialize();
             ValidateDataReader(DataReaderValidations.IsNotClosed);
 
-            if (!_fieldHeaderIndexes.TryGetValue(name, out var index))
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Field header not found."), "name");
+            int index;
+
+            if (!_fieldHeaderIndexes.TryGetValue(name, out index))
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "FieldHeaderNotFound", name), "name");
 
             return index;
         }
@@ -1701,13 +1810,17 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         IDataReader IDataRecord.GetData(int i)
         {
             ValidateDataReader(DataReaderValidations.IsInitialized | DataReaderValidations.IsNotClosed);
-            return i == 0 ? this : null;
+
+            if (i == 0)
+                return this;
+            return null;
         }
 
-        long IDataRecord.GetChars(int i, long fieldOffset, char[] buffer, int bufferOffset, int length)
+        long IDataRecord.GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
         {
             ValidateDataReader(DataReaderValidations.IsInitialized | DataReaderValidations.IsNotClosed);
-            return CopyFieldToArray(i, fieldOffset, buffer, bufferOffset, length);
+
+            return CopyFieldToArray(i, fieldoffset, buffer, bufferoffset, length);
         }
 
         string IDataRecord.GetString(int i)
@@ -1790,7 +1903,13 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// Raises the <see cref="M:Disposed"/> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        protected virtual void OnDisposed(EventArgs e) => Disposed?.Invoke(this, e);
+        protected virtual void OnDisposed(EventArgs e)
+        {
+            var handler = Disposed;
+
+            if (handler != null)
+                handler(this, e);
+        }
 
         /// <summary>
         /// Checks if the instance has been disposed of, and if it has, throws an <see cref="T:System.ComponentModel.ObjectDisposedException"/>; otherwise, does nothing.

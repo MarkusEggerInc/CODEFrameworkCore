@@ -48,7 +48,9 @@ namespace CODE.Framework.Services.Client
 
             var httpMethod = RestHelper.GetHttpMethodFromContract(method.Name, _contractType);
             var exposedMethodName = RestHelper.GetExposedMethodNameFromContract(method.Name, httpMethod, _contractType);
-            var serviceUriAbsoluteUri = _serviceUri.AbsoluteUri + "/" + exposedMethodName;
+            var serviceUri = _serviceUri.AbsoluteUri.Trim();
+            if (serviceUri.EndsWith("/")) serviceUri = serviceUri.Substring(0, serviceUri.Length - 1);
+            var serviceUriAbsoluteUri = serviceUri + "/" + exposedMethodName;
 
             try
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -10,12 +11,12 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
     /// Represents a reader that provides fast, cached, dynamic access to CSV data.
     /// </summary>
     /// <remarks>The number of records is limited to <see cref="System.Int32.MaxValue"/> - 1.</remarks>
-    public class CachedCsvReader : CsvReader, IListSource
+    public partial class CachedCsvReader : CsvReader, IListSource
     {
         /// <summary>
         /// Contains the cached records.
         /// </summary>
-        internal readonly List<string[]> _records;
+        private readonly List<string[]> _records;
 
         /// <summary>
         /// Contains the current record index (inside the cached records array).
@@ -174,7 +175,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// <exception cref="T:System.ComponentModel.ObjectDisposedException">
         ///		The instance has been disposed of.
         /// </exception>
-        public override String this[int field]
+        public override string this[int field]
         {
             get
             {
@@ -183,10 +184,11 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 if (_currentRecordIndex > -1)
                 {
                     if (field > -1 && field < FieldCount)
-                        return _records[(int)_currentRecordIndex][field];
-                    throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "Field index out of range."));
+                        return _records[(int) _currentRecordIndex][field];
+                    throw new ArgumentOutOfRangeException("field", field, string.Format(CultureInfo.InvariantCulture, "FieldIndexOutOfRange", field));
                 }
-                throw new InvalidOperationException("No current record.");
+
+                throw new InvalidOperationException("NoCurrentRecord");
             }
         }
 
@@ -224,15 +226,16 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 _currentRecordIndex++;
                 return true;
             }
+
             _readingStream = true;
 
             try
             {
-                bool canRead = base.ReadNextRecord(onlyReadHeaders, skipToNextLine);
+                var canRead = base.ReadNextRecord(onlyReadHeaders, skipToNextLine);
 
                 if (canRead)
                 {
-                    string[] record = new string[FieldCount];
+                    var record = new string[FieldCount];
 
                     if (base.CurrentRecordIndex > -1)
                     {
@@ -251,7 +254,9 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
                 }
                 else
                     // No more records to read, so set array size to only what is needed
+                {
                     _records.Capacity = _records.Count;
+                }
 
                 return canRead;
             }
@@ -264,10 +269,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         /// <summary>
         /// Moves before the first record.
         /// </summary>
-        public void MoveToStart()
-        {
-            _currentRecordIndex = -1;
-        }
+        public void MoveToStart() => _currentRecordIndex = -1;
 
         /// <summary>
         /// Moves to the last record read so far.
@@ -287,7 +289,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
         public override void MoveTo(long record)
         {
             if (record < -1)
-                throw new ArgumentOutOfRangeException("record", record, "Record index less than zero.");
+                throw new ArgumentOutOfRangeException("record", record, "RecordIndexLessThanZero");
 
             if (record <= base.CurrentRecordIndex)
                 _currentRecordIndex = record;
@@ -295,7 +297,7 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
             {
                 _currentRecordIndex = base.CurrentRecordIndex;
 
-                long offset = record - _currentRecordIndex;
+                var offset = record - _currentRecordIndex;
 
                 // read to the last record before the one we want
                 while (offset-- > 0 && ReadNextRecord()) ;
@@ -304,12 +306,6 @@ namespace CODE.Framework.Fundamentals.Utilities.Csv
 
         bool IListSource.ContainsListCollection => false;
 
-        System.Collections.IList IListSource.GetList()
-        {
-            if (_bindingList == null)
-                _bindingList = new CsvBindingList(this);
-
-            return _bindingList;
-        }
+        IList IListSource.GetList() => _bindingList ?? (_bindingList = new CsvBindingList(this));
     }
 }

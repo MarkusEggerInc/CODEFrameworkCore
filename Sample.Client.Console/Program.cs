@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using CODE.Framework.Fundamentals.Configuration;
+using CODE.Framework.Fundamentals.Utilities;
+using CODE.Framework.Fundamentals.Utilities.CODE.Framework.Core.Utilities;
 using CODE.Framework.Services.Client;
 using Sample.Contracts;
 
@@ -10,6 +13,14 @@ namespace Sample.Client.Console
         static void Main(string[] args)
         {
             var originalColor = System.Console.ForegroundColor;
+
+            //var markdown = "# Hello World\r\n\r\nThis _is_ a test :-)\r\n\r\ncodemag.com";
+            //var html = MarkdownHelper.ToHtml(markdown);
+            //var text = MarkupHelper.GetStrippedBodyOnly(html);
+
+            //var implementation = TransparentProxyGenerator.GetProxy<ITest>(new MyProxyHandler());
+            //var test = implementation.ToString();
+            //var result = implementation.HelloWorld("Test");
 
             ConfigurationSettings.Sources["Memory"].Settings["RestServiceUrl:ICustomerService"] = "http://localhost:5008/api/customers";
             ConfigurationSettings.Sources["Memory"].Settings["RestServiceUrl:IUserService"] = "http://localhost:5008/api/users";
@@ -79,6 +90,20 @@ namespace Sample.Client.Console
 
             System.Console.ForegroundColor = originalColor;
             System.Console.WriteLine("Done.");
+        }
+    }
+
+    public interface ITest
+    {
+        string HelloWorld(string test);
+    }
+
+    public class MyProxyHandler : IProxyHandler
+    {
+        public object OnMethod(MethodInfo method, object[] args)
+        {
+            System.Console.WriteLine("Method called: " + method.Name);
+            return Activator.CreateInstance(method.ReturnType);
         }
     }
 }

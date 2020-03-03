@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,13 +15,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Westwind.Utilities;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Writers;
-using System.Globalization;
+using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -109,8 +106,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 try
                 {
                     // get User from Http Context
-                    var context = serviceProvider.GetRequiredService(typeof(IHttpContextAccessor)) as IHttpContextAccessor;
-                    return context.HttpContext.User;
+                    return serviceProvider.GetRequiredService(typeof(IHttpContextAccessor)) is IHttpContextAccessor context ? context.HttpContext.User : null;
                 }
                 catch
                 {
@@ -134,110 +130,104 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (serviceConfig.Cors.UseCorsPolicy)
                 appBuilder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
-            foreach (var serviceInstanceConfig in serviceConfig.Services)
-                // conditionally route to service handler based on RouteBasePath
-                appBuilder.MapWhen(
-                                   context =>
-                                   {
-                                       var requestPath = context.Request.Path.ToString().ToLower();
-                                       var servicePath = serviceInstanceConfig.RouteBasePath.ToLower();
-                                       var matched = requestPath == servicePath || requestPath.StartsWith(servicePath.Replace("//", "/") + "/");
-                                       return matched;
-                                   },
-                                   builder =>
-                                   {
-                                       //if (serviceConfig.Cors.UseCorsPolicy)
-                                       //    builder.UseCors(serviceConfig.Cors.CorsPolicyName);
+            // Endpoints require routing 
+            appBuilder.UseRouting();
 
-                                       // Build up route mapping
-                                       builder.UseRouter(routeBuilder =>
+            appBuilder.UseEndpoints(endpoints =>
+            {
+                foreach (var serviceInstanceConfig in serviceConfig.Services)
+                    // conditionally route to service handler based on RouteBasePath
+                    appBuilder.MapWhen(
+                                       context =>
                                        {
-                                           // Get Service interface = assuming first interface def is service interface
-                                           var interfaces = serviceInstanceConfig.ServiceType.GetInterfaces();
-                                           if (interfaces.Length < 1)
-                                               throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
+                                           var requestPath = context.Request.Path.ToString().ToLower();
+                                           var servicePath = serviceInstanceConfig.RouteBasePath.ToLower();
+                                           var matched = requestPath == servicePath || requestPath.StartsWith(servicePath.Replace("//", "/") + "/");
+                                           return matched;
+                                       },
+                                       builder =>
+                                       {
+                                           //if (serviceConfig.Cors.UseCorsPolicy)
+                                           //    builder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
-                                           // TODO: Optionally enable swagger support.
-                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
-                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
-
-                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
-
-                                           // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
-                                           // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
-                                           foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
+                                           // Build up route mapping
+                                           builder.UseRouter(routeBuilder =>
                                            {
-                                               // find service contract                                
-                                               var interfaceMethod = interfaces[0].GetMethod(method.Name);
-                                               if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+                                               // Get Service interface = assuming first interface def is service interface
+                                               var interfaces = serviceInstanceConfig.ServiceType.GetInterfaces();
+                                               if (interfaces.Length < 1)
+                                                   throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                                               var restAttribute = GetRestAttribute(interfaceMethod);
-                                               if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+                                               // TODO: Optionally enable swagger support.
+                                               var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
+                                               if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
 
-                                               var relativeRoute = restAttribute.Route;
-                                               if (relativeRoute == null)
+                                               routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
+
+                                               // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
+                                               // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
+                                               foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
                                                {
-                                                   // If no route is defined, we either build a route out of name and other attributes, or we use the propertyInfo name as the last resort.
-                                                   // Note: string.Empty is a valid route (and also a valid name). Only null values indicate that the setting has not been set!
+                                                   // find service contract                                
+                                                   var interfaceMethod = interfaces[0].GetMethod(method.Name);
+                                                   if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
 
-                                                   if (restAttribute.Name == null)
-                                                       relativeRoute = method.Name;
-                                                   else
-                                                       relativeRoute = restAttribute.Name;
+                                                   var restAttribute = GetRestAttribute(interfaceMethod);
+                                                   if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
 
-                                                   // We also have to take a look at the parameter(s) - there should be only one - to build the route
-                                                   var parameters = method.GetParameters();
-                                                   if (parameters.Length > 0)
+                                                   var relativeRoute = restAttribute.Route;
+                                                   if (relativeRoute == null)
                                                    {
-                                                       var parameterType = parameters[0].ParameterType;
-                                                       var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-                                                       var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
-                                                       foreach (var inlineParameter in inlineParameters)
-                                                           relativeRoute += "/{" + inlineParameter + "}";
+                                                       // If no route is defined, we either build a route out of name and other attributes, or we use the propertyInfo name as the last resort.
+                                                       // Note: string.Empty is a valid route (and also a valid name). Only null values indicate that the setting has not been set!
+
+                                                       relativeRoute = restAttribute.Name ?? method.Name;
+
+                                                       // We also have to take a look at the parameter(s) - there should be only one - to build the route
+                                                       var parameters = method.GetParameters();
+                                                       if (parameters.Length > 0)
+                                                       {
+                                                           var parameterType = parameters[0].ParameterType;
+                                                           var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                                                           var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
+                                                           foreach (var inlineParameter in inlineParameters)
+                                                               relativeRoute += "/{" + inlineParameter + "}";
+                                                       }
                                                    }
-                                               }
 
-                                               if (relativeRoute.StartsWith("/")) relativeRoute = relativeRoute.Substring(1);
+                                                   if (relativeRoute.StartsWith("/")) relativeRoute = relativeRoute.Substring(1);
 
-                                               // Figure out the full route we pass the ASP.NET Core Route Manager
-                                               var fullRoute = (serviceInstanceConfig.RouteBasePath + "/" + relativeRoute).Replace("//", "/");
-                                               if (fullRoute.StartsWith("/")) fullRoute = fullRoute.Substring(1);
+                                                   // Figure out the full route we pass the ASP.NET Core Route Manager
+                                                   var fullRoute = (serviceInstanceConfig.RouteBasePath + "/" + relativeRoute).Replace("//", "/");
+                                                   if (fullRoute.StartsWith("/")) fullRoute = fullRoute.Substring(1);
 
-                                               // Cache reflection and context data
-                                               var methodContext = new MethodInvocationContext(method, serviceConfig, serviceInstanceConfig);
+                                                   // Cache reflection and context data
+                                                   var methodContext = new MethodInvocationContext(method, serviceConfig, serviceInstanceConfig);
 
-                                               var roles = restAttribute.AuthorizationRoles;
-                                               if (roles != null) methodContext.AuthorizationRoles = roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                                   var roles = restAttribute.AuthorizationRoles;
+                                                   if (roles != null)
+                                                       methodContext.AuthorizationRoles = roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                                               // This code is what triggers the SERVICE METHOD EXECUTION via a delegate that is called when the route is matched
-                                               Func<HttpRequest, HttpResponse, RouteData, Task> exec =
-                                                   async (req, resp, routeData) =>
+                                                   // This code is what triggers the SERVICE METHOD EXECUTION via a delegate that is called when the route is matched
+                                                   Func<HttpRequest, HttpResponse, RouteData, Task> exec =
+                                                       async (req, resp, routeData) =>
+                                                       {
+                                                           // ReSharper disable once AccessToModifiedClosure
+                                                           var handler = new ServiceHandler(req.HttpContext, routeData, methodContext);
+                                                           await handler.ProcessRequest();
+                                                       };
+
+                                                   routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) =>
                                                    {
-                                                       // ReSharper disable once AccessToModifiedClosure
-                                                       var handler = new ServiceHandler(req.HttpContext, routeData, methodContext);
-                                                       await handler.ProcessRequest();
-                                                   };
+                                                       resp.StatusCode = StatusCodes.Status204NoContent;
+                                                       await Task.CompletedTask;
+                                                   });
 
-                                               routeBuilder.MapVerb("OPTIONS", fullRoute, async (req, resp, route) =>
-                                               {
-                                                   //if (req.Headers.ContainsKey("Origin"))
-                                                   //    resp.Headers.Add("Access-Control-Allow-Origin", req.Headers["Origin"]);
-                                                   //else
-                                                   //    resp.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
-
-                                                   //if (req.Headers.ContainsKey("Access-Control-Request-Method"))
-                                                   //    resp.Headers.Add("Access-Control-Allow-Methods", new StringValues("*")); // TODO: Would be nice to return a more meaningful list based on what is actually exposed.
-
-                                                   //if (req.Headers.ContainsKey("Access-Control-Request-Headers"))
-                                                   //    resp.Headers.Add("Access-Control-Allow-Methods", req.Headers["Access-Control-Request-Headers"]);
-
-                                                   resp.StatusCode = StatusCodes.Status204NoContent;
-                                               });
-
-                                               routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
-                                           }
+                                                   routeBuilder.MapVerb(restAttribute.Method.ToString(), fullRoute, exec);
+                                               }
+                                           });
                                        });
-                                   });
+            });
 
             return appBuilder;
         }
@@ -390,17 +380,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return hostValue + routeBase;
         }
 
-        internal static string WriteSwaggerToJson(OpenApiDocument document)
+        internal static string WriteSwaggerToJson(OpenApiDocument docuemt)
         {
             try
             {
                 var outputStringWriter = new StringWriter(CultureInfo.InvariantCulture);
                 var writer = new OpenApiJsonWriter(outputStringWriter);
-                document.SerializeAsV2(writer);
+                docuemt.SerializeAsV2(writer);
                 writer.Flush();
                 return outputStringWriter.GetStringBuilder().ToString();
             }
-            catch (Exception ex)
+            catch
             {
                 return string.Empty;
             }
@@ -437,9 +427,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
             foreach (var propertyInfo in propertyInfos)
             {
                 var attribute = GetRestUrlParameterAttribute(propertyInfo);
-                if (attribute != null)
-                    if (attribute.Mode == UrlParameterMode.Inline)
-                        list.Add(new PropertyInfoHelper { Name = propertyInfo.Name, Order = attribute.Sequence });
+                if (attribute == null) continue;
+                if (attribute.Mode == UrlParameterMode.Inline)
+                    list.Add(new PropertyInfoHelper { Name = propertyInfo.Name, Order = attribute.Sequence });
             }
 
             return list.OrderBy(a => a.Order).Select(a => a.Name);
