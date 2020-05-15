@@ -15,9 +15,9 @@
     <PackageIcon>CodeFramework_Small.png</PackageIcon>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
-    <AssemblyVersion>1.5.4.0</AssemblyVersion>
-    <FileVersion>1.5.4.0</FileVersion>
-    <Version>1.5.4</Version>
+    <AssemblyVersion>1.5.6.0</AssemblyVersion>
+    <FileVersion>1.5.6.0</FileVersion>
+    <Version>1.5.6</Version>
   </PropertyGroup>
 
   

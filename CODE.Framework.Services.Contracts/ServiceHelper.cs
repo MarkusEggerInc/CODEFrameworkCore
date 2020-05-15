@@ -30,12 +30,14 @@ namespace CODE.Framework.Services.Contracts
             }
         }
 
+        public static bool ShowExtendedFailureInformation { get; set; } = false;
+
         public static TResponse GetPopulatedFailureResponse<TResponse>(Exception ex) where TResponse: new()
         {
             var response = new TResponse();
 
             var frame = new StackFrame(1);
-            var message = IsDebug() ? GetExceptionText(ex) : $"Generic error in {frame.GetMethod().DeclaringType.Name}::{frame.GetMethod().Name}";
+            var message = ShowExtendedFailureInformation ? GetExceptionText(ex) : $"Generic error in {frame.GetMethod().DeclaringType.Name}::{frame.GetMethod().Name}";
 
             if (response is BaseServiceResponse baseResponse)
             {
@@ -72,30 +74,30 @@ namespace CODE.Framework.Services.Contracts
             return response;
         }
 
-        private static string _isDebug = string.Empty;
-        public static bool IsDebug()
-        {
-            if (!string.IsNullOrEmpty(_isDebug)) return _isDebug == "YES";
+        //private static string _isDebug = string.Empty;
+        //public static bool IsDebug()
+        //{
+        //    if (!string.IsNullOrEmpty(_isDebug)) return _isDebug == "YES";
 
-            var assembly = Assembly.GetEntryAssembly();
-            if (assembly != null)
-            {
-                var attributes = assembly.GetCustomAttributes(typeof(DebuggableAttribute), true);
-                if (attributes.Length == 0)
-                {
-                    _isDebug = "NO";
-                    return false;
-                }
+        //    var assembly = Assembly.GetEntryAssembly();
+        //    if (assembly != null)
+        //    {
+        //        var attributes = assembly.GetCustomAttributes(typeof(DebuggableAttribute), true);
+        //        if (attributes.Length == 0)
+        //        {
+        //            _isDebug = "NO";
+        //            return false;
+        //        }
 
-                var debuggableAttribute = (DebuggableAttribute)attributes[0];
-                var debuggableAttributeIsJitTrackingEnabled = debuggableAttribute.IsJITTrackingEnabled;
-                _isDebug = debuggableAttributeIsJitTrackingEnabled ? "YES" : "NO";
-                return debuggableAttributeIsJitTrackingEnabled;
-            }
+        //        var debuggableAttribute = (DebuggableAttribute)attributes[0];
+        //        var debuggableAttributeIsJitTrackingEnabled = debuggableAttribute.IsJITTrackingEnabled;
+        //        _isDebug = debuggableAttributeIsJitTrackingEnabled ? "YES" : "NO";
+        //        return debuggableAttributeIsJitTrackingEnabled;
+        //    }
 
-            _isDebug = "NO";
-            return false;
-        }
+        //    _isDebug = "NO";
+        //    return false;
+        //}
 
         private static string GetExceptionText(Exception exception)
         {

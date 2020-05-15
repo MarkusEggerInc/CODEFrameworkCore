@@ -507,6 +507,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <returns>Just the path as a string</returns>
         public static string JustPath(string path)
         {
+            if (path.IndexOf("\\", StringComparison.Ordinal) < 1) return string.Empty;
             return path.Substring(0, At("\\", path, Occurs("\\", path)) - 1);
         }
 

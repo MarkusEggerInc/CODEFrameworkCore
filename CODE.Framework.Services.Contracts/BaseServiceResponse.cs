@@ -15,7 +15,7 @@ namespace CODE.Framework.Services.Contracts
         /// </summary>
         /// <value>The success.</value>
         [DataMember(IsRequired = true)]
-        public bool Success { get; set; } = true;
+        public bool Success { get; set; } = false;
 
         [DataMember]
         public string FailureInformation { get; set; } = string.Empty;
