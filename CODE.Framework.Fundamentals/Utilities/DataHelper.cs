@@ -105,6 +105,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static Guid ToGuidSafe(this object value)
         {
+            if (value == null) return Guid.Empty;
+
             try
             {
                 return value != DBNull.Value ? (Guid) value : Guid.Empty;
@@ -132,6 +134,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static string ToStringSafe(this object value)
         {
+            if (value == null) return string.Empty;
+
             try
             {
                 return value != DBNull.Value ? value.ToString() : string.Empty;
@@ -159,6 +163,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static bool ToBooleanSafe(this object value)
         {
+            if (value == null) return false;
+
             try
             {
                 return value != DBNull.Value && (bool) value;
@@ -186,6 +192,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static DateTime ToDateTimeSafe(this object value)
         {
+            if (value == null) return DateTime.MinValue;
+
             try
             {
                 return value != DBNull.Value ? (DateTime) value : DateTime.MinValue;
@@ -213,6 +221,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static int ToIntegerSafe(this object value)
         {
+            if (value == null) return 0;
+
             try
             {
                 return value != DBNull.Value ? (int) value : 0;
@@ -240,6 +250,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static double ToDoubleSafe(this object value)
         {
+            if (value == null) return 0.0;
+
             try
             {
                 return value != DBNull.Value ? (double) value : 0.0;
@@ -267,6 +279,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static decimal ToDecimalSafe(this object value)
         {
+            if (value == null) return 0m;
+
             try
             {
                 return value != DBNull.Value ? (decimal) value : 0m;
@@ -294,6 +308,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static char ToCharSafe(this object value)
         {
+            if (value == null) return ' ';
+
             try
             {
                 return value != DBNull.Value ? (char) value : ' ';
@@ -321,13 +337,15 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </example>
         public static byte[] ToByteArraySafe(this object value)
         {
+            if (value == null) return Array.Empty<byte>();
+
             try
             {
-                return value != DBNull.Value ? (byte[]) value : new byte[0];
+                return value != DBNull.Value ? (byte[]) value : Array.Empty<byte>();
             }
             catch
             {
-                return new byte[0];
+                return Array.Empty<byte>();
             }
         }
     }
