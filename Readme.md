@@ -263,7 +263,7 @@ You can configure a service method in the contract to explicitly require a set o
 
 ```cs
 [Rest(Method = RestMethods.Post, Name ="Customer", 
-      Route = "{id:guid}", AuthorizationRoles = "Administratortt")]
+      Route = "{id:guid}", AuthorizationRoles = "Administrator")]
 GetCustomerResponse GetCustomer(GetCustomerRequest request);
 ```
 
