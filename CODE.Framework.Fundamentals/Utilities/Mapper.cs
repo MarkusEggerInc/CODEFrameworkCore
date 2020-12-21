@@ -516,10 +516,53 @@ namespace CODE.Framework.Fundamentals.Utilities
                     break;
                 }
 
-                if (destinationItem == null) // Not found yet, so we have to add it
+                if (destinationItem == null) // Not found yet. Maybe the options provide a way to get a new type
+                    if (options.AddTargetCollectionItem != null)
+                        destinationItem = options.AddTargetCollectionItem(destination, sourceItem, options);
+
+                if (destinationItem == null) // Not found yet, so we have to add it manually
                 {
-                    destinationItem = Activator.CreateInstance(destinationItemType);
-                    destination.Add(destinationItem);
+                    var parameterlessConstructorFound = false;
+                    var constructors = destinationItemType.GetConstructors();
+                    foreach (var constructor in constructors)
+                        if (constructor.GetParameters().Length == 0)
+                        {
+                            parameterlessConstructorFound = true;
+                            break;
+                        }
+
+                    if (parameterlessConstructorFound)
+                    {
+                        destinationItem = Activator.CreateInstance(destinationItemType);
+                        destination.Add(destinationItem);
+                    }
+                    else
+                    {
+                        // This is not ideal, but we can try to see which constructors we have, and whether we can figure out what parameter to pass.
+                        foreach (var constructor in constructors)
+                        {
+                            var constructorParameters = constructor.GetParameters();
+                            if (constructorParameters.Length == 1)
+                            {
+                                // This could be a potential candidate, if the required parameter is the parent collection, which we can provide
+                                var collectionType = destination.GetType();
+                                if (collectionType == constructorParameters[0].ParameterType || collectionType.IsSubclassOf(constructorParameters[0].ParameterType))
+                                {
+                                    destinationItem = Activator.CreateInstance(destinationItemType, destination);
+                                    destination.Add(destinationItem);
+                                    break;
+                                }
+                                else if (constructorParameters[0].ParameterType.IsInterface)
+                                    foreach (var interfaceType in collectionType.GetInterfaces())
+                                        if (interfaceType == constructorParameters[0].ParameterType)
+                                        {
+                                            destinationItem = Activator.CreateInstance(destinationItemType, destination);
+                                            destination.Add(destinationItem);
+                                            break;
+                                        }
+                            }
+                        }
+                    }
                 }
 
                 MapObjects(sourceItem, destinationItem, options);
@@ -1613,6 +1656,13 @@ namespace CODE.Framework.Fundamentals.Utilities
         public List<string> MappedDestinationProperties { get; set; } = new List<string>();
         /// <summary>Contains the names of all destination properties excluded in the mapping operation. (Note: Only populated if LogMappedMembers = true)</summary>
         public List<string> IgnoredDestinationProperties { get; set; } = new List<string>();
+
+        /// <summary>
+        /// This delegate can be used to set a method that fires whenever a new collection item needs to be added to the target collection. 
+        /// The provided parameters are destination collection, source item, and mapping options.
+        /// The required output needs to be a reference to the newly created collection item.
+        /// </summary>
+        public Func<object, object, MappingOptions, object> AddTargetCollectionItem { get; set; }
     }
 
     /// <summary>
