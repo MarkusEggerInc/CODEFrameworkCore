@@ -2,19 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyVersion>1.5.13.0</AssemblyVersion>
-    <FileVersion>1.5.13.0</FileVersion>
-    <Version>1.5.13</Version>
-    <Authors>Markus Egger, Rick Strahl</Authors>
+    <AssemblyVersion>1.5.14.0</AssemblyVersion>
+    <FileVersion>1.5.14.0</FileVersion>
+    <Version>1.5.14</Version>
+    <Authors>Markus Egger Inc.</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
-    <Copyright>Markus Egger Inc., 2017-2020</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2021</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
-    <PackageIcon>CodeFramework_Small.png</PackageIcon>
+    <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
@@ -24,8 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+    
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Westwind.Utilities" Version="3.0.32" />
+    <PackageReference Include="Westwind.Utilities" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
