@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using CODE.Framework.Services.Server.AspNetCore.Properties;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -44,7 +44,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 if (svc.ServiceType == null)
                 {
-                    var type = ReflectionUtils.GetTypeFromName(svc.ServiceTypeName);
+                    var type = Type.GetType(svc.ServiceTypeName);
                     if (type == null)
                     {
                         var assemblyNameWithPath = svc.AssemblyName;
@@ -58,9 +58,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
                             }
                         }
 
-                        if (ReflectionUtils.LoadAssembly(Path.GetFullPath(assemblyNameWithPath)) == null)
+                        if (ObjectHelper.LoadAssembly(Path.GetFullPath(assemblyNameWithPath)) == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
-                        type = ReflectionUtils.GetTypeFromName(svc.ServiceTypeName);
+                        type = Type.GetType(svc.ServiceTypeName);
                         if (type == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
                     }

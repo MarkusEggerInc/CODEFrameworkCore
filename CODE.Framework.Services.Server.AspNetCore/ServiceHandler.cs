@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using CODE.Framework.Services.Server.AspNetCore.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Routing;
-using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -210,21 +213,20 @@ namespace CODE.Framework.Services.Server.AspNetCore
             // there's always 1 parameter
             object parameterData;
             if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
-                // if no content create an empty one
-                parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
+                parameterData = ObjectHelper.CreateInstanceFromType(parameter.ParameterType); // if no content create an empty one
             else
                 parameterData = await JsonSerializer.DeserializeAsync(HttpRequest.Body, parameter.ParameterType);
 
             // We map all parameters passed as named parameters in the URL to their respective properties
             foreach (var key in handlerContext.HttpRequest.Query.Keys)
             {
-                var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                if (prop == null) continue;
+                var property = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                if (property == null) continue;
                 try
                 {
                     var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
-                    var val = ReflectionUtils.StringToTypedValue(urlParameterValue, prop.PropertyType);
-                    ReflectionUtils.SetProperty(parameterData, key, val);
+                    var parameterValue = UrlParameterToValue(urlParameterValue, property.PropertyType);
+                    ObjectHelper.SetPropertyValue(parameterData, key, parameterValue);
                 }
                 catch
                 {
@@ -237,12 +239,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (RouteData != null)
                 foreach (var (key, value) in RouteData.Values)
                 {
-                    var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                    if (prop == null) continue;
+                    var property = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                    if (property == null) continue;
                     try
                     {
-                        var val = ReflectionUtils.StringToTypedValue(value as string, prop.PropertyType);
-                        ReflectionUtils.SetProperty(parameterData, key, val);
+                        var parameterValue = UrlParameterToValue(value as string, property.PropertyType);
+                        ObjectHelper.SetPropertyValue(parameterData, key, parameterValue);
                     }
                     catch
                     {
@@ -253,6 +255,70 @@ namespace CODE.Framework.Services.Server.AspNetCore
             parameterList = new[] {parameterData};
 
             return parameterList;
+        }
+
+        /// <summary>
+        /// Converts a URL parameter value to a typed object
+        /// </summary>
+        /// <param name="sourceString">The parameter value as a string</param>
+        /// <param name="targetType">Intended return type</param>
+        /// <param name="culture">String culture (optional)</param>
+        /// <returns>Typed value</returns>
+        private static object UrlParameterToValue(string sourceString, Type targetType, CultureInfo culture = null)
+        {
+            var isEmpty = string.IsNullOrEmpty(sourceString);
+            if (culture == null) culture = CultureInfo.InvariantCulture;
+
+            if (targetType == typeof(string))
+                return sourceString;
+            else if (targetType == typeof(int) || targetType == typeof(int))
+                return isEmpty ? 0 : int.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(long))
+                return isEmpty ? (long)0 : long.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(short))
+                return isEmpty ? (short)0 : short.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(decimal))
+                return isEmpty ? 0m : decimal.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(DateTime))
+                return isEmpty ? DateTime.MinValue : Convert.ToDateTime(sourceString, culture.DateTimeFormat);
+            else if (targetType == typeof(byte))
+                return isEmpty ? 0 : Convert.ToByte(sourceString);
+            else if (targetType == typeof(double))
+                return isEmpty ? 0d : double.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(float))
+                return isEmpty ? 0d : float.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(bool))
+            {
+                sourceString = sourceString.ToLower();
+                return !isEmpty && sourceString == "true" || sourceString == "on" || sourceString == "1" || sourceString == "yes";
+            }
+            else if (targetType == typeof(Guid))
+                return isEmpty ? Guid.Empty : new Guid(sourceString);
+            else if (targetType.IsEnum)
+                return Enum.Parse(targetType, sourceString);
+            else if (targetType == typeof(byte[]))
+                return new byte[0]; // We are not supporting type arrays for this purpose
+            else if (targetType.Name.StartsWith("Nullable`")) // Nullables are special. If they are null, we just return that. Otherwise, we unpack them and then run the current method again with that value.
+            {
+                if (sourceString.ToLower() == "null" || sourceString == string.Empty)
+                    return null;
+                else
+                {
+                    targetType = Nullable.GetUnderlyingType(targetType);
+                    return UrlParameterToValue(sourceString, targetType);
+                }
+            }
+            else
+            {
+                var converter = TypeDescriptor.GetConverter(targetType);
+                if (converter != null && converter.CanConvertFrom(typeof(string)))
+                    return converter.ConvertFromString(null, culture, sourceString);
+                else
+                {
+                    Debug.WriteLine($"Type Conversion not handled in StringToTypedValue for {targetType.Name} {sourceString}");
+                    return null;
+                }
+            }
         }
 
         private void ValidateRoles(IReadOnlyCollection<string> authorizationRoles, IPrincipal user)
