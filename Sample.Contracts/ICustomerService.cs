@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using CODE.Framework.Services.Contracts;
@@ -20,6 +21,28 @@ namespace Sample.Contracts
         [Rest(Method = RestMethods.Get, Name = "Search")]
         SearchTestResponse SearchTest(SearchTestRequest request);
 
+        [Rest(Method = RestMethods.Get)]
+        DateTestResponse DateTest(DateTestRequest request);
+    }
+
+    [DataContract]
+    public class DateTestRequest
+    {
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Inline)]
+        public DateTime FirstDate { get; set; } = DateTime.MinValue;
+
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Named)]
+        public DateTime SecondDate { get; set; } = DateTime.MinValue;
+    }
+
+    [DataContract]
+    public class DateTestResponse : BaseServiceResponse
+    {
+        [DataMember(IsRequired = true)]
+        public DateTime FirstDateReturned { get; set; } = DateTime.MinValue;
+
+        [DataMember(IsRequired = true)]
+        public DateTime SecondDateReturned { get; set; } = DateTime.MinValue;
     }
 
     [DataContract]

@@ -8,6 +8,23 @@ namespace Sample.Services.Implementation
     {
         public PingResponse Ping(PingRequest request) => this.GetPopulatedPingResponse();
 
+        public DateTestResponse DateTest(DateTestRequest request)
+        {
+            try
+            {
+                return new DateTestResponse
+                {
+                    Success = true,
+                    FirstDateReturned = request.FirstDate,
+                    SecondDateReturned = request.SecondDate
+                };
+            }
+            catch (Exception ex)
+            {
+                return ServiceHelper.GetPopulatedFailureResponse<DateTestResponse>(ex);
+            }
+        }
+
         public GetCustomersResponse GetCustomers(GetCustomersRequest request)
         {
             try

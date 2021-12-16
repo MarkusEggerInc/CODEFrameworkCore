@@ -89,6 +89,38 @@ namespace Sample.Client.Console
             });
 
             System.Console.ForegroundColor = originalColor;
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press key to call ICustomerService.DateTest().\r");
+            System.Console.ReadLine();
+
+            ServiceClient.Call<ICustomerService>(c =>
+            {
+                try
+                {
+                    System.Console.WriteLine("Calling service....");
+                    var response = c.DateTest(new DateTestRequest { FirstDate = DateTime.Now, SecondDate = DateTime.Now.AddYears(1) });
+                    if (response.Success)
+                    {
+                        System.Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        System.Console.WriteLine("Search Test Result:");
+                        System.Console.WriteLine($"First date returned: {response.FirstDateReturned}");
+                        System.Console.WriteLine($"Second date returned: {response.SecondDateReturned}");
+                    }
+                    else
+                    {
+                        System.Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        System.Console.WriteLine($"Service call returned Success = false. Failure Information: {response.FailureInformation}\r");
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine(e);
+                    throw;
+                }
+            });
+
+            System.Console.ForegroundColor = originalColor;
             System.Console.WriteLine("Done.");
         }
     }

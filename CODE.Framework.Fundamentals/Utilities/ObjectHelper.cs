@@ -141,6 +141,51 @@ namespace CODE.Framework.Fundamentals.Utilities
         }
 
         /// <summary>
+        /// Helper routine that looks up a type name and tries to retrieve the
+        /// full type reference using GetType() and if not found looking 
+        /// in the actively executing assemblies and optionally loading
+        /// the specified assembly name.
+        /// </summary>
+        /// <param name="typeName">type to load</param>
+        /// <param name="assemblyName">
+        /// Optional assembly name to load from if type cannot be loaded initially. 
+        /// Use for lazy loading of assemblies without taking a type dependency.
+        /// </param>
+        /// <returns>null</returns>
+        public static Type GetTypeFromName(string typeName, string assemblyName = null)
+        {
+            var type = Type.GetType(typeName, false);
+            if (type != null)
+                return type;
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            // try to find manually
+            foreach (Assembly asm in assemblies)
+            {
+                type = asm.GetType(typeName, false);
+
+                if (type != null)
+                    break;
+            }
+            if (type != null)
+                return type;
+
+            // see if we can load the assembly
+            if (!string.IsNullOrEmpty(assemblyName))
+            {
+                var a = LoadAssembly(assemblyName);
+                if (a != null)
+                {
+                    type = Type.GetType(typeName, false);
+                    if (type != null)
+                        return type;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Try to load an assembly into the application's app domain.
         /// Loads by name first then checks for filename
         /// </summary>

@@ -19,7 +19,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -79,7 +79,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only a single object parameter can be passed to a service method &quot;{0}&quot;.
+        ///   Looks up a localized string similar to Only a single object parameter can be passed to a service propertyInfo &quot;{0}&quot;.
         /// </summary>
         internal static string OnlySingleParametersAreAllowedOnServiceMethods {
             get {
@@ -88,7 +88,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Service method {0} doesn&apos;t exist or can&apos;t be called with Http Verb {1}. Method not invoked..
+        ///   Looks up a localized string similar to Service propertyInfo {0} doesn&apos;t exist or can&apos;t be called with Http Verb {1}. Method not invoked..
         /// </summary>
         internal static string ServiceMethodDoesntExist {
             get {
@@ -115,7 +115,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to execute method {0}: {1}.
+        ///   Looks up a localized string similar to Unable to execute propertyInfo {0}: {1}.
         /// </summary>
         internal static string UnableToExecuteMethod {
             get {
