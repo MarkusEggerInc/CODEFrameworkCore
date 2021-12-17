@@ -61,7 +61,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         var assemblyNameWithFullPath = Path.GetFullPath(assemblyNameWithPath);
                         if (ObjectHelper.LoadAssembly(assemblyNameWithFullPath) == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
-                        type = Type.GetType(svc.ServiceTypeName);
+                        type = ObjectHelper.GetTypeFromName(svc.ServiceTypeName); 
                         if (type == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
                     }
