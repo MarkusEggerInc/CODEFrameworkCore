@@ -117,7 +117,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         }
 
         /// <summary>
-        /// Hook up routed maps to service handlers.
+        /// Enabled CODE Framework service hosting
         /// </summary>
         /// <param name="appBuilder"></param>
         /// <returns></returns>
@@ -128,7 +128,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (serviceConfig.Cors.UseCorsPolicy)
                 appBuilder.UseCors(serviceConfig.Cors.CorsPolicyName);
 
-            // Endpoints require routing 
+            // Endpoints require routing, so we make sure it is there
             appBuilder.UseRouting();
 
             appBuilder.UseEndpoints(endpoints =>
@@ -155,13 +155,6 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                var interfaces = serviceInstanceConfig.ServiceType.GetInterfaces();
                                                if (interfaces.Length < 1)
                                                    throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
-
-                                               // TODO: *Optionally* enable swagger support.
-                                               // TODO: Create the json using object.
-                                               // TODO: Add openapi.yaml support
-                                               var openApiFullRoute = (serviceInstanceConfig.RouteBasePath + "/openapi.json").Replace("//", "/");
-                                               if (openApiFullRoute.StartsWith("/")) openApiFullRoute = openApiFullRoute.Substring(1);
-                                               routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceInstanceConfig, interfaces));
 
                                                // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                                // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -190,7 +183,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                            var parameterProperties = parameterType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
                                                            var inlineParameters = GetSortedInlineParameterNames(parameterProperties);
                                                            foreach (var inlineParameter in inlineParameters)
-                                                               relativeRoute += "/{" + inlineParameter + "}";
+                                                               relativeRoute += $"/{{{inlineParameter}}}";
                                                        }
                                                    }
 
@@ -231,48 +224,99 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return appBuilder;
         }
 
-        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces) => async (req, resp, route) =>
+        /// <summary>
+        /// Enabled CODE Framework Open API support.
+        /// </summary>
+        /// <param name="appBuilder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseOpenApiHandler(this IApplicationBuilder appBuilder, bool supportOpenApiJson = true, string openApiJsonRoute = "openapi.json")
         {
+            var serviceConfig = ServiceHandlerConfiguration.Current;
+
+            // Endpoints require routing, so we make sure it is there
+            appBuilder.UseRouting();
+
+            appBuilder.UseEndpoints(endpoints =>
+            {
+                // conditionally route to service handler based on RouteBasePath
+                appBuilder.MapWhen(
+                                    context =>
+                                    {
+
+                                        var requestPath = context.Request.Path.ToString().Trim().ToLowerInvariant();
+                                        var openApiFullRoute = !string.IsNullOrEmpty(openApiJsonRoute) ? openApiJsonRoute : "/openapi.json";
+                                        if (!openApiFullRoute.StartsWith("/"))
+                                            openApiFullRoute = "/" + openApiFullRoute;
+                                        openApiFullRoute = openApiFullRoute.Trim().ToLowerInvariant();
+                                        return requestPath == openApiFullRoute;
+                                    },
+                                    builder =>
+                                    {
+                                        // Build up route mapping
+                                        builder.UseRouter(routeBuilder =>
+                                        {
+                                            var openApiFullRoute = !string.IsNullOrEmpty(openApiJsonRoute) ? openApiJsonRoute : "/openapi.json";
+                                            if (!openApiFullRoute.StartsWith("/"))
+                                                openApiFullRoute = "/" + openApiFullRoute;
+                                            routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceConfig.Services));
+
+                                            // TODO: Add openapi.yaml support?
+                                        });
+                                    });
+            });
+
+            return appBuilder;
+        }
+
+        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(List<ServiceHandlerConfigurationInstance> serviceInstanceConfigurations) => async (req, resp, route) =>
+        {
+            // ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces
+
             resp.ContentType = "application/json; charset=utf-8";
 
             var openApiInfo = new OpenApiInformation { Info = { Description = "OpenAPI service description" } };
 
-            openApiInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
-
-            var methods = serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly);
-            foreach (var method in methods)
+            foreach (var serviceInstanceConfig in serviceInstanceConfigurations)
             {
-                var interfaceMethod = interfaces[0].GetMethod(method.Name);
-                if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
-                var restAttribute = GetRestAttribute(interfaceMethod);
-                if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+                var interfaces = serviceInstanceConfig.ServiceType.GetInterfaces();
+                if (interfaces.Length < 1)
+                    throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                var httpVerb = restAttribute.Method.ToString().ToLowerInvariant();
-                var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name);
+                openApiInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
-                pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
-
-                OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
-                pathInfo.ReturnTypeName = interfaceMethod.ReturnType.FullName;
-
-                if (httpVerb == "get")
-                    // Get operations do not have a payload/body, so everything must be coming in from the URL
-                    OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
-                else
+                var methods = serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly);
+                foreach (var method in methods)
                 {
-                    var methodParameters = interfaceMethod.GetParameters();
-                    foreach (var parameter in methodParameters) // Should always be a single parameter
-                        OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType);
-                    OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
-                    if (methodParameters.Length > 0)
-                        pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };
+                    var interfaceMethod = interfaces[0].GetMethod(method.Name);
+                    if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+                    var restAttribute = GetRestAttribute(interfaceMethod);
+                    if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
 
-                    // TODO: Payload "parameter" object
+                    var httpVerb = restAttribute.Method.ToString().ToLowerInvariant();
+                    var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name);
+
+                    pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
+
+                    OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
+                    pathInfo.ReturnTypeName = interfaceMethod.ReturnType.FullName;
+
+                    if (httpVerb == "get")
+                        // Get operations do not have a payload/body, so everything must be coming in from the URL
+                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                    else
+                    {
+                        var methodParameters = interfaceMethod.GetParameters();
+                        foreach (var parameter in methodParameters) // Should always be a single parameter
+                            OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType);
+                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                        if (methodParameters.Length > 0)
+                            pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };
+                    }
+
+                    var definedRoute = restAttribute.Route != null ? restAttribute.Route : restAttribute.Name == null ? $"{method.Name}" : $"{restAttribute.Name}";
+                    var fullRoute = string.IsNullOrEmpty(definedRoute) ? $"{serviceInstanceConfig.RouteBasePath}" : $"{serviceInstanceConfig.RouteBasePath}/{definedRoute}";
+                    openApiInfo.Paths.Add(fullRoute, pathInfo);
                 }
-
-                var definedRoute = restAttribute.Route != null ? restAttribute.Route : restAttribute.Name == null ? $"{method.Name}" : $"{restAttribute.Name}";
-                var fullRoute = string.IsNullOrEmpty(definedRoute)  ? $"{serviceInstanceConfig.RouteBasePath}" : $"{serviceInstanceConfig.RouteBasePath}/{definedRoute}";
-                openApiInfo.Paths.Add(fullRoute, pathInfo);
             }
 
             resp.ContentType = "application/json; charset=utf-8";

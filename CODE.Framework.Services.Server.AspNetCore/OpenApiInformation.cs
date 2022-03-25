@@ -350,7 +350,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (property.Type.Name == "List`1")
                 {
                     if (property.Type.GenericTypeArguments.Length > 0)
-                        AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0]);
+                        if (string.IsNullOrEmpty(GetOpenApiType(property.Type.GenericTypeArguments[0]))) // We don't want simple types like string... so anything that is a known OpenApi type can be ignored here
+                            AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0]);
                 }
                 else
                     AddTypeToComponents(openApiInfo, property.Type);

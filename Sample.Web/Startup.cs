@@ -77,12 +77,12 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServiceHandlerConfiguration config)
         {
             app.UseServiceHandler();
+            app.UseOpenApiHandler();
 
             // TODO: For now, we are using Swashbuckle
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/api/users/openapi.json", "users");
-                //options.SwaggerEndpoint("/api/customers/openapi.json", "users");
+                options.SwaggerEndpoint("/openapi.json", "Service Description");
             });
         }
     }

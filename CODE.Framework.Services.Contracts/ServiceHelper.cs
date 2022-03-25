@@ -17,7 +17,8 @@ namespace CODE.Framework.Services.Contracts
                     ServerDateTime = DateTime.Now, 
                     Version = referenceObject?.GetType().Assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
                     OperatingSystemDescription = RuntimeInformation.OSDescription,
-                    FrameworkDescription = RuntimeInformation.FrameworkDescription
+                    FrameworkDescription = RuntimeInformation.FrameworkDescription,
+                    Success = true
                 };
             }
             catch
