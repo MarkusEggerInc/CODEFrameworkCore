@@ -68,11 +68,12 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
                     }
                 });
 
-                config.Cors.UseCorsPolicy = true;
-                config.Cors.AllowedOrigins = "*";
+                // These are the defaults anyway:
+                //config.Cors.UseCorsPolicy = true;
+                //config.Cors.AllowedOrigins = "*";
             });
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ServiceHandlerConfiguration config) => app.UseServiceHandler();
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServiceHandlerConfiguration config) => app.UseServiceHandler();
     }
 }

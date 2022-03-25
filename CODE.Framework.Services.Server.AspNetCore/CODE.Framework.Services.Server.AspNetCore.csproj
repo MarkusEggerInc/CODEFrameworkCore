@@ -1,41 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.7</Version>
-    <Authors>Markus Egger, Rick Strahl</Authors>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyVersion>1.5.16.0</AssemblyVersion>
+    <FileVersion>1.5.16.0</FileVersion>
+    <Version>1.5.16</Version>
+    <Authors>Markus Egger Inc.</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
-    <Copyright>Markus Egger Inc., 2017-2019</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2021</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.0.1" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Westwind.Utilities" Version="3.0.8" />
+    <None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
     <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration.Json">
-      <HintPath>..\..\..\..\..\Users\megge\.nuget\packages\microsoft.extensions.configuration.json\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +49,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
 </Project>

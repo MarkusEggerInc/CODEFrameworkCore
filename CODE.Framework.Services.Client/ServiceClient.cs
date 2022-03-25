@@ -11,6 +11,12 @@ namespace CODE.Framework.Services.Client
 {
     public static class ServiceClient
     {
+        static ServiceClient()
+        {
+            if (GetSetting("ServiceClient:" + nameof(LogCommunicationErrors)).ToLowerInvariant() == "true")
+                LogCommunicationErrors = true;
+        }
+
         /// <summary>Internal message size cache</summary>
         private static readonly Dictionary<string, MessageSize> CachedMessageSizes = new Dictionary<string, MessageSize>();
 
@@ -35,29 +41,39 @@ namespace CODE.Framework.Services.Client
         /// </remarks>
         public static bool CacheSettings { get; set; } = true;
 
-        public static void Call<TServiceType>(Action<TServiceType> action) where TServiceType : class
+        /// <summary>
+        /// Opens a channel to the service by means of a transparently generated proxy and then performs the provided action on that call.
+        /// </summary>
+        /// <typeparam name="TServiceType">Service contract (interface) to call.</typeparam>
+        /// <param name="action">Code to run once the connection is established</param>
+        /// <param name="restServiceUrl">Optional URL for configuration-less calling of REST services. (Note: The standard approach is to not use this parameter and configure the system for the call)</param>
+        /// <example>
+        /// ServiceClient.Call<ISearchService>(s => {
+        ///     var response = s.Search(new SearchRequest { SearchText = "Hello World" });
+        ///     if (response.Success)
+        ///         Console.WriteLine(response.Results);
+        /// });
+        /// </ISearchService>
+        /// </example>
+        public static void Call<TServiceType>(Action<TServiceType> action, string restServiceUrl = null) where TServiceType : class
         {
-            var channel = GetChannelDedicated<TServiceType>();
+            var channel = GetChannelDedicated<TServiceType>(restServiceUrl);
             if (channel == null) return; // Exception event has fired by now, so callers can see what happened internally
 
             try
             {
                 action(channel);
-                // TODO: Do we need this for REST? -- CloseChannel(channel, false);
             }
             catch (Exception ex)
             {
-                // TODO: Do we need this for REST? -- AbortChannel(channel, ex);
-
                 if (MustRetryCall(ex))
                 {
-                    channel = GetChannelDedicated<TServiceType>();
+                    channel = GetChannelDedicated<TServiceType>(restServiceUrl);
                     try
                     {
                         action(channel);
-                        // TODO: Do we need this for REST? -- CloseChannel(channel, false);
                     }
-                    catch (Exception ex2)
+                    catch
                     {
                         // TODO: Do we need this for REST? -- AbortChannel(channel, ex2);
                     }
@@ -65,14 +81,17 @@ namespace CODE.Framework.Services.Client
             }
         }
 
-        public static bool AutoRetryFailedCalls { get; set; }
+        public static bool AutoRetryFailedCalls { get; set; } = false;
 
         /// <summary>Defines the delay (milliseconds) between auto-retry calls</summary>
         /// <remarks>The delay is defined in milliseconds (-1 = no delay). Note that the delay puts the thread to sleep, so this should not be done on foreground threads.</remarks>
-        public static int AutoRetryDelay { get; set; }
+        public static int AutoRetryDelay { get; set; } = -1;
 
         /// <summary>Defines the list of exception types for which to auto-retry calls</summary>
-        public static List<Type> AutoRetryFailedCallsForExceptions { get; set; }
+        public static List<Type> AutoRetryFailedCallsForExceptions { get; set; } // TODO: = new List<Type> { typeof (EndpointNotFoundException), typeof (ServerTooBusyException) };
+
+        /// <summary>When set to true (non-default), service communication errors are forwarded to the logging mediator.</summary>
+        public static bool LogCommunicationErrors { get; set; } = false;
 
         /// <summary>Determines whether a call needs to be auto-retried</summary>
         /// <param name="exception">The exception that caused the original failure.</param>
@@ -95,6 +114,7 @@ namespace CODE.Framework.Services.Client
         /// Gets a dedicated channel to a data contract.
         /// </summary>
         /// <typeparam name="TServiceType">The type of the service type.</typeparam>
+        /// <param name="restUrl">Optional URL for a rest service call. (If not passed, will be retrieved from settings, which is the usual scenario)</param>
         /// <returns>Operations service</returns>
         /// <example>
         /// var service = ServiceClient.GetChannelDedicated&lt;IUserService&gt;();
@@ -105,7 +125,7 @@ namespace CODE.Framework.Services.Client
         /// Relies on service configurations to figure out which protocol (and so forth) to use for the desired service.
         /// Creates a channel exclusive to this caller. It is up to the caller to close the channel after use!
         /// </remarks>
-        public static TServiceType GetChannelDedicated<TServiceType>() where TServiceType : class
+        public static TServiceType GetChannelDedicated<TServiceType>(string restUrl = null) where TServiceType : class
         {
             switch (GetProtocol<TServiceType>())
             {
@@ -125,7 +145,7 @@ namespace CODE.Framework.Services.Client
                     return ServiceGardenLocal.GetService<TServiceType>();
                 case Protocol.RestHttpJson:
                     var serviceId3 = GetServiceId<TServiceType>();
-                    var restUri = new Uri(GetSetting("RestServiceUrl:" + serviceId3));
+                    var restUri = string.IsNullOrEmpty(restUrl) ? new Uri(GetSetting($"RestServiceUrl:{serviceId3}")) : new Uri(restUrl);
                     var restHandler = new RestProxyHandler(restUri);
                     var proxy = TransparentProxyGenerator.GetProxy<TServiceType>(restHandler);
                     return proxy;
@@ -194,11 +214,7 @@ namespace CODE.Framework.Services.Client
         /// </summary>
         /// <typeparam name="TServiceType">The type of the T service type.</typeparam>
         /// <returns>MessageSize.</returns>
-        private static MessageSize GetMessageSize<TServiceType>()
-        {
-            var type = typeof(TServiceType);
-            return GetMessageSize(type.Name);
-        }
+        private static MessageSize GetMessageSize<TServiceType>() => GetMessageSize(typeof(TServiceType).Name);
 
         /// <summary>
         /// Gets the allowable message size for a specific interface

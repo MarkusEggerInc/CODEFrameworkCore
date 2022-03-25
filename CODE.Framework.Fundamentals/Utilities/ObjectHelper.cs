@@ -141,6 +141,80 @@ namespace CODE.Framework.Fundamentals.Utilities
         }
 
         /// <summary>
+        /// Helper routine that looks up a type name and tries to retrieve the
+        /// full type reference using GetType() and if not found looking 
+        /// in the actively executing assemblies and optionally loading
+        /// the specified assembly name.
+        /// </summary>
+        /// <param name="typeName">type to load</param>
+        /// <param name="assemblyName">
+        /// Optional assembly name to load from if type cannot be loaded initially. 
+        /// Use for lazy loading of assemblies without taking a type dependency.
+        /// </param>
+        /// <returns>null</returns>
+        public static Type GetTypeFromName(string typeName, string assemblyName = null)
+        {
+            var type = Type.GetType(typeName, false);
+            if (type != null)
+                return type;
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            // try to find manually
+            foreach (Assembly asm in assemblies)
+            {
+                type = asm.GetType(typeName, false);
+
+                if (type != null)
+                    break;
+            }
+            if (type != null)
+                return type;
+
+            // see if we can load the assembly
+            if (!string.IsNullOrEmpty(assemblyName))
+            {
+                var a = LoadAssembly(assemblyName);
+                if (a != null)
+                {
+                    type = Type.GetType(typeName, false);
+                    if (type != null)
+                        return type;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Try to load an assembly into the application's app domain.
+        /// Loads by name first then checks for filename
+        /// </summary>
+        /// <param name="assemblyName">Assembly name or full path</param>
+        /// <returns>Assembly or null</returns>
+        public static Assembly LoadAssembly(string assemblyName)
+        {
+            Assembly assembly = null;
+            try
+            {
+                assembly = Assembly.Load(assemblyName);
+            }
+            catch { }
+
+            if (assembly != null) return assembly;
+
+            try
+            {
+                if (File.Exists(assemblyName))
+                {
+                    assembly = Assembly.LoadFrom(assemblyName);
+                    if (assembly != null) return assembly;
+                }
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
         /// Serializes an object to its binary state
         /// </summary>
         /// <param name="objectToSerialize">The object to serialize.</param>
@@ -193,6 +267,21 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Customer customer = (Customer)stream.DeserializeFromBinary();
         /// </example>
         public static object DeserializeFromBinary(this Stream stateStream) => DeserializeFromBinaryStream(stateStream);
+
+        /// <summary>Creates an instance from a type by calling the parameterless constructor.</summary>
+        /// <param name="typeToCreate">The type from which to create an instance.</param>
+        /// <returns>Object instance</returns>
+        /// <remarks>Note this will not work with COM objects - continue to use the Activator.CreateInstance for COM objects.</remarks>
+        public static object CreateInstanceFromType(Type typeToCreate, params object[] args)
+        {
+            if (args == null)
+            {
+                var Parms = Type.EmptyTypes;
+                return typeToCreate.GetConstructor(Parms).Invoke(null);
+            }
+
+            return Activator.CreateInstance(typeToCreate, args);
+        }
 
         /// <summary>
         /// Serializes an object to its binary state
@@ -372,10 +461,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// // or
         /// string state = EPS.Utilities.ObjectHelper.SerializeToSoapString(customer);
         /// </example>
-        public static string SerializeToSoapString(this object objectToSerialize)
-        {
-            return StreamHelper.ToString(SerializeToSoapStream(objectToSerialize));
-        }
+        public static string SerializeToSoapString(this object objectToSerialize) => StreamHelper.ToString(SerializeToSoapStream(objectToSerialize));
 
         /// <summary>
         /// Serializes an object to its SOAP state
@@ -434,9 +520,7 @@ namespace CODE.Framework.Fundamentals.Utilities
 
             // Apparently, the values are not comparable. A likely scenario for this is that the
             // data is byte arrays, which do not implement IComparable, but they can still be compared.
-            var array1 = value1 as byte[];
-            var array2 = value2 as byte[];
-            if (array1 != null && array2 != null)
+            if (value1 is byte[] array1 && value2 is byte[] array2)
             {
                 if (array1.Length != array2.Length) return true; // Certainly not the same
                 return array1.Where((t, arrayCounter) => t != array2[arrayCounter]).Any();
@@ -489,8 +573,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             // The path is a complex path syntax that first needs to be parsed before we can retrieve the property value
             try
             {
-                object parentObject;
-                var property = GetPropertyByPath(valueObject, path, out parentObject);
+                var property = GetPropertyByPath(valueObject, path, out object parentObject);
                 if (property == null) return default;
                 var propertyValue = property.GetValue(parentObject, null);
                 return (TResult) propertyValue;
@@ -622,8 +705,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             // The path is a complex path syntax that first needs to be parsed before we can retrieve the property value
             try
             {
-                object parentObject;
-                var property = GetPropertyByPath(valueObject, path, out parentObject);
+                var property = GetPropertyByPath(valueObject, path, out object parentObject);
                 if (property == null) return false;
                 property.SetValue(parentObject, value, null);
                 return true;

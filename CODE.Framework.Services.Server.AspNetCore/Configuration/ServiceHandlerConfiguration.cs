@@ -65,9 +65,9 @@ namespace CODE.Framework.Services.Server.AspNetCore.Configuration
 
 
         /// <summary>
-        /// Determines how 
+        /// Determines how property names are rendered using CamelCase or ProperCase
         /// </summary>
-        public JsonFormatModes JsonFormatMode { get; set; } = JsonFormatModes.ProperCase;
+        public JsonFormatModes JsonFormatMode { get; set; } = JsonFormatModes.CamelCase;
         
         /// <summary>
         /// Optional hook method fired before the service method

@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using CODE.Framework.Services.Contracts;
 
 namespace Sample.Contracts
 {
+    [ServiceContract]
     public interface ICustomerService
     {
+        [OperationContract, Rest(Method = RestMethods.Get)]
+        PingResponse Ping(PingRequest request);
+
         [Rest(Method = RestMethods.Get, Name ="Customer", AuthorizationRoles = "Administrators")]
         GetCustomerResponse GetCustomer(GetCustomerRequest request);
 
@@ -15,6 +21,28 @@ namespace Sample.Contracts
         [Rest(Method = RestMethods.Get, Name = "Search")]
         SearchTestResponse SearchTest(SearchTestRequest request);
 
+        [Rest(Method = RestMethods.Get)]
+        DateTestResponse DateTest(DateTestRequest request);
+    }
+
+    [DataContract]
+    public class DateTestRequest
+    {
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Inline)]
+        public DateTime FirstDate { get; set; } = DateTime.MinValue;
+
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Named)]
+        public DateTime SecondDate { get; set; } = DateTime.MinValue;
+    }
+
+    [DataContract]
+    public class DateTestResponse : BaseServiceResponse
+    {
+        [DataMember(IsRequired = true)]
+        public DateTime FirstDateReturned { get; set; } = DateTime.MinValue;
+
+        [DataMember(IsRequired = true)]
+        public DateTime SecondDateReturned { get; set; } = DateTime.MinValue;
     }
 
     [DataContract]
@@ -51,14 +79,14 @@ namespace Sample.Contracts
     public class GetCustomersResponse : BaseServiceResponse
     {
         [DataMember]
-        public List<Customer> CustomerList { get; set; }
+        public List<Customer> CustomerList { get; set; } = new List<Customer>();
     }
 
     [DataContract]
     public class GetCustomerResponse : BaseServiceResponse
     {
         [DataMember]
-        public Customer Customer { get; set; }
+        public Customer Customer { get; set; } = new Customer();
     }
 
     public class Customer

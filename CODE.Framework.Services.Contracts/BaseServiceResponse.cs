@@ -15,24 +15,10 @@ namespace CODE.Framework.Services.Contracts
         /// </summary>
         /// <value>The success.</value>
         [DataMember(IsRequired = true)]
-        public bool Success { get; set; } = true;
+        public bool Success { get; set; } = false;
 
         [DataMember]
         public string FailureInformation { get; set; } = string.Empty;
-
-        public void SetError(string message, Exception ex = null)
-        {
-            if (message != null)
-            {
-                Success = false;
-                FailureInformation = message;
-            }
-            else
-            {
-                Success = true;
-                FailureInformation = null;
-            }
-        }
     }
 
     [DataContract]

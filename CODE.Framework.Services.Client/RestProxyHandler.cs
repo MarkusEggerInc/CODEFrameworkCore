@@ -16,10 +16,7 @@ namespace CODE.Framework.Services.Client
         /// Initializes a new instance of the <see cref="RestProxyHandler"/> class.
         /// </summary>
         /// <param name="serviceUri">The service root URI.</param>
-        public RestProxyHandler(Uri serviceUri)
-        {
-            _serviceUri = serviceUri;
-        }
+        public RestProxyHandler(Uri serviceUri) => _serviceUri = serviceUri;
 
         private readonly Uri _serviceUri;
         private Type _contractType;
@@ -51,6 +48,9 @@ namespace CODE.Framework.Services.Client
 
             var httpMethod = RestHelper.GetHttpMethodFromContract(method.Name, _contractType);
             var exposedMethodName = RestHelper.GetExposedMethodNameFromContract(method.Name, httpMethod, _contractType);
+            var serviceUri = _serviceUri.AbsoluteUri.Trim();
+            if (serviceUri.EndsWith("/")) serviceUri = serviceUri.Substring(0, serviceUri.Length - 1);
+            var serviceUriAbsoluteUri = serviceUri + "/" + exposedMethodName;
 
             try
             {
@@ -59,7 +59,6 @@ namespace CODE.Framework.Services.Client
                     client.Headers.Add("Content-Type", "application/json; charset=utf-8");
                     client.Encoding = Encoding.UTF8;
                     string restResponse;
-                    var serviceUriAbsoluteUri = _serviceUri.AbsoluteUri + "/" + exposedMethodName;
                     switch (httpMethod)
                     {
                         case "POST":
@@ -79,6 +78,7 @@ namespace CODE.Framework.Services.Client
             }
             catch (Exception ex)
             {
+                if (ServiceClient.LogCommunicationErrors) LoggingMediator.Log($"Unable to communicate with service at endpoint '" + serviceUriAbsoluteUri + "' [" + httpMethod + "].\r\n\r\n", ex);
                 throw new CommunicationException("Unable to communicate with REST service.", ex);
             }
         }

@@ -33,56 +33,26 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// PKInteger -> Id
         /// </remarks>
         /// <value>The Milos default maps.</value>
-        public static List<Map> MilosDefaultMaps
-        {
-            get
+        public static List<Map> MilosDefaultMaps =>
+            new List<Map>
             {
-                var maps = new List<Map>
-                           {
-                               new Map("PK", "Id"),
-                               new Map("PKString", "Id"),
-                               new Map("PKInteger", "Id")
-                           };
-                return maps;
-            }
-        }
+                new Map("PK", "Id"),
+                new Map("PKString", "Id"),
+                new Map("PKInteger", "Id")
+            };
 
         /// <summary>
         /// Adds the map.
         /// </summary>
         /// <param name="sourceField">The source field.</param>
         /// <param name="destinationField">The destination field.</param>
-        public void AddMap(string sourceField, string destinationField)
-        {
-            Maps.Add(new Map(sourceField, destinationField));
-        }
+        public void AddMap(string sourceField, string destinationField) => Maps.Add(new Map(sourceField, destinationField));
 
         /// <summary>
         /// Adds a list of maps to the mappings
         /// </summary>
         /// <param name="maps">The maps.</param>
-        public void AddMaps(List<Map> maps)
-        {
-            foreach (var map in maps)
-                Maps.Add(map);
-        }
-
-        /// <summary>
-        /// Attempts to fill all the read/write properties in the destination object
-        /// from the properties int he source object
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        /// <remarks>
-        /// This is identical to the MapObjects() instance method.
-        /// This method is simply provided for convenience.
-        /// </remarks>
-        /// <returns></returns>
-        public static bool Map(object source, object destination)
-        {
-            var mapper = new Mapper();
-            return mapper.MapObjects(source, destination);
-        }
+        public void AddMaps(List<Map> maps) => Maps.AddRange(maps);
 
         /// <summary>
         /// Attempts to fill all the read/write properties in the destination object
@@ -96,23 +66,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// This method is simply provided for convenience.
         /// </remarks>
         /// <returns>True if map operation is a success</returns>
-        public static bool Map(object source, object destination, MappingOptions options)
-        {
-            var mapper = new Mapper();
-            return mapper.MapObjects(source, destination, options);
-        }
-
-        /// <summary>
-        /// Attempts to fill all the read/write properties in the destination object
-        /// from the properties int he source object
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        /// <returns>True if successful</returns>
-        public bool MapObjects(object source, object destination)
-        {
-            return MapObjects(source, destination, new MappingOptions());
-        }
+        public static bool Map(object source, object destination, MappingOptions options = null) => new Mapper().MapObjects(source, destination, options);
 
         /// <summary>
         /// Attempts to fill all the read/write properties in the destination object
@@ -122,8 +76,10 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="destination">The destination.</param>
         /// <param name="options">The options.</param>
         /// <returns>True if successful</returns>
-        public bool MapObjects(object source, object destination, MappingOptions options)
+        public bool MapObjects(object source, object destination, MappingOptions options = null)
         {
+            if (options == null) options = new MappingOptions();
+
             var oldMaps = Maps;
             if (options.Maps != null)
                 Maps = options.Maps;
@@ -132,52 +88,125 @@ namespace CODE.Framework.Fundamentals.Utilities
             try
             {
                 var sourceType = source.GetType();
-                var properties = destination.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                foreach (var property in properties)
-                    if (property.CanRead && property.CanWrite && !options.ExcludedFields.Contains(property.Name))
+                var destinationProperties = destination.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var destinationProperty in destinationProperties)
+                    if (destinationProperty.CanRead && destinationProperty.CanWrite)
                     {
+                        var sourcePropertyName = GetMappedSourcePropertyName(destinationProperty.Name, options.MapDirection);
+
+                        if (options.ExcludedFields.Contains(destinationProperty.Name))
+                        {
+                            if (options.LogMappedMembers)
+                                if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name))
+                                    options.IgnoredDestinationProperties.Add(destinationProperty.Name);
+                            continue;
+                        }
+
                         // looks like we have one we are interested in
-                        var sourcePropertyName = GetMappedSourcePropertyName(property.Name, options.MapDirection);
-                        if (options.ExcludedFields.Contains(sourcePropertyName)) continue;
+                        if (options.ExcludedFields.Contains(sourcePropertyName))
+                        {
+                            if (options.LogMappedMembers)
+                                if (!options.IgnoredSourceProperties.Contains(sourcePropertyName))
+                                    options.IgnoredSourceProperties.Add(sourcePropertyName);
+                            continue;
+                        }
+
                         var sourceProperty = sourceType.GetProperty(sourcePropertyName, BindingFlags.Public | BindingFlags.Instance);
-                        if (sourceProperty == null) continue;
-                        if (sourceProperty.CanRead && property.CanWrite)
-                            if (options.MapFunctionsFiltered.ContainsKey(sourceProperty.Name) && options.MapFunctionsFiltered[property.Name](source, destination, options.MapDirection))
-                                continue; // Successfully mapped with a function filtered to this property
-                            else if (sourceProperty.PropertyType == property.PropertyType)
+                        if (sourceProperty == null)
+                        {
+                            if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name))
+                                options.IgnoredDestinationProperties.Add(destinationProperty.Name); // Have to ignore it, since we can't find the source to map from
+                            continue;
+                        }
+
+                        if (sourceProperty.CanRead && destinationProperty.CanWrite)
+                            if (options.MapFunctionsFiltered.ContainsKey(sourceProperty.Name) && options.MapFunctionsFiltered[destinationProperty.Name](source, destination, options.MapDirection))
+                            {
+                                // Successfully mapped with a function filtered to this property
+                                if (options.LogMappedMembers)
+                                {
+                                    if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                    if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                }
+                            }
+                            else if (sourceProperty.PropertyType == destinationProperty.PropertyType)
                                 try
                                 {
-                                    var currentValue = property.GetValue(destination, null);
+                                    var currentValue = destinationProperty.GetValue(destination, null);
                                     var newValue = sourceProperty.GetValue(source, null);
-                                    UpdateValueIfNeeded(destination, property, currentValue, newValue);
+                                    UpdateValueIfNeeded(destination, destinationProperty, currentValue, newValue);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
-                            else if (sourceProperty.PropertyType.Name == "Nullable`1" && !property.PropertyType.Name.StartsWith("Nullable"))
+                            else if (sourceProperty.PropertyType.Name == "Nullable`1" && !destinationProperty.PropertyType.Name.StartsWith("Nullable"))
                                 try
                                 {
                                     // The source is nullable, while the destination is not. This could be problematic, but we give it a try
                                     var newValue = sourceProperty.GetValue(source, null);
                                     if (newValue != null) // Can't set it if it is null.
-                                        property.SetValue(destination, newValue, null);
+                                        destinationProperty.SetValue(destination, newValue, null);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
-                            else if (property.PropertyType.Name == "Nullable`1" && !sourceProperty.PropertyType.Name.StartsWith("Nullable"))
+                            else if (destinationProperty.PropertyType.Name == "Nullable`1" && !sourceProperty.PropertyType.Name.StartsWith("Nullable"))
                                 try
                                 {
                                     // The destination is nullable although the source isn't. This has a pretty good chance of working
                                     var newValue = sourceProperty.GetValue(source, null);
-                                    property.SetValue(destination, newValue, null);
+                                    destinationProperty.SetValue(destination, newValue, null);
+                                    if (options.LogMappedMembers)
+                                    {
+                                        if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                        if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                    }
                                 }
                                 catch { } // Nothing we can do, really
                             else
+                            {
                                 // Property types differ, but maybe we can still map them
-                            if (options.MapEnums)
-                                if (sourceProperty.PropertyType.IsEnum && property.PropertyType.IsEnum)
-                                    MapEnumValues(source, destination, property, sourceProperty, options);
-                                else if (PropertyTypeIsNumeric(sourceProperty.PropertyType) && property.PropertyType.IsEnum)
-                                    MapNumericToEnum(source, destination, property, sourceProperty);
-                                else if (sourceProperty.PropertyType.IsEnum && PropertyTypeIsNumeric(property.PropertyType))
-                                    MapEnumToNumeric(source, destination, property, sourceProperty);
+                                if (options.MapEnums)
+                                    if (sourceProperty.PropertyType.IsEnum && destinationProperty.PropertyType.IsEnum)
+                                    {
+                                        MapEnumValues(source, destination, destinationProperty, sourceProperty, options);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                                    else if (PropertyTypeIsNumeric(sourceProperty.PropertyType) && destinationProperty.PropertyType.IsEnum)
+                                    {
+                                        MapNumericToEnum(source, destination, destinationProperty, sourceProperty);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                                    else if (sourceProperty.PropertyType.IsEnum && PropertyTypeIsNumeric(destinationProperty.PropertyType))
+                                    {
+                                        MapEnumToNumeric(source, destination, destinationProperty, sourceProperty);
+                                        if (options.LogMappedMembers)
+                                        {
+                                            if (!options.MappedSourceProperties.Contains(sourcePropertyName)) options.MappedSourceProperties.Add(sourcePropertyName);
+                                            if (!options.MappedDestinationProperties.Contains(destinationProperty.Name)) options.MappedDestinationProperties.Add(destinationProperty.Name);
+                                        }
+                                    }
+                            }
+                    }
+                    else if (options.LogMappedMembers)
+                    {
+                        var sourcePropertyName = GetMappedSourcePropertyName(destinationProperty.Name, options.MapDirection);
+                        if (!options.IgnoredSourceProperties.Contains(sourcePropertyName)) options.IgnoredSourceProperties.Add(sourcePropertyName);
+                        if (!options.IgnoredDestinationProperties.Contains(destinationProperty.Name)) options.IgnoredDestinationProperties.Add(destinationProperty.Name);
                     }
             }
             catch
@@ -196,6 +225,15 @@ namespace CODE.Framework.Fundamentals.Utilities
 
             Maps = oldMaps;
 
+            if (options.LogMappedMembers)
+            {
+                // We want to present all these logged list in a sorted fashion
+                options.MappedSourceProperties = options.MappedSourceProperties.OrderBy(p => p).ToList();
+                options.IgnoredSourceProperties = options.IgnoredSourceProperties.OrderBy(p => p).ToList();
+                options.MappedDestinationProperties = options.MappedDestinationProperties.OrderBy(p => p).ToList();
+                options.IgnoredDestinationProperties = options.IgnoredDestinationProperties.OrderBy(p => p).ToList();
+            }
+
             return retVal;
         }
 
@@ -204,34 +242,18 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        protected virtual bool PropertyTypeIsNumeric(Type type)
-        {
-            return type == typeof(byte)
-                || type == typeof(sbyte)
-                || type == typeof(short)
-                || type == typeof(ushort)
-                || type == typeof(int)
-                || type == typeof(uint)
-                || type == typeof(long)
-                || type == typeof(ulong)
-                || type == typeof(float)
-                || type == typeof(double)
-                || type == typeof(decimal);
-        }
-
-        /// <summary>
-        /// Maps collections and all the objects in the collection
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        /// <param name="keyField">The source key field.</param>
-        /// <param name="destinationItemType">Type of the items to be added to the destination collection.</param>
-        /// <returns></returns>
-        public static bool Collections(IList source, IList destination, string keyField, Type destinationItemType)
-        {
-            var mapper = new Mapper();
-            return mapper.MapCollections(source, destination, keyField, destinationItemType, new MappingOptions());
-        }
+        protected virtual bool PropertyTypeIsNumeric(Type type) =>
+            type == typeof(byte)
+         || type == typeof(sbyte)
+         || type == typeof(short)
+         || type == typeof(ushort)
+         || type == typeof(int)
+         || type == typeof(uint)
+         || type == typeof(long)
+         || type == typeof(ulong)
+         || type == typeof(float)
+         || type == typeof(double)
+         || type == typeof(decimal);
 
         /// <summary>
         /// Maps collections and all the objects in the collection
@@ -242,11 +264,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="destinationItemType">Type of the items to be added to the destination collection.</param>
         /// <param name="options">The options.</param>
         /// <returns></returns>
-        public static bool Collections(IList source, IList destination, string keyField, Type destinationItemType, MappingOptions options)
-        {
-            var mapper = new Mapper();
-            return mapper.MapCollections(source, destination, keyField, destinationItemType, options);
-        }
+        public static bool Collections(IList source, IList destination, string keyField, Type destinationItemType, MappingOptions options = null) => new Mapper().MapCollections(source, destination, keyField, destinationItemType, options);
 
         /// <summary>
         /// Maps any enumerable to a Milos Business Entity Sub Item collection
@@ -470,23 +488,12 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="destination">The destination.</param>
         /// <param name="keyField">The source key field.</param>
         /// <param name="destinationItemType">Type of the items to be added to the destination collection.</param>
-        /// <returns></returns>
-        public bool MapCollections(IList source, IList destination, string keyField, Type destinationItemType)
-        {
-            return MapCollections(source, destination, keyField, destinationItemType, new MappingOptions());
-        }
-
-        /// <summary>
-        /// Maps collections and all the objects in the collection
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        /// <param name="keyField">The source key field.</param>
-        /// <param name="destinationItemType">Type of the items to be added to the destination collection.</param>
         /// <param name="options">The options.</param>
         /// <returns></returns>
-        public bool MapCollections(IList source, IList destination, string keyField, Type destinationItemType, MappingOptions options)
+        public bool MapCollections(IList source, IList destination, string keyField, Type destinationItemType, MappingOptions options = null)
         {
+            if (options == null) options = new MappingOptions();
+
             var oldMaps = Maps;
             if (options.Maps != null)
                 Maps = options.Maps;
@@ -499,22 +506,63 @@ namespace CODE.Framework.Fundamentals.Utilities
             {
                 if (sourceKeyProperty == null)
                     sourceKeyProperty = sourceItem.GetType().GetProperty(GetMappedSourcePropertyName(keyField, options.MapDirection), BindingFlags.Public | BindingFlags.Instance);
-                var sourceKeyValue = sourceKeyProperty?.GetValue(sourceItem, null) as IComparable;
 
                 object destinationItem = null;
                 foreach (var destinationCheckItem in destination)
                 {
-                    var destinationKeyValue = destinationKeyProperty?.GetValue(destinationCheckItem, null) as IComparable;
-                    if (sourceKeyValue == null || destinationKeyValue == null) continue;
+                    if (!(sourceKeyProperty?.GetValue(sourceItem, null) is IComparable sourceKeyValue) || !(destinationKeyProperty?.GetValue(destinationCheckItem, null) is IComparable destinationKeyValue)) continue;
                     if (destinationKeyValue.CompareTo(sourceKeyValue) != 0) continue;
                     destinationItem = destinationCheckItem;
                     break;
                 }
 
-                if (destinationItem == null) // Not found yet, so we have to add it
+                if (destinationItem == null) // Not found yet. Maybe the options provide a way to get a new type
+                    if (options.AddTargetCollectionItem != null)
+                        destinationItem = options.AddTargetCollectionItem(destination, sourceItem, options);
+
+                if (destinationItem == null) // Not found yet, so we have to add it manually
                 {
-                    destinationItem = Activator.CreateInstance(destinationItemType);
-                    destination.Add(destinationItem);
+                    var parameterlessConstructorFound = false;
+                    var constructors = destinationItemType.GetConstructors();
+                    foreach (var constructor in constructors)
+                        if (constructor.GetParameters().Length == 0)
+                        {
+                            parameterlessConstructorFound = true;
+                            break;
+                        }
+
+                    if (parameterlessConstructorFound)
+                    {
+                        destinationItem = Activator.CreateInstance(destinationItemType);
+                        destination.Add(destinationItem);
+                    }
+                    else
+                    {
+                        // This is not ideal, but we can try to see which constructors we have, and whether we can figure out what parameter to pass.
+                        foreach (var constructor in constructors)
+                        {
+                            var constructorParameters = constructor.GetParameters();
+                            if (constructorParameters.Length == 1)
+                            {
+                                // This could be a potential candidate, if the required parameter is the parent collection, which we can provide
+                                var collectionType = destination.GetType();
+                                if (collectionType == constructorParameters[0].ParameterType || collectionType.IsSubclassOf(constructorParameters[0].ParameterType))
+                                {
+                                    destinationItem = Activator.CreateInstance(destinationItemType, destination);
+                                    destination.Add(destinationItem);
+                                    break;
+                                }
+                                else if (constructorParameters[0].ParameterType.IsInterface)
+                                    foreach (var interfaceType in collectionType.GetInterfaces())
+                                        if (interfaceType == constructorParameters[0].ParameterType)
+                                        {
+                                            destinationItem = Activator.CreateInstance(destinationItemType, destination);
+                                            destination.Add(destinationItem);
+                                            break;
+                                        }
+                            }
+                        }
+                    }
                 }
 
                 MapObjects(sourceItem, destinationItem, options);
@@ -620,9 +668,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             }
             catch
             {
-                Debug.WriteLine("Mapper could not map " +
-                                sourceProperty.PropertyType + " [" + sourceProperty.Name + "] to  [" +
-                                destinationProperty.PropertyType + " [" + destinationProperty.Name + "]");
+                Debug.WriteLine("Mapper could not map " + sourceProperty.PropertyType + " [" + sourceProperty.Name + "] to  [" + destinationProperty.PropertyType + " [" + destinationProperty.Name + "]");
             }
         }
 
@@ -702,9 +748,7 @@ namespace CODE.Framework.Fundamentals.Utilities
             }
             catch
             {
-                Debug.WriteLine("Mapper could not map " +
-                                sourceProperty.PropertyType + " [" + sourceProperty.Name + "] to  [" +
-                                destinationProperty.PropertyType + " [" + destinationProperty.Name + "]");
+                Debug.WriteLine("Mapper could not map " + sourceProperty.PropertyType + " [" + sourceProperty.Name + "] to  [" + destinationProperty.PropertyType + " [" + destinationProperty.Name + "]");
             }
         }
 
@@ -798,11 +842,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="options">The options.</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToList&lt;TDestination&gt;()</remarks>
-        public static List<TDestination> TableToList<TDestination>(DataRow[] sourceRows, MappingOptions options)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToList<TDestination>(sourceRows, options);
-        }
+        public static List<TDestination> TableToList<TDestination>(DataRow[] sourceRows, MappingOptions options) => new Mapper().MapTableToList<TDestination>(sourceRows, options);
 
         /// <summary>
         /// Maps tables to generic lists.
@@ -812,11 +852,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="options">The options.</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToList&lt;TDestination&gt;()</remarks>
-        public static List<TDestination> TableToList<TDestination>(DataTable table, MappingOptions options)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToList<TDestination>(table, options);
-        }
+        public static List<TDestination> TableToList<TDestination>(DataTable table, MappingOptions options) => new Mapper().MapTableToList<TDestination>(table, options);
 
         /// <summary>
         /// Maps tables to generic lists.
@@ -828,11 +864,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="numberOfRowsToMap">Number of rows to map (start index = 20, number of rows = 10 means that rows 21-30 will be mapped)</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToList&lt;TDestination&gt;()</remarks>
-        public static List<TDestination> TableToList<TDestination>(DataTable table, MappingOptions options, int startRowIndex, int numberOfRowsToMap)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToList<TDestination>(typeof(TDestination), table, options, startRowIndex, numberOfRowsToMap);
-        }
+        public static List<TDestination> TableToList<TDestination>(DataTable table, MappingOptions options, int startRowIndex, int numberOfRowsToMap) => new Mapper().MapTableToList<TDestination>(typeof(TDestination), table, options, startRowIndex, numberOfRowsToMap);
 
         /// <summary>
         /// Maps tables to generic lists.
@@ -841,11 +873,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="table">The table.</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToList&lt;TDestination&gt;()</remarks>
-        public static List<TDestination> TableToList<TDestination>(DataTable table)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToList<TDestination>(table);
-        }
+        public static List<TDestination> TableToList<TDestination>(DataTable table) => new Mapper().MapTableToList<TDestination>(table);
 
         /// <summary>
         /// Maps a data table's records to a generic List
@@ -934,37 +962,26 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// </summary>
         /// <typeparam name="TDestination">The type of the destination.</typeparam>
         /// <param name="source">The source.</param>
-        /// <returns></returns>
-        public List<TDestination> MapTableToList<TDestination>(DataTable source) => MapTableToList<TDestination>(source, new MappingOptions());
-
-        /// <summary>
-        /// Maps the enumerables.
-        /// </summary>
-        /// <typeparam name="TDestination">The type of the destination.</typeparam>
-        /// <param name="source">The source.</param>
         /// <param name="options">The options.</param>
         /// <returns></returns>
-        public List<TDestination> MapTableToList<TDestination>(DataTable source, MappingOptions options) => MapTableToList<TDestination>(typeof(TDestination), source, options);
-
-        /// <summary>
-        /// Maps the enumerables.
-        /// </summary>
-        /// <typeparam name="TDestination">The type of the destination.</typeparam>
-        /// <param name="destinationType">Destination type</param>
-        /// <param name="source">The source.</param>
-        /// <returns></returns>
-        public List<TDestination> MapTableToList<TDestination>(Type destinationType, DataTable source) => MapTableToList<TDestination>(destinationType, source, new MappingOptions());
-
-        /// <summary>
-        /// Maps the enumerables.
-        /// </summary>
-        /// <typeparam name="TDestination">The type of the destination.</typeparam>
-        /// <param name="destinationType">Destination type</param>
-        /// <param name="source">The source.</param>
-        /// <param name="options">The options.</param>
-        /// <returns></returns>
-        public List<TDestination> MapTableToList<TDestination>(Type destinationType, DataTable source, MappingOptions options)
+        public List<TDestination> MapTableToList<TDestination>(DataTable source, MappingOptions options = null)
         {
+            if (options == null) options = new MappingOptions();
+            return MapTableToList<TDestination>(typeof(TDestination), source, options);
+        }
+
+        /// <summary>
+        /// Maps the enumerables.
+        /// </summary>
+        /// <typeparam name="TDestination">The type of the destination.</typeparam>
+        /// <param name="destinationType">Destination type</param>
+        /// <param name="source">The source.</param>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        public List<TDestination> MapTableToList<TDestination>(Type destinationType, DataTable source, MappingOptions options = null)
+        {
+            if (options == null) options = new MappingOptions();
+
             var activator = new ExpressionTreeObjectActivator(destinationType);
 
             var oldMaps = Maps;
@@ -1038,10 +1055,10 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="options">The options.</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToCollection&lt;TDestination&gt;()</remarks>
-        public static Collection<TDestination> TableToCollection<TDestination>(DataRow[] sourceRows, MappingOptions options)
+        public static Collection<TDestination> TableToCollection<TDestination>(DataRow[] sourceRows, MappingOptions options = null)
         {
-            var mapper = new Mapper();
-            return mapper.MapTableToCollection<TDestination>(sourceRows, options);
+            if (options == null) options = new MappingOptions();
+            return new Mapper().MapTableToCollection<TDestination>(sourceRows, options);
         }
 
         /// <summary>
@@ -1052,10 +1069,10 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="options">The options.</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToCollection&lt;TDestination&gt;()</remarks>
-        public static Collection<TDestination> TableToCollection<TDestination>(DataTable table, MappingOptions options)
+        public static Collection<TDestination> TableToCollection<TDestination>(DataTable table, MappingOptions options = null)
         {
-            var mapper = new Mapper();
-            return mapper.MapTableToCollection<TDestination>(table, options);
+            if (options == null) options = new MappingOptions();
+            return new Mapper().MapTableToCollection<TDestination>(table, options);
         }
 
         /// <summary>
@@ -1068,24 +1085,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="numberOfRowsToMap">Number of rows to map (start index = 20, number of rows = 10 means that rows 21-30 will be mapped)</param>
         /// <returns></returns>
         /// <remarks>This is the same as the instance method MapTableToCollection&lt;TDestination&gt;()</remarks>
-        public static Collection<TDestination> TableToCollection<TDestination>(DataTable table, MappingOptions options, int startRowIndex, int numberOfRowsToMap)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToCollection<TDestination>(table, options, startRowIndex, numberOfRowsToMap);
-        }
-
-        /// <summary>
-        /// Maps tables to generic lists.
-        /// </summary>
-        /// <typeparam name="TDestination">The type of the destination.</typeparam>
-        /// <param name="table">The table.</param>
-        /// <returns></returns>
-        /// <remarks>This is the same as the instance method MapTableToCollection&lt;TDestination&gt;()</remarks>
-        public static Collection<TDestination> TableToCollection<TDestination>(DataTable table)
-        {
-            var mapper = new Mapper();
-            return mapper.MapTableToCollection<TDestination>(table);
-        }
+        public static Collection<TDestination> TableToCollection<TDestination>(DataTable table, MappingOptions options, int startRowIndex, int numberOfRowsToMap) => new Mapper().MapTableToCollection<TDestination>(table, options, startRowIndex, numberOfRowsToMap);
 
         /// <summary>
         /// Maps a data table's records to a generic collection
@@ -1094,8 +1094,10 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="sourceRows">The source rows.</param>
         /// <param name="options">The options.</param>
         /// <returns></returns>
-        public Collection<TDestination> MapTableToCollection<TDestination>(DataRow[] sourceRows, MappingOptions options)
+        public Collection<TDestination> MapTableToCollection<TDestination>(DataRow[] sourceRows, MappingOptions options = null)
         {
+            if (options == null) options = new MappingOptions();
+
             var activator = new ExpressionTreeObjectActivator(typeof(TDestination));
 
             var oldMaps = Maps;
@@ -1121,22 +1123,16 @@ namespace CODE.Framework.Fundamentals.Utilities
         }
 
         /// <summary>
-        /// Maps a data table to a generic collection of the specified type
-        /// </summary>
-        /// <typeparam name="TDestination">The type of the destination.</typeparam>
-        /// <param name="source">The source.</param>
-        /// <returns></returns>
-        public Collection<TDestination> MapTableToCollection<TDestination>(DataTable source) => MapTableToCollection<TDestination>(source, new MappingOptions());
-
-        /// <summary>
         /// Maps the enumerables.
         /// </summary>
         /// <typeparam name="TDestination">The type of the destination.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="options">The options.</param>
         /// <returns></returns>
-        public Collection<TDestination> MapTableToCollection<TDestination>(DataTable source, MappingOptions options)
+        public Collection<TDestination> MapTableToCollection<TDestination>(DataTable source, MappingOptions options = null)
         {
+            if (options == null) options = new MappingOptions();
+
             var activator = new ExpressionTreeObjectActivator(typeof(TDestination));
 
             var oldMaps = Maps;
@@ -1201,23 +1197,6 @@ namespace CODE.Framework.Fundamentals.Utilities
 
         /// <summary>
         /// Attempts to compare all the read/write properties in the first object
-        /// and the properties in the second object and return those that don't match
-        /// </summary>
-        /// <param name="first">The first object.</param>
-        /// <param name="second">The second object.</param>
-        /// <remarks>
-        /// This is identical to the CompareObjects() instance method.
-        /// This method is simply provided for convenience.
-        /// </remarks>
-        /// <returns>A list of all the properties that don't match</returns>
-        public static List<MapperCompareResults> Compare(object first, object second)
-        {
-            var mapper = new Mapper();
-            return mapper.CompareObjects(first, second);
-        }
-
-        /// <summary>
-        /// Attempts to compare all the read/write properties in the first object
         /// and the properties in the second object and return those that don't 
         /// match based on the options provided.
         /// </summary>
@@ -1229,21 +1208,11 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// This method is simply provided for convenience.
         /// </remarks>
         /// <returns>A list of all the properties that don't match</returns>
-        public static List<MapperCompareResults> Compare(object first, object second, MappingOptions options)
+        public static List<MapperCompareResults> Compare(object first, object second, MappingOptions options = null)
         {
-            var mapper = new Mapper();
-            return mapper.CompareObjects(first, second, options);
+            if (options == null) options = new MappingOptions();
+            return new Mapper().CompareObjects(first, second, options);
         }
-
-        /// <summary>
-        /// Attempts to compare all the read/write properties in the first object
-        /// to the properties in the second object and returns those that
-        /// that don't match
-        /// </summary>
-        /// <param name="first">The first object.</param>
-        /// <param name="second">The second object.</param>
-        /// <returns>A list of all the properties that don't match</returns>
-        public List<MapperCompareResults> CompareObjects(object first, object second) => CompareObjects(first, second, new MappingOptions());
 
         /// <summary>
         /// Attempts to compare all the read/write properties in the 
@@ -1256,8 +1225,9 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// supported is the ExcludedFields at this time.</param>
         /// <param name="level">This is only used internally and tracks how many levels down the conflict may be.</param>
         /// <returns>A list of all the properties that don't match</returns>
-        public List<MapperCompareResults> CompareObjects(object first, object second, MappingOptions options, int level = 0)
+        public List<MapperCompareResults> CompareObjects(object first, object second, MappingOptions options = null, int level = 0)
         {
+            if (options == null) options = new MappingOptions();
             var results = new List<MapperCompareResults>();
 
             var oldMaps = Maps;
@@ -1288,21 +1258,21 @@ namespace CODE.Framework.Fundamentals.Utilities
                     try
                     {
                         results.Add(new MapperCompareResults
-                                    {
-                                        Property = firstPropertyName,
-                                        ValueFirstObject = firstProperty.GetValue(first, null),
-                                        ValueSecondObject = secondProperty.GetValue(second, null),
-                                        Conflict = "Property Type Mismatch",
-                                        Level = level
-                                    });
+                        {
+                            Property = firstPropertyName,
+                            ValueFirstObject = firstProperty.GetValue(first, null),
+                            ValueSecondObject = secondProperty.GetValue(second, null),
+                            Conflict = "Property Type Mismatch",
+                            Level = level
+                        });
                     }
                     catch (Exception ex)
                     {
                         results.Add(new MapperCompareResults
-                                    {
-                                        Property = firstPropertyName,
-                                        Conflict = "Property Type Mismatch - error including values: " + ex.Message
-                                    });
+                        {
+                            Property = firstPropertyName,
+                            Conflict = "Property Type Mismatch - error including values: " + ex.Message
+                        });
                     }
                 else
                     // Ok, see if they compare
@@ -1319,13 +1289,13 @@ namespace CODE.Framework.Fundamentals.Utilities
                             if (((ICollection) value1).Count != ((ICollection) value2).Count)
                             {
                                 results.Add(new MapperCompareResults
-                                            {
-                                                Property = firstPropertyName,
-                                                ValueFirstObject = value1,
-                                                ValueSecondObject = value2,
-                                                Conflict = "Collection Count Mismatch",
-                                                Level = level
-                                            });
+                                {
+                                    Property = firstPropertyName,
+                                    ValueFirstObject = value1,
+                                    ValueSecondObject = value2,
+                                    Conflict = "Collection Count Mismatch",
+                                    Level = level
+                                });
                             }
                             else if (((ICollection) value1).Count > 0)
                             {
@@ -1382,13 +1352,13 @@ namespace CODE.Framework.Fundamentals.Utilities
                                 if (!matched)
                                     // Ok, add this to the results
                                     results.Add(new MapperCompareResults
-                                                {
-                                                    Property = firstPropertyName,
-                                                    ValueFirstObject = item1,
-                                                    ValueSecondObject = item2,
-                                                    Conflict = $"Element {count} does not match, no more elements checked.",
-                                                    Level = level
-                                                });
+                                    {
+                                        Property = firstPropertyName,
+                                        ValueFirstObject = item1,
+                                        ValueSecondObject = item2,
+                                        Conflict = $"Element {count} does not match, no more elements checked.",
+                                        Level = level
+                                    });
                             }
                         } //  if (value1 != null && value2 !=null && value1.ToString().StartsWith("System.Collections."))
                         else
@@ -1398,13 +1368,13 @@ namespace CODE.Framework.Fundamentals.Utilities
                                 // 1 is null, the other isn't OR they
                                 //  don't match - add it
                                 results.Add(new MapperCompareResults
-                                            {
-                                                Property = firstPropertyName,
-                                                ValueFirstObject = value1,
-                                                ValueSecondObject = value2,
-                                                Conflict = "!=",
-                                                Level = level
-                                            });
+                                {
+                                    Property = firstPropertyName,
+                                    ValueFirstObject = value1,
+                                    ValueSecondObject = value2,
+                                    Conflict = "!=",
+                                    Level = level
+                                });
                         }
                     }
                     catch (Exception ex)
@@ -1412,11 +1382,11 @@ namespace CODE.Framework.Fundamentals.Utilities
                         // We had an error, at least track the property 
                         //  that caused the error and report the error.
                         results.Add(new MapperCompareResults
-                                    {
-                                        Property = firstPropertyName,
-                                        Conflict = $"Error comparing values: {ex.Message}",
-                                        Level = level
-                                    });
+                        {
+                            Property = firstPropertyName,
+                            Conflict = $"Error comparing values: {ex.Message}",
+                            Level = level
+                        });
                     }
             }
 
@@ -1431,14 +1401,8 @@ namespace CODE.Framework.Fundamentals.Utilities
         {
             public PropertyInfo[] GetAllProperties(Type type)
             {
-                var properties = from property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                 select property;
-
-                var list = new List<PropertyInfo>();
-                list.AddRange(properties);
-
+                var list = type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(property => property).ToList();
                 ProcessInterfaces(type, list);
-
                 return list.ToArray();
             }
 
@@ -1453,11 +1417,7 @@ namespace CODE.Framework.Fundamentals.Utilities
                 }
             }
 
-            private void GetProperties(Type type, List<PropertyInfo> list)
-            {
-                var properties = from property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance) select property;
-                list.AddRange(properties);
-            }
+            private void GetProperties(Type type, List<PropertyInfo> list) => list.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(property => property));
         }
     }
 
@@ -1530,9 +1490,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         public Map(string sourceField, string destinationField)
         {
             SourceField = sourceField;
-            SourceContainer = string.Empty;
             DestinationField = destinationField;
-            DestinationContainer = string.Empty;
         }
 
         /// <summary>
@@ -1550,29 +1508,10 @@ namespace CODE.Framework.Fundamentals.Utilities
             DestinationContainer = destinationContainer;
         }
 
-        /// <summary>
-        /// Gets or sets the source field.
-        /// </summary>
-        /// <value>The source field.</value>
         public string SourceField { get; }
-
-        /// <summary>
-        /// Gets or sets the source container.
-        /// </summary>
-        /// <value>The source container.</value>
-        public string SourceContainer { get; }
-
-        /// <summary>
-        /// Gets or sets the destination field.
-        /// </summary>
-        /// <value>The destination field.</value>
+        public string SourceContainer { get; } = string.Empty;
         public string DestinationField { get; }
-
-        /// <summary>
-        /// Gets or sets the destination container.
-        /// </summary>
-        /// <value>The destination container.</value>
-        public string DestinationContainer { get; }
+        public string DestinationContainer { get; } = string.Empty;
     }
 
     /// <summary>
@@ -1596,19 +1535,37 @@ namespace CODE.Framework.Fundamentals.Utilities
     /// </summary>
     public class MappingOptions
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MappingOptions"/> class.
-        /// </summary>
         public MappingOptions()
         {
-            MapEnums = true;
-            MatchEnumCase = true;
-            Maps = new List<Map>();
-            ExcludedFields = new List<string>();
-            MapDirection = MapDirection.Forward;
-            MapFunctions = new List<Func<object, object, MapDirection, bool>>();
-            MapFunctionsFiltered = new Dictionary<string, Func<object, object, MapDirection, bool>>();
-            SmartPrefixMap = false;
+            if (IsDebug())
+                LogMappedMembers = true;
+        }
+
+        public void AddMap(string sourceField, string destinationField) => Maps.Add(new Map(sourceField, destinationField));
+
+        private static string _isDebug = string.Empty;
+        private static bool IsDebug()
+        {
+            if (!string.IsNullOrEmpty(_isDebug)) return _isDebug == "YES";
+
+            var assembly = Assembly.GetEntryAssembly();
+            if (assembly != null)
+            {
+                var attributes = assembly.GetCustomAttributes(typeof(DebuggableAttribute), true);
+                if (attributes.Length == 0)
+                {
+                    _isDebug = "NO";
+                    return false;
+                }
+
+                var debuggableAttribute = (DebuggableAttribute)attributes[0];
+                var debuggableAttributeIsJitTrackingEnabled = debuggableAttribute.IsJITTrackingEnabled;
+                _isDebug = debuggableAttributeIsJitTrackingEnabled ? "YES" : "NO";
+                return debuggableAttributeIsJitTrackingEnabled;
+            }
+
+            _isDebug = "NO";
+            return false;
         }
 
         /// <summary>
@@ -1618,32 +1575,32 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Tries to map enums by their names and if that doesn't work, by their value (integer or byte)
         /// </remarks>
         /// <value><c>true</c> if enums are to be mapped, otherwise, <c>false</c>.</value>
-        public bool MapEnums { get; set; }
+        public bool MapEnums { get; set; } = true;
 
         /// <summary>
         /// Indicates whether auto-map enum attempts shall be case sensitive or not
         /// </summary>
         /// <value><c>true</c> if case sensitive, otherwise, <c>false</c>.</value>
-        public bool MatchEnumCase { get; set; }
+        public bool MatchEnumCase { get; set; } = true;
 
         /// <summary>
         /// If set to true, the mapper will automatically try to make prefixed fields to 
         /// non-prefixed properties, such as cName or _name or c_name to Name.
         /// </summary>
         /// <value><c>true</c> if [smart prefix map]; otherwise, <c>false</c>.</value>
-        public bool SmartPrefixMap { get; set; }
+        public bool SmartPrefixMap { get; set; } = false;
 
         /// <summary>
         /// If not null, this list of maps will be used instead of other defined maps
         /// </summary>
         /// <value>The maps.</value>
-        public List<Map> Maps { get; set; }
+        public List<Map> Maps { get; set; } = new List<Map>();
 
         /// <summary>
         /// List of excluded fields
         /// </summary>
         /// <value>The excluded fields.</value>
-        public List<string> ExcludedFields { get; set; }
+        public List<string> ExcludedFields { get; set; } = new List<string>();
 
         /// <summary>
         /// Direction of the mapping operation
@@ -1653,7 +1610,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Backward = Destination to source
         /// </remarks>
         /// <value>The map direction.</value>
-        public MapDirection MapDirection { get; set; }
+        public MapDirection MapDirection { get; set; } = MapDirection.Forward;
 
         /// <summary>
         /// A list of functions that get called for mapped objects.
@@ -1666,7 +1623,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Parameter 3 = direction
         /// Return value = true if successful
         /// </remarks>
-        public List<Func<object, object, MapDirection, bool>> MapFunctions { get; set; }
+        public List<Func<object, object, MapDirection, bool>> MapFunctions { get; set; } = new List<Func<object, object, MapDirection, bool>>();
 
         /// <summary>
         /// A list of functions that get called for mapped objects.
@@ -1680,7 +1637,32 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Parameter 3 = direction
         /// Return value = true if successful
         /// </remarks>
-        public Dictionary<string, Func<object, object, MapDirection, bool>> MapFunctionsFiltered { get; set; }
+        public Dictionary<string, Func<object, object, MapDirection, bool>> MapFunctionsFiltered { get; set; } = new Dictionary<string, Func<object, object, MapDirection, bool>>();
+
+        /// <summary>
+        /// When set to true, the mapper logs which members it mapped and which members it ignored
+        /// </summary>
+        /// <remarks>
+        /// This is useful during debug sessions. The system automatically sets this to true in debug builds, but it can be overridden manually.
+        /// Note that this feature is not aware of map-functions, as it can't know which members a function might touch.
+        /// </remarks>
+        public bool LogMappedMembers { get; set; } = false;
+
+        /// <summary>Contains the names of all source properties included in the mapping operation. (Note: Only populated if LogMappedMembers = true)</summary>
+        public List<string> MappedSourceProperties { get; set; } = new List<string>();
+        /// <summary>Contains the names of all source properties ignored in the mapping operation. (Note: Only populated if LogMappedMembers = true)</summary>
+        public List<string> IgnoredSourceProperties { get; set; } = new List<string>();
+        /// <summary>Contains the names of all destination properties included in the mapping operation. (Note: Only populated if LogMappedMembers = true)</summary>
+        public List<string> MappedDestinationProperties { get; set; } = new List<string>();
+        /// <summary>Contains the names of all destination properties excluded in the mapping operation. (Note: Only populated if LogMappedMembers = true)</summary>
+        public List<string> IgnoredDestinationProperties { get; set; } = new List<string>();
+
+        /// <summary>
+        /// This delegate can be used to set a method that fires whenever a new collection item needs to be added to the target collection. 
+        /// The provided parameters are destination collection, source item, and mapping options.
+        /// The required output needs to be a reference to the newly created collection item.
+        /// </summary>
+        public Func<object, object, MappingOptions, object> AddTargetCollectionItem { get; set; }
     }
 
     /// <summary>
@@ -1689,8 +1671,8 @@ namespace CODE.Framework.Fundamentals.Utilities
     /// </summary>
     public class ExpressionTreeObjectActivator
     {
-        private readonly ObjectActivator activator;
-        private readonly Type objectType;
+        private readonly ObjectActivator _activator;
+        private readonly Type _objectType;
 
         /// <summary>
         /// Constructor
@@ -1698,18 +1680,18 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// <param name="objectType">Type of the object to be instantiated.</param>
         public ExpressionTreeObjectActivator(Type objectType)
         {
-            this.objectType = objectType;
+            _objectType = objectType;
             var constructorInfo = FindDefaultParameterlessConstructor();
-            activator = GetActivator(constructorInfo);
+            _activator = GetActivator(constructorInfo);
         }
 
         private ConstructorInfo FindDefaultParameterlessConstructor()
         {
-            var constructors = objectType.GetConstructors().Where(x => x.GetParameters().Count().Equals(0));
+            var constructors = _objectType.GetConstructors().Where(x => x.GetParameters().Count().Equals(0));
 
             var constructorInfos = constructors as ConstructorInfo[] ?? constructors.ToArray();
             if (!constructorInfos.Any())
-                throw new InvalidOperationException("Parameterless constructor required on type '" + objectType.FullName + "'.");
+                throw new InvalidOperationException("Parameterless constructor required on type '" + _objectType.FullName + "'.");
             return constructorInfos.Single();
         }
 
@@ -1717,7 +1699,7 @@ namespace CODE.Framework.Fundamentals.Utilities
         /// Instantiates the type using its default parameterless constructor.
         /// </summary>
         /// <returns></returns>
-        public object InstantiateType() => activator(null);
+        public object InstantiateType() => _activator(null);
 
         private static ObjectActivator GetActivator(ConstructorInfo constructorInfo)
         {

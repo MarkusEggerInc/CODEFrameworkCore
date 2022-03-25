@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Text.Json;
 using System.Threading.Tasks;
+using CODE.Framework.Fundamentals.Utilities;
 using CODE.Framework.Services.Contracts;
 using CODE.Framework.Services.Server.AspNetCore.Configuration;
 using CODE.Framework.Services.Server.AspNetCore.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Routing;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Westwind.Utilities;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -111,15 +112,29 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                 ServiceInstanceConfiguration.OnAfterMethodInvoke?.Invoke(context);
 
+                // TODO: Do we really need this still?
                 if (string.IsNullOrEmpty(context.ResultJson))
-                    context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
+                {
+                    var options = new JsonSerializerOptions();
 
-                SendJsonResponse(context, context.ResultValue);
+                    if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+
+#if DEBUG
+                    options.WriteIndented = true;
+#endif
+
+                    var inputType = context.ResultValue.GetType();
+                    context.ResultJson = JsonSerializer.Serialize(context.ResultValue, inputType, options);
+                    //context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
+                }
+
+                await SendJsonResponseAsync(context, context.ResultValue);
             }
             catch (Exception ex)
             {
                 var error = new ErrorResponse(ex);
-                SendJsonResponse(context, error);
+                await SendJsonResponseAsync(context, error);
             }
         }
 
@@ -139,6 +154,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 // Empty response - ASP.NET will provide CORS headers via applied policy
                 handlerContext.HttpResponse.StatusCode = StatusCodes.Status204NoContent;
+                // TODO: Adding this header for now after all, since it doesn't seem to work, but we should remove this later.
+                //handlerContext.HttpResponse.Headers.Add("Access-Control-Allow-Origin", new StringValues(serviceConfig.Cors.AllowedOrigins));
                 return;
             }
 
@@ -155,7 +172,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             try
             {
-                var parameterList = GetMethodParameters(handlerContext);
+                var parameterList = await GetMethodParametersAsync(handlerContext);
 
                 if (!handlerContext.MethodContext.IsAsync)
                     handlerContext.ResultValue = methodToInvoke.Invoke(inst, parameterList);
@@ -177,7 +194,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// </summary>
         /// <param name="handlerContext"></param>
         /// <returns></returns>
-        private object[] GetMethodParameters(ServiceHandlerRequestContext handlerContext)
+        private async Task<object[]> GetMethodParametersAsync(ServiceHandlerRequestContext handlerContext)
         {
             // parameter parsing
             var parameterList = new object[] { };
@@ -188,67 +205,125 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 throw new ArgumentNullException(string.Format(Resources.OnlySingleParametersAreAllowedOnServiceMethods, MethodContext.MethodInfo.Name));
 
             // if there is a parameter create and de-serialize, then add url parameters
-            if (paramInfos.Length == 1)
+            if (paramInfos.Length != 1) return parameterList;
+            var parameter = paramInfos[0];
+
+            // First Deserialize from body if any
+
+            // there's always 1 parameter
+            object parameterData;
+            if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
+                parameterData = ObjectHelper.CreateInstanceFromType(parameter.ParameterType); // if no content create an empty one
+            else
+                parameterData = await JsonSerializer.DeserializeAsync(HttpRequest.Body, parameter.ParameterType);
+
+            // We map all parameters passed as named parameters in the URL to their respective properties
+            foreach (var key in handlerContext.HttpRequest.Query.Keys)
             {
-                var parameter = paramInfos[0];
-
-                // First Deserialize from body if any
-                var serializer = new JsonSerializer();
-
-                // there's always 1 parameter
-                object parameterData = null;
-                if (HttpRequest.ContentLength == null || HttpRequest.ContentLength < 1)
-                    // if no content create an empty one
-                    parameterData = ReflectionUtils.CreateInstanceFromType(parameter.ParameterType);
-                else
-                    using (var sw = new StreamReader(HttpRequest.Body))
-                    using (JsonReader reader = new JsonTextReader(sw))
-                        parameterData = serializer.Deserialize(reader, parameter.ParameterType);
-
-                // We map all parameters passed as named parameters in the URL to their respective properties
-                foreach (var key in handlerContext.HttpRequest.Query.Keys)
+                var property = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                if (property == null) continue;
+                try
                 {
-                    var prop = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                    if (prop != null)
-                        try
-                        {
-                            var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
-                            var val = ReflectionUtils.StringToTypedValue(urlParameterValue, prop.PropertyType);
-                            ReflectionUtils.SetProperty(parameterData, key, val);
-                        }
-                        catch
-                        {
-                            throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
-                        }
+                    var urlParameterValue = handlerContext.HttpRequest.Query[key].ToString();
+                    var parameterValue = UrlParameterToValue(urlParameterValue, property.PropertyType);
+                    ObjectHelper.SetPropertyValue(parameterData, key, parameterValue);
+                }
+                catch
+                {
+                    throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
+                }
+            }
+
+            // Map inline URL parameters defined in the route to properties.
+            // Note: Since this is done after the named parameters above, parameters that are part of the route definition win out over simple named parameters
+            if (RouteData != null)
+                foreach (var (key, value) in RouteData.Values)
+                {
+                    var property = parameter.ParameterType.GetProperty(key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
+                    if (property == null) continue;
+                    try
+                    {
+                        var parameterValue = UrlParameterToValue(value as string, property.PropertyType);
+                        ObjectHelper.SetPropertyValue(parameterData, key, parameterValue);
+                    }
+                    catch
+                    {
+                        throw new InvalidOperationException($"Unable set parameter from URL segment for property: {key}");
+                    }
                 }
 
-                // Map inline URL parameters defined in the route to properties.
-                // Note: Since this is done after the named parameters above, parameters that are part of the route definition win out over simple named parameters
-                if (RouteData != null)
-                    foreach (var kv in RouteData.Values)
-                    {
-                        var prop = parameter.ParameterType.GetProperty(kv.Key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.IgnoreCase);
-                        if (prop != null)
-                            try
-                            {
-                                var val = ReflectionUtils.StringToTypedValue(kv.Value as string, prop.PropertyType);
-                                ReflectionUtils.SetProperty(parameterData, kv.Key, val);
-                            }
-                            catch
-                            {
-                                throw new InvalidOperationException($"Unable set parameter from URL segment for property: {kv.Key}");
-                            }
-                    }
-
-                parameterList = new[] {parameterData};
-            }
+            parameterList = new[] {parameterData};
 
             return parameterList;
         }
 
-        private void ValidateRoles(List<string> authorizationRoles, IPrincipal user)
+        /// <summary>
+        /// Converts a URL parameter value to a typed object
+        /// </summary>
+        /// <param name="sourceString">The parameter value as a string</param>
+        /// <param name="targetType">Intended return type</param>
+        /// <param name="culture">String culture (optional)</param>
+        /// <returns>Typed value</returns>
+        private static object UrlParameterToValue(string sourceString, Type targetType, CultureInfo culture = null)
         {
-            if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
+            var isEmpty = string.IsNullOrEmpty(sourceString);
+            if (culture == null) culture = CultureInfo.InvariantCulture;
+
+            if (targetType == typeof(string))
+                return sourceString;
+            else if (targetType == typeof(int) || targetType == typeof(int))
+                return isEmpty ? 0 : int.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(long))
+                return isEmpty ? (long)0 : long.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(short))
+                return isEmpty ? (short)0 : short.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(decimal))
+                return isEmpty ? 0m : decimal.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(DateTime))
+                return isEmpty ? DateTime.MinValue : Convert.ToDateTime(sourceString, culture.DateTimeFormat);
+            else if (targetType == typeof(byte))
+                return isEmpty ? 0 : Convert.ToByte(sourceString);
+            else if (targetType == typeof(double))
+                return isEmpty ? 0d : double.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(float))
+                return isEmpty ? 0d : float.Parse(sourceString, NumberStyles.Any, culture.NumberFormat);
+            else if (targetType == typeof(bool))
+            {
+                sourceString = sourceString.ToLower();
+                return !isEmpty && sourceString == "true" || sourceString == "on" || sourceString == "1" || sourceString == "yes";
+            }
+            else if (targetType == typeof(Guid))
+                return isEmpty ? Guid.Empty : new Guid(sourceString);
+            else if (targetType.IsEnum)
+                return Enum.Parse(targetType, sourceString);
+            else if (targetType == typeof(byte[]))
+                return new byte[0]; // We are not supporting type arrays for this purpose
+            else if (targetType.Name.StartsWith("Nullable`")) // Nullables are special. If they are null, we just return that. Otherwise, we unpack them and then run the current method again with that value.
+            {
+                if (sourceString.ToLower() == "null" || sourceString == string.Empty)
+                    return null;
+                else
+                {
+                    targetType = Nullable.GetUnderlyingType(targetType);
+                    return UrlParameterToValue(sourceString, targetType);
+                }
+            }
+            else
+            {
+                var converter = TypeDescriptor.GetConverter(targetType);
+                if (converter != null && converter.CanConvertFrom(typeof(string)))
+                    return converter.ConvertFromString(null, culture, sourceString);
+                else
+                {
+                    Debug.WriteLine($"Type Conversion not handled in StringToTypedValue for {targetType.Name} {sourceString}");
+                    return null;
+                }
+            }
+        }
+
+        private void ValidateRoles(IReadOnlyCollection<string> authorizationRoles, IPrincipal user)
+        {
+            if (user?.Identity != null && user.Identity.IsAuthenticated)
             {
                 if (user.Identity is ClaimsIdentity identity) {
                     var rolesClaim = identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
@@ -267,31 +342,26 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             throw new UnauthorizedAccessException("Access denied: User is not part of required Role.");
         }
-
-        private static readonly DefaultContractResolver CamelCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
-
-        private static readonly DefaultContractResolver SnakeCaseNamingStrategy = new DefaultContractResolver {NamingStrategy = new SnakeCaseNamingStrategy()};
-
-        public static void SendJsonResponse(ServiceHandlerRequestContext context, object value)
+        
+        public static async Task SendJsonResponseAsync(ServiceHandlerRequestContext context, object value)
         {
             var response = context.HttpResponse;
 
             response.ContentType = "application/json; charset=utf-8";
 
-            var serializer = new JsonSerializer();
+            var options = new JsonSerializerOptions();
 
             if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
-                serializer.ContractResolver = CamelCaseNamingStrategy;
-            else if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.SnakeCase)
-                serializer.ContractResolver = SnakeCaseNamingStrategy;
+                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            //else if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.SnakeCase)
+            //    serializer.ContractResolver = SnakeCaseNamingStrategy;
 
 #if DEBUG
-            serializer.Formatting = Formatting.Indented;
+            options.WriteIndented = true;
 #endif
 
-            using (var sw = new StreamWriter(response.Body))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-                serializer.Serialize(writer, value);
+            var inputType = value.GetType();
+            await JsonSerializer.SerializeAsync(response.Body, value, inputType, options);
         }
     }
 }

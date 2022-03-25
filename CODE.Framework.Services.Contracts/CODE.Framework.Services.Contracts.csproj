@@ -1,38 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>1.0.7</Version>
-    <Authors>Markus Egger, Rick Strahl</Authors>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyVersion>1.5.16.0</AssemblyVersion>
+    <FileVersion>1.5.16.0</FileVersion>
+    <Version>1.5.16</Version>
+    <Authors>Markus Egger Inc.</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Copyright>Markus Egger Inc., 2017-2019</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2021</Copyright>
     <Description>Base contracts for the CODE Framework Server side services</Description>
     <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+    <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
   </PropertyGroup>
 
-  
+  <ItemGroup>
+    <None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>DEBUG;NETCORE;NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+  <!--<PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
     <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>-->
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <Optimize>false</Optimize>
   </PropertyGroup>
   
+  <ItemGroup>
+    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
 </Project>

@@ -140,9 +140,13 @@ namespace CODE.Framework.Services.Client
             var sb = new StringBuilder();
             foreach (var inlineProperty in inlineParameterProperties)
             {
-                sb.Append("/");
                 var propertyValue = inlineProperty.GetValue(objectToSerialize, null);
-                sb.Append(GetSerializedParameterValue(propertyValue));
+                sb.Append("/");
+                if (propertyValue != null)
+                {
+                    var encodedPropertyValue = HttpHelper.UrlEncode(propertyValue.ToString());
+                    sb.Append(encodedPropertyValue); // TODO: We need to make sure we are doing well for specific property types
+                }
             }
             if (httpMethod == "GET" && namedParameterProperties.Count > 0)
             {
@@ -153,27 +157,12 @@ namespace CODE.Framework.Services.Client
                     if (propertyValue == null) continue;
                     if (isFirst) sb.Append("?");
                     if (!isFirst) sb.Append("&");
-                    sb.Append($"{namedProperty.Name}={GetSerializedParameterValue(propertyValue)}");
+                    sb.Append(namedProperty.Name + "=" + HttpHelper.UrlEncode(propertyValue.ToString())); // TODO: We need to make sure we are doing well for specific property types
                     isFirst = false;
                 }
             }
 
             return sb.ToString();
-        }
-
-        private static string GetSerializedParameterValue(object value)
-        {
-            if (value == null) return "null";
-
-            string stringValue;
-            if (value is DateTime valueDate)
-                stringValue = valueDate.ToString("o");
-            else
-                stringValue = value.ToString();
-
-            var encodedValue = HttpHelper.UrlEncode(stringValue);
-
-            return encodedValue;
         }
 
         private class PropertySorter

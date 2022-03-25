@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using CODE.Framework.Services.Contracts;
 
 namespace Sample.Contracts
-{    
+{   
+    [ServiceContract]
     public interface IUserService
     {     
         [Rest(Method = RestMethods.Get)]
@@ -76,7 +78,7 @@ namespace Sample.Contracts
     public class GetUsersResponse : BaseServiceResponse
     {
         [DataMember]
-        public List<User> Users = new List<User>();
+        public List<User> Users { get; set;  } = new List<User>();
     }
 
     public class SignoutRequest : BaseServiceRequest { }
