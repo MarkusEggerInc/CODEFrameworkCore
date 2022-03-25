@@ -61,7 +61,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         var assemblyNameWithFullPath = Path.GetFullPath(assemblyNameWithPath);
                         if (ObjectHelper.LoadAssembly(assemblyNameWithFullPath) == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
-                        type = ObjectHelper.GetTypeFromName(svc.ServiceTypeName); 
+                        type = ObjectHelper.GetTypeFromName(svc.ServiceTypeName);
                         if (type == null)
                             throw new ArgumentException(string.Format(Resources.InvalidServiceType, svc.ServiceTypeName));
                     }
@@ -85,13 +85,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                       if (config.Cors.AllowedOrigins == "*")
                                           builder = builder.SetIsOriginAllowed(s => true);
                                       else if (!string.IsNullOrEmpty(config.Cors.AllowedOrigins))
-                                          builder.WithOrigins(config.Cors.AllowedOrigins.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithOrigins(config.Cors.AllowedOrigins.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (!string.IsNullOrEmpty(config.Cors.AllowedMethods))
-                                          builder.WithMethods(config.Cors.AllowedMethods.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithMethods(config.Cors.AllowedMethods.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (!string.IsNullOrEmpty(config.Cors.AllowedHeaders))
-                                          builder.WithHeaders(config.Cors.AllowedHeaders.Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries));
+                                          builder.WithHeaders(config.Cors.AllowedHeaders.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries));
 
                                       if (config.Cors.AllowCredentials)
                                           builder.AllowCredentials();
@@ -156,11 +156,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                                if (interfaces.Length < 1)
                                                    throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                                           // TODO: Optionally enable swagger support.
-                                           // TODO: CReate the json using object.
-                                           var swaggerFullRoute = (serviceInstanceConfig.RouteBasePath + "/swagger.json").Replace("//", "/");
-                                           if (swaggerFullRoute.StartsWith("/")) swaggerFullRoute = swaggerFullRoute.Substring(1);
-                                           routeBuilder.MapVerb("GET", swaggerFullRoute, GetSwaggerJson(serviceInstanceConfig, interfaces));
+                                               // TODO: *Optionally* enable swagger support.
+                                               // TODO: Create the json using object.
+                                               // TODO: Add openapi.yaml support
+                                               var openApiFullRoute = (serviceInstanceConfig.RouteBasePath + "/openapi.json").Replace("//", "/");
+                                               if (openApiFullRoute.StartsWith("/")) openApiFullRoute = openApiFullRoute.Substring(1);
+                                               routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceInstanceConfig, interfaces));
 
                                                // Loop through service methods and cache the propertyInfo info, parameter info, and RestAttribute
                                                // in a MethodInvocationContext so we don't have to do this for each propertyInfo call
@@ -204,7 +205,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                                                    var roles = restAttribute.AuthorizationRoles;
                                                    if (roles != null)
-                                                       methodContext.AuthorizationRoles = roles.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                                       methodContext.AuthorizationRoles = roles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
                                                    // This code is what triggers the SERVICE METHOD EXECUTION via a delegate that is called when the route is matched
                                                    Func<HttpRequest, HttpResponse, RouteData, Task> exec =
@@ -230,25 +231,54 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return appBuilder;
         }
 
-        //private static Func<HttpRequest, HttpResponse, RouteData, Task> GetSwaggerJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces) => async (req, resp, route) =>
-        //{
-        //    resp.ContentType = "application/json; charset=utf-8";
+        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces) => async (req, resp, route) =>
+        {
+            resp.ContentType = "application/json; charset=utf-8";
 
-        //    var si = new SwaggerInformation {Info = {Description = "This is a test"}};
+            var openApiInfo = new OpenApiInformation { Info = { Description = "OpenAPI service description" } };
 
-        //    foreach (var method in serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly))
-        //    {
-        //        var interfaceMethod = interfaces[0].GetMethod(method.Name);
-        //        if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
-        //        var restAttribute = GetRestAttribute(interfaceMethod);
-        //        if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
+            openApiInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
-        //        si.Paths.Add(restAttribute.Name == null ? "/" + method.Name : "/" + restAttribute.Name, new SwaggerPathInfo(restAttribute.Method.ToString()) {OperationId = method.Name});
-        //    }
+            var methods = serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly);
+            foreach (var method in methods)
+            {
+                var interfaceMethod = interfaces[0].GetMethod(method.Name);
+                if (interfaceMethod == null) continue; // Should never happen, but doesn't hurt to check
+                var restAttribute = GetRestAttribute(interfaceMethod);
+                if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
 
-        //    resp.ContentType = "application/json; charset=utf-8";
-        //    await System.Text.Json.JsonSerializer.SerializeAsync(resp.Body, si);
-        //}
+                var httpVerb = restAttribute.Method.ToString().ToLowerInvariant();
+                var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name);
+
+                pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
+
+                OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
+                pathInfo.ReturnTypeName = interfaceMethod.ReturnType.FullName;
+
+                if (httpVerb == "get")
+                    // Get operations do not have a payload/body, so everything must be coming in from the URL
+                    OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                else
+                {
+                    var methodParameters = interfaceMethod.GetParameters();
+                    foreach (var parameter in methodParameters) // Should always be a single parameter
+                        OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType);
+                    OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                    if (methodParameters.Length > 0)
+                        pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };
+
+                    // TODO: Payload "parameter" object
+                }
+
+                var definedRoute = restAttribute.Route != null ? restAttribute.Route : restAttribute.Name == null ? $"{method.Name}" : $"{restAttribute.Name}";
+                var fullRoute = string.IsNullOrEmpty(definedRoute)  ? $"{serviceInstanceConfig.RouteBasePath}" : $"{serviceInstanceConfig.RouteBasePath}/{definedRoute}";
+                openApiInfo.Paths.Add(fullRoute, pathInfo);
+            }
+
+            resp.ContentType = "application/json; charset=utf-8";
+            var options = new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase };
+            await System.Text.Json.JsonSerializer.SerializeAsync(resp.Body, openApiInfo, typeof(OpenApiInformation), options);
+        };
 
         /// <summary>
         /// Extracts the RestAttribute from a propertyInfo's attributes
@@ -283,7 +313,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 var attribute = GetRestUrlParameterAttribute(propertyInfo);
                 if (attribute == null) continue;
                 if (attribute.Mode == UrlParameterMode.Inline)
-                    list.Add(new PropertyInfoHelper {Name = propertyInfo.Name, Order = attribute.Sequence});
+                    list.Add(new PropertyInfoHelper { Name = propertyInfo.Name, Order = attribute.Sequence });
             }
 
             return list.OrderBy(a => a.Order).Select(a => a.Name);

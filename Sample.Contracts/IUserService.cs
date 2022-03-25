@@ -15,13 +15,13 @@ namespace Sample.Contracts
         [Rest(Method = RestMethods.Post)]
         IsAuthenticatedResponse IsAuthenticated(IsAuthenticatedRequest request);
         
-        [Rest(Method = RestMethods.Post, Name = "user")]
+        [Rest(Method = RestMethods.Put, Name = "user")]
         SaveUserResponse SaveUser(SaveUserRequest request);
 
         [Rest(Method = RestMethods.Post)]
         ResetPasswordResponse ResetPassword(ResetPasswordRequest request);
 
-        [Rest(Method = RestMethods.Get, Name = "")]
+        [Rest(Method = RestMethods.Get, Name = "userload")]
         GetUserResponse GetUser(GetUserRequest request);
 
         [Rest(Method = RestMethods.Get, Name = "authenticate")]

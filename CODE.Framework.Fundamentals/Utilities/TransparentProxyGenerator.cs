@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace CODE.Framework.Fundamentals.Utilities
 {
-#if NETSTANDARD2_0
+#if NETCORE
     /// <summary>
     /// Class TransparentProxyGenerator.
     /// </summary>

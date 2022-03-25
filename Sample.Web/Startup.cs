@@ -74,6 +74,16 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
             });
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServiceHandlerConfiguration config) => app.UseServiceHandler();
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServiceHandlerConfiguration config)
+        {
+            app.UseServiceHandler();
+
+            // TODO: For now, we are using Swashbuckle
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/api/users/openapi.json", "users");
+                //options.SwaggerEndpoint("/api/customers/openapi.json", "users");
+            });
+        }
     }
 }
