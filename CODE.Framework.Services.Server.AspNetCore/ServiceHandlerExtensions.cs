@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -229,7 +230,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// </summary>
         /// <param name="appBuilder"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseOpenApiHandler(this IApplicationBuilder appBuilder, bool supportOpenApiJson = true, string openApiJsonRoute = "openapi.json")
+        public static IApplicationBuilder UseOpenApiHandler(this IApplicationBuilder appBuilder, bool supportOpenApiJson = true, string openApiJsonRoute = "openapi.json", OpenApiInfo info = null)
         {
             var serviceConfig = ServiceHandlerConfiguration.Current;
 
@@ -258,7 +259,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                             var openApiFullRoute = !string.IsNullOrEmpty(openApiJsonRoute) ? openApiJsonRoute : "/openapi.json";
                                             if (!openApiFullRoute.StartsWith("/"))
                                                 openApiFullRoute = "/" + openApiFullRoute;
-                                            routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceConfig.Services));
+                                            routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceConfig.Services, info));
 
                                             // TODO: Add openapi.yaml support?
                                         });
@@ -268,13 +269,15 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return appBuilder;
         }
 
-        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(List<ServiceHandlerConfigurationInstance> serviceInstanceConfigurations) => async (req, resp, route) =>
+        private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(List<ServiceHandlerConfigurationInstance> serviceInstanceConfigurations, OpenApiInfo info = null) => async (req, resp, route) =>
         {
-            // ServiceHandlerConfigurationInstance serviceInstanceConfig, Type[] interfaces
-
             resp.ContentType = "application/json; charset=utf-8";
 
-            var openApiInfo = new OpenApiInformation { Info = { Description = "OpenAPI service description" } };
+            var xmlDocumentationFiles = new Dictionary<Assembly, OpenApiXmlDocumentationFile>();
+            //ComponentsJsonConverter.XmlDocumentationFiles = xmlDocumentationFiles; // This is a little dirty, but it is a good way to get this into the converter
+
+            if (info == null) info = new OpenApiInfo();
+            var openApiInfo = new OpenApiInformation { Info = info };
 
             foreach (var serviceInstanceConfig in serviceInstanceConfigurations)
             {
@@ -282,7 +285,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (interfaces.Length < 1)
                     throw new NotSupportedException(Resources.HostedServiceRequiresAnInterface);
 
-                openApiInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
+                if (!xmlDocumentationFiles.ContainsKey(interfaces[0].Assembly))
+                    xmlDocumentationFiles.Add(interfaces[0].Assembly, new OpenApiXmlDocumentationFile(interfaces[0].Assembly));
+
+                // If we do not have a version number yet, we use the first interface to see if that can give us a version number
+                if (string.IsNullOrEmpty(info.Version)) 
+                    info.Version = interfaces[0].Assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+
+                var tag = new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name };
+                tag.Description = OpenApiHelper.GetDescription(serviceInstanceConfig.ServiceType, interfaces[0], xmlDocumentationFiles);
+                tag.ExternalDocs = OpenApiHelper.GetExternalDocs(serviceInstanceConfig.ServiceType, interfaces[0]);
+                openApiInfo.Tags.Add(tag);
 
                 var methods = serviceInstanceConfig.ServiceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.DeclaredOnly);
                 foreach (var method in methods)
@@ -295,6 +308,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     var httpVerb = restAttribute.Method.ToString().ToLowerInvariant();
                     var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name);
 
+                    // Get method summary and description
+                    pathInfo.Verbs[pathInfo.Verbs.Keys.First()].Summary = OpenApiHelper.GetSummary(interfaceMethod, interfaces[0], xmlDocumentationFiles);
+                    pathInfo.Verbs[pathInfo.Verbs.Keys.First()].Description = OpenApiHelper.GetDescription(interfaceMethod, interfaces[0], xmlDocumentationFiles);
+
                     pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
                     OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
@@ -302,20 +319,25 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     if (httpVerb == "get")
                         // Get operations do not have a payload/body, so everything must be coming in from the URL
-                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo, xmlDocumentationFiles);
                     else
                     {
                         var methodParameters = interfaceMethod.GetParameters();
                         foreach (var parameter in methodParameters) // Should always be a single parameter
                             OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType);
-                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo);
+                        OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo, xmlDocumentationFiles);
                         if (methodParameters.Length > 0)
                             pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };
                     }
 
                     var definedRoute = restAttribute.Route != null ? restAttribute.Route : restAttribute.Name == null ? $"{method.Name}" : $"{restAttribute.Name}";
                     var fullRoute = string.IsNullOrEmpty(definedRoute) ? $"{serviceInstanceConfig.RouteBasePath}" : $"{serviceInstanceConfig.RouteBasePath}/{definedRoute}";
-                    openApiInfo.Paths.Add(fullRoute, pathInfo);
+                    var fullRouteKey = $"{httpVerb}::{fullRoute}";
+
+                    if (!openApiInfo.Paths.ContainsKey(fullRouteKey))
+                        openApiInfo.Paths.Add(fullRouteKey, pathInfo);
+                    else
+                        throw new Exception($"Duplicate path/route in service definition.{Environment.NewLine}Route: {fullRoute}");
                 }
             }
 

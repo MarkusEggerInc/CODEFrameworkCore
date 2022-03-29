@@ -8,7 +8,7 @@
     <Authors>Markus Egger Inc.</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
-    <Copyright>Markus Egger Inc., 2017-2021</Copyright>
+    <Copyright>Markus Egger Inc., 2017-2022</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
     <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>

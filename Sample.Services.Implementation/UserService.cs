@@ -38,7 +38,7 @@ namespace Sample.Services.Implementation
             }
         }
 
-        public SignoutResponse Signout(SignoutRequest response) => new SignoutResponse();
+        public SignoutResponse Signout(SignoutRequest response) => new SignoutResponse { Success = true };
 
         public IsAuthenticatedResponse IsAuthenticated(IsAuthenticatedRequest request)
         {
@@ -122,9 +122,12 @@ namespace Sample.Services.Implementation
         {
             Users = new List<User>
             {
-                new User {Id = Guid.NewGuid(), Username = "rstrahl"},
-                new User {Id = Guid.NewGuid(), Username = "megger"}
-            }
+                new User {Id = Guid.NewGuid(), Username = "megger"},
+                new User {Id = Guid.NewGuid(), Username = "myeager"},
+                new User {Id = Guid.NewGuid(), Username = "ewhitney"},
+                new User {Id = Guid.NewGuid(), Username = "odobretsberger"}
+            },
+            Success = true
         };
     }
 }

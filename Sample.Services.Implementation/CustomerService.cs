@@ -32,8 +32,17 @@ namespace Sample.Services.Implementation
                 var response = new GetCustomersResponse();
 
                 // Real code goes here...
-                response.CustomerList.Add(new Customer {Name = "Rick Strahl", Company = "West wind"});
-                response.CustomerList.Add(new Customer {Name = "Markus Egger", Company = "EPS Software Corp."});
+                //response.CustomerList.Add(new Customer { Name = "Markus Egger", Company = "CODE" });
+                //response.CustomerList.Add(new Customer { Name = "Ellen Whitney", Company = "CODE" });
+                //response.CustomerList.Add(new Customer { Name = "Mike Yeager", Company = "CODE" });
+                //response.CustomerList.Add(new Customer { Name = "Otto Dobretsberger", Company = "CODE" });
+
+                response.CustomerList = new Customer[] {
+                    new Customer { Name = "Markus Egger", Company = "CODE" },
+                    new Customer { Name = "Ellen Whitney", Company = "CODE" },
+                    new Customer { Name = "Mike Yeager", Company = "CODE" },
+                    new Customer { Name = "Otto Dobretsberger", Company = "CODE" }
+                };
 
                 response.Success = true;
                 return response;
@@ -71,7 +80,8 @@ namespace Sample.Services.Implementation
 
                 var result = new GetCustomerResponse
                 {
-                    Customer = new Customer {Id = request.Id, Name = "Rick Strahl", Company = "West wind"}
+                    Customer = new Customer {Id = request.Id, Name = "Markus Egger", Company = "CODE"},
+                    Success = true
                 };
                 return result;
             }

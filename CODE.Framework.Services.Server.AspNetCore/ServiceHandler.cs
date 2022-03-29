@@ -127,6 +127,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     var inputType = context.ResultValue.GetType();
                     context.ResultJson = JsonSerializer.Serialize(context.ResultValue, inputType, options);
                     //context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
+
+                    context.HttpResponse.Headers.Add("x-powered-by", "CODE Framework - codeframework.io");
                 }
 
                 await SendJsonResponseAsync(context, context.ResultValue);

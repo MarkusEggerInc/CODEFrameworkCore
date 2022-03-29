@@ -9,7 +9,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
-		<Copyright>Markus Egger Inc., 2017-2021</Copyright>
+		<Copyright>Markus Egger Inc., 2017-2022</Copyright>
 		<Description>Shared fundamentals used by other CODE Framework components</Description>
 		<PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
 		<PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>

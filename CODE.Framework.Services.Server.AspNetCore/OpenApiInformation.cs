@@ -1,11 +1,14 @@
-﻿using CODE.Framework.Services.Contracts;
+﻿using CODE.Framework.Fundamentals.Utilities;
+using CODE.Framework.Services.Contracts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml;
 
 namespace CODE.Framework.Services.Server.AspNetCore
 {
@@ -27,7 +30,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public class OpenApiInfo
     {
-        public string Description { get; set; } = string.Empty;
+        public string Title { get; set; } = "Service Description";
+        public string Description { get; set; } = "Open API Service Description";
+        public string TermsOfService { get; set; } = string.Empty;
+        public string Contact { get; set; } = string.Empty;
+        public string License { get; set; } = string.Empty;
+        public string Version { get; set; } = string.Empty;
     }
 
     public class OpenApiPathInfo
@@ -67,7 +75,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public class OpenApiPropertyDefinition
     {
-        public OpenApiPropertyDefinition(Type type) => Type = type;
+        public OpenApiPropertyDefinition(Type type, string description = null)
+        {
+            Type = type;
+            Description = description;
+        }
+
+        public string Description { get; set; }
 
         public string Name => Type.Name;
         public Type Type { get; init; } = typeof(string);
@@ -100,19 +114,28 @@ namespace CODE.Framework.Services.Server.AspNetCore
     {
         public OpenApiVerb(string operationId) => OperationId = operationId;
 
-        public string OperationId { get; set; } = " ";
-
-        public string Summary { get; internal set; } = " ";
+        public string OperationId { get; set; } = string.Empty;
+        public string Summary { get; internal set; } = string.Empty;
+        public string Description { get; internal set; } = string.Empty;
     }
 
     public class OpenApiTag
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+        public OpenApiExternalDocumentation ExternalDocs { get; set; } = null;
+    }
+
+    public class OpenApiExternalDocumentation
+    {
+        public string Description { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
     }
 
     public class ComponentsJsonConverter : JsonConverter<Dictionary<string, OpenApiSchemaDefinition>>
     {
+        //internal static Dictionary<Assembly, OpenApiXmlDocumentationFile> XmlDocumentationFiles { get; internal set; }
+
         public override Dictionary<string, OpenApiSchemaDefinition> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             throw new NotImplementedException();
@@ -133,8 +156,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                 foreach (var propertyName in value[definitionName].Properties.Keys)
                 {
+                    var prop = value[definitionName].Properties[propertyName];
                     writer.WriteStartObject(propertyName);
-                    WritePropertyTypeInformation(value[definitionName].Properties[propertyName].Type, writer);
+                    WritePropertyTypeInformation(prop.Type, writer, prop.Description);
                     writer.WriteEndObject();
                 }
 
@@ -145,7 +169,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             writer.WriteEndObject();
         }
 
-        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer)
+        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer, string description = null)
         {
             var typeString = OpenApiHelper.GetOpenApiType(propertyType);
             if (!string.IsNullOrEmpty(typeString))
@@ -160,6 +184,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WriteStringValue(formatString);
                 }
 
+                if (!string.IsNullOrEmpty(description))
+                {
+                    writer.WritePropertyName("description");
+                    writer.WriteStringValue(description);
+                }
+
                 if (propertyType.Name == "List`1")
                 {
                     if (propertyType.GenericTypeArguments.Length > 0)
@@ -171,7 +201,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 }
                 else if (propertyType.IsArray)
                 {
-                    // TODO: Define member types
+                    writer.WriteStartObject("items");
+                    WritePropertyTypeInformation(propertyType.GetElementType(), writer);
+                    writer.WriteEndObject();
                 }
             }
             else
@@ -189,44 +221,69 @@ namespace CODE.Framework.Services.Server.AspNetCore
             throw new NotImplementedException();
         }
 
+        private string GetRouteFromOpenApiInfo(string route, List<OpenApiPositionalOperationParameter> positionalParameters, List<OpenApiNamedOperationParameter> namedParameters)
+        {
+            if (route.IndexOf("::") > -1)
+                route = route.Substring(route.IndexOf("::") + 2);
+
+            foreach (var positionalParameter in positionalParameters.OrderBy(p => p.PositionIndex))
+                route += $"/{{{positionalParameter.Name}}}";
+
+            if (namedParameters.Count > 0)
+            {
+                route += "?";
+                for (int parameterCounter = 0; parameterCounter < namedParameters.Count; parameterCounter++)
+                {
+                    var namedParameter = namedParameters[parameterCounter];
+                    route += $"{namedParameter.Name}={{{namedParameter.Name}}}";
+                    if (parameterCounter < namedParameters.Count - 1)
+                        route += "&";
+                }
+            }
+
+            return route;
+        }
+
         public override void Write(Utf8JsonWriter writer, Dictionary<string, OpenApiPathInfo> value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
-            foreach (var path in value.Keys.OrderBy(k => k))
+
+            var pathIdenticalToLast = false;
+            var lastRoute = string.Empty;
+
+            var normalizedKeys = value.Keys.OrderBy(k => k.Substring(k.IndexOf("::") + 2)).ToList();
+            for (var keyCounter = 0; keyCounter < normalizedKeys.Count; keyCounter++)
             {
-                var path2 = value[path];
-                var route = path;
+                var normalizedKey = normalizedKeys[keyCounter];
+                var path = value[normalizedKey];
+                var route = GetRouteFromOpenApiInfo(normalizedKey, path.PositionalParameters, path.NamedParameters);
 
-                foreach (var positionalParameter in path2.PositionalParameters.OrderBy(p => p.PositionIndex))
-                    route += $"/{{{positionalParameter.Name}}}";
-
-                if (path2.NamedParameters.Count > 0)
+                var nextRoute = string.Empty;
+                if (keyCounter < normalizedKeys.Count - 1)
                 {
-                    route += "?";
-                    for (int parameterCounter = 0; parameterCounter < path2.NamedParameters.Count; parameterCounter++)
-                    {
-                        var namedParameter = path2.NamedParameters[parameterCounter];
-                        route += $"{namedParameter.Name}={{{namedParameter.Name}}}";
-                        if (parameterCounter < path2.NamedParameters.Count - 1)
-                            route += "&";
-                    }
+                    var nextNormalizedKey = normalizedKeys[keyCounter + 1];
+                    var nextPath = value[nextNormalizedKey];
+                    nextRoute = GetRouteFromOpenApiInfo(nextNormalizedKey, nextPath.PositionalParameters, nextPath.NamedParameters);
                 }
+                var pathIdenticalToNext = nextRoute == route;
+                pathIdenticalToLast = route == lastRoute;
 
-                writer.WriteStartObject(route); // "paths"
+                if (!pathIdenticalToLast) // If the last path was the same, then the node already exists, and we just add to it
+                    writer.WriteStartObject(route); // "paths"
 
-                foreach (var verb in path2.Verbs.Keys)
+                foreach (var verb in path.Verbs.Keys)
                 {
                     writer.WriteStartObject(verb);
 
-                    var verbObject = path2.Verbs[verb];
+                    var verbObject = path.Verbs[verb];
                     writer.WritePropertyName("operationId");
                     writer.WriteStringValue(verbObject.OperationId);
 
                     writer.WritePropertyName("summary");
-                    writer.WriteStringValue(""); // TODO: fill this in
+                    writer.WriteStringValue(verbObject.Summary);
 
                     writer.WritePropertyName("description");
-                    writer.WriteStringValue(""); // TODO: fill this in
+                    writer.WriteStringValue(verbObject.Description);
 
                     if (verb.ToLowerInvariant() != "get")
                     {
@@ -236,12 +293,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     }
 
                     writer.WriteStartArray("parameters");
-                    foreach (var parameter in path2.PositionalParameters.OrderBy(p => p.PositionIndex))
+                    foreach (var parameter in path.PositionalParameters.OrderBy(p => p.PositionIndex))
                         WritePathParameters(writer, parameter);
-                    foreach (var parameter in path2.NamedParameters)
+                    foreach (var parameter in path.NamedParameters)
                         WritePathParameters(writer, parameter);
 
-                    if (path2.Payload != null)
+                    if (path.Payload != null)
                     {
                         writer.WriteStartObject();
                         writer.WritePropertyName("name");
@@ -254,7 +311,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         writer.WritePropertyName("schema");
                         writer.WriteStartObject();
                         writer.WritePropertyName("$ref");
-                        writer.WriteStringValue($"#/components/schemas/{path2.Payload.Type.FullName}");
+                        writer.WriteStringValue($"#/components/schemas/{path.Payload.Type.FullName}");
                         writer.WriteEndObject();
                         writer.WriteEndObject();
                     }
@@ -277,7 +334,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WritePropertyName("schema");
                     writer.WriteStartObject();
                     writer.WritePropertyName("$ref");
-                    writer.WriteStringValue($"#/components/schemas/{path2.ReturnTypeName}");
+                    writer.WriteStringValue($"#/components/schemas/{path.ReturnTypeName}");
                     writer.WriteEndObject();
                     writer.WriteEndObject();
                     writer.WriteEndObject();
@@ -285,14 +342,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WriteEndObject();
 
                     writer.WriteStartArray("tags");
-                    foreach (var tag in path2.Tags)
+                    foreach (var tag in path.Tags)
                         writer.WriteStringValue(tag.Name);
                     writer.WriteEndArray();
 
                     writer.WriteEndObject(); //verb
                 }
 
-                writer.WriteEndObject(); // "paths"
+                if (!pathIdenticalToNext) // If the next path is identical, then we leave the current node open so the next one can just add to it
+                    writer.WriteEndObject(); // "paths"
+
+                lastRoute = route;
             }
             writer.WriteEndObject();
         }
@@ -318,6 +378,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WriteStringValue(parameterOpenApiTypeFormat);
                 }
             }
+            if (!string.IsNullOrEmpty(parameter.Description))
+            {
+                writer.WritePropertyName("description");
+                writer.WriteStringValue(parameter.Description.Trim());
+            }
             writer.WriteEndObject();
         }
     }
@@ -332,7 +397,21 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             var properties = type.GetProperties();
             foreach (var property in properties)
-                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType));
+            {
+                var description = string.Empty;
+
+                var descriptionAttribute = property.GetCustomAttribute<DescriptionAttribute>();
+                if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
+                    description = descriptionAttribute.Description.Trim();
+                else
+                {
+                    var descriptionAttribute2 = property.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+                    if (descriptionAttribute2 != null && !string.IsNullOrEmpty(descriptionAttribute2.Description))
+                        description = descriptionAttribute2.Description.Trim();
+                }
+
+                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, description));
+            }
 
             return schema;
         }
@@ -346,8 +425,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             foreach (var property in typeDefinition.Properties.Values.Where(p => !p.IsSimpleType))
             {
-                if (property.Type.IsArray) continue; // TODO: Handle this
-                if (property.Type.Name == "List`1")
+                if (property.Type.IsArray)
+                    AddTypeToComponents(openApiInfo, property.Type.GetElementType());
+                else if (property.Type.Name == "List`1")
                 {
                     if (property.Type.GenericTypeArguments.Length > 0)
                         if (string.IsNullOrEmpty(GetOpenApiType(property.Type.GenericTypeArguments[0]))) // We don't want simple types like string... so anything that is a known OpenApi type can be ignored here
@@ -358,7 +438,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             }
         }
 
-        public static void ExtractOpenApiParameters(MethodInfo methodInfo, OpenApiPathInfo pathInfo)
+        public static void ExtractOpenApiParameters(MethodInfo methodInfo, OpenApiPathInfo pathInfo, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
             var methodParameters = methodInfo.GetParameters();
             if (methodParameters.Length > 0)
@@ -367,20 +447,127 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 var parameterProperties = parameter.ParameterType.GetProperties();
                 foreach (var parameterProperty in parameterProperties)
                 {
+                    var description = OpenApiHelper.GetDescription(parameterProperty, xmlDocumentationFiles);
+
                     var restUrParameterAttribute = parameterProperty.GetCustomAttribute<RestUrlParameterAttribute>();
                     if (restUrParameterAttribute != null)
                         if (restUrParameterAttribute.Mode == UrlParameterMode.Inline)
-                            pathInfo.PositionalParameters.Add(new OpenApiPositionalOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, PositionIndex = restUrParameterAttribute.Sequence });
+                            pathInfo.PositionalParameters.Add(new OpenApiPositionalOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, PositionIndex = restUrParameterAttribute.Sequence, Description = description });
                         else
                         {
                             var isRequired = true;
                             var dataMemberAttribute = parameterProperty.GetCustomAttribute<DataMemberAttribute>();
                             if (dataMemberAttribute != null)
                                 isRequired = dataMemberAttribute.IsRequired;
-                            pathInfo.NamedParameters.Add(new OpenApiNamedOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, Required = isRequired });
+                            pathInfo.NamedParameters.Add(new OpenApiNamedOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, Required = isRequired, Description = description });
                         }
+
                 }
             }
+        }
+
+        public static OpenApiExternalDocumentation GetExternalDocs(Type implementationType, Type interfaceType)
+        {
+            var attribute = implementationType.GetCustomAttribute<ExternalDocumentationAttribute>();
+            if (attribute != null)
+                return new OpenApiExternalDocumentation { Description = attribute.Description, Url = attribute.Url };
+
+            var attribute2 = interfaceType.GetCustomAttribute<ExternalDocumentationAttribute>();
+            if (attribute2 != null)
+                return new OpenApiExternalDocumentation { Description = attribute2.Description, Url = attribute2.Url };
+
+            return null;
+        }
+
+        public static string GetDescription(Type implementationType, Type interfaceType, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var descriptionAttribute = implementationType.GetCustomAttribute<DescriptionAttribute>();
+            if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
+                return descriptionAttribute.Description.Trim();
+
+            var descriptionAttribute2 = interfaceType.GetCustomAttribute<DescriptionAttribute>();
+            if (descriptionAttribute2 != null && !string.IsNullOrEmpty(descriptionAttribute2.Description))
+                return descriptionAttribute2.Description.Trim();
+
+            var componentModelDescriptionAttribute = implementationType.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
+                return componentModelDescriptionAttribute.Description.Trim();
+
+            var componentModelDescriptionAttribute2 = interfaceType.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            if (componentModelDescriptionAttribute2 != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute2.Description))
+                return componentModelDescriptionAttribute2.Description.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(implementationType.Assembly))
+            {
+                var xmlDescription = xmlDocumentationFiles[implementationType.Assembly].GetDescriptionFromXmlDocs(implementationType);
+                if (!string.IsNullOrEmpty(xmlDescription))
+                    return xmlDescription;
+            }
+
+            if (xmlDocumentationFiles.ContainsKey(interfaceType.Assembly))
+            {
+                var xmlDescription = xmlDocumentationFiles[interfaceType.Assembly].GetDescriptionFromXmlDocs(interfaceType);
+                if (!string.IsNullOrEmpty(xmlDescription))
+                    return xmlDescription;
+            }
+
+            return string.Empty;
+        }
+
+        public static string GetDescription(PropertyInfo property, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var descriptionAttribute = property.GetCustomAttribute<DescriptionAttribute>();
+            if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
+                return descriptionAttribute.Description.Trim();
+
+            var componentModelDescriptionAttribute = property.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
+                return componentModelDescriptionAttribute.Description.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(property.DeclaringType.Assembly))
+            {
+                var xmlDescription = xmlDocumentationFiles[property.DeclaringType.Assembly].GetDescriptionFromXmlDocs(property);
+                if (!string.IsNullOrEmpty(xmlDescription))
+                    return xmlDescription;
+            }
+
+            return string.Empty;
+        }
+
+        public static string GetDescription(MethodInfo interfaceMethod, Type methodInterface, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var descriptionAttribute = interfaceMethod.GetCustomAttribute<DescriptionAttribute>();
+            if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
+                return descriptionAttribute.Description.Trim();
+
+            var componentModelDescriptionAttribute = interfaceMethod.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
+                return componentModelDescriptionAttribute.Description.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(methodInterface.Assembly))
+            {
+                var xmlDescription = xmlDocumentationFiles[methodInterface.Assembly].GetDescriptionFromXmlDocs(interfaceMethod);
+                if (!string.IsNullOrEmpty(xmlDescription))
+                    return xmlDescription;
+            }
+
+            return string.Empty;
+        }
+
+        public static string GetSummary(MethodInfo interfaceMethod, Type methodInterface, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var ummaryAttribute = interfaceMethod.GetCustomAttribute<SummaryAttribute>();
+            if (ummaryAttribute != null && !string.IsNullOrEmpty(ummaryAttribute.Summary))
+                return ummaryAttribute.Summary.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(methodInterface.Assembly))
+            {
+                var xmlSummary = xmlDocumentationFiles[methodInterface.Assembly].GetSummaryFromXmlDocs(interfaceMethod);
+                if (!string.IsNullOrEmpty(xmlSummary))
+                    return xmlSummary;
+            }
+
+            return string.Empty;
         }
 
         public static string GetOpenApiType(Type type)
@@ -411,6 +598,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     public interface IOpenApiOperationParameter
     {
         string Name { get; set; }
+        string Description { get; set; }
         bool Required { get; set; }
         Type Type { get; set; }
     }
@@ -423,6 +611,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     public class OpenApiNamedOperationParameter : IOpenApiOperationParameter
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public Type Type { get; set; }
         public bool Required { get; set; } = true;
     }
@@ -430,5 +619,147 @@ namespace CODE.Framework.Services.Server.AspNetCore
     public class OpenApiPositionalOperationParameter : OpenApiNamedOperationParameter
     {
         public int PositionIndex { get; set; }
+    }
+
+    public class OpenApiXmlDocumentationFile
+    {
+        public OpenApiXmlDocumentationFile(Assembly assembly)
+        {
+            var xmlFileLocation = assembly.Location;
+            if (xmlFileLocation.ToLowerInvariant().EndsWith(".dll"))
+                xmlFileLocation = xmlFileLocation.Substring(0, xmlFileLocation.Length - 4) + ".xml";
+
+            try
+            {
+                if (File.Exists(xmlFileLocation))
+                {
+                    FileExists = true;
+                    XmlString = StringHelper.FromFile(xmlFileLocation);
+                }
+            }
+            catch
+            {
+                // Bummer... but too bad
+            }
+        }
+
+        public bool FileExists { get; set; }
+        public string XmlString { get; set; }
+
+        public string GetSummaryFromXmlDocs(MethodInfo method)
+        {
+            if (!FileExists) return string.Empty;
+
+            var xml = GetXmlDocument();
+            if (xml == null) return string.Empty;
+
+            var node = GetMemberNode(xml, method);
+            if (node == null) return string.Empty;
+            var summaryNode = node.SelectSingleNode("summary");
+            if (summaryNode == null) return string.Empty;
+            return summaryNode.InnerText.Trim();
+        }
+
+        public string GetDescriptionFromXmlDocs(PropertyInfo property)
+        {
+            if (!FileExists) return string.Empty;
+
+            var xml = GetXmlDocument();
+            if (xml == null) return string.Empty;
+
+            var node = GetMemberNode(xml, property);
+            if (node == null) return string.Empty;
+            var descriptionNode = node.SelectSingleNode("description");
+            if (descriptionNode != null && descriptionNode.InnerText != null && !string.IsNullOrEmpty(descriptionNode.InnerText)) return descriptionNode.InnerText.Trim();
+            var remarksNode = node.SelectSingleNode("remarks");
+            if (remarksNode != null && remarksNode.InnerText != null && !string.IsNullOrEmpty(remarksNode.InnerText)) return remarksNode.InnerText.Trim();
+
+            return string.Empty;
+        }
+
+        public string GetDescriptionFromXmlDocs(MethodInfo method)
+        {
+            if (!FileExists) return string.Empty;
+
+            var xml = GetXmlDocument();
+            if (xml == null) return string.Empty;
+
+            var node = GetMemberNode(xml, method);
+            if (node == null) return string.Empty;
+            var descriptionNode = node.SelectSingleNode("description");
+            if (descriptionNode != null && descriptionNode.InnerText != null && !string.IsNullOrEmpty(descriptionNode.InnerText)) return descriptionNode.InnerText.Trim();
+            var remarksNode = node.SelectSingleNode("remarks");
+            if (remarksNode != null && remarksNode.InnerText != null && !string.IsNullOrEmpty(remarksNode.InnerText)) return remarksNode.InnerText.Trim();
+
+            return string.Empty;
+        }
+
+        public string GetDescriptionFromXmlDocs(Type type)
+        {
+            if (!FileExists) return string.Empty;
+
+            var xml = GetXmlDocument();
+            if (xml == null) return string.Empty;
+
+            var node = GetMemberNode(xml, type);
+            if (node == null) return string.Empty;
+            var descriptionNode = node.SelectSingleNode("description");
+            if (descriptionNode != null && descriptionNode.InnerText != null && !string.IsNullOrEmpty(descriptionNode.InnerText)) return descriptionNode.InnerText.Trim();
+            var remarksNode = node.SelectSingleNode("remarks");
+            if (remarksNode != null && remarksNode.InnerText != null && !string.IsNullOrEmpty(remarksNode.InnerText)) return remarksNode.InnerText.Trim();
+
+            return string.Empty;
+        }
+
+        private static XmlNode GetMemberNode(XmlDocument xml, PropertyInfo property)
+        {
+            var xmlPath = $"{property.DeclaringType.FullName}.{property.Name}";
+            var node = xml.SelectSingleNode($"/doc/members/member[@name='P:{xmlPath}']");
+            return node;
+        }
+
+        private static XmlNode GetMemberNode(XmlDocument xml, MethodInfo method)
+        {
+            var xmlPath = $"{method.DeclaringType.FullName}.{method.Name}(";
+
+            var firstParameter = true;
+            foreach (var parameter in method.GetParameters())
+            {
+                if (!firstParameter) xmlPath += ",";
+                xmlPath += parameter.ParameterType.FullName;
+                firstParameter = false;
+            }
+
+            xmlPath += ")";
+
+            var node = xml.SelectSingleNode($"/doc/members/member[@name='M:{xmlPath}']");
+            return node;
+        }
+
+        private static XmlNode GetMemberNode(XmlDocument xml, Type type)
+        {
+            var xmlPath = $"{type.FullName}";
+            var node = xml.SelectSingleNode($"/doc/members/member[@name='T:{xmlPath}']");
+            return node;
+        }
+
+        private XmlDocument _xml;
+        private XmlDocument GetXmlDocument()
+        {
+            if (string.IsNullOrEmpty(XmlString)) return null;
+            try
+            {
+                if (_xml == null)
+                {
+                    _xml = new XmlDocument();
+                    _xml.LoadXml(XmlString);
+                }
+            }
+            catch
+            {
+                // Nothing we can do
+            }
+            return _xml;
+        }
     }
 }

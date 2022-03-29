@@ -40,39 +40,30 @@ namespace CODE.Framework.Services.Contracts
     public class RestAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RestAttribute"/> class.
-        /// </summary>
-        public RestAttribute()
-        {
-            Method = RestMethods.Post;
-            Name = null;
-        }
-
-        /// <summary>
         /// The HTTP method/verb used for the rest operation
         /// </summary>
         /// <value>The method.</value>
-        public RestMethods Method { get; set; }
+        public RestMethods Method { get; set; } = RestMethods.Post;
 
         /// <summary>
         /// Exposed name of the method/operation
         /// </summary>
         /// <value>The name.</value>
         /// <remarks>If the method is an empty string, it is considered to be the root (method name does not have to be specified)</remarks>
-        public string Name { get; set; }
+        public string Name { get; set; } = null; // This is the default anyway, but to indicate that this is indeed the desired value, we set it to null here.
 
         /// <summary>
         /// ASP.NET Core Routing data
         /// </summary>
-        public string Route { get; set; }
+        public string Route { get; set; } = null; // This is the default anyway, but to indicate that this is indeed the desired value, we set it to null here.
 
         /// <summary>
         /// Specify roles required to access this method
         /// null means anonymous, string.Empty means ANY authorized user
         /// </summary>
-        public string AuthorizationRoles { get; set; }
+        public string AuthorizationRoles { get; set; } = null; // This is the default anyway, but to indicate that this is indeed the desired value, we set it to null here.
 
-        public string AuthorizationPolicy { get; set; }
+        public string AuthorizationPolicy { get; set; } = null; // This is the default anyway, but to indicate that this is indeed the desired value, we set it to null here.
     }
 
     /// <summary>
@@ -95,11 +86,6 @@ namespace CODE.Framework.Services.Contracts
     public class RestUrlParameterAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RestUrlParameterAttribute"/> class.
-        /// </summary>
-        public RestUrlParameterAttribute() => Mode = UrlParameterMode.Named;
-
-        /// <summary>
         /// Sets the sequence of the parameter within the URL
         /// </summary>
         /// <value>The sequence.</value>
@@ -107,13 +93,13 @@ namespace CODE.Framework.Services.Contracts
         /// This is technically 0-based. However, it is just use for ordering, so the actual numbers don't really matter.
         /// This setting is only valid for Mode=Inline parameters
         /// </remarks>
-        public int Sequence { get; set; }
+        public int Sequence { get; set; } = 0;
 
         /// <summary>
         /// The usage mode of the parameter
         /// </summary>
         /// <value>The mode.</value>
-        public UrlParameterMode Mode { get; set; }
+        public UrlParameterMode Mode { get; set; } = UrlParameterMode.Named;
     }
 
     /// <summary>

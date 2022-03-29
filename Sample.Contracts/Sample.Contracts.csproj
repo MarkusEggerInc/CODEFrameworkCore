@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0-alpha-1</Version>
-    <Authors>Markus Egger, Rick Strahl</Authors>
+    <Version>1.0.0</Version>
+    <Authors>Markus Egger</Authors>
     <Company>Markus Egger Inc.</Company>
     <Product>CODE Framework</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

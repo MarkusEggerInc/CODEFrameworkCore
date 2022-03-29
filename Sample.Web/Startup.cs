@@ -41,7 +41,7 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
                             {
                                 new Claim("Permission", "CanViewPage"),
                                 new Claim(ClaimTypes.Role, "Administrator"),
-                                new Claim(ClaimTypes.NameIdentifier, "Rick S. User")
+                                new Claim(ClaimTypes.NameIdentifier, "Markus E. User")
                             }, "Basic"));
 
                             return Task.FromResult(true);
@@ -77,9 +77,16 @@ namespace CODE.Framework.Services.Server.AspNetCore.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServiceHandlerConfiguration config)
         {
             app.UseServiceHandler();
-            app.UseOpenApiHandler();
+            app.UseOpenApiHandler(info: new OpenApiInfo
+            {
+                Title = "CODE Framework Service/API Example",
+                Description = "This service/api example is used to test, demonstrate, and document some of the CODE Framework service/api features.",
+                TermsOfService = "http://codeframework.io",
+                License = "MIT",
+                Contact = "info@codemag.com"
+            });
 
-            // TODO: For now, we are using Swashbuckle
+            // TODO: For now, we are using Swashbuckle, but it would be nice to just have this without an outside dependency
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/openapi.json", "Service Description");
