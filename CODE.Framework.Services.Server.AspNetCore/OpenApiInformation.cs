@@ -453,7 +453,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
             foreach (var property in typeDefinition.Properties.Values.Where(p => !p.IsSimpleType))
             {
                 if (property.Type.IsArray)
-                    AddTypeToComponents(openApiInfo, property.Type.GetElementType());
+                {
+                    if (!(property.Type.FullName.StartsWith("System.") && property.Type.FullName.Split('.').Length == 2))
+                        AddTypeToComponents(openApiInfo, property.Type.GetElementType());
+                }
                 else if (property.Type.Name == "List`1")
                 {
                     if (property.Type.GenericTypeArguments.Length > 0)
