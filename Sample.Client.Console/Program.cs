@@ -121,6 +121,22 @@ namespace Sample.Client.Console
             });
 
             System.Console.ForegroundColor = originalColor;
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press key to call ICustomerService.GetPhoto().\r");
+            System.Console.ReadLine();
+
+            ServiceClient.Call<ICustomerService>(s =>
+            {
+                System.Console.WriteLine("Calling service....");
+                var response = s.GetPhoto(new GetPhotoRequest { CustomerId = "1" });
+                System.Console.ForegroundColor = ConsoleColor.DarkGreen;
+                System.Console.WriteLine($"File Name: {response.FileName}");
+                System.Console.WriteLine($"Content Type: {response.ContentType}");
+                System.Console.WriteLine($"Content Length: {response.FileBytes.Length}");
+            });
+
+            System.Console.ForegroundColor = originalColor;
+            System.Console.WriteLine();
             System.Console.WriteLine("Done.");
         }
     }

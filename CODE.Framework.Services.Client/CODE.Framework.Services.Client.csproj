@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>NET6.0</TargetFrameworks>
-    <AssemblyVersion>1.5.16.0</AssemblyVersion>
-    <FileVersion>1.5.16.0</FileVersion>
-    <Version>1.5.16</Version>
-    <Authors>Markus Egger Inc.</Authors>
-    <Company>Markus Egger Inc.</Company>
-    <Product>CODE Framework</Product>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <Copyright>Markus Egger Inc., 2017-2022</Copyright>
-    <Description>Client-side components used for CODE Framework Service Features</Description>
-    <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
-    <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
-    <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
-    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>NET6.0</TargetFrameworks>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Version>2.0.0-beta</Version>
+		<Authors>Markus Egger Inc.</Authors>
+		<Company>Markus Egger Inc.</Company>
+		<Product>CODE Framework</Product>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<Copyright>Markus Egger Inc., 2017-2022</Copyright>
+		<Description>Client-side components used for CODE Framework Service Features</Description>
+		<PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+		<PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
+		<PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
+		<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <Optimize>false</Optimize>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+		<Optimize>false</Optimize>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
-    <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
+		<ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
 
 </Project>

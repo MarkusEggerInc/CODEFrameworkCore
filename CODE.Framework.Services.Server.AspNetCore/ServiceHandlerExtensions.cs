@@ -306,7 +306,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     if (restAttribute == null) continue; // This should never happen since GetRestAttribute() above returns a default attribute if none is attached
 
                     var httpVerb = restAttribute.Method.ToString().ToLowerInvariant();
-                    var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name);
+                    var pathInfo = new OpenApiPathInfo(restAttribute.Method.ToString(), httpVerb, method.Name, method);
 
                     // Get method summary and description
                     pathInfo.Verbs[pathInfo.Verbs.Keys.First()].Summary = OpenApiHelper.GetSummary(interfaceMethod, interfaces[0], xmlDocumentationFiles);
@@ -315,7 +315,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
                     OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
-                    pathInfo.ReturnTypeName = interfaceMethod.ReturnType.FullName;
+                    pathInfo.ReturnType = interfaceMethod.ReturnType;
 
                     if (httpVerb == "get")
                         // Get operations do not have a payload/body, so everything must be coming in from the URL

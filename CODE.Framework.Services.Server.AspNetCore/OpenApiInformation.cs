@@ -43,10 +43,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
         private readonly string _path;
         private readonly Dictionary<string, OpenApiVerb> _verbs = new Dictionary<string, OpenApiVerb>();
 
-        public OpenApiPathInfo(string path, string verb = "post", string operationId = "")
+        public OpenApiPathInfo(string path, string verb = "post", string operationId = "", MethodInfo method = null)
         {
             _path = path;
             verb = verb.Trim().ToLowerInvariant();
+            Method = method;
             _verbs.Add(verb, new OpenApiVerb(operationId));
         }
 
@@ -64,7 +65,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
         
         public OpenApiPayload Payload { get; set; }
 
-        public string ReturnTypeName { get; set; }
+        public Type ReturnType { get; set; }
+
+        public MethodInfo Method { get; set; }
     }
 
     public class OpenApiSchemaDefinition
@@ -199,10 +202,24 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         writer.WriteEndObject();
                     }
                 }
-                else if (propertyType.IsArray)
+                else if (propertyType.IsArray && !(typeString == "string" && formatString == "byte"))
                 {
                     writer.WriteStartObject("items");
-                    WritePropertyTypeInformation(propertyType.GetElementType(), writer);
+                    var elementType = propertyType.GetElementType();
+                    var elementType2 = OpenApiHelper.GetOpenApiType(elementType);
+                    if (!string.IsNullOrEmpty(elementType2))
+                    {
+                        writer.WritePropertyName("type");
+                        writer.WriteStringValue(elementType2);
+                        var elementTypeFormat = OpenApiHelper.GetOpenApiTypeFormat(elementType);
+                        if (!string.IsNullOrEmpty(elementTypeFormat))
+                        {
+                            writer.WritePropertyName("format");
+                            writer.WriteStringValue(elementTypeFormat);
+                        }
+                    }
+                    else
+                        WritePropertyTypeInformation(elementType, writer);
                     writer.WriteEndObject();
                 }
             }
@@ -318,8 +335,18 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     writer.WriteEndArray();
 
+                    var responseContentType = "application/json";
+                    if (path.ReturnType.GetInterfaces().Contains(typeof(IFileResponse)))
+                    {
+                        var contentTypeAttribute = path.Method.GetCustomAttributeEx<RestContentTypeAttribute>();
+                        if (contentTypeAttribute != null && !string.IsNullOrEmpty(contentTypeAttribute.ContentType))
+                            responseContentType = contentTypeAttribute.ContentType.Trim();
+                        else
+                            responseContentType = "application/x-binary";
+                    }
+
                     writer.WriteStartArray("produces");
-                    writer.WriteStringValue("application/json");
+                    writer.WriteStringValue(responseContentType);
                     writer.WriteEndArray();
 
                     writer.WriteStartObject("responses");
@@ -329,12 +356,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     writer.WritePropertyName("content");
                     writer.WriteStartObject();
-                    writer.WritePropertyName("application/json");
+                    writer.WritePropertyName(responseContentType);
                     writer.WriteStartObject();
                     writer.WritePropertyName("schema");
                     writer.WriteStartObject();
                     writer.WritePropertyName("$ref");
-                    writer.WriteStringValue($"#/components/schemas/{path.ReturnTypeName}");
+                    writer.WriteStringValue($"#/components/schemas/{path.ReturnType}");
                     writer.WriteEndObject();
                     writer.WriteEndObject();
                     writer.WriteEndObject();
@@ -400,12 +427,12 @@ namespace CODE.Framework.Services.Server.AspNetCore
             {
                 var description = string.Empty;
 
-                var descriptionAttribute = property.GetCustomAttribute<DescriptionAttribute>();
+                var descriptionAttribute = property.GetCustomAttributeEx<DescriptionAttribute>();
                 if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
                     description = descriptionAttribute.Description.Trim();
                 else
                 {
-                    var descriptionAttribute2 = property.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+                    var descriptionAttribute2 = property.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
                     if (descriptionAttribute2 != null && !string.IsNullOrEmpty(descriptionAttribute2.Description))
                         description = descriptionAttribute2.Description.Trim();
                 }
@@ -449,14 +476,14 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 {
                     var description = OpenApiHelper.GetDescription(parameterProperty, xmlDocumentationFiles);
 
-                    var restUrParameterAttribute = parameterProperty.GetCustomAttribute<RestUrlParameterAttribute>();
+                    var restUrParameterAttribute = parameterProperty.GetCustomAttributeEx<RestUrlParameterAttribute>();
                     if (restUrParameterAttribute != null)
                         if (restUrParameterAttribute.Mode == UrlParameterMode.Inline)
                             pathInfo.PositionalParameters.Add(new OpenApiPositionalOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, PositionIndex = restUrParameterAttribute.Sequence, Description = description });
                         else
                         {
                             var isRequired = true;
-                            var dataMemberAttribute = parameterProperty.GetCustomAttribute<DataMemberAttribute>();
+                            var dataMemberAttribute = parameterProperty.GetCustomAttributeEx<DataMemberAttribute>();
                             if (dataMemberAttribute != null)
                                 isRequired = dataMemberAttribute.IsRequired;
                             pathInfo.NamedParameters.Add(new OpenApiNamedOperationParameter { Name = parameterProperty.Name, Type = parameterProperty.PropertyType, Required = isRequired, Description = description });
@@ -468,11 +495,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public static OpenApiExternalDocumentation GetExternalDocs(Type implementationType, Type interfaceType)
         {
-            var attribute = implementationType.GetCustomAttribute<ExternalDocumentationAttribute>();
+            var attribute = implementationType.GetCustomAttributeEx<ExternalDocumentationAttribute>();
             if (attribute != null)
                 return new OpenApiExternalDocumentation { Description = attribute.Description, Url = attribute.Url };
 
-            var attribute2 = interfaceType.GetCustomAttribute<ExternalDocumentationAttribute>();
+            var attribute2 = interfaceType.GetCustomAttributeEx<ExternalDocumentationAttribute>();
             if (attribute2 != null)
                 return new OpenApiExternalDocumentation { Description = attribute2.Description, Url = attribute2.Url };
 
@@ -481,19 +508,19 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public static string GetDescription(Type implementationType, Type interfaceType, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
-            var descriptionAttribute = implementationType.GetCustomAttribute<DescriptionAttribute>();
+            var descriptionAttribute = implementationType.GetCustomAttributeEx<DescriptionAttribute>();
             if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
                 return descriptionAttribute.Description.Trim();
 
-            var descriptionAttribute2 = interfaceType.GetCustomAttribute<DescriptionAttribute>();
+            var descriptionAttribute2 = interfaceType.GetCustomAttributeEx<DescriptionAttribute>();
             if (descriptionAttribute2 != null && !string.IsNullOrEmpty(descriptionAttribute2.Description))
                 return descriptionAttribute2.Description.Trim();
 
-            var componentModelDescriptionAttribute = implementationType.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            var componentModelDescriptionAttribute = implementationType.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
             if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
                 return componentModelDescriptionAttribute.Description.Trim();
 
-            var componentModelDescriptionAttribute2 = interfaceType.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            var componentModelDescriptionAttribute2 = interfaceType.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
             if (componentModelDescriptionAttribute2 != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute2.Description))
                 return componentModelDescriptionAttribute2.Description.Trim();
 
@@ -516,11 +543,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public static string GetDescription(PropertyInfo property, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
-            var descriptionAttribute = property.GetCustomAttribute<DescriptionAttribute>();
+            var descriptionAttribute = property.GetCustomAttributeEx<DescriptionAttribute>();
             if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
                 return descriptionAttribute.Description.Trim();
 
-            var componentModelDescriptionAttribute = property.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            var componentModelDescriptionAttribute = property.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
             if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
                 return componentModelDescriptionAttribute.Description.Trim();
 
@@ -536,11 +563,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public static string GetDescription(MethodInfo interfaceMethod, Type methodInterface, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
-            var descriptionAttribute = interfaceMethod.GetCustomAttribute<DescriptionAttribute>();
+            var descriptionAttribute = interfaceMethod.GetCustomAttributeEx<DescriptionAttribute>();
             if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
                 return descriptionAttribute.Description.Trim();
 
-            var componentModelDescriptionAttribute = interfaceMethod.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+            var componentModelDescriptionAttribute = interfaceMethod.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
             if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
                 return componentModelDescriptionAttribute.Description.Trim();
 
@@ -556,7 +583,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
         public static string GetSummary(MethodInfo interfaceMethod, Type methodInterface, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
-            var ummaryAttribute = interfaceMethod.GetCustomAttribute<SummaryAttribute>();
+            var ummaryAttribute = interfaceMethod.GetCustomAttributeEx<SummaryAttribute>();
             if (ummaryAttribute != null && !string.IsNullOrEmpty(ummaryAttribute.Summary))
                 return ummaryAttribute.Summary.Trim();
 
@@ -575,6 +602,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (type == typeof(string) || type == typeof(char)) return "string";
             if (type == typeof(Guid)) return "string";
             if (type == typeof(byte[])) return "string";
+            if (type == typeof(byte)) return "string";
             if (type == typeof(int)) return "integer";
             if (type == typeof(decimal) || type == typeof(double)) return "number";
             if (type == typeof(DateTime)) return "string";
@@ -588,6 +616,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         {
             if (type == typeof(Guid)) return "uuid";
             if (type == typeof(byte[])) return "byte";
+            if (type == typeof(byte)) return "byte";
             if (type == typeof(int)) return "int64";
             if (type == typeof(decimal) || type == typeof(double)) return "double";
             if (type == typeof(DateTime)) return "date-time";

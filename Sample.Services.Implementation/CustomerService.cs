@@ -1,5 +1,6 @@
 ﻿using CODE.Framework.Services.Contracts;
 using Sample.Contracts;
+using Sample.Services.Implementation.Properties;
 using System;
 
 namespace Sample.Services.Implementation
@@ -90,6 +91,23 @@ namespace Sample.Services.Implementation
                 return ServiceHelper.GetPopulatedFailureResponse<GetCustomerResponse>(ex);
             }
 
+        }
+
+        public FileResponse GetPhoto(GetPhotoRequest request)
+        {
+            try
+            {
+                return new FileResponse
+                {
+                    ContentType = "image/png",
+                    FileName = "ExampleImage.png",
+                    FileBytes = Resources.RocketMan
+                };
+            }
+            catch (Exception ex)
+            {
+                return ServiceHelper.GetPopulatedFailureResponse<FileResponse>(ex);
+            }
         }
 
         public void OnInProcessHostLaunched()

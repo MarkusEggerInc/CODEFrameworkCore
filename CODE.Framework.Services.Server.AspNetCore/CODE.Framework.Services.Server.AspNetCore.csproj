@@ -1,58 +1,58 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>NET6.0</TargetFramework>
-    <AssemblyVersion>1.5.16.0</AssemblyVersion>
-    <FileVersion>1.5.16.0</FileVersion>
-    <Version>1.5.16</Version>
-    <Authors>Markus Egger Inc.</Authors>
-    <Company>Markus Egger Inc.</Company>
-    <Product>CODE Framework</Product>
-    <Copyright>Markus Egger Inc., 2017-2022</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
-    <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
-    <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
-    <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
-    <RepositoryType>Git</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Version>2.0.0-beta</Version>
+		<Authors>Markus Egger Inc.</Authors>
+		<Company>Markus Egger Inc.</Company>
+		<Product>CODE Framework</Product>
+		<Copyright>Markus Egger Inc., 2017-2022</Copyright>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>ASP.NET Core specific service implementation for CODE Framework.</Description>
+		<PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MarkusEggerInc/CODEFrameworkCore</RepositoryUrl>
+		<PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+		<PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
+		<RepositoryType>Git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <Optimize>false</Optimize>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Optimize>false</Optimize>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-    
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
-    <ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CODE.Framework.Fundamentals\CODE.Framework.Fundamentals.csproj" />
+		<ProjectReference Include="..\CODE.Framework.Services.Contracts\CODE.Framework.Services.Contracts.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DependentUpon>Resources.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="CodeFramework_Small.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
 
 </Project>

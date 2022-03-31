@@ -23,26 +23,39 @@ namespace Sample.Contracts
         /// <summary>
         /// Retrieves a single customer
         /// </summary>
-        [Rest(Method = RestMethods.Get, Name ="Customer", AuthorizationRoles = "Administrators")]
+        [OperationContract, Rest(Method = RestMethods.Get, Name ="Customer", AuthorizationRoles = "Administrators")]
         GetCustomerResponse GetCustomer(GetCustomerRequest request);
 
         /// <summary>
         /// Retrieves a list of customers
         /// </summary>
-        [Rest(Method = RestMethods.Get, Name = "")]
+        [OperationContract, Rest(Method = RestMethods.Get, Name = "")]
         GetCustomersResponse GetCustomers(GetCustomersRequest request);
 
         /// <summary>
         /// Example of searching for customers
         /// </summary>
-        [Rest(Method = RestMethods.Get, Name = "Search")]
+        [OperationContract, Rest(Method = RestMethods.Get, Name = "Search")]
         SearchTestResponse SearchTest(SearchTestRequest request);
 
         /// <summary>
         /// Test method to demonstrate date handling
         /// </summary>
-        [Rest(Method = RestMethods.Get)]
+        [OperationContract, Rest(Method = RestMethods.Get)]
         DateTestResponse DateTest(DateTestRequest request);
+
+        /// <summary>
+        /// Returns the photo of a customer
+        /// </summary>
+        [OperationContract, Rest(Method = RestMethods.Get, Name = "Photo"), RestContentType("image/png")]
+        FileResponse GetPhoto(GetPhotoRequest request);
+    }
+
+    [DataContract]
+    public class GetPhotoRequest
+    {
+        [DataMember(IsRequired = true), RestUrlParameter(Mode = UrlParameterMode.Inline)]
+        public string CustomerId { get; set; } = string.Empty;
     }
 
     [DataContract]

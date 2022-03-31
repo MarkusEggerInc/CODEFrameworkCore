@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using CODE.Framework.Fundamentals.Utilities;
+using CODE.Framework.Services.Contracts;
 
 namespace CODE.Framework.Services.Client
 {
@@ -54,26 +56,77 @@ namespace CODE.Framework.Services.Client
 
             try
             {
-                using (var client = new WebClient())
+                if (method.ReturnType.FullName == typeof(FileResponse).FullName)
                 {
-                    client.Headers.Add("Content-Type", "application/json; charset=utf-8");
-                    client.Encoding = Encoding.UTF8;
-                    string restResponse;
-                    switch (httpMethod)
+                    // File response from a REST/HTTP call is a special case, as it returns the raw file. 
+                    // To make everything work transparently, we thus re-assembly a file response object here.
+                    var fileResponseContent = new byte[0];
+                    using (var client = new WebClient())
                     {
-                        case "POST":
-                            restResponse = client.UploadString(serviceUriAbsoluteUri, JsonHelper.SerializeToRestJson(data));
-                            break;
-                        case "GET":
-                            var serializedData = RestHelper.SerializeToUrlParameters(data);
-                            var serviceFullUrl = serviceUriAbsoluteUri + serializedData;
-                            restResponse = client.DownloadString(serviceFullUrl);
-                            break;
-                        default:
-                            restResponse = client.UploadString(serviceUriAbsoluteUri, httpMethod, JsonHelper.SerializeToRestJson(data));
-                            break;
+                        client.Headers.Add("Content-Type", "application/json; charset=utf-8");
+                        client.Encoding = Encoding.UTF8;
+                        switch (httpMethod)
+                        {
+                            case "POST":
+                                fileResponseContent = client.UploadData(serviceUriAbsoluteUri, Encoding.UTF8.GetBytes(JsonHelper.SerializeToRestJson(data)));
+                                break;
+                            case "GET":
+                                var serializedData = RestHelper.SerializeToUrlParameters(data);
+                                var serviceFullUrl = serviceUriAbsoluteUri + serializedData;
+                                fileResponseContent = client.DownloadData(serviceFullUrl);
+                                break;
+                            default:
+                                fileResponseContent = client.UploadData(serviceUriAbsoluteUri, httpMethod, Encoding.UTF8.GetBytes(JsonHelper.SerializeToRestJson(data)));
+                                break;
+                        }
+                        var fileName = string.Empty;
+                        if (client.ResponseHeaders["Content-Disposition"] != null)
+                        {
+                            fileName = client.ResponseHeaders["Content-Disposition"];
+                            if (fileName.IndexOf("filename=\"") > -1)
+                            {
+                                fileName = fileName.Substring(fileName.IndexOf("filename=\"") + 10);
+                                if (fileName.EndsWith("\""))
+                                    fileName = fileName.Substring(0, fileName.Length - 1);
+                            } 
+                        }
+
+                        var contentType = "application/x-binary";
+                        if (client.ResponseHeaders["Content-Type"] != null)
+                            contentType = client.ResponseHeaders["Content-Type"];
+
+                        return new FileResponse
+                        {
+                            FileBytes = fileResponseContent,
+                            ContentType = contentType,
+                            FileName = fileName
+                        };
                     }
-                    return JsonHelper.DeserializeFromRestJson(restResponse, method.ReturnType);
+                }
+                else
+                {
+                    using (var client = new WebClient())
+                    {
+                        client.Headers.Add("Content-Type", "application/json; charset=utf-8");
+                        client.Encoding = Encoding.UTF8;
+                        string restResponse;
+                        switch (httpMethod)
+                        {
+                            case "POST":
+                                restResponse = client.UploadString(serviceUriAbsoluteUri, JsonHelper.SerializeToRestJson(data));
+                                break;
+                            case "GET":
+                                var serializedData = RestHelper.SerializeToUrlParameters(data);
+                                var serviceFullUrl = serviceUriAbsoluteUri + serializedData;
+                                restResponse = client.DownloadString(serviceFullUrl);
+                                break;
+                            default:
+                                restResponse = client.UploadString(serviceUriAbsoluteUri, httpMethod, JsonHelper.SerializeToRestJson(data));
+                                break;
+                        }
+
+                        return JsonHelper.DeserializeFromRestJson(restResponse, method.ReturnType);
+                    }
                 }
             }
             catch (Exception ex)

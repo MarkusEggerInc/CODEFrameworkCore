@@ -112,26 +112,35 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                 ServiceInstanceConfiguration.OnAfterMethodInvoke?.Invoke(context);
 
-                // TODO: Do we really need this still?
-                if (string.IsNullOrEmpty(context.ResultJson))
+                if (context.ResultValue is IFileResponse fileResponse)
                 {
-                    var options = new JsonSerializerOptions();
+                    // This is a special case in which we stream the file back low level (side-stepping any kind of JSON serialization)
+                    context.HttpResponse.ContentType = fileResponse.ContentType;
+                    context.HttpResponse.Headers.Add("Content-Disposition" , $"inline; filename=\"{fileResponse.FileName.Trim()}\"");
+                    context.HttpResponse.Headers.Add("x-powered-by", "CODE Framework - codeframework.io");
+                    await context.HttpResponse.Body.WriteAsync(fileResponse.FileBytes, 0, fileResponse.FileBytes.Length);
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(context.ResultJson))
+                    {
+                        var options = new JsonSerializerOptions();
 
-                    if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
-                        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                        if (context.ServiceInstanceConfiguration.JsonFormatMode == JsonFormatModes.CamelCase)
+                            options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 
 #if DEBUG
-                    options.WriteIndented = true;
+                        options.WriteIndented = true;
 #endif
 
-                    var inputType = context.ResultValue.GetType();
-                    context.ResultJson = JsonSerializer.Serialize(context.ResultValue, inputType, options);
-                    //context.ResultJson = JsonSerializationUtils.Serialize(context.ResultValue);
+                        var inputType = context.ResultValue.GetType();
+                        context.ResultJson = JsonSerializer.Serialize(context.ResultValue, inputType, options);
 
-                    context.HttpResponse.Headers.Add("x-powered-by", "CODE Framework - codeframework.io");
+                        context.HttpResponse.Headers.Add("x-powered-by", "CODE Framework - codeframework.io");
+                    }
+
+                    await SendJsonResponseAsync(context, context.ResultValue);
                 }
-
-                await SendJsonResponseAsync(context, context.ResultValue);
             }
             catch (Exception ex)
             {
@@ -141,7 +150,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
         }
 
         /// <summary>
-        /// 
+        /// Runs the actual method that implements the service
         /// </summary>
         /// <param name="handlerContext"></param>
         /// <returns></returns>

@@ -5,7 +5,7 @@ namespace CODE.Framework.Services.Contracts
     /// <summary>
     /// Generic description attribute usable in all service elements
     /// </summary>
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class DescriptionAttribute : Attribute
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace CODE.Framework.Services.Contracts
     /// <summary>
     /// Generic summary attribute usable in all service elements
     /// </summary>
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class SummaryAttribute : Attribute
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace CODE.Framework.Services.Contracts
     /// <summary>
     /// Generic external documentation attribute usable in all service elements
     /// </summary>
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class ExternalDocumentationAttribute : Attribute
     {
         public ExternalDocumentationAttribute(string description, string url)
@@ -65,5 +65,22 @@ namespace CODE.Framework.Services.Contracts
         /// Full URL for the external description
         /// </summary>
         public string Url { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Can be used to specify a custom content type for REST calls. (Used for things such as FileResponse contracts)
+    /// </summary>
+    [AttributeUsage(AttributeTargets.All, Inherited = true)]
+    public class RestContentTypeAttribute : Attribute
+    {
+        public RestContentTypeAttribute(string contentType)
+        {
+            ContentType = contentType;
+        }
+
+        /// <summary>
+        /// Content type
+        /// </summary>
+        public string ContentType { get; set; } = "application/json";
     }
 }
