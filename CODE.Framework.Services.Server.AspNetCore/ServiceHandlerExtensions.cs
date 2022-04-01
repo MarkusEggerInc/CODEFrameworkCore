@@ -329,7 +329,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     if (obsoleteAttribute != null)
                     {
                         obsolete = true;
-                        obsoleteReason = obsoleteAttribute.Message.Trim();
+                        if (!string.IsNullOrEmpty(obsoleteAttribute.Message))
+                            obsoleteReason = obsoleteAttribute.Message.Trim();
                     }
                     OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType, obsolete, obsoleteReason);
                     pathInfo.ReturnType = interfaceMethod.ReturnType;
@@ -350,7 +351,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                             if (obsoleteAttribute2 != null)
                             {
                                 obsolete2 = true;
-                                obsoleteReason2 = obsoleteAttribute2.Message.Trim();
+                                if (!string.IsNullOrEmpty(obsoleteAttribute2.Message))
+                                    obsoleteReason2 = obsoleteAttribute2.Message.Trim();
                             }
                             OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType, obsolete2, obsoleteReason2);
                         }

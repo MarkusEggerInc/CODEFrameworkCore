@@ -502,7 +502,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (obsoleteAttribute != null)
                 {
                     obsolete2 = true;
-                    obsoleteReason2 = obsoleteAttribute.Message.Trim();
+                    if (!string.IsNullOrEmpty(obsoleteAttribute.Message))
+                        obsoleteReason2 = obsoleteAttribute.Message.Trim();
                 }
 
                 schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, description, obsolete2, obsoleteReason2));
