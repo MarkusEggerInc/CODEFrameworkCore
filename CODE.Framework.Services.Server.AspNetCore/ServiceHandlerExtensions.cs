@@ -140,6 +140,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                        context =>
                                        {
                                            var requestPath = context.Request.Path.ToString().ToLower();
+                                           if (SwaggerRoutes != null && SwaggerRoutes.Contains(requestPath)) return false; // We make sure we are not accidently eating up a configured swagger/openapi route
                                            var servicePath = serviceInstanceConfig.RouteBasePath.ToLower();
                                            var matched = requestPath == servicePath || requestPath.StartsWith(servicePath.Replace("//", "/") + "/");
                                            return matched;
@@ -232,6 +233,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
         /// <returns></returns>
         public static IApplicationBuilder UseOpenApiHandler(this IApplicationBuilder appBuilder, bool supportOpenApiJson = true, string openApiJsonRoute = "openapi.json", OpenApiInfo info = null)
         {
+            if (SwaggerRoutes == null)
+            {
+                SwaggerRoutes = new List<string>();
+                SwaggerRoutes.Add("/swagger"); // We assume swagger API is used when OpenAPI features are on. This makes sure that the general handler does not eat up other service routes
+                SwaggerRoutes.Add("/swagger/index.html");
+            }
+
             var serviceConfig = ServiceHandlerConfiguration.Current;
 
             // Endpoints require routing, so we make sure it is there
@@ -239,11 +247,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             appBuilder.UseEndpoints(endpoints =>
             {
-                // conditionally route to service handler based on RouteBasePath
                 appBuilder.MapWhen(
                                     context =>
                                     {
-
                                         var requestPath = context.Request.Path.ToString().Trim().ToLowerInvariant();
                                         var openApiFullRoute = !string.IsNullOrEmpty(openApiJsonRoute) ? openApiJsonRoute : "/openapi.json";
                                         if (!openApiFullRoute.StartsWith("/"))
@@ -260,6 +266,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                             if (!openApiFullRoute.StartsWith("/"))
                                                 openApiFullRoute = "/" + openApiFullRoute;
                                             routeBuilder.MapVerb("GET", openApiFullRoute, GetOpenApiJson(serviceConfig.Services, info));
+                                            SwaggerRoutes.Add(openApiFullRoute);
 
                                             // TODO: Add openapi.yaml support?
                                         });
@@ -268,6 +275,8 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
             return appBuilder;
         }
+
+        private static List<string> SwaggerRoutes { get; set; }
 
         private static Func<HttpRequest, HttpResponse, RouteData, Task> GetOpenApiJson(List<ServiceHandlerConfigurationInstance> serviceInstanceConfigurations, OpenApiInfo info = null) => async (req, resp, route) =>
         {
@@ -314,8 +323,18 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
-                    OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType);
+                    var obsolete = false;
+                    var obsoleteReason = string.Empty;
+                    var obsoleteAttribute = interfaceMethod.GetCustomAttribute<ObsoleteAttribute>();
+                    if (obsoleteAttribute != null)
+                    {
+                        obsolete = true;
+                        obsoleteReason = obsoleteAttribute.Message.Trim();
+                    }
+                    OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType, obsolete, obsoleteReason);
                     pathInfo.ReturnType = interfaceMethod.ReturnType;
+                    pathInfo.Obsolete = obsolete;
+                    pathInfo.ObsoleteReason = obsoleteReason;
 
                     if (httpVerb == "get")
                         // Get operations do not have a payload/body, so everything must be coming in from the URL
@@ -324,7 +343,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     {
                         var methodParameters = interfaceMethod.GetParameters();
                         foreach (var parameter in methodParameters) // Should always be a single parameter
-                            OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType);
+                        {
+                            var obsolete2 = false;
+                            var obsoleteReason2 = string.Empty;
+                            var obsoleteAttribute2 = parameter.GetCustomAttribute<ObsoleteAttribute>();
+                            if (obsoleteAttribute2 != null)
+                            {
+                                obsolete2 = true;
+                                obsoleteReason2 = obsoleteAttribute2.Message.Trim();
+                            }
+                            OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType, obsolete2, obsoleteReason2);
+                        }
                         OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo, xmlDocumentationFiles);
                         if (methodParameters.Length > 0)
                             pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };

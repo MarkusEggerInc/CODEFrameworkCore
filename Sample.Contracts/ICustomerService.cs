@@ -41,7 +41,7 @@ namespace Sample.Contracts
         /// <summary>
         /// Test method to demonstrate date handling
         /// </summary>
-        [OperationContract, Rest(Method = RestMethods.Get)]
+        [OperationContract, Rest(Method = RestMethods.Get), Obsolete("Flagged as obsolete for test purposes.")]
         DateTestResponse DateTest(DateTestRequest request);
 
         /// <summary>
@@ -68,14 +68,14 @@ namespace Sample.Contracts
         public DateTime SecondDate { get; set; } = DateTime.MinValue;
     }
 
-    [DataContract]
+    [DataContract, Obsolete("Flagged obsolete for test purposes only.")]
     public class DateTestResponse : BaseServiceResponse
     {
         [DataMember(IsRequired = true)]
         public DateTime FirstDateReturned { get; set; } = DateTime.MinValue;
 
-        [DataMember(IsRequired = true)]
-        public DateTime SecondDateReturned { get; set; } = DateTime.MinValue;
+        [DataMember(IsRequired = true), Description("This once was an awesome date."), Obsolete("Flagged obsolete for test purposes only.")]
+        public DateTime? SecondDateReturned { get; set; } = DateTime.MinValue;
     }
 
     [DataContract]

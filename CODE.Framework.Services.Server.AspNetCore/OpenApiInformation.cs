@@ -68,23 +68,34 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public Type ReturnType { get; set; }
 
         public MethodInfo Method { get; set; }
+
+        public bool Obsolete { get; set; }
+        public string ObsoleteReason { get; set; }
     }
 
     public class OpenApiSchemaDefinition
     {
         public string Name { get; set; }
         public Dictionary<string, OpenApiPropertyDefinition> Properties { get; } = new Dictionary<string, OpenApiPropertyDefinition>();
+        public bool Obsolete { get; set; }
+        public string ObsoleteReason { get; set; }
     }
 
     public class OpenApiPropertyDefinition
     {
-        public OpenApiPropertyDefinition(Type type, string description = null)
+        public OpenApiPropertyDefinition(Type type, string description = null, bool obsolete = false, string obsoleteReason = "")
         {
             Type = type;
             Description = description;
+            Obsolete = obsolete;
+            ObsoleteReason = obsoleteReason;
         }
 
         public string Description { get; set; }
+
+        public bool Obsolete { get; set; }
+
+        public string ObsoleteReason { get; set; }
 
         public string Name => Type.Name;
         public Type Type { get; init; } = typeof(string);
@@ -155,13 +166,25 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 writer.WritePropertyName("type");
                 writer.WriteStringValue("object");
 
+                if (value[definitionName].Obsolete)
+                {
+                    writer.WritePropertyName("deprecated");
+                    writer.WriteBooleanValue(true);
+
+                    if (!string.IsNullOrEmpty(value[definitionName].ObsoleteReason))
+                    {
+                        writer.WritePropertyName("description");
+                        writer.WriteStringValue(value[definitionName].ObsoleteReason);
+                    }
+                }
+
                 writer.WriteStartObject("properties");
 
                 foreach (var propertyName in value[definitionName].Properties.Keys)
                 {
                     var prop = value[definitionName].Properties[propertyName];
                     writer.WriteStartObject(propertyName);
-                    WritePropertyTypeInformation(prop.Type, writer, prop.Description);
+                    WritePropertyTypeInformation(prop.Type, writer, prop.Description, prop.Obsolete, prop.ObsoleteReason);
                     writer.WriteEndObject();
                 }
 
@@ -172,7 +195,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             writer.WriteEndObject();
         }
 
-        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer, string description = null)
+        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer, string description = null, bool obsolete = false, string obsoleteReason = "")
         {
             var typeString = OpenApiHelper.GetOpenApiType(propertyType);
             if (!string.IsNullOrEmpty(typeString))
@@ -185,6 +208,26 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 {
                     writer.WritePropertyName("format");
                     writer.WriteStringValue(formatString);
+                }
+
+                if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    writer.WritePropertyName("nullable");
+                    writer.WriteBooleanValue(true);
+                }
+
+                if (obsolete)
+                {
+                    writer.WritePropertyName("deprecated");
+                    writer.WriteBooleanValue(true);
+
+                    if (!string.IsNullOrEmpty(obsoleteReason))
+                    {
+                        if (!string.IsNullOrEmpty(description))
+                            description += $" Deprecated: {obsoleteReason}";
+                        else
+                            description = $"Deprecated: {obsoleteReason}";
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(description))
@@ -296,11 +339,25 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WritePropertyName("operationId");
                     writer.WriteStringValue(verbObject.OperationId);
 
+                    if (path.Obsolete)
+                    {
+                        writer.WritePropertyName("deprecated");
+                        writer.WriteBooleanValue(true);
+                    }
+
                     writer.WritePropertyName("summary");
                     writer.WriteStringValue(verbObject.Summary);
 
                     writer.WritePropertyName("description");
-                    writer.WriteStringValue(verbObject.Description);
+                    var description = verbObject.Description;
+                    if (path.Obsolete && !string.IsNullOrEmpty(path.ObsoleteReason))
+                    {
+                        if (!string.IsNullOrEmpty(description))
+                            description = description.Trim() + " Deprecated: " + path.ObsoleteReason;
+                        else
+                            description = "Deprecated: " + path.ObsoleteReason;
+                    }
+                    writer.WriteStringValue(description);
 
                     if (verb.ToLowerInvariant() != "get")
                     {
@@ -416,11 +473,13 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public static class OpenApiHelper
     {
-        public static OpenApiSchemaDefinition GetTypeDefinition(Type type)
+        public static OpenApiSchemaDefinition GetTypeDefinition(Type type, bool obsolete, string obsoleteReason)
         {
             var schema = new OpenApiSchemaDefinition();
 
             schema.Name = type.FullName;
+            schema.Obsolete = obsolete;
+            schema.ObsoleteReason = obsoleteReason;
 
             var properties = type.GetProperties();
             foreach (var property in properties)
@@ -437,15 +496,24 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         description = descriptionAttribute2.Description.Trim();
                 }
 
-                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, description));
+                var obsolete2 = false;
+                var obsoleteReason2 = string.Empty;
+                var obsoleteAttribute = property.GetCustomAttribute<ObsoleteAttribute>();
+                if (obsoleteAttribute != null)
+                {
+                    obsolete2 = true;
+                    obsoleteReason2 = obsoleteAttribute.Message.Trim();
+                }
+
+                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, description, obsolete2, obsoleteReason2));
             }
 
             return schema;
         }
 
-        public static void AddTypeToComponents(OpenApiInformation openApiInfo, Type type)
+        public static void AddTypeToComponents(OpenApiInformation openApiInfo, Type type, bool obsolete, string obsoleteReason)
         {
-            var typeDefinition = GetTypeDefinition(type);
+            var typeDefinition = GetTypeDefinition(type, obsolete, obsoleteReason);
             if (openApiInfo.Components.ContainsKey(typeDefinition.Name)) return;
 
             openApiInfo.Components.Add(typeDefinition.Name, typeDefinition);
@@ -455,16 +523,19 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (property.Type.IsArray)
                 {
                     if (!(property.Type.FullName.StartsWith("System.") && property.Type.FullName.Split('.').Length == 2))
-                        AddTypeToComponents(openApiInfo, property.Type.GetElementType());
+                        AddTypeToComponents(openApiInfo, property.Type.GetElementType(), property.Obsolete, property.ObsoleteReason);
                 }
                 else if (property.Type.Name == "List`1")
                 {
                     if (property.Type.GenericTypeArguments.Length > 0)
                         if (string.IsNullOrEmpty(GetOpenApiType(property.Type.GenericTypeArguments[0]))) // We don't want simple types like string... so anything that is a known OpenApi type can be ignored here
-                            AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0]);
+                            AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0], property.Obsolete, property.ObsoleteReason);
                 }
+                else if (property.Type.IsGenericType && property.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    // Nullable types are likely just masqueraded simple types, so we can skip this one after all
+                    continue;
                 else
-                    AddTypeToComponents(openApiInfo, property.Type);
+                    AddTypeToComponents(openApiInfo, property.Type, property.Obsolete, property.ObsoleteReason);
             }
         }
 
@@ -612,6 +683,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (type == typeof(bool)) return "boolean";
             if (type.Name == "List`1") return "array";
             if (type.IsArray) return "array";
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var nulledType = type.GetGenericArguments()[0];
+                return GetOpenApiType(nulledType);
+            }
             return string.Empty;
         }
 
@@ -623,6 +699,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (type == typeof(int)) return "int64";
             if (type == typeof(decimal) || type == typeof(double)) return "double";
             if (type == typeof(DateTime)) return "date-time";
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var nulledType = type.GetGenericArguments()[0];
+                return GetOpenApiTypeFormat(nulledType);
+            }
             return string.Empty;
         }
     }
