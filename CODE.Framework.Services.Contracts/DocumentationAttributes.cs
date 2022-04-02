@@ -12,10 +12,7 @@ namespace CODE.Framework.Services.Contracts
         /// Constructor
         /// </summary>
         /// <param name="description">Description text</param>
-        public DescriptionAttribute(string description)
-        {
-            Description = description;
-        }
+        public DescriptionAttribute(string description) => Description = description;
 
         /// <summary>
         /// Description text (depending on usage, this may or may not support markdown)
@@ -33,10 +30,7 @@ namespace CODE.Framework.Services.Contracts
         /// Constructor
         /// </summary>
         /// <param name="summary">Summary text</param>
-        public SummaryAttribute(string summary)
-        {
-            Summary = summary;
-        }
+        public SummaryAttribute(string summary) => Summary = summary;
 
         /// <summary>
         /// Summary text (depending on usage, this may or may not support markdown)
@@ -73,14 +67,17 @@ namespace CODE.Framework.Services.Contracts
     [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class RestContentTypeAttribute : Attribute
     {
-        public RestContentTypeAttribute(string contentType)
-        {
-            ContentType = contentType;
-        }
+        public RestContentTypeAttribute(string contentType) => ContentType = contentType;
 
         /// <summary>
         /// Content type
         /// </summary>
         public string ContentType { get; set; } = "application/json";
     }
+
+    /// <summary>
+    /// Marker attribute used to indicate that a byte[] property contains a file
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, Inherited = true)]
+    public class FileContentAttribute : Attribute { }
 }

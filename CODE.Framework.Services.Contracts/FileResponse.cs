@@ -40,7 +40,20 @@ namespace CODE.Framework.Services.Contracts
         [DataMember(IsRequired = true)]
         public string ContentType { get; set; } = "application/x-binary";
 
+        [DataMember(IsRequired = true), FileContent]
+        public byte[] FileBytes { get; set; } = new byte[0];
+    }
+
+    [DataContract]
+    public class FileRequest : BaseServiceRequest
+    {
         [DataMember(IsRequired = true)]
+        public string FileName { get; set; } = string.Empty;
+
+        [DataMember(IsRequired = true)]
+        public string ContentType { get; set; } = "application/x-binary";
+
+        [DataMember(IsRequired = true), FileContent]
         public byte[] FileBytes { get; set; } = new byte[0];
     }
 }

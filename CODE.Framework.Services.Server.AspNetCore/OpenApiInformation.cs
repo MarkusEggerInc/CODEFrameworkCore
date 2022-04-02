@@ -84,9 +84,10 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public class OpenApiPropertyDefinition
     {
-        public OpenApiPropertyDefinition(Type type, string description = null, bool obsolete = false, string obsoleteReason = "")
+        public OpenApiPropertyDefinition(Type type, PropertyInfo info, string description = null, bool obsolete = false, string obsoleteReason = "")
         {
             Type = type;
+            PropertyInfo = info;
             Description = description;
             Obsolete = obsolete;
             ObsoleteReason = obsoleteReason;
@@ -99,8 +100,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
         public string ObsoleteReason { get; set; }
 
         public string Name => Type.Name;
+
         public Type Type { get; init; } = typeof(string);
-        
+
+        public PropertyInfo PropertyInfo { get; set; }
+
         public bool IsSimpleType
         {
             get
@@ -192,7 +196,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 {
                     var prop = value[definitionName].Properties[propertyName];
                     writer.WriteStartObject(propertyName);
-                    WritePropertyTypeInformation(prop.Type, writer, prop.Description, prop.Obsolete, prop.ObsoleteReason);
+                    WritePropertyTypeInformation(prop.Type, writer, prop.PropertyInfo, prop.Description, prop.Obsolete, prop.ObsoleteReason);
                     writer.WriteEndObject();
                 }
 
@@ -203,7 +207,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             writer.WriteEndObject();
         }
 
-        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer, string description = null, bool obsolete = false, string obsoleteReason = "")
+        private void WritePropertyTypeInformation(Type propertyType, Utf8JsonWriter writer, PropertyInfo propertyInfo, string description = null, bool obsolete = false, string obsoleteReason = "")
         {
             var typeString = OpenApiHelper.GetOpenApiType(propertyType);
             if (!string.IsNullOrEmpty(typeString))
@@ -211,11 +215,21 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(typeString);
 
-                var formatString = OpenApiHelper.GetOpenApiTypeFormat(propertyType);
+                var formatString = OpenApiHelper.GetOpenApiTypeFormat(propertyType, propertyInfo);
                 if (!string.IsNullOrEmpty(formatString))
                 {
                     writer.WritePropertyName("format");
                     writer.WriteStringValue(formatString);
+                }
+
+                if (propertyType.IsEnum)
+                {
+                    OpenApiHelper.WriteEnumDeclaration(writer, propertyType);
+                    var enumDescription = OpenApiHelper.GetOpenApiEnumDescription(propertyType);
+                    if (string.IsNullOrEmpty(description))
+                        description = enumDescription;
+                    else
+                        description += $" Enum values: {enumDescription}";
                 }
 
                 if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -249,7 +263,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     if (propertyType.GenericTypeArguments.Length > 0)
                     {
                         writer.WriteStartObject("items");
-                        WritePropertyTypeInformation(propertyType.GenericTypeArguments[0], writer);
+                        WritePropertyTypeInformation(propertyType.GenericTypeArguments[0], writer, propertyInfo);
                         writer.WriteEndObject();
                     }
                 }
@@ -262,7 +276,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     {
                         writer.WritePropertyName("type");
                         writer.WriteStringValue(elementType2);
-                        var elementTypeFormat = OpenApiHelper.GetOpenApiTypeFormat(elementType);
+                        var elementTypeFormat = OpenApiHelper.GetOpenApiTypeFormat(elementType, propertyInfo);
                         if (!string.IsNullOrEmpty(elementTypeFormat))
                         {
                             writer.WritePropertyName("format");
@@ -270,7 +284,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         }
                     }
                     else
-                        WritePropertyTypeInformation(elementType, writer);
+                        WritePropertyTypeInformation(elementType, writer, propertyInfo);
                     writer.WriteEndObject();
                 }
             }
@@ -535,7 +549,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         obsoleteReason2 = obsoleteAttribute.Message.Trim();
                 }
 
-                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, description, obsolete2, obsoleteReason2));
+                schema.Properties.Add(property.Name, new OpenApiPropertyDefinition(property.PropertyType, property, description, obsolete2, obsoleteReason2));
             }
 
             return schema;
@@ -743,10 +757,11 @@ namespace CODE.Framework.Services.Server.AspNetCore
             if (type == typeof(Guid)) return "string";
             if (type == typeof(byte[])) return "string";
             if (type == typeof(byte)) return "string";
-            if (type == typeof(int)) return "integer";
+            if (type == typeof(int) || type == typeof(short) || type == typeof(long)) return "integer";
             if (type == typeof(decimal) || type == typeof(double)) return "number";
             if (type == typeof(DateTime)) return "string";
             if (type == typeof(bool)) return "boolean";
+            if (type.IsEnum) return "integer";
             if (type.Name == "List`1") return "array";
             if (type.IsArray) return "array";
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -757,20 +772,80 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return string.Empty;
         }
 
-        public static string GetOpenApiTypeFormat(Type type)
+        public static string GetOpenApiTypeFormat(Type type, PropertyInfo property = null)
         {
             if (type == typeof(Guid)) return "uuid";
-            if (type == typeof(byte[])) return "byte";
+            if (type == typeof(byte[]))
+            {
+                if (property == null) return "byte";
+                if (AttributeHelper.GetCustomAttributeEx<FileContentAttribute>(property) == null) return "byte";
+                return "file";
+            }
             if (type == typeof(byte)) return "byte";
-            if (type == typeof(int)) return "int64";
+            if (type == typeof(int) || type == typeof(short) || type == typeof(long)) return "int64";
             if (type == typeof(decimal) || type == typeof(double)) return "double";
             if (type == typeof(DateTime)) return "date-time";
+            if (type.IsEnum) return "int64";
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 var nulledType = type.GetGenericArguments()[0];
-                return GetOpenApiTypeFormat(nulledType);
+                return GetOpenApiTypeFormat(nulledType, property);
             }
             return string.Empty;
+        }
+
+        public static object[] GetOpenApiEnumValues(Type type)
+        {
+            if (!type.IsEnum) return new object[0];
+
+            var enumValues = Enum.GetValues(type);
+            var enumType = type.GetEnumUnderlyingType();
+            var returnList = new object[enumValues.Length];
+            for (var counter = 0; counter < returnList.Length; counter++)
+                returnList[counter] = Convert.ChangeType(enumValues.GetValue(counter), enumType);
+            return returnList;
+        }
+
+        public static string GetOpenApiEnumDescription(Type type)
+        {
+            if (!type.IsEnum) return string.Empty;
+
+            var returnList = string.Empty;
+            var enumValues = GetOpenApiEnumValues(type);
+            var enumNames = type.GetEnumNames();
+            var counter = -1;
+            foreach (var enumValue in enumValues)
+            {
+                counter++;
+                if (!string.IsNullOrEmpty(returnList))
+                    returnList += ", ";
+                returnList += $"{enumValue} = {enumNames[counter]}";
+            }
+            return returnList;
+        }
+
+        public static void WriteEnumDeclaration(Utf8JsonWriter writer, Type propertyType)
+        {
+            writer.WriteStartArray("enum");
+            var enumValues = GetOpenApiEnumValues(propertyType);
+            foreach (var enumValue in enumValues)
+                if (enumValue is int)
+                    writer.WriteNumberValue((int)enumValue);
+                else if (enumValue is short)
+                    writer.WriteNumberValue((short)enumValue);
+                else if (enumValue is long)
+                    writer.WriteNumberValue((long)enumValue);
+                else if (enumValue is uint)
+                    writer.WriteNumberValue((uint)enumValue);
+                else if (enumValue is ushort)
+                    writer.WriteNumberValue((ushort)enumValue);
+                else if (enumValue is ulong)
+                    writer.WriteNumberValue((ulong)enumValue);
+                else if (enumValue is byte)
+                    writer.WriteNumberValue((byte)enumValue);
+                else if (enumValue is sbyte)
+                    writer.WriteNumberValue((sbyte)enumValue);
+            writer.WriteEndArray();
         }
     }
 

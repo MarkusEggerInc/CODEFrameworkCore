@@ -113,5 +113,9 @@ namespace Sample.Services.Implementation
         public void OnInProcessHostLaunched()
         {
         }
+
+        public GetStatusResponse GetStatus(GetStatusRequest request) => new GetStatusResponse { Status = request.Status, Success = true };
+
+        public FileResponse UploadCustomerFile(UploadCustomerFileRequest request) => new FileResponse { ContentType = request.ContentType, FileBytes = request.FileBytes, FileName = request.FileName };
     }
 }

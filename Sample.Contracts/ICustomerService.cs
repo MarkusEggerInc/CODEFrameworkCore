@@ -49,6 +49,63 @@ namespace Sample.Contracts
         /// </summary>
         [OperationContract, Rest(Method = RestMethods.Get, Name = "Photo"), RestContentType("image/png")]
         FileResponse GetPhoto(GetPhotoRequest request);
+
+        /// <summary>
+        /// Example method using enums
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [OperationContract, Rest(Method = RestMethods.Post, Name = "Status")]
+        GetStatusResponse GetStatus(GetStatusRequest request);
+
+        [OperationContract, Rest(Method = RestMethods.Put, Name = "Upload")]
+        FileResponse UploadCustomerFile(UploadCustomerFileRequest request);
+    }
+
+    [DataContract]
+    public class UploadCustomerFileRequest : FileRequest
+    {
+        [DataMember]
+        public string CustomerId { get; set; } = string.Empty;
+
+        [DataMember]
+        public string FileDescription { get; set; } = string.Empty;
+    }
+
+    [DataContract]
+    public class GetStatusResponse : BaseServiceResponse
+    {
+        [DataMember()]
+        public CustomerStatus Status { get; set; } = CustomerStatus.Normal;
+    }
+
+
+    [DataContract]
+    public class GetStatusRequest
+    {
+        [DataMember()]
+        public CustomerStatus Status { get; set; } = CustomerStatus.Normal;
+    }
+
+    /// <summary>
+    /// Flag inticating the significance status of a customer
+    /// </summary>
+    public enum CustomerStatus
+    {
+        /// <summary>
+        /// Normal customers
+        /// </summary>
+        Normal = 10,
+
+        /// <summary>
+        /// Pretty important customers
+        /// </summary>
+        Important = 25,
+
+        /// <summary>
+        /// These customers are the bee's knees!
+        /// </summary>
+        Premium = 100
     }
 
     [DataContract]
