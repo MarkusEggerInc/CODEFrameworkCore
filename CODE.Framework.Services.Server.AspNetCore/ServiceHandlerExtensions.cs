@@ -323,19 +323,23 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     pathInfo.Tags.Add(new OpenApiTag { Name = serviceInstanceConfig.ServiceType.Name });
 
-                    var obsolete = false;
-                    var obsoleteReason = string.Empty;
-                    var obsoleteAttribute = interfaceMethod.GetCustomAttribute<ObsoleteAttribute>();
-                    if (obsoleteAttribute != null)
-                    {
-                        obsolete = true;
-                        if (!string.IsNullOrEmpty(obsoleteAttribute.Message))
-                            obsoleteReason = obsoleteAttribute.Message.Trim();
-                    }
-                    OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType, obsolete, obsoleteReason);
                     pathInfo.ReturnType = interfaceMethod.ReturnType;
-                    pathInfo.Obsolete = obsolete;
-                    pathInfo.ObsoleteReason = obsoleteReason;
+                    var returnTypeOpenApiString = OpenApiHelper.GetOpenApiType(interfaceMethod.ReturnType);
+                    if (string.IsNullOrEmpty(returnTypeOpenApiString)) // If it isn't a simple type (which it really shouldn't be, based on our usage patterns), we add the component definition (schema)
+                    {
+                        var obsolete = false;
+                        var obsoleteReason = string.Empty;
+                        var obsoleteAttribute = interfaceMethod.GetCustomAttribute<ObsoleteAttribute>();
+                        if (obsoleteAttribute != null)
+                        {
+                            obsolete = true;
+                            if (!string.IsNullOrEmpty(obsoleteAttribute.Message))
+                                obsoleteReason = obsoleteAttribute.Message.Trim();
+                        }
+                        OpenApiHelper.AddTypeToComponents(openApiInfo, interfaceMethod.ReturnType, obsolete, obsoleteReason, xmlDocumentationFiles);
+                        pathInfo.Obsolete = obsolete;
+                        pathInfo.ObsoleteReason = obsoleteReason;
+                    }
 
                     if (httpVerb == "get")
                         // Get operations do not have a payload/body, so everything must be coming in from the URL
@@ -354,11 +358,16 @@ namespace CODE.Framework.Services.Server.AspNetCore
                                 if (!string.IsNullOrEmpty(obsoleteAttribute2.Message))
                                     obsoleteReason2 = obsoleteAttribute2.Message.Trim();
                             }
-                            OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType, obsolete2, obsoleteReason2);
+                            OpenApiHelper.AddTypeToComponents(openApiInfo, parameter.ParameterType, obsolete2, obsoleteReason2, xmlDocumentationFiles);
                         }
                         OpenApiHelper.ExtractOpenApiParameters(interfaceMethod, pathInfo, xmlDocumentationFiles);
                         if (methodParameters.Length > 0)
+                        {
                             pathInfo.Payload = new OpenApiPayload { Type = methodParameters[0].ParameterType };
+                            pathInfo.Payload.Description = OpenApiHelper.GetDescription(methodParameters[0].ParameterType, xmlDocumentationFiles);
+                            if (string.IsNullOrEmpty(pathInfo.Payload.Description))
+                                pathInfo.Payload.Description = OpenApiHelper.GetSummary(methodParameters[0].ParameterType, xmlDocumentationFiles);
+                        }
                     }
 
                     var definedRoute = restAttribute.Route != null ? restAttribute.Route : restAttribute.Name == null ? $"{method.Name}" : $"{restAttribute.Name}";

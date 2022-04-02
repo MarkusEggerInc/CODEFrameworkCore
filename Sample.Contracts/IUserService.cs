@@ -36,7 +36,10 @@ namespace Sample.Contracts
 
         [Rest(Method = RestMethods.Get, Route = "")]
         [Description("Retrieves a list of all users.")]
-        GetUsersResponse GetUsers(GetUsersRequest request);        
+        GetUsersResponse GetUsers(GetUsersRequest request);
+
+        [Rest(Method = RestMethods.Get)]
+        DateTime Test(string bla);
     }
 
     [DataContract]
@@ -97,6 +100,9 @@ namespace Sample.Contracts
 
     public class SignoutRequest : BaseServiceRequest { }
 
+    /// <summary>
+    /// Request message for password reset operations
+    /// </summary>
     [DataContract]
     public class ResetPasswordRequest : BaseServiceRequest
     {
@@ -104,6 +110,9 @@ namespace Sample.Contracts
         public string Username { get; set; } = string.Empty;
     }
 
+    /// <summary>
+    /// Response message for password reset operations
+    /// </summary>
     [DataContract]
     public class ResetPasswordResponse : BaseServiceResponse { }
 

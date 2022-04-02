@@ -76,6 +76,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     public class OpenApiSchemaDefinition
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public Dictionary<string, OpenApiPropertyDefinition> Properties { get; } = new Dictionary<string, OpenApiPropertyDefinition>();
         public bool Obsolete { get; set; }
         public string ObsoleteReason { get; set; }
@@ -148,10 +149,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public class ComponentsJsonConverter : JsonConverter<Dictionary<string, OpenApiSchemaDefinition>>
     {
-        //internal static Dictionary<Assembly, OpenApiXmlDocumentationFile> XmlDocumentationFiles { get; internal set; }
-
         public override Dictionary<string, OpenApiSchemaDefinition> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            // Not needed
             throw new NotImplementedException();
         }
 
@@ -161,7 +161,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
             writer.WriteStartObject("schemas");
             foreach (var definitionName in value.Keys.OrderBy(k => k))
             {
-                writer.WriteStartObject(definitionName); // "paths"
+                writer.WriteStartObject(definitionName);
 
                 writer.WritePropertyName("type");
                 writer.WriteStringValue("object");
@@ -173,9 +173,17 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
                     if (!string.IsNullOrEmpty(value[definitionName].ObsoleteReason))
                     {
-                        writer.WritePropertyName("description");
-                        writer.WriteStringValue(value[definitionName].ObsoleteReason);
+                        if (string.IsNullOrEmpty(value[definitionName].Description))
+                            value[definitionName].Description = value[definitionName].ObsoleteReason;
+                        else
+                            value[definitionName].Description +=  " Deprecated: " + value[definitionName].ObsoleteReason;
                     }
+                }
+
+                if (!string.IsNullOrEmpty(value[definitionName].Description))
+                {
+                    writer.WritePropertyName("description");
+                    writer.WriteStringValue(value[definitionName].Description);
                 }
 
                 writer.WriteStartObject("properties");
@@ -278,6 +286,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     {
         public override Dictionary<string, OpenApiPathInfo> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            // Not needed
             throw new NotImplementedException();
         }
 
@@ -371,26 +380,29 @@ namespace CODE.Framework.Services.Server.AspNetCore
                         WritePathParameters(writer, parameter);
                     foreach (var parameter in path.NamedParameters)
                         WritePathParameters(writer, parameter);
+                    writer.WriteEndArray();
 
                     if (path.Payload != null)
                     {
-                        writer.WriteStartObject();
-                        writer.WritePropertyName("name");
-                        writer.WriteStringValue("body");
-                        writer.WritePropertyName("in");
-                        writer.WriteStringValue("query");
+                        writer.WriteStartObject("requestBody");
                         writer.WritePropertyName("required");
                         writer.WriteBooleanValue(true);
-                        //writer.WriteStartObject();
+                        if (path.Payload != null && !string.IsNullOrEmpty(path.Payload.Description))
+                        {
+                            writer.WritePropertyName("description");
+                            writer.WriteStringValue(path.Payload.Description);
+                        }
+                        writer.WriteStartObject("content");
+                        writer.WriteStartObject("application/json");
                         writer.WritePropertyName("schema");
                         writer.WriteStartObject();
                         writer.WritePropertyName("$ref");
                         writer.WriteStringValue($"#/components/schemas/{path.Payload.Type.FullName}");
                         writer.WriteEndObject();
                         writer.WriteEndObject();
+                        writer.WriteEndObject();
+                        writer.WriteEndObject();
                     }
-
-                    writer.WriteEndArray();
 
                     var responseContentType = "application/json";
                     if (path.ReturnType.GetInterfaces().Contains(typeof(IFileResponse)))
@@ -417,8 +429,22 @@ namespace CODE.Framework.Services.Server.AspNetCore
                     writer.WriteStartObject();
                     writer.WritePropertyName("schema");
                     writer.WriteStartObject();
-                    writer.WritePropertyName("$ref");
-                    writer.WriteStringValue($"#/components/schemas/{path.ReturnType}");
+
+                    var openApiType = OpenApiHelper.GetOpenApiType(path.ReturnType);
+                    if (string.IsNullOrEmpty(openApiType))
+                    {
+                        writer.WritePropertyName("$ref");
+                        writer.WriteStringValue($"#/components/schemas/{path.ReturnType}");
+                    }
+                    else
+                    {
+                        // This should really not happen, since it doesn't follow standard CODE Framework patterns.
+                        // But we will still create docs if someone creates something like this.
+                        // Note, that most likely, Swagger UI cannot execute a test call against this method anyway.
+                        writer.WritePropertyName("type");
+                        writer.WriteStringValue(openApiType);
+                    }
+
                     writer.WriteEndObject();
                     writer.WriteEndObject();
                     writer.WriteEndObject();
@@ -473,13 +499,16 @@ namespace CODE.Framework.Services.Server.AspNetCore
 
     public static class OpenApiHelper
     {
-        public static OpenApiSchemaDefinition GetTypeDefinition(Type type, bool obsolete, string obsoleteReason)
+        public static OpenApiSchemaDefinition GetTypeDefinition(Type type, bool obsolete, string obsoleteReason, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
             var schema = new OpenApiSchemaDefinition();
 
             schema.Name = type.FullName;
             schema.Obsolete = obsolete;
             schema.ObsoleteReason = obsoleteReason;
+            schema.Description = GetSummary(type, xmlDocumentationFiles);
+            if (string.IsNullOrEmpty(schema.Description))
+                schema.Description = GetDescription(type, xmlDocumentationFiles);
 
             var properties = type.GetProperties();
             foreach (var property in properties)
@@ -512,9 +541,9 @@ namespace CODE.Framework.Services.Server.AspNetCore
             return schema;
         }
 
-        public static void AddTypeToComponents(OpenApiInformation openApiInfo, Type type, bool obsolete, string obsoleteReason)
+        public static void AddTypeToComponents(OpenApiInformation openApiInfo, Type type, bool obsolete, string obsoleteReason, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
         {
-            var typeDefinition = GetTypeDefinition(type, obsolete, obsoleteReason);
+            var typeDefinition = GetTypeDefinition(type, obsolete, obsoleteReason, xmlDocumentationFiles);
             if (openApiInfo.Components.ContainsKey(typeDefinition.Name)) return;
 
             openApiInfo.Components.Add(typeDefinition.Name, typeDefinition);
@@ -524,19 +553,19 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 if (property.Type.IsArray)
                 {
                     if (!(property.Type.FullName.StartsWith("System.") && property.Type.FullName.Split('.').Length == 2))
-                        AddTypeToComponents(openApiInfo, property.Type.GetElementType(), property.Obsolete, property.ObsoleteReason);
+                        AddTypeToComponents(openApiInfo, property.Type.GetElementType(), property.Obsolete, property.ObsoleteReason, xmlDocumentationFiles);
                 }
                 else if (property.Type.Name == "List`1")
                 {
                     if (property.Type.GenericTypeArguments.Length > 0)
                         if (string.IsNullOrEmpty(GetOpenApiType(property.Type.GenericTypeArguments[0]))) // We don't want simple types like string... so anything that is a known OpenApi type can be ignored here
-                            AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0], property.Obsolete, property.ObsoleteReason);
+                            AddTypeToComponents(openApiInfo, property.Type.GenericTypeArguments[0], property.Obsolete, property.ObsoleteReason, xmlDocumentationFiles);
                 }
                 else if (property.Type.IsGenericType && property.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
                     // Nullable types are likely just masqueraded simple types, so we can skip this one after all
                     continue;
                 else
-                    AddTypeToComponents(openApiInfo, property.Type, property.Obsolete, property.ObsoleteReason);
+                    AddTypeToComponents(openApiInfo, property.Type, property.Obsolete, property.ObsoleteReason, xmlDocumentationFiles);
             }
         }
 
@@ -579,6 +608,42 @@ namespace CODE.Framework.Services.Server.AspNetCore
                 return new OpenApiExternalDocumentation { Description = attribute2.Description, Url = attribute2.Url };
 
             return null;
+        }
+
+        public static string GetSummary(Type type, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var summaryAttribute = type.GetCustomAttributeEx<SummaryAttribute>();
+            if (summaryAttribute != null && !string.IsNullOrEmpty(summaryAttribute.Summary))
+                return summaryAttribute.Summary.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(type.Assembly))
+            {
+                var xmlSummary = xmlDocumentationFiles[type.Assembly].GetSummaryFromXmlDocs(type);
+                if (!string.IsNullOrEmpty(xmlSummary))
+                    return xmlSummary;
+            }
+
+            return string.Empty;
+        }
+
+        public static string GetDescription(Type type, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
+        {
+            var descriptionAttribute = type.GetCustomAttributeEx<DescriptionAttribute>();
+            if (descriptionAttribute != null && !string.IsNullOrEmpty(descriptionAttribute.Description))
+                return descriptionAttribute.Description.Trim();
+
+            var componentModelDescriptionAttribute = type.GetCustomAttributeEx<System.ComponentModel.DescriptionAttribute>();
+            if (componentModelDescriptionAttribute != null && !string.IsNullOrEmpty(componentModelDescriptionAttribute.Description))
+                return componentModelDescriptionAttribute.Description.Trim();
+
+            if (xmlDocumentationFiles.ContainsKey(type.Assembly))
+            {
+                var xmlDescription = xmlDocumentationFiles[type.Assembly].GetDescriptionFromXmlDocs(type);
+                if (!string.IsNullOrEmpty(xmlDescription))
+                    return xmlDescription;
+            }
+
+            return string.Empty;
         }
 
         public static string GetDescription(Type implementationType, Type interfaceType, Dictionary<Assembly, OpenApiXmlDocumentationFile> xmlDocumentationFiles)
@@ -720,6 +785,7 @@ namespace CODE.Framework.Services.Server.AspNetCore
     public class OpenApiPayload
     {
         public Type Type { get; set; }
+        public string Description { get; set; }
     }
 
     public class OpenApiNamedOperationParameter : IOpenApiOperationParameter
@@ -772,6 +838,21 @@ namespace CODE.Framework.Services.Server.AspNetCore
             var summaryNode = node.SelectSingleNode("summary");
             if (summaryNode == null) return string.Empty;
             return summaryNode.InnerText.Trim();
+        }
+
+        public string GetSummaryFromXmlDocs(Type type)
+        {
+            if (!FileExists) return string.Empty;
+
+            var xml = GetXmlDocument();
+            if (xml == null) return string.Empty;
+
+            var node = GetMemberNode(xml, type);
+            if (node == null) return string.Empty;
+            var summaryNode = node.SelectSingleNode("summary");
+            if (summaryNode != null && summaryNode.InnerText != null && !string.IsNullOrEmpty(summaryNode.InnerText)) return summaryNode.InnerText.Trim();
+
+            return string.Empty;
         }
 
         public string GetDescriptionFromXmlDocs(PropertyInfo property)

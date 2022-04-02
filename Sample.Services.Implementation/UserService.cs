@@ -129,5 +129,10 @@ namespace Sample.Services.Implementation
             },
             Success = true
         };
+
+        public DateTime Test(string bla)
+        {
+            return DateTime.Now;
+        }
     }
 }
