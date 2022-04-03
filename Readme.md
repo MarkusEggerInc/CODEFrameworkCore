@@ -1,6 +1,6 @@
 # CODE Framework ASP.NET Core Services/APIs
 
-This repository has moved to https://github.com/codeframework/Docs/
+This repository has moved to https://github.com/codeframework/CODEFrameworkServices
 
 
 
