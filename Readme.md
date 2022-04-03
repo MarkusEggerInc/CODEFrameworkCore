@@ -9,9 +9,6 @@ This repository has moved to https://github.com/codeframework/Docs/
 ### Create a new Project
 The following provides basic steps for a service handler based project setup.
 
-> #### Pre-release NuGet Packages
-> Framework is current in alpha stage. All NuGet packages have to be loaded using the **pre-release** flag in the Package Manager.
-
 The following is a quick walk through for creating a new project. Here's what the project should look like with appropriate references applied:
 
 ![](assets/images/FirstProjectSolutionReferences.png)
