@@ -1,4 +1,10 @@
-# CODE Framework ASP.NET Core Services
+# CODE Framework ASP.NET Core Services/APIs
+
+This repository has moved to https://github.com/codeframework/Docs/
+
+
+
+
 
 ### Create a new Project
 The following provides basic steps for a service handler based project setup.
@@ -262,8 +268,7 @@ You can manage authentication in two ways:
 You can configure a service method in the contract to explicitly require a set of access roles:
 
 ```cs
-[Rest(Method = RestMethods.Post, Name ="Customer", 
-      Route = "{id:guid}", AuthorizationRoles = "Administratortt")]
+[Rest(Method = RestMethods.Post, Name ="Customer", Route = "{id:guid}", AuthorizationRoles = "Administratort")]
 GetCustomerResponse GetCustomer(GetCustomerRequest request);
 ```
 
